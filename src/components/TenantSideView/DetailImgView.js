@@ -608,7 +608,8 @@ function DetailImgView() {
             <Footer />
           </div>
         </div>
-      ))}
+      )
+      )}
     </>
   );
 }
