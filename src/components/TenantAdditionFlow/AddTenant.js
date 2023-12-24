@@ -249,6 +249,7 @@ function AddTenant() {
 
   return (
     <>
+      {/* New fixed Code */}
       <ToastContainer
         className="my-[3rem] text-[1.1rem] font-bold"
         autoClose={1000}
