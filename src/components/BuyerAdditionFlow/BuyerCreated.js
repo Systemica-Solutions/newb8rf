@@ -53,8 +53,7 @@ function BuyerCreated() {
                 <u>Budget Details</u>
               </p>
               <p className="text-[2rem] font-bold text-[#1E0058]">
-                {" "}
-                {budget}Cr
+                {budget} Cr
               </p>
             </div>
             <Link
@@ -69,7 +68,7 @@ function BuyerCreated() {
                 bgColor="#3F007F"
               />
             </Link>
-            
+
             <Footer />
             <br />
           </div>

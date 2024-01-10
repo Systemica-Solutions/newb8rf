@@ -435,7 +435,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <FaEye className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountTenants.CurrentlyViewing}
+                      {CountTenants.CurrentlyViewing + CountTenants.Shortlisted}
                     </p>
                   </div>
                   {/* text */}

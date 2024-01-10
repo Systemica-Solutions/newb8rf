@@ -185,10 +185,10 @@ function AllTenantOneS() {
 
         <SearchBar onSearch={handleSearch} placeholder="Search by Buyer name" />
 
-        <div className="p-[1rem] text-[1.2rem]">
+        {/* <div className="p-[1rem] text-[1.2rem]">
           <p className="font-bold py-[1rem]">Hey {name},</p>
           <p> Here are all the tenants that you have onboarded</p>
-        </div>
+        </div> */}
 
         {/* <SearchBar
           onSearch={handleSearch}

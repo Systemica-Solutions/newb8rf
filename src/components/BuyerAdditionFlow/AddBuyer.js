@@ -314,11 +314,19 @@ function AddBuyer() {
                 </option>
                 {/* houseType" must be one of [Flat (in Gated Society…r Floor,
                 Standalone Individual House, 0, 1, 2, 3] */}
-                <option value="Gated Society)">Flat(in Gated Society)</option>
+                <option value="Flat (in Gated Society)">
+                  Flat (in Gated Society)
+                </option>
                 {/* <option value="Individual"> Individual Builder Floor</option>
                 <option value="Individual House">
                   Individual House(in Gated Society)
                 </option> */}
+                <option value="Individual House(in Gated Society)">
+                  Individual House(in Gated Society)
+                </option>
+                <option value="Individual Builder Floor">
+                  Individual Builder Floor
+                </option>
                 <option value="Standalone Individual House">
                   Standalone Individual House
                 </option>
@@ -388,7 +396,6 @@ function AddBuyer() {
                     onChange={handleChange}
                     name="moveIn"
                     required
-   
                     // placeholder="username"
                     style={{
                       backgroundColor: "white",

@@ -179,6 +179,8 @@ function CreateBoardS() {
     bathroom: "Bathroom",
   };
 
+  // console.log(responseDataTenant);
+
   return (
     <div>
       <div
@@ -212,13 +214,13 @@ function CreateBoardS() {
                 }}
               >
                 <p className="text-[1.4rem]">
-                  Tenant Name: <b>{name}</b>
+                  Buyer Name: <b>{name}</b>
                 </p>
-                <p className="text-[0.9rem]">(8 days since onboarded)</p>
+                {/* <p className="text-[0.9rem]">(8 days since onboarded)</p> */}
                 {/* Preference */}
                 <div className="pt-[1.5rem]">
                   <p className="font-bold text-[1.2rem]">
-                    <u>Preference of Tenant</u>
+                    <u>Preference of Buyer</u>
                   </p>
                   <div
                     className="bg-white py-[0.2rem] grid grid-cols-3"
@@ -265,8 +267,8 @@ function CreateBoardS() {
                       <HiCurrencyRupee className="text-[2rem]" />
                       <span className="text-[1.3rem] font-bold px-[0.2rem]">
                         {responseDataTenant.length !== 0 &&
-                          responseDataTenant[0].rent}
-                        /month
+                          responseDataTenant[0].budget}{" "}
+                        Cr
                       </span>
                     </div>
                     {/* ApartmentType */}
@@ -329,7 +331,7 @@ function CreateBoardS() {
                 </div>
               </div> */}
             </div>
-            \ {/* CreateBoard - container */}
+            {/* CreateBoard - container */}
             <div className="px-[1rem] py-[1rem]">
               <p className="text-[#1E0058] text-[2rem] font-semibold text-center pb-[0.5rem]">
                 Create Tenant Board

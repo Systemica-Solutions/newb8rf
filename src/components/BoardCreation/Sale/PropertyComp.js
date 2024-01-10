@@ -43,14 +43,14 @@ const PropertyComp = ({
 
   const addToBoard = async (pId) => {
     console.log(pId);
-    setLoading(true);
+    // setLoading(true);
 
-    if (addedItems.includes(pId)) {
-      // If it's already added, remove it
-      setAddedItems(addedItems.filter((item) => item !== pId));
-    } else {
-      // If it's not added, add it
+    if (!addedItems.includes(pId)) {
+      // If it's not already added, add it to the addedItems state
       setAddedItems([...addedItems, pId]);
+    } else {
+      // If it's not added, add it to the addedItems state
+      setAddedItems(addedItems.filter((item) => item !== pId));
     }
   };
 
@@ -85,145 +85,6 @@ const PropertyComp = ({
         <div>
           {props.slice(0, visibleItems).map((values, key) => (
             <div key={key} className="py-[1rem]">
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginTop: "10px",
-                }}
-              >
-                {/* left side */}
-                <div
-                  style={{
-                    height: "75px",
-                    width: "332px",
-                    background: "#F5F5F5",
-                    border: "1px solid #000000",
-                    borderRadius: "15px",
-                    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                    display: "flex",
-                  }}
-                >
-                  {/* img */}
-                  <div>
-                    <img
-                      src={imgOne}
-                      alt="imgOne"
-                      style={{ marginLeft: "10px", marginTop: "10px" }}
-                    />
-                  </div>
-                  <div style={{ display: "flex" }}>
-                    <div style={{ marginTop: "10px", marginLeft: "-2px" }}>
-                      <text style={{ fontSize: "10px" }}>
-                        {values.houseName},{values.societyName}
-                      </text>
-                      <br />
-                      <text style={{ fontSize: "10px", marginLeft: "-90px" }}>
-                        <b>
-                          Rent:{values.propertyDetails.featureInfo.rentAmount}
-                        </b>
-                      </text>
-                      <div
-                        style={{
-                          width: "150px",
-                          height: "25px",
-                          marginTop: "10px",
-                          marginLeft: "10px",
-                          display: "flex",
-                        }}
-                      >
-                        <img src={Group} height={15} />
-                        <text
-                          style={{
-                            fontSize: "12px",
-                            marginLeft: "1px",
-                            fontFamily: "Inter",
-                            fontStyle: "normal",
-                            fontWeight: "bold",
-                          }}
-                        >
-                          {values.propertyDetails.featureInfo.furnishingType}
-                        </text>
-                      </div>
-                    </div>
-                    <div style={{ marginTop: "13px" }}>
-                      <div style={{ marginLeft: "-25px" }}>
-                        <img src={space} alt="space" />
-                        <text style={{ fontSize: "10px" }}>
-                          {values.propertyDetails.featureInfo.carpetArea}
-                        </text>
-                      </div>
-                      <div>
-                        <img
-                          src={area}
-                          alt="area"
-                          style={{ marginLeft: "-25px" }}
-                        />
-                        <text style={{ fontSize: "7px" }}>
-                          {values.propertyDetails.propertyInfo.houseConfig}
-                        </text>
-                      </div>
-                      <img
-                        src={parking}
-                        alt="parking"
-                        style={{ marginLeft: "-25px" }}
-                      />
-                      <text style={{ fontSize: "10px" }}>
-                        {values.propertyDetails.featureInfo.parking.car > 0 &&
-                        values.propertyDetails.featureInfo.parking.bike > 0
-                          ? "Available"
-                          : "No"}
-                      </text>
-                    </div>
-                  </div>
-                </div>
-
-                {/* {values._id} */}
-                {/* {addedProperty ? (
-                  <p style={{ color: "#52796F", fontWeight: "bolder" }}>
-                    Added
-                  </p>
-                ) : (
-                  <> */}
-
-                <text style={{ fontSize: "12px", color: "#5D6560" }}>
-                  {/* <b onClick={() => addToBoard(values._id)}>
-                          Add to Board
-                        </b> */}
-                  <b key={values._id} onClick={() => addToBoard(values._id)}>
-                    {addedItems.includes(values._id) ? (
-                      <p style={{ color: "#52796F", fontWeight: "bolder" }}>
-                        {" "}
-                        Added{" "}
-                      </p>
-                    ) : (
-                      <div
-                        style={{
-                          height: "75px",
-                          width: "52px",
-                          background: "#E8E7E7",
-                          borderRadius: "10px",
-                          marginLeft: "10px",
-                        }}
-                      >
-                        <img
-                          src={Add}
-                          alt="Add"
-                          style={{
-                            height: "27px",
-                            marginTop: "20px",
-                            marginBottom: "-8px",
-                          }}
-                        />
-                        <br></br>
-                        <br></br>
-                        Add to Board
-                      </div>
-                    )}
-                  </b>
-                </text>
-              </div>
               <div className="flex w-[100%] gap-x-[0.5rem]">
                 {/* left side */}
                 <div
@@ -280,8 +141,8 @@ const PropertyComp = ({
                         {values.societyName}
                       </p>
                       <p className="font-bold">
-                        Rent:{values.propertyDetails.featureInfo.rentAmount}{" "}
-                        INR/month
+                        Sale Amount:
+                        {values.propertyDetails.featureInfo.saleAmount} INR
                       </p>
                       <div className="pt-[0.8rem] flex items-center text-[#3B413D] font-semibold justify-center py-[0.5rem]">
                         <MdChair className="text-[1.2rem]" />
@@ -388,11 +249,14 @@ const PropertyComp = ({
           )}
         </div>
       )}
-      <div onClick={() => viewToBoard()}>
+      <div
+        // onClick={() => viewToBoard()}
+        className="flex justify-center items-center py-[1rem]"
+      >
         <Link
-          to={`/PropertyViewBoard?boardId=${responseDataTenantData.boardId}`}
+          to={`/PropertyViewBoardS?boardId=${responseDataTenantData.boardId}`}
         >
-          <CommonBtn title="View Board" margin="90px" bgolor="#3F007F" />
+          <CommonBtn title="View Board" bgColor="#3F007F" />
         </Link>
       </div>
     </>

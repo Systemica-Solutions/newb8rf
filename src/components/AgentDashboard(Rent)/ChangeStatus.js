@@ -32,6 +32,15 @@ function ChangeStatus() {
   const [RenderRentName, setRenderRentName] = useState("Rented of B8R");
   const [propertyDetails, setPropertyDetails] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [closeListingReason, setCloseListingReason] = useState("Rented of B8R");
+  const [tenantName, setTenantName] = useState("");
+  const [tenancyStartDate, setTenancyStartDate] = useState("");
+  const [rentAmount, setRentAmount] = useState("");
+  const [agreementFor, setAgreementFor] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [feedback, setFeedback] = useState("");
+
+  // console.log("name -:> " + tenantName);
 
   const token = localStorage.getItem("token");
 
@@ -176,31 +185,83 @@ function ChangeStatus() {
     });
   };
 
+  const validateSubmit = () => {
+    if (closeListingReason === "Delist (Owner Denied)")
+      if (feedback == "") {
+        alert("please ");
+      }
+  };
+
   const submitRent = async (event) => {
     event.preventDefault();
 
     //  console.log(formData);
-    console.log(JSON.stringify(formData));
-    try {
-      const response = await axios.put(
-        `https://b8rliving.com/property/close-listing/${propertyId}`,
-        formData,
-        axiosConfig
-      );
+    // console.log(JSON.stringify(formData));
+    if (
+      closeListingReason !== "" &&
+      closeListingReason === "Delist (Owner Denied)"
+    ) {
+      console.log("condition 2");
+      try {
+        const response = await axios.put(
+          `https://b8rliving.com/property/close-listing/${propertyId}`,
+          {
+            closeListingReason,
+            closeListingDetails: {
+              feedback,
+            },
+          },
+          axiosConfig
+        );
 
-      // Log the updated state
-      console.log(JSON.stringify(response));
-      var nameResponse = response.data.data.property.houseName;
-      var nameResponse2 = response.data.data.property.societyName;
-      var ClosedStatus = response.data.data.property.closeListingReason;
+        // Log the updated state
+        console.log(JSON.stringify(response));
+        var nameResponse = response.data.data.property.houseName;
+        var nameResponse2 = response.data.data.property.societyName;
+        var ClosedStatus = response.data.data.property.closeListingReason;
 
-      alert("Property Closed sucessfully!");
-      window.location.href = `/PropertyClosed?name=${nameResponse}&closed=${ClosedStatus}&societyname=${nameResponse2}`;
-    } catch (error) {
-      // Handle any errors that occur during the API request
-      alert(error);
-    } finally {
-      setLoading(false); // Set loading to false when the request is complete
+        alert("Property Closed sucessfully!");
+        window.location.href = `/PropertyClosed?name=${nameResponse}&closed=${ClosedStatus}&societyname=${nameResponse2}`;
+      } catch (error) {
+        // Handle any errors that occur during the API request
+        alert(error);
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      console.log("else case");
+      try {
+        const response = await axios.put(
+          `https://b8rliving.com/property/close-listing/${propertyId}`,
+          {
+            closeListingReason,
+            closeListingDetails: {
+              tenantName,
+              tenancyStartDate,
+              rentAmount,
+              agreementFor,
+              phoneNumber,
+            },
+          },
+          axiosConfig
+        );
+
+        // Log the updated state
+        console.log(JSON.stringify(response));
+        var nameResponse = response.data.data.property.houseName;
+        var nameResponse2 = response.data.data.property.societyName;
+        var ClosedStatus = response.data.data.property.closeListingReason;
+
+        alert("Property Closed sucessfully!");
+        window.location.href = `/PropertyClosed?name=${nameResponse}&closed=${ClosedStatus}&societyname=${nameResponse2}`;
+      } catch (error) {
+        // Handle any errors that occur during the API request
+        alert(error);
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -261,25 +322,45 @@ function ChangeStatus() {
             <p className="text-[1.2rem] font-bold">Close Listing</p>
             <div className="flex justify-center  items-center flex-col w-[75%] py-[1rem] gap-y-[1.5rem]">
               <CommonTopButton
-                bgColor={isActive1 ? "#52796F" : "#D2D7D6"}
+                bgColor={
+                  closeListingReason === "Rented of B8R" ? "#52796F" : "#D2D7D6"
+                }
                 borderColor="#DAF0EE"
-                color={isActive1 ? "#FFFFFF" : "#77A8A4"}
+                color={
+                  closeListingReason === "Rented of B8R" ? "#FFFFFF" : "#77A8A4"
+                }
                 text="Rented On B8R"
-                onclicked={() => handlePageAvailable("rent")}
+                onclicked={() => setCloseListingReason("Rented of B8R")}
               />
               <CommonTopButton
-                bgColor={isActive2 ? "#52796F" : "#D2D7D6"}
+                bgColor={
+                  closeListingReason === "Delist (Owner Denied)"
+                    ? "#52796F"
+                    : "#D2D7D6"
+                }
                 borderColor="#DAF0EE"
-                color={isActive2 ? "#FFFFFF" : "#77A8A4"}
+                color={
+                  closeListingReason === "Delist (Owner Denied)"
+                    ? "#FFFFFF"
+                    : "#77A8A4"
+                }
                 text="Delist (Owner Denied)"
-                onclicked={() => handlePageAvailable("delist")}
+                onclicked={() => setCloseListingReason("Delist (Owner Denied)")}
               />
               <CommonTopButton
-                bgColor={isActive3 ? "#52796F" : "#D2D7D6"}
+                bgColor={
+                  closeListingReason === "Rented Outside"
+                    ? "#52796F"
+                    : "#D2D7D6"
+                }
                 borderColor="#DAF0EE"
-                color={isActive3 ? "#FFFFFF" : "#77A8A4"}
+                color={
+                  closeListingReason === "Rented Outside"
+                    ? "#FFFFFF"
+                    : "#77A8A4 "
+                }
                 text="Rented Outside"
-                onclicked={() => handlePageAvailable("rented")}
+                onclicked={() => setCloseListingReason("Rented Outside")}
               />
             </div>
           </div>
@@ -288,7 +369,7 @@ function ChangeStatus() {
         {/* -----------------------------------------------2nd div----------------------------------------------------- */}
 
         {/* -----------------------------------------------3rd div----------------------------------------------------- */}
-        {RenderRent == "rent" ? (
+        {closeListingReason === "Rented of B8R" ? (
           <form className="login-form" onSubmit={submitRent}>
             <div className="px-[1rem]">
               <div
@@ -330,8 +411,8 @@ function ChangeStatus() {
                       type="text"
                       id="tenantName"
                       name="tenantName"
-                      value={formData.tenantName}
-                      onChange={handleChange}
+                      value={tenantName}
+                      onChange={(e) => setTenantName(e.target.value)}
                       // placeholder="Google Maps Plug-in"
                       style={{
                         backgroundColor: "#F5F5F5",
@@ -339,6 +420,7 @@ function ChangeStatus() {
                         borderRadius: "10pxpx",
                         border: "1px solid #52796F",
                       }}
+                      required
                     />
 
                     <label
@@ -357,8 +439,8 @@ function ChangeStatus() {
                       type="text"
                       id="rentAmount"
                       name="rentAmount"
-                      value={formData.rentAmount}
-                      onChange={handleChange}
+                      value={rentAmount}
+                      onChange={(e) => setRentAmount(e.target.value)}
                       // placeholder="Google Maps Plug-in"
                       style={{
                         backgroundColor: "#F5F5F5",
@@ -366,6 +448,7 @@ function ChangeStatus() {
                         borderRadius: "10pxpx",
                         border: "1px solid #52796F",
                       }}
+                      required
                     />
 
                     <label
@@ -384,8 +467,8 @@ function ChangeStatus() {
                       type="text"
                       id="mapphoneNumber"
                       name="phoneNumber"
-                      value={formData.phoneNumber}
-                      onChange={handleChange}
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
                       // placeholder="Google Maps Plug-in"
                       style={{
                         backgroundColor: "#F5F5F5",
@@ -393,6 +476,7 @@ function ChangeStatus() {
                         borderRadius: "10pxpx",
                         border: "1px solid #52796F",
                       }}
+                      required
                     />
 
                     <label
@@ -411,14 +495,15 @@ function ChangeStatus() {
                       type="date"
                       id="tenancyStartDate"
                       name="tenancyStartDate"
-                      value={formData.tenancyStartDate}
-                      onChange={handleChange}
+                      value={tenancyStartDate}
+                      onChange={(e) => setTenancyStartDate(e.target.value)}
                       style={{
                         backgroundColor: "#F5F5F5",
                         padding: "10px",
                         borderRadius: "10pxpx",
                         border: "1px solid #52796F",
                       }}
+                      required
                     />
 
                     <label
@@ -437,8 +522,8 @@ function ChangeStatus() {
                       type="text"
                       id="agreementFor"
                       name="agreementFor"
-                      value={formData.agreementFor}
-                      onChange={handleChange}
+                      value={agreementFor}
+                      onChange={(e) => setAgreementFor(e.target.value)}
                       // placeholder="Google Maps Plug-in"
                       style={{
                         backgroundColor: "#F5F5F5",
@@ -446,6 +531,7 @@ function ChangeStatus() {
                         borderRadius: "10pxpx",
                         border: "1px solid #52796F",
                       }}
+                      required
                     />
                   </div>
                 </div>
@@ -465,7 +551,7 @@ function ChangeStatus() {
         {/* -----------------------------------------------3rd div----------------------------------------------------- */}
         {/* BODY */}
 
-        {RenderRent == "delist" ? (
+        {closeListingReason === "Delist (Owner Denied)" ? (
           <div>
             <form className="login-form" onSubmit={submitRent}>
               <p className="text-[1.2rem] py-[1rem]">
@@ -487,14 +573,17 @@ function ChangeStatus() {
                     name="feedback"
                     rows="4"
                     cols="50"
-                    value={formDataTwo.feedback}
-                    onChange={handleChangeTwo}
+                    value={feedback}
+                    onChange={(e) => setFeedback(e.target.value)}
                     style={{
                       outline: "none",
                       border: "none",
                       background: "transparent",
                       boxShadow: "none",
                     }}
+                    required
+                    placeholder="
+                    enter your feedback"
                   >
                     Enter Feed Back
                   </textarea>
@@ -512,7 +601,7 @@ function ChangeStatus() {
           </div>
         ) : null}
         {/* ---------------------------------------------------------------------------------------------------------------- */}
-        {RenderRent == "rented" ? (
+        {closeListingReason === "Rented Outside" ? (
           <div className=" px-[1rem]">
             <div
               style={{
@@ -546,8 +635,8 @@ function ChangeStatus() {
                     type="text"
                     id="tenantName"
                     name="tenantName"
-                    value={formData.tenantName}
-                    onChange={handleChange}
+                    value={tenantName}
+                    onChange={(e) => setTenantName(e.target.value)}
                     // placeholder="Google Maps Plug-in"
                     style={{
                       backgroundColor: "#F5F5F5",
@@ -555,6 +644,7 @@ function ChangeStatus() {
                       borderRadius: "10pxpx",
                       border: "1px solid #52796F",
                     }}
+                    required
                   />
 
                   <label
@@ -573,8 +663,8 @@ function ChangeStatus() {
                     type="text"
                     id="rentAmount"
                     name="rentAmount"
-                    value={formData.rentAmount}
-                    onChange={handleChange}
+                    value={rentAmount}
+                    onChange={(e) => setRentAmount(e.target.value)}
                     // placeholder="Google Maps Plug-in"
                     style={{
                       backgroundColor: "#F5F5F5",
@@ -582,6 +672,7 @@ function ChangeStatus() {
                       borderRadius: "10pxpx",
                       border: "1px solid #52796F",
                     }}
+                    required
                   />
 
                   <label
@@ -600,8 +691,8 @@ function ChangeStatus() {
                     type="text"
                     id="mapphoneNumber"
                     name="phoneNumber"
-                    value={formData.phoneNumber}
-                    onChange={handleChange}
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
                     // placeholder="Google Maps Plug-in"
                     style={{
                       backgroundColor: "#F5F5F5",
@@ -609,6 +700,7 @@ function ChangeStatus() {
                       borderRadius: "10pxpx",
                       border: "1px solid #52796F",
                     }}
+                    required
                   />
 
                   <label
@@ -627,14 +719,15 @@ function ChangeStatus() {
                     type="date"
                     id="tenancyStartDate"
                     name="tenancyStartDate"
-                    value={formData.tenancyStartDate}
-                    onChange={handleChange}
+                    value={tenancyStartDate}
+                    onChange={(e) => setTenancyStartDate(e.target.value)}
                     style={{
                       backgroundColor: "#F5F5F5",
                       padding: "10px",
                       borderRadius: "10pxpx",
                       border: "1px solid #52796F",
                     }}
+                    required
                   />
                   <label
                     for="agreementFor"
@@ -652,8 +745,8 @@ function ChangeStatus() {
                     type="text"
                     id="agreementFor"
                     name="agreementFor"
-                    value={formData.agreementFor}
-                    onChange={handleChange}
+                    value={agreementFor}
+                    onChange={(e) => setAgreementFor(e.target.value)}
                     // placeholder="Google Maps Plug-in"
                     style={{
                       backgroundColor: "#F5F5F5",
@@ -661,6 +754,7 @@ function ChangeStatus() {
                       borderRadius: "10pxpx",
                       border: "1px solid #52796F",
                     }}
+                    required
                   />
                 </div>
               </form>
