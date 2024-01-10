@@ -75,6 +75,7 @@ import DetailImgView from "./components/TenantSideView/DetailImgView";
 import DetailView from "./components/TenantSideView/DetailView";
 import OTPscreen from "./components/TenantSideView/OTPscreen";
 import TenantSideView from "./components/TenantSideView/TenantSideView";
+import VirtualTour from "./components/TenantSideView/VirtualTour";
 
 //PropertyCreate -Imports ---------------------------------------------------
 // import PropertyDetails from "./components/PropertyDetails";
@@ -285,6 +286,8 @@ function App(props) {
 
             <Route exact path="TenantSideView" element={<TenantSideView />} />
             <Route exact path="DetailImgView" element={<DetailImgView />} />
+            <Route exact path="VirtualTour" element={<VirtualTour />} />
+
             {/* OTP VERIFY */}
 
             {/* <Route exact path="SuccesfulSignup" element={<SuccessfulSignup />} /> */}

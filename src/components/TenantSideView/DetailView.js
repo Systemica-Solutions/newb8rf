@@ -267,6 +267,7 @@ function DetailView() {
               </Carousel>
             </div>
 
+
             <Link to={property.tourLink3D}>
               <div className="px-[1rem]">
                 <div className="flex justify-center items-center flex-col">

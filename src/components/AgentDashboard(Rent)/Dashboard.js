@@ -217,6 +217,7 @@ function Dashboard() {
   var pendingCounting = 0;
   var activeCounting = 0;
   const number = CountTenants.Total - CountTenants.Deactivate;
+  const AvailablePropertyNumber = CountProperties.Total - CountProperties.Closed;
   responseProperties.map((element) => {
     // console.log(element.status);
     if (

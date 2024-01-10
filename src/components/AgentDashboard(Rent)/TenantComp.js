@@ -17,6 +17,7 @@ import { MdOutlineMobileScreenShare } from "react-icons/md"; //share
 const TenantComp = ({ props, name }) => {
   // console.log(props);
   const [filteredData, setfilteredData] = useState([]);
+  
   const [searchValue, setSearchValue] = useState("");
   // const [BoardNotFound, setBoardNotFound] = useState(false);
   const boardIds = ["boardId1", "boardId2", "boardId3"]; // Replace with your actual boardIds
@@ -31,6 +32,7 @@ const TenantComp = ({ props, name }) => {
     // If search term is empty, show all properties
     if (searchTerm === "") {
       setfilteredData(props);
+      console.log("filteredData",filteredData);
     } else {
       // Filter properties based on houseName
       const filtered = props.filter((tenant) =>
@@ -39,6 +41,7 @@ const TenantComp = ({ props, name }) => {
           .includes(searchTerm.toLowerCase())
       );
       setfilteredData(filtered);
+      
     }
   };
 
@@ -189,7 +192,6 @@ const TenantComp = ({ props, name }) => {
                     <div>
                       <FaHeart className="text-[#B30808] text-[2.5rem]" />
                     </div>
-
                     <div className="text-[0.9rem] font-semibold px-[0.2rem]">
                       {values.numberShortlisted} properties shortlisted
                     </div>
