@@ -464,7 +464,7 @@ function DetailView() {
                       <div className="flex items-center flex-col text-center">
                         <HiCurrencyRupee className="text-[2rem]" />
                         <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                          {property.propertyDetails.featureInfo.rentAmount}{" "}
+                          {property.propertyDetails.featureInfo.rentAmount} INR{" "}
                           /month
                         </p>
                         <p className="text-[#52796F] text-[0.8rem]">

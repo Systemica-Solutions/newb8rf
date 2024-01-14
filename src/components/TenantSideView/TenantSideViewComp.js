@@ -210,7 +210,7 @@ function TenantSideViewComp({ boards, boardId }) {
                         fontWeight: "bolder",
                       }}
                     >
-                      {property.houseName}
+                      {property.houseName}, {property.societyName}
                     </p>
                   </div>
                 ))}

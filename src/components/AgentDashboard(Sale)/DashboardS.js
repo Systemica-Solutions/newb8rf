@@ -91,7 +91,7 @@ function DashboardS() {
             {/* Listing */}
             <div className="flex justify-center items-center text-[#1E0058]">
               <FaHouse className="text-[1.7rem]" />
-              <p className="px-[0.6rem] text-[1.4rem] font-bold">Listing</p>
+              <p className="px-[0.6rem] text-[1.4rem] font-bold">Listings</p>
             </div>
             {/* tenant */}
             <div className="flex justify-center items-center text-[#4C00A7]">
