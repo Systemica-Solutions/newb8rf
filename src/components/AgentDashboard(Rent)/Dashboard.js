@@ -210,14 +210,15 @@ function Dashboard() {
     fetchPropertiesCounts();
     fetchTententCounts();
     // console.log(CountTenants.Total)
-  }, [CountProperties]);
+  }, []);
 
   // console.log(CountProperties);
 
   var pendingCounting = 0;
   var activeCounting = 0;
   const number = CountTenants.Total - CountTenants.Deactivate;
-  const AvailablePropertyNumber = CountProperties.Total - CountProperties.Closed;
+  const AvailablePropertyNumber =
+    CountProperties.Total - CountProperties.Closed;
   responseProperties.map((element) => {
     // console.log(element.status);
     if (
