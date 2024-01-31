@@ -506,13 +506,14 @@ function AddTenant() {
                     border: "1px solid #52796F",
                   }}
                 >
-                  <option value="gated_apartment" disabled selected>
+                  {/* <option value="gated_apartment" disabled selected>
                     Select from Drop Down
-                  </option>
+                  </option> */}
                   {/* <option value="Studio">
                 Studio
               </option> */}
                   {/* <option value="1BHK">1BHK</option> */}
+                  <option value="" disabled selected>Select from Drop Down</option>
 
                   <option value="Studio">Studio</option>
                   <option value="1 BHK">1 BHK</option>
