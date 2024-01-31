@@ -421,7 +421,7 @@ function EditPropertyInfo() {
             <img src={num_1} alt="Image description" height={55} width={300} />
 
             <form
-              className="login-form inner-background"
+              className="property-form inner-background"
               onSubmit={handleChangeOne}
             >
               <h4 style={{ color: "#52796f" }}>
@@ -439,7 +439,7 @@ function EditPropertyInfo() {
                   float: "left",
                 }}
               >
-                What is the House type?
+                Property Type?
               </label>
               <select
                 id="houseType"
@@ -487,7 +487,7 @@ function EditPropertyInfo() {
                   float: "left",
                 }}
               >
-                What is the house configuration?{" "}
+                Property Configuration?{" "}
               </label>
               <select
                 id="houseConfig"
@@ -559,7 +559,7 @@ function EditPropertyInfo() {
                   float: "left",
                 }}
               >
-                What is the Society?
+                Society Name?
               </label>
               <input
                 type=""
@@ -759,7 +759,7 @@ function EditPropertyInfo() {
               style={{ borderRadius: "16px" }}
               className="inner-background"
             >
-              {/* Landlord FIRST NAME */}
+              {/* Owner's First NAME */}
               <h4 style={{ color: "#52796f" }}> Who owns this Property?</h4>
 
               <label
@@ -772,19 +772,19 @@ function EditPropertyInfo() {
                   float: "left",
                 }}
               >
-                Landlord First Name*{" "}
+                Owner's First Name*{" "}
               </label>
               <input
                 type="text"
                 id="first"
-                placeholder="Landlord First Name"
+                placeholder="Owner's First Name"
                 name="first"
                 value={formData.propertyDetails.ownerInfo.name.first}
                 onChange={handleChange}
                 style={styles}
               />
               <br></br>
-              {/* Landlord LAST NAME */}
+              {/* Owner's Last NAME */}
               <label
                 for="last"
                 style={{
@@ -795,12 +795,12 @@ function EditPropertyInfo() {
                   float: "left",
                 }}
               >
-                Landlord Last Name*{" "}
+                Owner's Last Name*{" "}
               </label>
               <input
                 type="text"
                 id="last"
-                placeholder="Landlord last name"
+                placeholder="Owner's Last name"
                 name="last"
                 value={formData.propertyDetails.ownerInfo.name.last}
                 onChange={handleChange}
@@ -1275,7 +1275,7 @@ function EditPropertyInfo() {
                     }}
                   >
                     <img src={floor_number} alt="Icon description" />
-                    <h5 style={{ marginTop: "-1px" }}>Floor Number</h5>
+                    <h5 style={{ marginTop: "-1px" }}>Property Floor Number</h5>
                     <div
                       style={{
                         display: "flex",
@@ -1372,7 +1372,7 @@ function EditPropertyInfo() {
                     >
                       <option value="Drop Down">Drop Down</option>
                       <option
-                        style={{ textAlign: "center", backgroundColor: "red" }}
+                        style={{ backgroundColor: "red" }}
                         value="1 Car"
                       >
                         1 Car
@@ -1404,7 +1404,7 @@ function EditPropertyInfo() {
                     >
                       <option value="Drop Down">Drop Down</option>
                       <option
-                        style={{ textAlign: "center", backgroundColor: "red" }}
+                        style={{ backgroundColor: "red" }}
                         value="1 Bike"
                       >
                         1 Bike
@@ -1433,7 +1433,7 @@ function EditPropertyInfo() {
                     >
                       <option value="Drop Down">Drop Down</option>
                       <option
-                        style={{ textAlign: "center", backgroundColor: "red" }}
+                        style={{ backgroundColor: "red" }}
                         value="Covered Roof"
                       >
                         Covered Roof
@@ -1476,7 +1476,7 @@ function EditPropertyInfo() {
                   >
                     <option value="Drop Down">Drop Down</option>
                     <option
-                      style={{ textAlign: "center", backgroundColor: "red" }}
+                      style={{  backgroundColor: "red" }}
                       value="1 Room"
                     >
                       1 Room
@@ -1610,7 +1610,7 @@ function EditPropertyInfo() {
                   >
                     <option value="furnish">Drop Down</option>
                     <option
-                      style={{ textAlign: "center", backgroundColor: "red" }}
+                      style={{  backgroundColor: "red" }}
                       value="Un-furnished"
                     >
                       Un-furnished

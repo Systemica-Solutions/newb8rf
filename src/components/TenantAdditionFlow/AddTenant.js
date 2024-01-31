@@ -569,7 +569,7 @@ function AddTenant() {
                   }}
                 >
                   {/* houseType" must be one of [Flat (in Gated Society…r Floor, Standalone Individual House, 0, 1, 2, 3] */}
-                  What is the House type?{" "}
+                  Property Type?{" "}
                   <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
                 </label>
                 <select

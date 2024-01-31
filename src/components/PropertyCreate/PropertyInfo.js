@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
-import PropertyInfocss from "./PropertyInfo.css";
+import "./PropertyInfo.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import backgroundSecond from "../Assets/Images/other_bg.png";
@@ -545,7 +545,7 @@ function PropertyInfo() {
             </div>
 
             <form
-              className="login-form inner-background"
+              className="property-form inner-background"
               onSubmit={handleChangeOne}
             >
               <p
@@ -562,10 +562,10 @@ function PropertyInfo() {
                   display: "block",
                   marginBottom: "0.5rem",
                   fontWeight: "300",
-                  float: "left",
+                  float: "left"
                 }}
               >
-                What is the House type?{" "}
+                Property Type?{" "}
                 <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
               </label>
               <div className="">
@@ -612,7 +612,7 @@ function PropertyInfo() {
                   float: "left",
                 }}
               >
-                What is the house configuration?{" "}
+                Property Configuration?{" "}
                 <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
               </label>
               <div className="">
@@ -681,7 +681,7 @@ function PropertyInfo() {
                   float: "left",
                 }}
               >
-                What is the Society?{" "}
+                Society Name?{" "}
                 <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
               </label>
               <input
@@ -920,7 +920,7 @@ function PropertyInfo() {
               style={{ borderRadius: "16px" }}
               className="inner-background"
             >
-              {/* Landlord FIRST NAME */}
+              {/* Owner's First NAME */}
               <div className="flex justify-center items-center pb-[1rem]">
                 <h4
                   style={{ color: "#52796f" }}
@@ -941,13 +941,13 @@ function PropertyInfo() {
                   float: "left",
                 }}
               >
-                Landlord First Name{" "}
+                Owner's First Name{" "}
                 <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
               </label>
               <input
                 type="text"
                 id="first"
-                placeholder="Landlord First Name"
+                placeholder="Owner's First Name"
                 name="first"
                 required
                 value={formData.propertyData.ownerInfo.name.first}
@@ -955,7 +955,7 @@ function PropertyInfo() {
                 style={styles}
               />
               {/* <br></br> */}
-              {/* Landlord LAST NAME */}
+              {/* Owner's Last NAME */}
               <label
                 className="mx-[0.2rem]"
                 for="last"
@@ -967,13 +967,13 @@ function PropertyInfo() {
                   float: "left",
                 }}
               >
-                Landlord Last Name{" "}
+                Owner's Last Name{" "}
                 <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
               </label>
               <input
                 type="text"
                 id="last"
-                placeholder="Landlord last name"
+                placeholder="Owner's Last name"
                 name="last"
                 required
                 value={formData.propertyData.ownerInfo.name.last}
@@ -1438,11 +1438,11 @@ function PropertyInfo() {
                       }}
                     >
                       <HiMiniBuildingOffice className="text-[2rem] my-[0.5rem]" />
-                      <p className="font-semibold">Floor Number</p>
+                      <p className="font-semibold">Property Floor Number</p>
                       <div className="grid grid-cols-2 text-center">
                         <div className="py-[0.5rem] flex flex-col justify-center items-center">
                           <label className="text-[0.9rem]">
-                            Your Floor{" "}
+                            Floor Number of Property{" "}
                             <span style={{ color: "red", fontSize: "1.2rem" }}>
                               *
                             </span>
@@ -1472,7 +1472,7 @@ function PropertyInfo() {
                         </div>
                         <div className="py-[0.5rem] flex flex-col justify-center items-center">
                           <label className="text-[0.9rem]">
-                            Total Floor{" "}
+                            Total Floors in Apartment Complex{" "}
                             <span style={{ color: "red", fontSize: "1.2rem" }}>
                               *
                             </span>
@@ -1545,7 +1545,6 @@ function PropertyInfo() {
                           </option>
                           <option
                             style={{
-                              textAlign: "center",
                               backgroundColor: "red",
                             }}
                             value="1 Car"
@@ -1586,7 +1585,6 @@ function PropertyInfo() {
                           </option>
                           <option
                             style={{
-                              textAlign: "center",
                               backgroundColor: "red",
                             }}
                             value="0"
@@ -1626,7 +1624,6 @@ function PropertyInfo() {
                           </option>
                           <option
                             style={{
-                              textAlign: "center",
                               backgroundColor: "red",
                             }}
                             value="Covered Roof"
@@ -1674,7 +1671,6 @@ function PropertyInfo() {
                         </option>
                         <option
                           style={{
-                            textAlign: "center",
                             backgroundColor: "red",
                           }}
                           value="1"
@@ -1721,7 +1717,6 @@ function PropertyInfo() {
                         </option>
                         <option
                           style={{
-                            textAlign: "center",
                             backgroundColor: "red",
                           }}
                           value="1"
@@ -1778,7 +1773,6 @@ function PropertyInfo() {
                           </option>
                           <option
                             style={{
-                              textAlign: "center",
                               backgroundColor: "red",
                             }}
                             value="1 Room"
