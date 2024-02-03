@@ -381,6 +381,7 @@ function PropertyInfo() {
     const swimmingPool = formData.propertyData.featureInfo.swimmingPool;
     const gym = formData.propertyData.featureInfo.gym;
     const clubHouse = formData.propertyData.featureInfo.clubHouse;
+
     if (
       (gatedSecurity ||
         powerBackup ||
@@ -980,9 +981,9 @@ function PropertyInfo() {
                 onChange={handleChange}
                 style={styles}
               />
-              {/* <br></br> */}
+              <br></br>
               {/* CONTACT NUM */}
-              {/* <label
+              <label 
                 className="mx-[0.2rem]"
                 for="phoneNumber"
                 style={{
@@ -1002,14 +1003,14 @@ function PropertyInfo() {
                 placeholder="10 digit number"
                 name="phoneNumber"
                 // required
-                value={formData.propertyData.ownerInfo.phoneNumber}
+                // value={formData.propertyData.ownerInfo.phoneNumber}
+                defaultValue=""
                 onChange={handleChange}
                 style={styles}
-              /> */}
-              {/* <br></br> */}
-              {/* <br></br> */}
+              /> 
+              <br></br>
               {/* PAN CARD */}
-              {/* <label
+              <label
                 className="mx-[0.2rem] mt-[20px]"
                 for="panNumber"
                 style={{
@@ -1028,13 +1029,14 @@ function PropertyInfo() {
                 placeholder="Pan number"
                 name="panNumber"
                 // required
-                value={formData.propertyData.ownerInfo.panNumber}
+                // value={formData.propertyData.ownerInfo.panNumber}
+                defaultValue=""
                 onChange={handleChange}
                 style={styles}
-              /> */}
-              {/* <br></br> */}
+              />
+              <br></br>
               {/* Residing Country */}
-              {/* <label
+              <label
                 className="mx-[0.2rem]"
                 for="country"
                 style={{
@@ -1045,7 +1047,7 @@ function PropertyInfo() {
                   float: "left",
                 }}
               >
-                Country of residence of Landlord
+                Country of Residence 
               </label>
               <input
                 type="text"
@@ -1053,12 +1055,13 @@ function PropertyInfo() {
                 placeholder="residing country"
                 name="country"
                 // required
-                value={formData.propertyData.ownerInfo.country}
+                // value={formData.propertyData.ownerInfo.country}
+                defaultValue=""
                 onChange={handleChange}
                 style={styles}
-              /> */}
-              {/* <br></br> */}
-              {/* <label
+              />
+              <br></br>
+              <label
                 className="mx-[0.2rem]"
                 for="city"
                 style={{
@@ -1069,7 +1072,7 @@ function PropertyInfo() {
                   float: "left",
                 }}
               >
-                City of residence of Landlord
+                City of Residence
               </label>
               <input
                 type="text"
@@ -1077,10 +1080,11 @@ function PropertyInfo() {
                 placeholder="residing city"
                 name="city"
                 // required
-                value={formData.propertyData.ownerInfo.city}
+                // value={formData.propertyData.ownerInfo.city}
+                defaultValue=""
                 onChange={handleChange}
                 style={styles}
-              /> */}
+              />
               {/* <br></br> */}
               {/* <br></br> */}
               <div className="flex justify-around items-center">
