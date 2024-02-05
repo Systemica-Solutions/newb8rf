@@ -10,12 +10,14 @@ import logo from "../Assets/Images/Logo.png";
 import CommonBtn from "../CommonButton";
 
 function AuthCode() {
+
+  const today = new Date().toISOString().substring(0, 10); //set today's date
   //States
   const [formData, setFormData] = useState({
     entity: "",
     code: "",
     codeType: "",
-    startTime: ""
+    startTime: today, //set the default start date to today
   });
   const [data, setData] = useState(null);
 
@@ -140,6 +142,7 @@ function AuthCode() {
               type="date"
               id="startTime"
               value={formData.startTime}
+              defaultValue={today}
               onChange={handleChange}
               name="startTime"
               className="input-field"

@@ -666,7 +666,7 @@ function FieldAgentVerifyProperty() {
                           float: "left",
                         }}
                       >
-                        What is the House type?{" "}
+                        Property Type?{" "}
                         <span style={{ color: "red", fontSize: "1.5rem" }}>
                           *
                         </span>
@@ -717,7 +717,7 @@ function FieldAgentVerifyProperty() {
                           float: "left",
                         }}
                       >
-                        What is the house configuration?{" "}
+                        Property Configuration?{" "}
                         <span style={{ color: "red", fontSize: "1.5rem" }}>
                           *
                         </span>
@@ -797,7 +797,7 @@ function FieldAgentVerifyProperty() {
                         float: "left",
                       }}
                     >
-                      What is the Society?{" "}
+                      Society Name?{" "}
                       <span style={{ color: "red", fontSize: "1.5rem" }}>
                         *
                       </span>
