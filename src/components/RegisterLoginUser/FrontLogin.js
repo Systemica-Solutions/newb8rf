@@ -54,6 +54,7 @@ function FrontLogin() {
   // };
 
   const handleChange = (event) => {
+    console.log("in handle submit start")
     const { name, value } = event.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
@@ -94,6 +95,10 @@ function FrontLogin() {
 
         //set token to axios common header
         //  setAuthToken(token);
+        console.log("Invite Code:", inviteCode);
+console.log("User Type:", usertype);
+console.log("Redirecting to:", inviteCode.substring(0, 2) == "FA" ? "/FieldAgentHomeN" : "/dashboard");
+
 
         alert("You're Logged In");
         //redirect user to Dashboard
@@ -110,6 +115,7 @@ function FrontLogin() {
         // handle the error
         alert(error.response.data.message);
       });
+      console.log("in handle submit end")
   };
 
   // console.log(data);
