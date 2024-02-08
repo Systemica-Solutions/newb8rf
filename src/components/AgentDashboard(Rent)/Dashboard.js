@@ -71,7 +71,7 @@ function Dashboard() {
           // console.log(response.data.data.properties);
           var myArrayPropertyCount = response.data.data.properties;
           setresponseCountProperties(myArrayPropertyCount.length);
-          console.log(myArrayPropertyCount.length);
+          // console.log(myArrayPropertyCount.length);
 
           setresponseProperties(response.data.data.properties);
 
@@ -178,7 +178,7 @@ function Dashboard() {
         );
         // Update the countProperties state with the response data
         setCountProperties(response.data.data.counts);
-        console.log(response.data.data.counts);
+        // console.log(response.data.data.counts);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -196,8 +196,8 @@ function Dashboard() {
         );
         // Update the countProperties state with the response data
         setCountTenants(response.data.data.tenant);
-        console.log("Count count", response.data.data.counts);
-        console.log("Count tenants", response.data.data.tenant);
+        // console.log("Count count", response.data.data.counts);
+        // console.log("Count tenants", response.data.data.tenant);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -216,8 +216,8 @@ function Dashboard() {
 
   var pendingCounting = 0;
   var activeCounting = 0;
-  const number = CountTenants.Total - CountTenants.Deactivate;
-  const AvailablePropertyNumber = CountProperties.Total - CountProperties.Closed;
+  const number = CountTenants.Total - CountTenants.Deactivate ? CountTenants.Total - CountTenants.Deactivate : 0;
+  const AvailablePropertyNumber = CountProperties.Total - CountProperties.Closed ? CountProperties.Total - CountProperties.Closed : 0;
   responseProperties.map((element) => {
     // console.log(element.status);
     if (
@@ -292,9 +292,10 @@ function Dashboard() {
                   {/* icon */}
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <TbBrandGoogleHome className="text-[#52796F] text-[2.5rem]" />
+                    
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountProperties.Total}
-                    </p>
+                     {AvailablePropertyNumber}
+                     </p>
                   </div>
                   {/* text */}
                   <div className="font-bold flex justify-center items-center">
@@ -310,7 +311,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <RiQuestionnaireFill className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountProperties.Pending}
+                      {CountProperties.Pending ? CountProperties.Pending : 0}
                     </p>
                   </div>
                   <div className="font-bold flex justify-center items-center flex-col">
@@ -326,7 +327,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <BsFillBookmarkCheckFill className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountProperties.Verified}
+                      {CountProperties.Verified ? CountProperties.Verified : 0}
                     </p>
                   </div>
                   {/* text */}
@@ -343,7 +344,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <TbShareOff className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {ytsCount}
+                      {ytsCount ? ytsCount : 0}
                     </p>
                   </div>
                   {/* text */}
@@ -360,7 +361,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <MdOutlineMobileScreenShare className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {SharedPropertyCount}
+                      {SharedPropertyCount ? SharedPropertyCount : 0}
                     </p>
                   </div>
                   {/* text */}
@@ -377,7 +378,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <RiHomeHeartLine className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountProperties.Shortlisted}
+                      {CountProperties.Shortlisted ? CountProperties.Shortlisted : 0}
                     </p>
                   </div>
                   {/* text */}
@@ -387,7 +388,7 @@ function Dashboard() {
                 </Link>
               </div>
               <p className="font-bold text-[1.2rem] text-center py-[1rem]">
-                {CountProperties.Closed} Closed
+                {CountProperties.Closed ? CountProperties.Closed : 0} Closed
               </p>
             </div>
             {/* right-container */}
@@ -419,7 +420,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <RiQuestionnaireFill className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountTenants.WaitingForProperty}
+                      {CountTenants.WaitingForProperty ? CountTenants.WaitingForProperty : 0}
                     </p>
                   </div>
                   {/* text */}
@@ -436,7 +437,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <FaEye className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountTenants.CurrentlyViewing + CountTenants.Shortlisted}
+                      {CountTenants.CurrentlyViewing + CountTenants.Shortlisted ? CountTenants.CurrentlyViewing + CountTenants.Shortlisted : 0}
                     </p>
                   </div>
                   {/* text */}
@@ -453,7 +454,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <RiHomeHeartLine className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountTenants.Shortlisted}
+                      {CountTenants.Shortlisted ? CountTenants.Shortlisted : 0}
                     </p>
                   </div>
                   {/* text */}
@@ -463,7 +464,7 @@ function Dashboard() {
                 </Link>
               </div>
               <p className="font-bold text-[1.2rem] text-center py-[1rem]">
-                {CountTenants.Deactivate} Closed
+                {CountTenants.Deactivate ? CountTenants.Deactivate : 0} Closed
               </p>
             </div>
           </div>
