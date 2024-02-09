@@ -463,6 +463,7 @@ function AddTenant() {
                   min="1"
                   max="12"
                   value={formData.tenantData.numberOfMonth  }
+                  onWheel={(e) => e.target.blur()}
                   onChange={handleChange}
                   maxLength="2"
                   name="numberOfMonth"
@@ -655,6 +656,7 @@ function AddTenant() {
                       id="rent"
                       value={formData.tenantData.rent}
                       onChange={handleChange}
+                      onWheel={(e) => e.target.blur()}
                       name="rent"
                       placeholder="-number only*-"
                       style={{

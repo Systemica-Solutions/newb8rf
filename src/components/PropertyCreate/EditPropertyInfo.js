@@ -597,6 +597,7 @@ function EditPropertyInfo() {
                 value={formData.pinCode}
                 onChange={handleChange}
                 onBlur={validatePincode}
+                onWheel={(e) => e.target.blur()}
                 placeholder="Pin code"
                 style={{
                   backgroundColor: "white",
@@ -1245,6 +1246,7 @@ function EditPropertyInfo() {
                       id="carpetArea"
                       value={formData.propertyDetails.featureInfo.carpetArea}
                       onChange={handleChange}
+                      onWheel={(e) => e.target.blur()}
                       name="carpetArea"
                       placeholder="number only*"
                       style={{
@@ -1289,6 +1291,7 @@ function EditPropertyInfo() {
                         id="your"
                         value={formData.propertyDetails.featureInfo.floors.your}
                         onChange={handleChange}
+                        onWheel={(e) => e.target.blur()}
                         name="your"
                         placeholder="number only*"
                         style={{
@@ -1310,6 +1313,7 @@ function EditPropertyInfo() {
                           formData.propertyDetails.featureInfo.floors.total
                         }
                         onChange={handleChange}
+                        onWheel={(e) => e.target.blur()}
                         name="total"
                         placeholder="number*"
                         style={{
@@ -1737,6 +1741,7 @@ function EditPropertyInfo() {
                         formData.propertyDetails.featureInfo.constructionYear
                       }
                       onChange={handleChange}
+                      onWheel={(e) => e.target.blur()}
                       name="constructionYear"
                       placeholder="-year drop-down* -"
                       style={{
@@ -1835,6 +1840,7 @@ function EditPropertyInfo() {
                         id="rentAmount"
                         value={formData.propertyDetails.featureInfo.rentAmount}
                         onChange={handleChange}
+                        onWheel={(e) => e.target.blur()}
                         name="rentAmount"
                         placeholder="-number only*-"
                         style={{
@@ -1867,6 +1873,7 @@ function EditPropertyInfo() {
                         id="rentDeposit"
                         value={formData.propertyDetails.featureInfo.rentDeposit}
                         onChange={handleChange}
+                        onWheel={(e) => e.target.blur()}
                         name="rentDeposit"
                         placeholder="-number only*-"
                         style={{
@@ -1906,6 +1913,7 @@ function EditPropertyInfo() {
                         value={
                           formData.propertyDetails.featureInfo.rentMaintenance
                         }
+                        onWheel={(e) => e.target.blur()}
                         onChange={handleChange}
                         name="rentMaintenance"
                         placeholder="-number only*-"
@@ -1942,6 +1950,7 @@ function EditPropertyInfo() {
                         value={
                           formData.propertyDetails.featureInfo.lockInPeriod
                         }
+                        onWheel={(e) => e.target.blur()}
                         onChange={handleChange}
                         name="lockInPeriod"
                         placeholder="-number only*-"
@@ -2009,6 +2018,7 @@ function EditPropertyInfo() {
                           value={
                             formData.propertyDetails.featureInfo.saleAmount
                           }
+                          onWheel={(e) => e.target.blur()}
                           onChange={handleChange}
                           name="saleAmount"
                           placeholder="-number only*-"
@@ -2045,6 +2055,7 @@ function EditPropertyInfo() {
                           value={
                             formData.propertyDetails.featureInfo.saleDeposit
                           }
+                          onWheel={(e) => e.target.blur()}
                           onChange={handleChange}
                           name="saleDeposit"
                           placeholder="-number only*-"
@@ -2086,6 +2097,7 @@ function EditPropertyInfo() {
                           value={
                             formData.propertyDetails.featureInfo.saleMaintenance
                           }
+                          onWheel={(e) => e.target.blur()}
                           onChange={handleChange}
                           name="saleMaintenance"
                           placeholder="-number only*-"
@@ -2122,6 +2134,7 @@ function EditPropertyInfo() {
                           value={
                             formData.propertyDetails.featureInfo.moveInFrom
                           }
+                          onWheel={(e) => e.target.blur()}
                           onChange={handleChange}
                           name="moveInFrom"
                           placeholder="-number only*-"
