@@ -1954,6 +1954,7 @@ function PropertyInfo() {
                         name="constructionYear"
                         placeholder="-year drop-down* -"
                         max={getCurrentYear()}
+                        min={getCurrentYear()-100}
                         style={{
                           backgroundColor: "white",
                           padding: "0.5rem",
