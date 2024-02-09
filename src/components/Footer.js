@@ -43,9 +43,9 @@ function Footer() {
               <img src={logo} alt="fireSpot" />
             </Link>
           ) : (
-            <Link to="/FieldAgentHomeN">
+            // <Link to="/FieldAgentHomeN">
               <img src={logo} height={35} alt="fireSpot" />
-            </Link>
+            // </Link>
           )}
         </div>
         <div>A better way to manage better homes</div>
