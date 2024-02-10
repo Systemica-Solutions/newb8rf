@@ -367,6 +367,7 @@ function AddBuyer() {
                 className={"fieldInput-add"}
                 type="number"
                 id="budget"
+                onWheel={(e) => e.target.blur()}
                 name="budget"
                 value={formData.buyerData.budget}
                 onChange={handleChange}

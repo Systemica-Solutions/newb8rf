@@ -274,6 +274,7 @@ function OTPscreen() {
                   type="number"
                   id="phone"
                   value={formData.phone}
+                  onWheel={(e) => e.target.blur()}
                   onChange={handleChange}
                   name="phone"
                   required
@@ -304,6 +305,7 @@ function OTPscreen() {
                   disabled={FormDisable}
                   id="enter_otp"
                   value={formData.enter_otp}
+                  onWheel={(e) => e.target.blur()}
                   onChange={handleChange}
                   style={{
                     width: "90%",

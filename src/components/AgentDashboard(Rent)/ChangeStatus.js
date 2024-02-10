@@ -280,7 +280,7 @@ function ChangeStatus() {
           backgroundSize: "100% 100%",
         }}
       >
-        <CommonHeader title="Change Status/ Edit Property" color="#52796F" />
+        <CommonHeader title="Change Status/Close Property" color="#52796F" />
         <div className="px-[1rem]">
           <div
             className="bg-white px-[1rem] py-[0.5rem]"
