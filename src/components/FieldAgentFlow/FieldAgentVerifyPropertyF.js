@@ -294,6 +294,7 @@ function FieldAgentVerifyPropertyF(){
                         type="number"
                         id="Total_Floor"
                         value={formData.Total_Floor}
+                        onWheel={(e) => e.target.blur()}
                         onChange={handleChange}
                         name="Total_Floor"
                         placeholder="number*"
