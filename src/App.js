@@ -129,6 +129,7 @@ import PropertyCreated from "./components/PropertyCreate/PropertyCreated";
 
 //footer
 import Footer from "./components/Footer";
+import Home from "./components/Home";
 
 function App(props) {
   const [isLogin, setIsLogin] = useState(true);
@@ -179,6 +180,7 @@ function App(props) {
 
             {/* RegisterLoginUser */}
             <Route exact path="/" element={<SignUp />} />
+            <Route exact path="/Home" element={<Home/>} />
             <Route exact path="FrontLogin" element={<FrontLogin />} />
             <Route exact path="AuthCode" element={<AuthCode />} />
             <Route exact path="AdminFront" element={<AdminFront />} />
