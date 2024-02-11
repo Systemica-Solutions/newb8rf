@@ -145,7 +145,7 @@ const AvailablePropertyComp = ({ props, name, activeProperies }) => {
                 to={`/Changestatus?propertyId=${values._id}`}
               >
                 <IoIosArrowDroprightCircle className="text-[1.7rem] text-[#5D6560]" />
-                <p className="font-bold py-[0.2rem] text-[#5D6560]">Edit</p>
+                <p className="font-bold py-[0.2rem] text-[#5D6560]">Close Property</p>
               </Link>
             </div>
           </div>

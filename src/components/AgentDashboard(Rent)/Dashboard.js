@@ -210,7 +210,7 @@ function Dashboard() {
     fetchPropertiesCounts();
     fetchTententCounts();
     // console.log(CountTenants.Total)
-  }, [CountProperties]);
+  }, []);
 
   // console.log(CountProperties);
 

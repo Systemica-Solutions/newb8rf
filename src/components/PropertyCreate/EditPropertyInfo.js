@@ -421,7 +421,7 @@ function EditPropertyInfo() {
             <img src={num_1} alt="Image description" height={55} width={300} />
 
             <form
-              className="login-form inner-background"
+              className="property-form inner-background"
               onSubmit={handleChangeOne}
             >
               <h4 style={{ color: "#52796f" }}>
@@ -439,7 +439,7 @@ function EditPropertyInfo() {
                   float: "left",
                 }}
               >
-                What is the House type?
+                Property Type?
               </label>
               <select
                 id="houseType"
@@ -487,7 +487,7 @@ function EditPropertyInfo() {
                   float: "left",
                 }}
               >
-                What is the house configuration?{" "}
+                Property Configuration?{" "}
               </label>
               <select
                 id="houseConfig"
@@ -559,7 +559,7 @@ function EditPropertyInfo() {
                   float: "left",
                 }}
               >
-                What is the Society?
+                Society Name?
               </label>
               <input
                 type=""
@@ -597,6 +597,7 @@ function EditPropertyInfo() {
                 value={formData.pinCode}
                 onChange={handleChange}
                 onBlur={validatePincode}
+                onWheel={(e) => e.target.blur()}
                 placeholder="Pin code"
                 style={{
                   backgroundColor: "white",
@@ -759,7 +760,7 @@ function EditPropertyInfo() {
               style={{ borderRadius: "16px" }}
               className="inner-background"
             >
-              {/* Landlord FIRST NAME */}
+              {/* Owner's First NAME */}
               <h4 style={{ color: "#52796f" }}> Who owns this Property?</h4>
 
               <label
@@ -772,19 +773,19 @@ function EditPropertyInfo() {
                   float: "left",
                 }}
               >
-                Landlord First Name*{" "}
+                Owner's First Name*{" "}
               </label>
               <input
                 type="text"
                 id="first"
-                placeholder="Landlord First Name"
+                placeholder="Owner's First Name"
                 name="first"
                 value={formData.propertyDetails.ownerInfo.name.first}
                 onChange={handleChange}
                 style={styles}
               />
               <br></br>
-              {/* Landlord LAST NAME */}
+              {/* Owner's Last NAME */}
               <label
                 for="last"
                 style={{
@@ -795,12 +796,12 @@ function EditPropertyInfo() {
                   float: "left",
                 }}
               >
-                Landlord Last Name*{" "}
+                Owner's Last Name*{" "}
               </label>
               <input
                 type="text"
                 id="last"
-                placeholder="Landlord last name"
+                placeholder="Owner's Last name"
                 name="last"
                 value={formData.propertyDetails.ownerInfo.name.last}
                 onChange={handleChange}
@@ -1245,6 +1246,7 @@ function EditPropertyInfo() {
                       id="carpetArea"
                       value={formData.propertyDetails.featureInfo.carpetArea}
                       onChange={handleChange}
+                      onWheel={(e) => e.target.blur()}
                       name="carpetArea"
                       placeholder="number only*"
                       style={{
@@ -1275,7 +1277,7 @@ function EditPropertyInfo() {
                     }}
                   >
                     <img src={floor_number} alt="Icon description" />
-                    <h5 style={{ marginTop: "-1px" }}>Floor Number</h5>
+                    <h5 style={{ marginTop: "-1px" }}>Property Floor Number</h5>
                     <div
                       style={{
                         display: "flex",
@@ -1289,6 +1291,7 @@ function EditPropertyInfo() {
                         id="your"
                         value={formData.propertyDetails.featureInfo.floors.your}
                         onChange={handleChange}
+                        onWheel={(e) => e.target.blur()}
                         name="your"
                         placeholder="number only*"
                         style={{
@@ -1310,6 +1313,7 @@ function EditPropertyInfo() {
                           formData.propertyDetails.featureInfo.floors.total
                         }
                         onChange={handleChange}
+                        onWheel={(e) => e.target.blur()}
                         name="total"
                         placeholder="number*"
                         style={{
@@ -1372,7 +1376,7 @@ function EditPropertyInfo() {
                     >
                       <option value="Drop Down">Drop Down</option>
                       <option
-                        style={{ textAlign: "center", backgroundColor: "red" }}
+                        style={{ backgroundColor: "red" }}
                         value="1 Car"
                       >
                         1 Car
@@ -1404,7 +1408,7 @@ function EditPropertyInfo() {
                     >
                       <option value="Drop Down">Drop Down</option>
                       <option
-                        style={{ textAlign: "center", backgroundColor: "red" }}
+                        style={{ backgroundColor: "red" }}
                         value="1 Bike"
                       >
                         1 Bike
@@ -1433,7 +1437,7 @@ function EditPropertyInfo() {
                     >
                       <option value="Drop Down">Drop Down</option>
                       <option
-                        style={{ textAlign: "center", backgroundColor: "red" }}
+                        style={{ backgroundColor: "red" }}
                         value="Covered Roof"
                       >
                         Covered Roof
@@ -1476,7 +1480,7 @@ function EditPropertyInfo() {
                   >
                     <option value="Drop Down">Drop Down</option>
                     <option
-                      style={{ textAlign: "center", backgroundColor: "red" }}
+                      style={{  backgroundColor: "red" }}
                       value="1 Room"
                     >
                       1 Room
@@ -1610,7 +1614,7 @@ function EditPropertyInfo() {
                   >
                     <option value="furnish">Drop Down</option>
                     <option
-                      style={{ textAlign: "center", backgroundColor: "red" }}
+                      style={{  backgroundColor: "red" }}
                       value="Un-furnished"
                     >
                       Un-furnished
@@ -1737,6 +1741,7 @@ function EditPropertyInfo() {
                         formData.propertyDetails.featureInfo.constructionYear
                       }
                       onChange={handleChange}
+                      onWheel={(e) => e.target.blur()}
                       name="constructionYear"
                       placeholder="-year drop-down* -"
                       style={{
@@ -1835,6 +1840,7 @@ function EditPropertyInfo() {
                         id="rentAmount"
                         value={formData.propertyDetails.featureInfo.rentAmount}
                         onChange={handleChange}
+                        onWheel={(e) => e.target.blur()}
                         name="rentAmount"
                         placeholder="-number only*-"
                         style={{
@@ -1867,6 +1873,7 @@ function EditPropertyInfo() {
                         id="rentDeposit"
                         value={formData.propertyDetails.featureInfo.rentDeposit}
                         onChange={handleChange}
+                        onWheel={(e) => e.target.blur()}
                         name="rentDeposit"
                         placeholder="-number only*-"
                         style={{
@@ -1906,6 +1913,7 @@ function EditPropertyInfo() {
                         value={
                           formData.propertyDetails.featureInfo.rentMaintenance
                         }
+                        onWheel={(e) => e.target.blur()}
                         onChange={handleChange}
                         name="rentMaintenance"
                         placeholder="-number only*-"
@@ -1942,6 +1950,7 @@ function EditPropertyInfo() {
                         value={
                           formData.propertyDetails.featureInfo.lockInPeriod
                         }
+                        onWheel={(e) => e.target.blur()}
                         onChange={handleChange}
                         name="lockInPeriod"
                         placeholder="-number only*-"
@@ -2009,6 +2018,7 @@ function EditPropertyInfo() {
                           value={
                             formData.propertyDetails.featureInfo.saleAmount
                           }
+                          onWheel={(e) => e.target.blur()}
                           onChange={handleChange}
                           name="saleAmount"
                           placeholder="-number only*-"
@@ -2045,6 +2055,7 @@ function EditPropertyInfo() {
                           value={
                             formData.propertyDetails.featureInfo.saleDeposit
                           }
+                          onWheel={(e) => e.target.blur()}
                           onChange={handleChange}
                           name="saleDeposit"
                           placeholder="-number only*-"
@@ -2086,6 +2097,7 @@ function EditPropertyInfo() {
                           value={
                             formData.propertyDetails.featureInfo.saleMaintenance
                           }
+                          onWheel={(e) => e.target.blur()}
                           onChange={handleChange}
                           name="saleMaintenance"
                           placeholder="-number only*-"
@@ -2122,6 +2134,7 @@ function EditPropertyInfo() {
                           value={
                             formData.propertyDetails.featureInfo.moveInFrom
                           }
+                          onWheel={(e) => e.target.blur()}
                           onChange={handleChange}
                           name="moveInFrom"
                           placeholder="-number only*-"

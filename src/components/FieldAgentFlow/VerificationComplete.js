@@ -73,12 +73,13 @@ function VerificationComplete() {
             {propertyData &&
               propertyData.propertyDetails.propertyInfo.houseConfig}
           </p>
-          <p className="text-[1.4rem] font-semibold">
+          <p className="text-[1.4rem] font-semibold mb-10">
             {`(${
               propertyData &&
               propertyData.propertyDetails.featureInfo.furnishingType
             })`}
           </p>
+        <Link to="/FieldAgentHomeN"><CommonBtn title="Return to Home"  margin="52%" fontweight="bolder" /></Link>
         </div>
       </div>
       <Footer />

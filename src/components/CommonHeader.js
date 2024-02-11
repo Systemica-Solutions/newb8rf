@@ -37,13 +37,29 @@ function CommonHeader(props) {
 
   const handleLogout = (event) => {
     event.preventDefault();
+  //   console.log("Value hit");
+  //   localStorage.removeItem("token");
+  //   localStorage.removeItem("usertype");
+  //   alert("You have been logged out.");
+  //   //redirect user to UploadPhotos
+  //   window.location.href = "/FrontLogin";
+  // };
+
+  // warning before logging out
+const confirmLogout = window.confirm("Are you sure you want to log out?");
+if (confirmLogout) {
     console.log("Value hit");
     localStorage.removeItem("token");
     localStorage.removeItem("usertype");
     alert("You have been logged out.");
-    //redirect user to UploadPhotos
+    // Redirect user to FrontLogin
     window.location.href = "/FrontLogin";
-  };
+} else {
+    // If user not logout
+    console.log("Logout cancelled");
+}
+
+  }
 
   return (
     <>
@@ -96,5 +112,6 @@ function CommonHeader(props) {
       </div>
     </>
   );
-}
-export default CommonHeader;
+          }
+
+export default CommonHeader

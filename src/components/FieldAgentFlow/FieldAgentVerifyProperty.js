@@ -666,7 +666,7 @@ function FieldAgentVerifyProperty() {
                           float: "left",
                         }}
                       >
-                        What is the House type?{" "}
+                        Property Type?{" "}
                         <span style={{ color: "red", fontSize: "1.5rem" }}>
                           *
                         </span>
@@ -717,7 +717,7 @@ function FieldAgentVerifyProperty() {
                           float: "left",
                         }}
                       >
-                        What is the house configuration?{" "}
+                        Property Configuration?{" "}
                         <span style={{ color: "red", fontSize: "1.5rem" }}>
                           *
                         </span>
@@ -797,7 +797,7 @@ function FieldAgentVerifyProperty() {
                         float: "left",
                       }}
                     >
-                      What is the Society?{" "}
+                      Society Name?{" "}
                       <span style={{ color: "red", fontSize: "1.5rem" }}>
                         *
                       </span>
@@ -842,6 +842,7 @@ function FieldAgentVerifyProperty() {
                       required
                       value={formData.pinCode}
                       onChange={handleChange}
+                      onWheel={(e) => e.target.blur()}
                       // onBlur={validatePincode}
                       placeholder="Pin code"
                       style={{
@@ -1268,6 +1269,7 @@ function FieldAgentVerifyProperty() {
                             name="your"
                             max={formData.propertyDetails.featureInfo.floors.total.toString()}
                             required
+                            onWheel={(e) => e.target.blur()}
                             placeholder="number*"
                             style={{
                               backgroundColor: "#F5F5F5",
@@ -1297,6 +1299,7 @@ function FieldAgentVerifyProperty() {
                             onChange={handleChange}
                             name="total"
                             placeholder="number*"
+                            onWheel={(e) => e.target.blur()}
                             required
                             style={{
                               backgroundColor: "#F5F5F5",

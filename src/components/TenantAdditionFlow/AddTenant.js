@@ -463,6 +463,7 @@ function AddTenant() {
                   min="1"
                   max="12"
                   value={formData.tenantData.numberOfMonth  }
+                  onWheel={(e) => e.target.blur()}
                   onChange={handleChange}
                   maxLength="2"
                   name="numberOfMonth"
@@ -506,13 +507,14 @@ function AddTenant() {
                     border: "1px solid #52796F",
                   }}
                 >
-                  <option value="gated_apartment" disabled selected>
+                  {/* <option value="gated_apartment" disabled selected>
                     Select from Drop Down
-                  </option>
+                  </option> */}
                   {/* <option value="Studio">
                 Studio
               </option> */}
                   {/* <option value="1BHK">1BHK</option> */}
+                  <option value="" disabled selected>Select from Drop Down</option>
 
                   <option value="Studio">Studio</option>
                   <option value="1 BHK">1 BHK</option>
@@ -569,7 +571,7 @@ function AddTenant() {
                   }}
                 >
                   {/* houseType" must be one of [Flat (in Gated Society…r Floor, Standalone Individual House, 0, 1, 2, 3] */}
-                  What is the House type?{" "}
+                  Property Type?{" "}
                   <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
                 </label>
                 <select
@@ -654,6 +656,7 @@ function AddTenant() {
                       id="rent"
                       value={formData.tenantData.rent}
                       onChange={handleChange}
+                      onWheel={(e) => e.target.blur()}
                       name="rent"
                       placeholder="-number only*-"
                       style={{
