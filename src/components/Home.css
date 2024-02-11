@@ -1,11 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 .home_{
     width: 100%;
     height:100vh;
-    background: url("./Assets/image1.png");
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(270deg, #ffffffaa, #ffffffaa),url("./Assets/image1.png");
     background-size: cover;
     position: relative;
 }
-.home_:before {
+/* .home_:before {
     content: "";
     background:linear-gradient(270deg, #2F303A, #2f303a00);
     position: absolute;
@@ -13,4 +15,75 @@
     top: 0;
     left: 0;
     right: 0;
-  }
+  } */
+ .top{
+    /* position: absolute; */
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+ }
+ .logo_div{
+    display: flex;
+    align-items: baseline;
+ }
+ .logo_div h4{
+    margin-left: 10px;
+    font-size: 30px;
+    font-weight: 500;
+ }
+ .logo_{
+    width:150px;
+    height:auto;
+    object-fit: cover;
+ }
+ .login_link h2{
+    font-size: 20px;
+    color: rgb(23, 22, 22);
+    font-weight: 500;
+ }
+ .main_{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+ }
+ .main_ h1{
+    font-size: 55px;
+    font-weight: 700;
+    color: rgb(0, 0, 0);
+ }
+ .main_ h4{
+    max-width: 513px;
+    font-size: 20px;
+    margin-top: 25px;
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+ }
+
+.button-1 {
+  background-color: #47143D;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 12px 26px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
