@@ -82,7 +82,7 @@ function SignUp() {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
-    console.log(formData);
+    // console.log(formData);
   };
 
   const handleChangeOTP = (event) => {
@@ -214,6 +214,7 @@ function SignUp() {
 
         alert("OTP has been send!");
         setIsOTP(false);
+        console.log("hello")
         //redirect user to Dashboard
         // window.location.href = `/ConfirmOTPAgent?sessionId=${OTP_SESSION}&phone=${phone}&username=${username}`;
       })
@@ -251,7 +252,7 @@ function SignUp() {
             .post("https://b8rliving.com/agent/signup", formData)
             .then((response) => {
               console.log(response.data);
-              // do something with the response
+              // do something with the response 144221
               const token = response.data.token;
               const username = response.data.name;
               //set JWT token to local
