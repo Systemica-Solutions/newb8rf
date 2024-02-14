@@ -13,7 +13,7 @@ import { MdOutlineHideImage } from "react-icons/md";
 import { RiQuestionnaireFill } from "react-icons/ri";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 
-const AvailablePropertyComp = ({ props, name, activeProperies }) => {
+const AvailablePropertyComp = ({ props, name, showCloseButton }) => {
   const [filteredData, setfilteredData] = useState(props);
   const [searchValue, setSearchValue] = useState("");
 
@@ -140,13 +140,13 @@ const AvailablePropertyComp = ({ props, name, activeProperies }) => {
                 </div>
               </div>
               {/* right/edit section */}
-              <Link
+              {/* <Link
                 className="w-[15%] bg-[#E8E7E7] flex justify-center items-center p-[0.5rem] flex-col rounded-[0.5rem]"
                 to={`/Changestatus?propertyId=${values._id}`}
               >
                 <IoIosArrowDroprightCircle className="text-[1.7rem] text-[#5D6560]" />
                 <p className="font-bold py-[0.2rem] text-[#5D6560]">Close Property</p>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
