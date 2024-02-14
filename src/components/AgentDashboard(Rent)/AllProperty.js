@@ -263,6 +263,7 @@ function AllProperty() {
           <AvailablePropertyComp
             props={responsePendingProperties}
             name={name}
+            showCloseButton={true}
           />
         )}
 
