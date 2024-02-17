@@ -433,7 +433,7 @@ function ChangeStatus() {
                         float: "left",
                       }}
                     >
-                      Select Rent Amaount (Rent + Maintenance)
+                      Select Rent Amount (Rent + Maintenance)
                     </label>
                     <input
                       type="text"
@@ -657,7 +657,7 @@ function ChangeStatus() {
                       float: "left",
                     }}
                   >
-                    Select Rent Amaount (Rent + Maintenance)
+                    Select Rent Amount (Rent + Maintenance)
                   </label>
                   <input
                     type="text"
