@@ -115,7 +115,7 @@ function ChangeStatus() {
         setIsActive3(false);
         setRenderRent(condition);
         setRenderRentName("Rented of B8R");
-        setFormData({ closeListingReason: "Rented on B8R" });
+        setFormData({ closeListingReason: "Rented of B8R" });
         break;
 
       case "delist":
@@ -325,7 +325,6 @@ function ChangeStatus() {
           >
             <p className="text-[1.2rem] font-bold">Close Listing</p>
             <div className="flex justify-center  items-center flex-col w-[75%] py-[1rem] gap-y-[1.5rem]">
-            {propertyDetails.status === 'verified' && (
               <CommonTopButton
                 bgColor={
                   closeListingReason === "Rented on B8R" ? "#52796F" : "#D2D7D6"
@@ -337,7 +336,6 @@ function ChangeStatus() {
                 text="Rented On B8R"
                 onclicked={() => setCloseListingReason("Rented on B8R")}
               />
-              )}
               <CommonTopButton
                 bgColor={
                   closeListingReason === "Delist (Owner Denied)"
@@ -561,7 +559,7 @@ function ChangeStatus() {
           <div>
             <form className="login-form" onSubmit={submitRent}>
               <p className="text-[1.2rem] py-[1rem]">
-                <b>Write the reason for Delisting</b>
+                <b>Write your Feedback here</b>
               </p>
               <div className="px-[1rem]">
                 <div
@@ -589,9 +587,9 @@ function ChangeStatus() {
                     }}
                     required
                     placeholder="
-                    Enter your reason"
+                    enter your feedback"
                   >
-                    Enter Feed Back
+                   Enter your reason
                   </textarea>
                 </div>
               </div>

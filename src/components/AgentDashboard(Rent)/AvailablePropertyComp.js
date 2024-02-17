@@ -114,7 +114,7 @@ const AvailablePropertyComp = ({ props, name, showCloseButton }) => {
                   {/* name & icon */}
                   <div className="flex justify-between items-center pl-[0.5rem]">
                     <p className="font-semibold px-[0.2rem]">
-                    {values.houseName} , {values.societyName} 
+                      {values.societyName}
                     </p>
                     {values.imagesApproved ? (
                       <>
@@ -148,8 +148,6 @@ const AvailablePropertyComp = ({ props, name, showCloseButton }) => {
                 <IoIosArrowDroprightCircle className="text-[1.7rem] text-[#5D6560]" />
                 <p className="font-bold py-[0.2rem] text-[#5D6560]">Close Property</p>
               </Link>
-              )}
-              
             </div>
           </div>
         </div>
