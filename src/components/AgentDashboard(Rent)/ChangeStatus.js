@@ -555,7 +555,7 @@ function ChangeStatus() {
           <div>
             <form className="login-form" onSubmit={submitRent}>
               <p className="text-[1.2rem] py-[1rem]">
-                <b>Write your Feedback here</b>
+              <b>Write the reason for Delisting</b>
               </p>
               <div className="px-[1rem]">
                 <div
@@ -585,7 +585,7 @@ function ChangeStatus() {
                     placeholder="
                     enter your feedback"
                   >
-                    Enter Feed Back
+                   Enter your reason
                   </textarea>
                 </div>
               </div>
