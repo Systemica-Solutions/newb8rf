@@ -114,8 +114,8 @@ function ChangeStatus() {
         setIsActive2(false);
         setIsActive3(false);
         setRenderRent(condition);
-        setRenderRentName("Rented of B8R");
-        setFormData({ closeListingReason: "Rented of B8R" });
+        setRenderRentName("Rented on B8R");
+        setFormData({ closeListingReason: "Rented on B8R" });
         break;
 
       case "delist":
@@ -325,7 +325,8 @@ function ChangeStatus() {
           >
             <p className="text-[1.2rem] font-bold">Close Listing</p>
             <div className="flex justify-center  items-center flex-col w-[75%] py-[1rem] gap-y-[1.5rem]">
-              <CommonTopButton
+            {propertyDetails.status === 'verified' && (
+               <CommonTopButton
                 bgColor={
                   closeListingReason === "Rented on B8R" ? "#52796F" : "#D2D7D6"
                 }
@@ -336,6 +337,7 @@ function ChangeStatus() {
                 text="Rented On B8R"
                 onclicked={() => setCloseListingReason("Rented on B8R")}
               />
+            )}
               <CommonTopButton
                 bgColor={
                   closeListingReason === "Delist (Owner Denied)"
