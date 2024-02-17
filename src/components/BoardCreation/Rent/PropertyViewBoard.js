@@ -50,7 +50,7 @@ function PropertyViewBoard() {
             `https://b8rliving.com/board/${boardId}`,
             axiosConfig
           );
-
+          console.log(response.data)
           // const responseData = response.data.data.tenant.tenantDetails;
           const responseDataBoardData = response.data.data.board;
           const responseDataPropertiesData =
@@ -66,7 +66,7 @@ function PropertyViewBoard() {
             setResponseDataProperty(filteredProperties); // Set All properties added to board
           }
 
-          console.log(responseDataBoardData);
+          // console.log(responseDataBoardData);
 
           // Update the formData state with the response data
           setResponseDataBoard(responseDataBoardData);
