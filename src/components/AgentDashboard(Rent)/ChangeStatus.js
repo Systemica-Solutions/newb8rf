@@ -32,7 +32,7 @@ function ChangeStatus() {
   const [RenderRentName, setRenderRentName] = useState("Rented of B8R");
   const [propertyDetails, setPropertyDetails] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [closeListingReason, setCloseListingReason] = useState("Rented of B8R");
+  const [closeListingReason, setCloseListingReason] = useState("Delist (Owner Denied)");
   const [tenantName, setTenantName] = useState("");
   const [tenancyStartDate, setTenancyStartDate] = useState("");
   const [rentAmount, setRentAmount] = useState("");
@@ -92,6 +92,9 @@ function ChangeStatus() {
 
         const responseData = response.data.data.property;
         setPropertyDetails(responseData);
+        if (responseData.status === 'pendingVerification') {
+          setCloseListingReason("Rented Outside");
+        }
       } catch (error) {
         // Handle any errors that occur during the API request
         console.error("Error fetching data:", error);
