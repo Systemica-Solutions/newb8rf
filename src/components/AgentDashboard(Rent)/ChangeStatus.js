@@ -588,7 +588,7 @@ function ChangeStatus() {
                     }}
                     required
                     placeholder="
-                    enter your feedback"
+                    enter your reason"
                   >
                    Enter your reason
                   </textarea>
