@@ -28,7 +28,7 @@ const PropertyComp = ({
   boardId,
   boardData,
 }) => {
-  const [visibleItems, setVisibleItems] = useState(3);
+  const [visibleItems, setVisibleItems] = useState(2);
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(false);
   const [responseDataBoard, setResponseDataBoard] = useState([]);
@@ -117,7 +117,7 @@ const PropertyComp = ({
   // }, [boardId]);
 
   const addToBoard = async (pId) => {
-    console.log(pId);
+    console.log("addToBoard",pId);
 
     if (!addedItems.includes(pId)) {
       // If it's not already added, add it to the addedItems state
@@ -129,6 +129,7 @@ const PropertyComp = ({
   };
 
   console.log("added Items->" + addedItems);
+
   // console.log(typeof addedItems);
 
   const viewToBoard = async () => {
@@ -144,16 +145,15 @@ const PropertyComp = ({
       console.log("tenant board already exist");
       try {
         if (boardId) {
-          for (const pId of addedItems) {
-            const response = await axios.put(
-              `https://b8rliving.com/board/property/${boardId}`,
-              { propertyId: pId },
-              axiosConfig
-            );
-            console.log(response);
-            if (response.status === 200) {
-              window.location.href = `/PropertyViewBoard?boardId=${boardId}&tenantId=${Id}&name=${name}`;
-            }
+          console.log(addedItems)
+          var res;
+          const response = await axios.put(
+            `https://b8rliving.com/board/property/${boardId}`,
+            { propertyId: addedItems },  // Ensure propertyId is an array
+            axiosConfig
+          );
+          if (response.status === 200) {
+            window.location.href = `/PropertyViewBoard?boardId=${boardId}&tenantId=${Id}&name=${name}`;
           }
         }
       } catch (error) {
@@ -183,18 +183,16 @@ const PropertyComp = ({
 
       try {
         if (bId !== undefined && bId !== null) {
-          for (const pId of addedItems) {
-            const response = await axios.put(
-              `https://b8rliving.com/board/property/${bId}`,
-              { propertyId: pId },
-              axiosConfig
-            );
-            console.log(response);
-            if (response.status === 200) {
-              window.location.href = `/PropertyViewBoard?boardId=${bId}&tenantId=${Id}&name=${name}`;
-            }
+          const response = await axios.put(
+            `https://b8rliving.com/board/property/${boardId}`,
+            { propertyId: addedItems },  // Ensure propertyId is an array
+            axiosConfig
+          );
+          if (response.status === 200) {
+            window.location.href = `/PropertyViewBoard?boardId=${bId}&tenantId=${Id}&name=${name}`;
           }
         }
+        
       } catch (error) {
         // Handle any errors that occur during the API request
         console.error("Error fetching data:", error);
@@ -384,8 +382,8 @@ const PropertyComp = ({
           ))}
 
           {visibleItems < props.length && (
-            <div style={{ textAlign: "center", marginTop: "10px" }}>
-              <button onClick={handleLoadMore}>Load More Properties</button>
+            <div style={{ textAlign: "center", marginTop: "10px", }}>
+              <button onClick={handleLoadMore} style={{padding:"10px 10px",background:"#E78895",color:"white",borderRadius:"5px"}}>Load More Properties . .</button>
             </div>
           )}
         </div>
