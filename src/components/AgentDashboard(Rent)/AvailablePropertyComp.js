@@ -114,7 +114,7 @@ const AvailablePropertyComp = ({ props, name,showCloseButton }) => {
                   {/* name & icon */}
                   <div className="flex justify-between items-center pl-[0.5rem]">
                     <p className="font-semibold px-[0.2rem]">
-                      {values.societyName}
+                    {values.houseName} , {values.societyName}
                     </p>
                     {values.imagesApproved ? (
                       <>
