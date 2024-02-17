@@ -256,6 +256,7 @@ function AllProperty() {
             <AvailablePropertyComp
               props={responseArchiveProperties}
               name={name}
+              showCloseButton={false}
             />
           </>
         ) : (
