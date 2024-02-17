@@ -82,7 +82,7 @@ const AvailablePropertyComp = ({ props, name, showCloseButton }) => {
             <div className="flex justify-between gap-x-[0.5rem]">
               {/* left-section */}
               <div
-                className="bg-white w-[85%] p-[0.5rem] rounded-[0.5rem] flex "
+                className="bg-white w-[100%] p-[0.5rem] rounded-[0.5rem] flex "
                 style={{
                   border: "1px solid #DAF0EE",
                   boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
