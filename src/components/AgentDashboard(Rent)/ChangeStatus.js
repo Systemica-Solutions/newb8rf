@@ -29,7 +29,7 @@ function ChangeStatus() {
   console.log(propertyId);
 
   const [RenderRent, setRenderRent] = useState("rent");
-  const [RenderRentName, setRenderRentName] = useState("Rented of B8R");
+  const [RenderRentName, setRenderRentName] = useState("Rented on B8R");
   const [propertyDetails, setPropertyDetails] = useState([]);
   const [loading, setLoading] = useState(false);
   const [closeListingReason, setCloseListingReason] = useState("Delist (Owner Denied)");
@@ -115,12 +115,12 @@ function ChangeStatus() {
         setIsActive3(false);
         setRenderRent(condition);
         setRenderRentName("Rented of B8R");
-        setFormData({ closeListingReason: "Rented of B8R" });
+        setFormData({ closeListingReason: "Rented on B8R" });
         break;
 
       case "delist":
         setIsActive2(true);
-        setFormDataTwo({ closeListingReason: "Rented of B8R" });
+        setFormDataTwo({ closeListingReason: "Rented on B8R" });
         setRenderRentName("Delist (Owner Denied)");
         setRenderRent(condition);
 
@@ -328,14 +328,14 @@ function ChangeStatus() {
             {propertyDetails.status === 'verified' && (
               <CommonTopButton
                 bgColor={
-                  closeListingReason === "Rented of B8R" ? "#52796F" : "#D2D7D6"
+                  closeListingReason === "Rented on B8R" ? "#52796F" : "#D2D7D6"
                 }
                 borderColor="#DAF0EE"
                 color={
-                  closeListingReason === "Rented of B8R" ? "#FFFFFF" : "#77A8A4"
+                  closeListingReason === "Rented on B8R" ? "#FFFFFF" : "#77A8A4"
                 }
                 text="Rented On B8R"
-                onclicked={() => setCloseListingReason("Rented of B8R")}
+                onclicked={() => setCloseListingReason("Rented on B8R")}
               />
               )}
               <CommonTopButton
@@ -375,7 +375,7 @@ function ChangeStatus() {
         {/* -----------------------------------------------2nd div----------------------------------------------------- */}
 
         {/* -----------------------------------------------3rd div----------------------------------------------------- */}
-        {closeListingReason === "Rented of B8R" ? (
+        {closeListingReason === "Rented on B8R" ? (
           <form className="login-form" onSubmit={submitRent}>
             <div className="px-[1rem]">
               <div
