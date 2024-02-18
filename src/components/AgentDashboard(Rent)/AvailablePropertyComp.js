@@ -13,7 +13,7 @@ import { MdOutlineHideImage } from "react-icons/md";
 import { RiQuestionnaireFill } from "react-icons/ri";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 
-const AvailablePropertyComp = ({ props, name, activeProperies }) => {
+const AvailablePropertyComp = ({ props, name,showCloseButton }) => {
   const [filteredData, setfilteredData] = useState(props);
   const [searchValue, setSearchValue] = useState("");
 
@@ -82,7 +82,7 @@ const AvailablePropertyComp = ({ props, name, activeProperies }) => {
             <div className="flex justify-between gap-x-[0.5rem]">
               {/* left-section */}
               <div
-                className="bg-white w-[85%] p-[0.5rem] rounded-[0.5rem] flex "
+                className="bg-white w-[100%] p-[0.5rem] rounded-[0.5rem] flex "
                 style={{
                   border: "1px solid #DAF0EE",
                   boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
@@ -114,7 +114,7 @@ const AvailablePropertyComp = ({ props, name, activeProperies }) => {
                   {/* name & icon */}
                   <div className="flex justify-between items-center pl-[0.5rem]">
                     <p className="font-semibold px-[0.2rem]">
-                      {values.societyName}
+                    {values.houseName} , {values.societyName}
                     </p>
                     {values.imagesApproved ? (
                       <>
@@ -140,13 +140,15 @@ const AvailablePropertyComp = ({ props, name, activeProperies }) => {
                 </div>
               </div>
               {/* right/edit section */}
-              <Link
+              {showCloseButton && ( 
+                  <Link
                 className="w-[15%] bg-[#E8E7E7] flex justify-center items-center p-[0.5rem] flex-col rounded-[0.5rem]"
                 to={`/Changestatus?propertyId=${values._id}`}
               >
                 <IoIosArrowDroprightCircle className="text-[1.7rem] text-[#5D6560]" />
                 <p className="font-bold py-[0.2rem] text-[#5D6560]">Close Property</p>
-              </Link>
+              </Link> 
+              )}
             </div>
           </div>
         </div>
