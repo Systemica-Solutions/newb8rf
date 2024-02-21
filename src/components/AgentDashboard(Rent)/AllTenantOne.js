@@ -73,7 +73,7 @@ function AllTenantOne() {
     fetchPosts();
   }, []);
 
-  console.log(responseTenat);
+  // console.log(responseTenat);
 
   // Function to handle button clicks and trigger filtering
   const handlePageAvailable = (condition) => {
