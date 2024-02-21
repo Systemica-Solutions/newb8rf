@@ -20,6 +20,7 @@ import AddTenant from "./components/TenantAdditionFlow/AddTenant";
 
 //Add Buyer
 import AddBuyer from "./components/BuyerAdditionFlow/AddBuyer";
+
 import BuyerDetails from "./components/BuyerAdditionFlow/BuyerDetails";
 import BuyerCreated from "./components/BuyerAdditionFlow/BuyerCreated";
 
