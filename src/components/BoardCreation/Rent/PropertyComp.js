@@ -184,7 +184,7 @@ const PropertyComp = ({
       try {
         if (bId !== undefined && bId !== null) {
           const response = await axios.put(
-            `https://b8rliving.com/board/property/${bId}`,
+            `https://b8rliving.com/board/property/${boardId}`,
             { propertyId: addedItems },  // Ensure propertyId is an array
             axiosConfig
           );
