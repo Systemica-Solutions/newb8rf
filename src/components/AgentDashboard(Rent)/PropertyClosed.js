@@ -30,13 +30,13 @@ function PropertyClosed() {
         <div className="flex justify-center items-center flex-col pt-[3rem] pb-[2rem] px-[1.5rem]">
           <p
             style={{ fontWeight: "lighter", textDecoration: "underline" }}
-            className="text-[2rem]"
+            className="text-[1.3rem]"
           >
             Name
           </p>
           <p
             style={{ color: "#52796F", fontWeight: "bolder" }}
-            className="text-[2.7rem]"
+            className="text-[1.5rem]"
           >
             {name},{societyName}
           </p>
@@ -46,13 +46,13 @@ function PropertyClosed() {
         <div className="flex justify-center items-center flex-col pt-[1rem] pb-[4rem] px-[1.5rem]">
           <p
             style={{ fontWeight: "lighter", textDecoration: "underline" }}
-            className="text-[2rem]"
+            className="text-[1.3rem]"
           >
             Closed Status
           </p>
           <p
             style={{ color: "#52796F", fontWeight: "bolder" }}
-            className="text-[2.7rem]"
+            className="text-[1.5rem]"
           >
             {reason}
           </p>
