@@ -83,7 +83,8 @@ function DetailView() {
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
   const [booleanValues, setBooleanValues] = useState([]); // Store boolean values here
-  const { isClickArray, setIsClickArray } = useBoardState();
+  // const { isClickArray, setIsClickArray } = useBoardState();
+  const [isClickArray, setIsClickArray] = useState([]);
 
   let axiosConfig = {
     headers: {
@@ -100,6 +101,17 @@ function DetailView() {
   };
 
   useEffect(() => {
+
+    // const updateViewTime = async () => {
+    //   try{
+    //     const response = await axios.put(`https://b8rliving.com/board/view-property/${boardId}`, axiosConfig, propertyId);
+    //     console.log(response);
+    //   }
+    //   catch(err){
+    //     console.log(err);
+    //   }
+    // }
+
     const fetchTenantDetails = async () => {
       setLoading(true);
       //console.log("wuhssufeeteiUUUUU");
@@ -110,7 +122,14 @@ function DetailView() {
           `https://b8rliving.com/board/${boardId}`,
           axiosConfig
         );
-
+          const boardData = response.data.data.board;
+          if(boardData.propertyId){
+            let isClick = [];
+            boardData.propertyId.map((property) => {
+              isClick.push(boardData.isShortlisted[property._id] ? boardData.isShortlisted[property._id]: false)
+            })
+            setIsClickArray(isClick);
+          }
         // const responseData = response.data.data.board.propertyId;
         const responseDataProperty = response.data.data.board.propertyId;
         console.log("REsponse", response);
@@ -166,6 +185,7 @@ function DetailView() {
 
   //////////////////////////////////
   const shortlist = async (propertyid, propertIndex) => {
+    const status = !isClickArray[propertIndex];
     setIsClickArray((prevState) => {
       const updatedIsClickArray = [...prevState];
       updatedIsClickArray[propertIndex] = !isClickArray[propertIndex];
@@ -178,7 +198,7 @@ function DetailView() {
       console.log("Recieved BId", boardId);
       const response = await axios.put(
         `https://b8rliving.com/board/shortlist/${boardId}`,
-        { propertyid, shortListStatus, globalTenantId },
+        { propertyid, shortListStatus:status, globalTenantId },
         axiosConfig
       );
       console.log("Response fo apishortlist ", response);

@@ -61,6 +61,7 @@ function TenantSideView() {
           (property) => property.status != "Closed"
         );
 
+        console.log(responseDataBoardtData);
         // Update the formData state with the response data
         setResponseDataBoard(responseDataBoardtData);
         setResponseDataProperty(filteredProperties);
@@ -148,7 +149,7 @@ function TenantSideView() {
           Check them out and pick the one you like!
         </p>
       </div>
-      <TenantSideViewComp boards={responseDataProperty} boardId={boardId} />
+      <TenantSideViewComp boards={responseDataProperty} boardId={boardId} boardData={responseDataBoard}/>
       <div className="flex justify-center items-center py-[2rem] text-[1.2rem] font-bold">
         <p style={{ fontFamily: "GlidaDisplay" }} className="text-center">
           That’s All for the Day!
