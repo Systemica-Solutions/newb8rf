@@ -194,6 +194,7 @@ function Dashboard() {
           "https://b8rliving.com/tenant/count",
           axiosConfig
         );
+        console.log(response);
         // Update the countProperties state with the response data
         setCountTenants(response.data.data.tenant);
         // console.log("Count count", response.data.data.counts);
@@ -436,6 +437,23 @@ function Dashboard() {
                     <p className="text-center">Waiting for Property</p>
                   </div>
                 </Link>
+                {/*board shared*/}
+                <Link
+                  className="p-[0.5rem] bg-[#FFFFFF] rounded-[0.8rem] flex justify-between items-center w-[100%] flex-col"
+                  to={`/AllTenantOne?route=${route.CurrentlyViewing}`}
+                >
+                  {/* icon */}
+                  <div className="flex justify-center items-center pb-[0.5rem]">
+                  <MdOutlineMobileScreenShare className="text-[#52796F] text-[2.5rem]" />
+                    <p className="text-[2rem] text-center px-[0.5rem] font-bold">
+                      {(CountTenants.Total-CountTenants.WaitingForProperty) && (CountTenants.Total-CountTenants.WaitingForProperty)!==0 ?  (CountTenants.Total-CountTenants.WaitingForProperty) : (CountTenants.Total-CountTenants.WaitingForProperty)===0? 0: "-"}
+                    </p>
+                  </div>
+                  {/* text */}
+                  <div className="font-bold flex justify-center items-center flex-col">
+                    <p className="text-center">Board shared</p>
+                  </div>
+                </Link>
                 {/* currently viewing */}
                 <Link
                   className="p-[0.5rem] bg-[#FFFFFF] rounded-[0.8rem] flex justify-between items-center w-[100%] flex-col"
@@ -445,7 +463,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <FaEye className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {(CountTenants.CurrentlyViewing + CountTenants.Shortlisted) && (CountTenants.CurrentlyViewing + CountTenants.Shortlisted)!==0 ?  (CountTenants.CurrentlyViewing + CountTenants.Shortlisted) : (CountTenants.CurrentlyViewing + CountTenants.Shortlisted)===0? 0: "-"}
+                      {(CountTenants.CurrentlyViewing+CountTenants.Shortlisted) && (CountTenants.CurrentlyViewing+CountTenants.Shortlisted)!==0 ?  (CountTenants.CurrentlyViewing+CountTenants.Shortlisted) : (CountTenants.CurrentlyViewing+CountTenants.Shortlisted)===0? 0: "-"}
                     </p>
                   </div>
                   {/* text */}
@@ -470,6 +488,7 @@ function Dashboard() {
                     <p className="text-center">Shortlisted</p>
                   </div>
                 </Link>
+                
               </div>
               <p className="font-bold text-[1.2rem] text-center py-[1rem]">
                 {CountTenants.Deactivate && CountTenants.Deactivate!==0 ? CountTenants.Deactivate : CountTenants.Deactivate===0? 0 : "-"} Closed

@@ -119,6 +119,7 @@ function TenantSideViewComp({ boards, boardId }) {
       setClick(false);
       setshortListStatus(false);
     }
+    console.log(shortListStatus)
     //setIsClickArray
     /*  
    if(isClick){
