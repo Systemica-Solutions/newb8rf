@@ -27,7 +27,8 @@ const AvailablePropertyComp = ({ props, name,showCloseButton }) => {
     } else {
       // Filter properties based on houseName
       const filtered = props.filter((property) =>
-        property.houseName.toLowerCase().includes(searchTerm.toLowerCase())
+        property.houseName.toLowerCase().includes(searchTerm.toLowerCase()) ||  
+        property.societyName.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setfilteredData(filtered);
     }
