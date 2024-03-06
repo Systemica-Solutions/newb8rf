@@ -195,6 +195,7 @@ function Dashboard() {
           axiosConfig
         );
         console.log(response);
+        console.log(response);
         // Update the countProperties state with the response data
         setCountTenants(response.data.data.tenant);
         // console.log("Count count", response.data.data.counts);
@@ -489,6 +490,7 @@ function Dashboard() {
                     <p className="text-center">Shortlisted</p>
                   </div>
                 </Link>
+                
                 
               </div>
               <p className="font-bold text-[1.2rem] text-center py-[1rem]">
