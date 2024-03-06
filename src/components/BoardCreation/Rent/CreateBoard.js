@@ -250,7 +250,7 @@ function CreateBoard() {
     };
 
     fetchTenantDetails(); // Call the fetch function
-  }, [tenantId]);
+  }, [tenantId,responseDataProperty,boardData]);
   
   // console.log(booleanValues);
 
