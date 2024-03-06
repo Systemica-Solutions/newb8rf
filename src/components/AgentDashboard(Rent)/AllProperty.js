@@ -56,7 +56,7 @@ function AllProperty() {
 
         // Sort the response data by the 'imagesApproved' property in descending order
         const sortedProperties = filterData.sort((a, b) => {
-          return a.imagesApproved - b.imagesApproved;
+          return new Date(b.createdAt) - new Date(a.createdAt);
         });
 
         const filteredProperties = sortedProperties.filter(

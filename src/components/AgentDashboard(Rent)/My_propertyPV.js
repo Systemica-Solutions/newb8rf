@@ -60,6 +60,10 @@ function My_propertyPV() {
             );
           });
 
+          const sortedProperties = response.data.data.properties.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt)
+          });
+
           const noImageProperties = propertiesData.filter((property) => {
             return (
               property.images.length == 0 &&
@@ -69,7 +73,7 @@ function My_propertyPV() {
           });
 
           // var myArrayPropertyCount = response.data.data.properties;
-          setresponseProperty(underReviewProperties);
+          setresponseProperty(underReviewProperties || sortedProperties);
           setresponseNoImageProperty(noImageProperties);
         })
         .catch((error) => {

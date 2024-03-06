@@ -49,6 +49,10 @@ function AllActiveProperties() {
         const properties = response.data.data.properties;
         console.log(properties);
 
+        const sort = properties.sort((a,b) =>{
+          return new Date(b.createdAt) - new Date(a.createdAt)
+        })
+
         if (properties) {
           // Filter properties where 'imagesApproved' is true
           const filteredProperties = properties.filter(
@@ -61,7 +65,7 @@ function AllActiveProperties() {
             return b.imagesApproved - a.imagesApproved;
           });
 
-          setresponsePendingProperties(sortedProperties);
+          setresponsePendingProperties(sortedProperties || sort );
         } else {
           // Handle the case where 'imagesApproved' is empty or doesn't exist
           console.log("No properties with images approved found.");
