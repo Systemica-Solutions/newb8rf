@@ -81,6 +81,7 @@ function CreateBoard() {
   const token = localStorage.getItem("token");
   const [booleanValues, setBooleanValues] = useState([]); // Store boolean values here
   const [boardData, setBoardData] = useState([]);
+  const [updatedData, setUpdatedData] = useState([]);
 
   const handleSearch = (searchTerm) => {
     setSearchValue(searchTerm);
@@ -96,7 +97,7 @@ function CreateBoard() {
 
   useEffect(() => {
     const fetchBoardDetails = async () => {
-      console.log("7378");
+      // console.log("7378");
       if (boardId) {
         // setLoading(true);
         try {
@@ -117,9 +118,8 @@ function CreateBoard() {
                 property.status == "Verified" &&
                 property.closeListingDetails == null
             );
-            setBoardData(filteredProperties); // Set All properties added to board
+            setBoardData(responseDataPropertiesData); // Set All properties added to board
           }
-          console.log(boardData);
           // console.log(responseDataBoardData);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -132,7 +132,7 @@ function CreateBoard() {
     fetchBoardDetails();
   }, [boardId]);
 
-  console.log(boardData);
+  // console.log(boardData);
 
   useEffect(() => {
     const fetchTenantDetails = async () => {
@@ -231,6 +231,16 @@ function CreateBoard() {
 
           // console.log(filteredProperties);
           setResponseDataProperty(filteredProperties);
+          const closedPropertiesInBoard = boardData.filter(
+            (boardProperty) => boardProperty.status === "Closed"
+          );
+          console.log(closedPropertiesInBoard)
+          // Combine responseDataProperty and closedPropertiesInBoard
+          const final = [...responseDataProperty, ...closedPropertiesInBoard];
+          console.log(final)
+          
+          // Set the updated data to your state or variable
+          setUpdatedData(final);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -241,7 +251,7 @@ function CreateBoard() {
 
     fetchTenantDetails(); // Call the fetch function
   }, [tenantId]);
-
+  
   // console.log(booleanValues);
 
   // console.log(responseDataProperty);
@@ -443,7 +453,7 @@ function CreateBoard() {
                 </button>
               </div>
               <PropertyComp
-                props={responseDataProperty}
+                props={updatedData}
                 boardId={boardId}
                 responseDataTenantData={responseDataTenantData}
                 loading={loading}

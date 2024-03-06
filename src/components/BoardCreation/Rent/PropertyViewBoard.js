@@ -63,7 +63,7 @@ function PropertyViewBoard() {
                 property.status == "Verified" &&
                 property.closeListingDetails == null
             );
-            setResponseDataProperty(filteredProperties); // Set All properties added to board
+            setResponseDataProperty(responseDataPropertiesData); // Set All properties added to board
           }
 
           // console.log(responseDataBoardData);

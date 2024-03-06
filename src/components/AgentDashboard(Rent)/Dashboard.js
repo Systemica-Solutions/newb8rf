@@ -246,6 +246,7 @@ function Dashboard() {
     CurrentlyViewing: "CurrentlyViewing",
     Shortlisted: "Shortlisted",
     Deactivate: "Deactivate",
+    BoardShared: "BoardShared",
   };
 
   return (
@@ -440,13 +441,13 @@ function Dashboard() {
                 {/*board shared*/}
                 <Link
                   className="p-[0.5rem] bg-[#FFFFFF] rounded-[0.8rem] flex justify-between items-center w-[100%] flex-col"
-                  to={`/AllTenantOne?route=${route.CurrentlyViewing}`}
+                  to={`/AllTenantOne?route=${route.BoardShared}`}
                 >
                   {/* icon */}
                   <div className="flex justify-center items-center pb-[0.5rem]">
                   <MdOutlineMobileScreenShare className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {(CountTenants.Total-CountTenants.WaitingForProperty) && (CountTenants.Total-CountTenants.WaitingForProperty)!==0 ?  (CountTenants.Total-CountTenants.WaitingForProperty) : (CountTenants.Total-CountTenants.WaitingForProperty)===0? 0: "-"}
+                      {(CountTenants.Total-CountTenants.WaitingForProperty - CountTenants.Deactivate) && (CountTenants.Total-CountTenants.WaitingForProperty - CountTenants.Deactivate)!==0 ?  (CountTenants.Total-CountTenants.WaitingForProperty - CountTenants.Deactivate) : (CountTenants.Total-CountTenants.WaitingForProperty - CountTenants.Deactivate)===0? 0: "-"}
                     </p>
                   </div>
                   {/* text */}

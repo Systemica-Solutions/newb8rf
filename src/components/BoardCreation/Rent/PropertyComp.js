@@ -34,6 +34,7 @@ const PropertyComp = ({
   const [responseDataBoard, setResponseDataBoard] = useState([]);
   const [responseDataProperty, setResponseDataProperty] = useState([]);
   const [addedItems, setAddedItems] = useState([]);
+
   // const [isClickArray, setIsClickArray] = useState(new Array(boards.length).fill(false));
   // console.log(props);
   let axiosConfig = {
@@ -43,6 +44,7 @@ const PropertyComp = ({
       Authorization: `Basic ${token}`,
     },
   };
+  // console.log("boardData=>"+boardData)
 
   // useEffect(() => {
   //   const fetchBoardDetails = async () => {
@@ -135,10 +137,9 @@ const PropertyComp = ({
   const viewToBoard = async () => {
     var bId;
     const propertyId = [...addedItems];
-    if (propertyId.length === 0) {
-      // Handle the case where no properties are added
-      alert("Please add atleast one property");
-      return;
+    if (addedItems.length === 0) {
+      alert("Please select at least one property.");
+      return; // Stop further execution
     }
     console.log("boardID -> " + boardId);
     if (boardId !== null && boardId !== undefined) {
@@ -211,7 +212,6 @@ const PropertyComp = ({
       setAddedItems(boardData.map((data) => data._id));
     }
   }, [boardData]);
-
   // console.log(addedItems);
   // console.log(boardData);
   // console.log(responseDataProperty);
@@ -228,7 +228,7 @@ const PropertyComp = ({
                 <div
                   className="w-[85%] px-[1rem] py-[0.5rem] flex justify-between items-center"
                   style={{
-                    background: "#F5F5F5",
+                    background: values.status === "Closed" ? "rgb(250, 203, 203)" : "#F5F5F5",
                     border: "1px solid #000000",
                     borderRadius: "0.5rem",
                     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
@@ -354,7 +354,7 @@ const PropertyComp = ({
                 ) : (
                   <> */}
                 <div
-                  className="w-[15%] bg-[#E8E7E7] flex justify-center items-center rounded-[0.5rem] flex-col font-bold"
+                 className={`w-[15%] flex justify-center items-center rounded-[0.5rem] flex-col font-bold ${values.status === "Closed" ? "bg-[#FACBCB]" : "bg-[#E8E7E7]"}`}
                   key={values._id}
                   onClick={() => addToBoard(values._id)}
                 >

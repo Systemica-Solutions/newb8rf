@@ -18,7 +18,7 @@ import TenantComp from "./TenantComp";
 function AllTenantOne() {
   const [archiveData, setArchiveData] = useState(false);
   const queryParameters = new URLSearchParams(window.location.search);
-  const route = queryParameters.get("route");
+  const [route,setRoute] = useState(queryParameters.get("route"));
   const [ActivebgColor, setActivebgColor] = useState("#D2D7D6");
   const [ActiveBorderColor, setBorderColor] = useState("#A9C0BA");
   const [activeColor, setColor] = useState("#77A8A4");
@@ -36,6 +36,7 @@ function AllTenantOne() {
   const [isActive1, setIsActive1] = useState(false);
   const [isActive2, setIsActive2] = useState(false);
   const [isActive3, setIsActive3] = useState(false);
+  const [isActive4, setIsActive4] = useState(false);
 
   const token = localStorage.getItem("token");
   // console.log(token);
@@ -78,16 +79,21 @@ function AllTenantOne() {
   // Function to handle button clicks and trigger filtering
   const handlePageAvailable = (condition) => {
     setActiveCondition(condition);
-    console.log(condition);
+    // console.log(condition);
     filterTenants(condition); // Trigger the filtering
   };
+  // useEffect(() => {
+  //   filterTenants(activeCondition);
+  // }, [activeCondition]);
 
   useEffect(() => {
-    if (filteredTenants.length !== 0 && route !== null) {
-      console.log("active -> " + activeCondition);
+    if (filteredTenants.length !== 0 && route !== null && activeCondition !== null) {
       handlePageAvailable(route);
+      // Set the route value to null after handling the initial condition
+      setRoute(null);
     }
-  }, [filteredTenants, route]);
+  }, [filteredTenants, route, activeCondition]);
+  
   // console.log(activeCondition);
   const prevRouteRef = useRef(null);
 
@@ -97,9 +103,7 @@ function AllTenantOne() {
       case "WaitingForProperty":
         setIsActive1(true);
         setFilteredTenants(
-          responseTenat.filter(
-            (tenant) => tenant.status === "WaitingForProperty"
-          )
+          responseTenat.filter((tenant) => tenant.status === "WaitingForProperty")
         );
         break;
       case "CurrentlyViewing":
@@ -114,9 +118,19 @@ function AllTenantOne() {
           responseTenat.filter((tenant) => tenant.status === "Shortlisted")
         );
         break;
-      case "Deactivate":
+      case "Archived":
         setFilteredTenants(
           responseTenat.filter((tenant) => tenant.status === "Deactivate")
+        );
+        break;
+      case "BoardShared":
+        setIsActive4(true);
+        setFilteredTenants(
+          responseTenat.filter(
+            (tenant) =>
+              tenant.status !== "WaitingForProperty" &&
+              tenant.status !== "Deactivate"
+          )
         );
         break;
       default:
@@ -231,6 +245,19 @@ function AllTenantOne() {
               />
             </div>
             <div>
+              <CommonTopButton
+                bgColor={
+                  activeCondition === "BoardShared" ? "#52796F" : "#D2D7D6"
+                }
+                borderColor="#DAF0EE"
+                color={
+                  activeCondition === "BoardShared" ? "#FFFFFF" : "#77A8A4"
+                }
+                text="BoardShared"
+                onclicked={() => handlePageAvailable("BoardShared")}
+              />
+            </div>
+            <div>
               {/* {archiveData ? (
                 <CommonTopButton
                   bgColor="#52796F"
@@ -250,12 +277,12 @@ function AllTenantOne() {
               )} */}
               <CommonTopButton
                 bgColor={
-                  activeCondition === "Deactivate" ? "#52796F" : "#D2D7D6"
+                  activeCondition === "Archived" ? "#52796F" : "#D2D7D6"
                 }
                 borderColor="#DAF0EE"
-                color={activeCondition === "Deactivate" ? "#FFFFFF" : "#77A8A4"}
+                color={activeCondition === "Archived" ? "#FFFFFF" : "#77A8A4"}
                 text="Archived"
-                onclicked={() => handlePageAvailable("Deactivate")}
+                onclicked={() => handlePageAvailable("Archived")}
               />
             </div>
           </div>
