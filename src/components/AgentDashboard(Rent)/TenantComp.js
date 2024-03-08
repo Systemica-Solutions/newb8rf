@@ -58,7 +58,7 @@ const TenantComp = ({ props, name }) => {
     console.log("name-> " + name);
     try {
       const res = await axios.get(
-        `http://localhost:8080/tenant/v2/board/${TId}`,
+        `https://b8rliving.com/tenant/v2/board/${TId}`,
         axiosConfig
       );
       const data = res.data;

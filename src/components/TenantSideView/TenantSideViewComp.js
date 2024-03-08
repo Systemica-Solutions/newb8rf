@@ -50,17 +50,20 @@ import { FaSearch } from "react-icons/fa";
 
 // import ActiveLeads from "./ActiveLeads";
 
-function TenantSideViewComp({ boards, boardId }) {
+function TenantSideViewComp({ boards, boardId, boardData }) {
   const token = localStorage.getItem("token");
   // console.log(token);
   //const shortListStatus = false;
+  console.log(boardData);
   const [isClick, setClick] = useState(false);
   const [shortListStatus, setshortListStatus] = useState(false);
   const [loading, setLoading] = useState(false);
   // Initialize isClick state as an array with the same length as boards
-  const { isClickArray, setIsClickArray } = useBoardState(boards.length);
+  // const { isClickArray, setIsClickArray } = useBoardState(boards.length, boardData);
+  const [isClickArray, setIsClickArray] = useState([])
   //const ClickArray
   console.log("isClickArray", isClickArray);
+  console.log(boards);
   //console.log("boardLength", boards.length)
 
   let axiosConfig = {
@@ -70,6 +73,17 @@ function TenantSideViewComp({ boards, boardId }) {
       Authorization: `Basic ${token}`,
     },
   };
+
+  useEffect(() => {
+    console.log(boardData);
+    if(boardData.propertyId){
+      let isClick = [];
+      boardData.propertyId.map((property) => {
+        isClick.push(boardData.isShortlisted[property._id] ? boardData.isShortlisted[property._id]: false)
+      })
+      setIsClickArray(isClick);
+    }
+  }, [boardData])
 
   // useEffect(() => {
   //   const fetchPosts = async () => {
@@ -112,6 +126,7 @@ function TenantSideViewComp({ boards, boardId }) {
     // event.preventDefault();
     // setClick(true);
 
+    const status = !isClickArray[index]
     if (isClickArray[index]) {
       setClick(!isClick);
       setshortListStatus(true);
@@ -151,13 +166,13 @@ function TenantSideViewComp({ boards, boardId }) {
         "PropertyId",
         propertyid,
         "shortliststatus",
-        shortListStatus,
+        status,
         "tenantId",
         globalTenantId
       );
       const response = await axios.put(
         `https://b8rliving.com/board/shortlist/${boardId}`,
-        { propertyid, shortListStatus, globalTenantId },
+        { propertyid, shortListStatus: status, globalTenantId },
         axiosConfig
       );
       console.log("Response fo apishortlist ", response);
