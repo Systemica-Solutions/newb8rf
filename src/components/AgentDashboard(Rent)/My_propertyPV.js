@@ -62,6 +62,7 @@ function My_propertyPV() {
 
           const noImageProperties = propertiesData.filter((property) => {
             return (
+              property.status !== "Closed" &&
               property.images.length == 0 &&
               (property.fieldAgentStatus === "DetailsCompleted" ||
                 property.fieldAgentStatus === "Unassigned")
