@@ -1,21 +1,28 @@
 import React, { useEffect, useRef, useState } from "react";
 import Dashboardcss from "../Dashboard.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Housimg from "../Assets/Images/TenantSideView/TenantSideViewS.png";
 import Footer from "../Footer";
 import logo from "../Assets/Images/Logo.png";
 import TenantSideViewComp from "./TenantSideViewComp";
+import CommonBtn from "../CommonButton";
+
 //export  {globalTenantId};
 let globalTenantId;
 
 function TenantSideView() {
   const queryParameters = new URLSearchParams(window.location.search);
+  const navigate = useNavigate();
 
   const tenantId = queryParameters.get("tenantId");
   globalTenantId = tenantId;
   const boardId = queryParameters.get("boardId");
   console.log("TId -> " + tenantId);
+  const handleGoBack = () => {
+    console.log("hello")
+    navigate(-1); 
+  };
 
   const [responseDataBoard, setResponseDataBoard] = useState([]);
   const [responseDataTenant, setResponseDataTenant] = useState([]);
@@ -149,7 +156,13 @@ function TenantSideView() {
           Check them out and pick the one you like!
         </p>
       </div>
-      <TenantSideViewComp boards={responseDataProperty} boardId={boardId} boardData={responseDataBoard}/>
+
+      <TenantSideViewComp boards={responseDataProperty} boardId={boardId} />
+      <div style={{ display: 'flex', justifyContent: 'center',marginTop:"50px"}}>
+            <button onClick={handleGoBack}>
+              <CommonBtn title="Go Back" margin="90px" />
+            </button>
+      </div>
       <div className="flex justify-center items-center py-[2rem] text-[1.2rem] font-bold">
         <p style={{ fontFamily: "GlidaDisplay" }} className="text-center">
           That’s All for the Day!

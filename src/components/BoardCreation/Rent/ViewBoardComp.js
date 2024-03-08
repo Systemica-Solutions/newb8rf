@@ -76,7 +76,7 @@ const ViewBoardComp = ({ props, loading, Id, responseDataBoard }) => {
   };
 
   const handleLoadMore = () => {
-    setVisibleItems(visibleItems + 3);
+    setVisibleItems(visibleItems + 2);
   };
 
   return (
@@ -155,7 +155,7 @@ const ViewBoardComp = ({ props, loading, Id, responseDataBoard }) => {
                       </div>
                     </div>
                     {/* last-section */}
-                    <div className="flex font-bold text-[#3B413D] gap-x-[2rem] text-center">
+                    <div className="flex font-bold text-[#3B413D] gap-x-[2rem] text-center flex-row flex-wrap">
                       {/* <div style={{ marginLeft: "-25px" }}>
                       <img src={space} alt="space" />
                       <text style={{ fontSize: "10px" }}>
@@ -184,27 +184,27 @@ const ViewBoardComp = ({ props, loading, Id, responseDataBoard }) => {
                         : "No"}
                     </text> */}
                       <div className="flex flex-col items-center">
-                        <RxDimensions className="text-[1.5rem] mx-[0.3rem]" />
-                        <p className="text-[0.9rem]">
+                        <RxDimensions className="text-[1.1rem] mx-[0.3rem]" />
+                        <p className="text-[0.6rem]">
                           {values.propertyDetails.featureInfo.carpetArea} sft
                         </p>
                       </div>
                       <div className="flex flex-col items-center">
-                        <MdBed className="text-[1.5rem] mx-[0.3rem]" />
-                        <p className="text-[0.9rem]">
+                        <MdBed className="text-[1.1rem] mx-[0.3rem]" />
+                        <p className="text-[0.6rem]">
                           {values.propertyDetails.propertyInfo.houseConfig}
                         </p>
                       </div>
                       {values.propertyDetails.featureInfo.parking.car > 0 &&
                       values.propertyDetails.featureInfo.parking.bike > 0 ? (
                         <div className="flex flex-col items-center">
-                          <LuParkingCircle className="text-[1.5rem] mx-[0.3rem]" />
-                          <p className="text-[0.9rem]">Available</p>
+                          <LuParkingCircle className="text-[1.1rem] mx-[0.3rem]" />
+                          <p className="text-[0.6rem]">Available</p>
                         </div>
                       ) : (
                         <div className="flex flex-col items-center">
-                          <LuParkingCircleOff className="text-[1.5rem] mx-[0.3rem]" />
-                          <p className="text-[0.9rem]">Not Available</p>
+                          <LuParkingCircleOff className="text-[1.1rem] mx-[0.3rem]" />
+                          <p className="text-[0.6rem]">Not Available</p>
                         </div>
                       )}
                     </div>
@@ -250,7 +250,7 @@ const ViewBoardComp = ({ props, loading, Id, responseDataBoard }) => {
                     to={`/ChangeStatus?propertyId=${values._id}`}
                   >
                     <IoIosArrowDroprightCircle className="text-[1.4rem] text-[#5D6560]" />
-                    <p className="text-[0.9rem] text-center py-[0.4rem] text-[#5D6560]">
+                    <p className="text-[0.7rem] text-center py-[0.4rem] text-[#5D6560]">
                       Change Status
                     </p>
                   </Link>
