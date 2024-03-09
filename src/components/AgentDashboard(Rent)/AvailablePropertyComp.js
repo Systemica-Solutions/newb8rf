@@ -27,7 +27,8 @@ const AvailablePropertyComp = ({ props, name,showCloseButton }) => {
     } else {
       // Filter properties based on houseName
       const filtered = props.filter((property) =>
-        property.houseName.toLowerCase().includes(searchTerm.toLowerCase())
+        property.houseName.toLowerCase().includes(searchTerm.toLowerCase()) ||  
+        property.societyName.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setfilteredData(filtered);
     }
@@ -80,6 +81,7 @@ const AvailablePropertyComp = ({ props, name,showCloseButton }) => {
         <div key={index}>
           <div className="px-[1rem] py-[0.5rem]">
             <div className="flex justify-between gap-x-[0.5rem]">
+              
               {/* left-section */}
               <div
                 className="bg-white w-[100%] p-[0.5rem] rounded-[0.5rem] flex "
@@ -115,6 +117,14 @@ const AvailablePropertyComp = ({ props, name,showCloseButton }) => {
                   <div className="flex justify-between items-center pl-[0.5rem]">
                     <p className="font-semibold px-[0.2rem]">
                     {values.houseName} , {values.societyName}
+                    { values.closeListingReason && (
+              <div
+                className="flex justify-between items-center  pl-[0.5rem]"
+                style={{ color: "#E13018" }}
+              >
+               {values.closeListingReason}
+              </div>
+            )}
                     </p>
                     {values.imagesApproved ? (
                       <>

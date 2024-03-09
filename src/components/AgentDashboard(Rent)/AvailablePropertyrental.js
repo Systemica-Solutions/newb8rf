@@ -41,7 +41,7 @@ function AvailablePropertyrental() {
 
         // Sort the response data by the 'imagesApproved' property in descending order
         const sortedProperties = response.data.data.properties.sort((a, b) => {
-          return a.imagesApproved - b.imagesApproved;
+          return new Date(b.createdAt) - new Date(a.createdAt)
         });
 
         const filteredProperties = sortedProperties.filter(
