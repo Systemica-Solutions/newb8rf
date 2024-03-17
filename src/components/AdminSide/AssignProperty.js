@@ -54,7 +54,7 @@ function AssignProperty() {
       );
       console.log(res.data.data.properties);
       const unverifiedProperties = res.data.data.properties.filter(
-        (property) => property.status === "Pending"
+        (property) => property.status === "Pending" && property.fieldAgentStatus === "Unassigned"
       );
       console.log(unverifiedProperties);
       setProperties(unverifiedProperties);

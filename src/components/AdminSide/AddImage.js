@@ -48,7 +48,7 @@ function AddImage() {
       );
       console.log(res.data.data.properties);
       const unverifiedProperties = res.data.data.properties.filter(
-        (property) => property.status === "Verified"
+        (property) => property.status === "Pending" && property.fieldAgentStatus === "Completed"
       );
       console.log(unverifiedProperties);
       setProperties(unverifiedProperties);
