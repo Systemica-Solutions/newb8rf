@@ -53,7 +53,7 @@ import DeactivateTenant from "./components/AgentDashboard(Rent)/DeactivateTenant
 // _________________________________________________________________________
 
 import AuthCode from "./components/AdminSide/AuthCode";
-import AdminFront from "./components/AdminSide/AdminFront";
+import AddImage from "./components/AdminSide/AddImage";
 import AssignProperty from "./components/AdminSide/AssignProperty";
 // AgentFlow --------------------------------------------------
 import FieldAgentHomeN from "./components/FieldAgentFlow/FieldAgentHomeN";
@@ -184,7 +184,8 @@ function App(props) {
             <Route exact path="/Home" element={<Home/>} />
             <Route exact path="FrontLogin" element={<FrontLogin />} />
             <Route exact path="AuthCode" element={<AuthCode />} />
-            <Route exact path="AdminFront" element={<AdminFront />} />
+            <Route exact path="adminFront/addImage" element={<AddImage />} />
+            <Route exact path="adminFront/assignProperty" element={<AssignProperty />} />
             <Route exact path="AssignProperty" element={<AssignProperty />} />
             <Route exact path="ResetPassword" element={<ResetPassword />} />
             <Route exact path="EnterOTP" element={<EnterOTP />} />

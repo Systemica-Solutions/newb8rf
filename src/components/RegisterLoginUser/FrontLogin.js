@@ -150,7 +150,7 @@ console.log("Redirecting to:", inviteCode.substring(0, 2) == "FA" ? "/FieldAgent
           {/* <h3 className="Htitle">Agent Sign In</h3> */}
           <div className="font-bold text-[1.3rem] py-[1rem]">Agent Sign In</div>
 
-          <form onSubmit={handleSubmit} className="login-form h-[60vh]">
+          <form onSubmit={handleSubmit} className="login-form h-fit">
             {/* phone */}
             <label htmlFor="phoneNumber" className="label-phone">
               Mobile Number
