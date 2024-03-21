@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect,useState } from "react";
 import "./DashboardS.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -40,6 +40,8 @@ import ExtraCommonButton from "../ExtraCommonButton";
 
 function DashboardS() {
   const token = localStorage.getItem("token");
+  const [countBuyer,setCountBuyer] = useState([]);
+  const [loading, setLoading] = useState(false);
   console.log(token);
 
   const handleSubmit = (event) => {
@@ -47,6 +49,41 @@ function DashboardS() {
     localStorage.removeItem("token");
     alert("You have been logged out.");
   };
+  let axiosConfig = {
+    headers: {
+      "Content-Type": "application/json;charset=UTF-8",
+      "Access-Control-Allow-Origin": "*",
+      Authorization: `Basic ${token}`,
+    },
+  };
+  useEffect(() =>{
+    const fetchBuyerCounts = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          "https://b8rliving.com/buyer/count",
+          axiosConfig
+        );
+        // Update the countProperties state with the response data
+        setCountBuyer(response.data.data.buyer);
+        // console.log(response.data.data.counts);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        // Handle the error
+        setLoading(false);
+      }
+    };
+    fetchBuyerCounts();
+  },[])
+  console.log(countBuyer);
+  const difference = countBuyer.Total - countBuyer.Deactivate;
+
+  const number = difference && difference !== 0
+    ? difference
+    : difference === 0
+    ? 0
+    : "-";
 
   return (
     <>
@@ -223,7 +260,7 @@ function DashboardS() {
                     <div className="flex justify-center items-center pb-[0.5rem]">
                       <FaCircleUser className="text-[#1E0058] text-[2.5rem]" />
                       <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                        1
+                        {number}
                       </p>
                     </div>
                     {/* text */}
@@ -240,7 +277,7 @@ function DashboardS() {
                     <div className="flex justify-center items-center pb-[0.5rem]">
                       <RiQuestionnaireFill className="text-[#1E0058] text-[2.5rem]" />
                       <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                        8
+                        {countBuyer.WaitingForProperty}
                       </p>
                     </div>
                     {/* text */}
@@ -257,7 +294,7 @@ function DashboardS() {
                     <div className="flex justify-center items-center pb-[0.5rem]">
                       <FaEye className="text-[#1E0058] text-[2.5rem]" />
                       <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                        4
+                        {countBuyer.CurrentlyViewing + countBuyer.Shortlisted}
                       </p>
                     </div>
                     {/* text */}
@@ -274,7 +311,7 @@ function DashboardS() {
                     <div className="flex justify-center items-center pb-[0.5rem]">
                       <RiHomeHeartLine className="text-[#1E0058] text-[2.5rem]" />
                       <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                        3
+                        {countBuyer.Shortlisted}
                       </p>
                     </div>
                     {/* text */}
@@ -284,7 +321,7 @@ function DashboardS() {
                   </Link>
                 </div>
                 <p className="font-bold text-[1.2rem] text-center py-[1rem]">
-                  1 Sold
+                  {countBuyer.Deactivate} closed
                 </p>
               </div>
             </div>

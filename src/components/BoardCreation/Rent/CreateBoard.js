@@ -97,61 +97,48 @@ function CreateBoard() {
 
   useEffect(() => {
     const fetchBoardDetails = async () => {
-      // console.log("7378");
       if (boardId) {
-        // setLoading(true);
         try {
           const response = await axios.get(
             `https://b8rliving.com/board/${boardId}`,
             axiosConfig
           );
-
-          // const responseData = response.data.data.tenant.tenantDetails;
-          // const responseDataBoardData = response.data.data.board;
-          const responseDataPropertiesData =
-            response.data.data.board.propertyId;
-
+  
+          const responseDataPropertiesData = response.data.data.board.propertyId;
+  
           if (responseDataPropertiesData) {
             // Filter properties where 'imagesApproved' is true
             const filteredProperties = responseDataPropertiesData.filter(
               (property) =>
-                property.status == "Verified" &&
-                property.closeListingDetails == null
+                property.status === "Verified" &&
+                property.closeListingDetails === null
             );
-            setBoardData(responseDataPropertiesData); // Set All properties added to board
+            setBoardData(responseDataPropertiesData); // Set all properties added to the board
           }
-          // console.log(responseDataBoardData);
         } catch (error) {
-          console.error("Error fetching data:", error);
-        } finally {
-          setLoading(false); // Set loading to false when the request is complete
+          console.error("Error fetching board details:", error);
         }
       }
     };
-
+  
     fetchBoardDetails();
   }, [boardId]);
-
-  // console.log(boardData);
-
+  
   useEffect(() => {
     const fetchTenantDetails = async () => {
-      // setLoading(true);
       try {
         const response = await axios.get(
           `https://b8rliving.com/tenant/${tenantId}`,
           axiosConfig
         );
-
+  
         const responseData = response.data.data.tenant.tenantDetails;
-        const responseDataTenant = response.data.data.tenant;
         const responseDataTenantBoardId = response.data.data.tenant.boardId;
-
+  
         setResponseDataTenantBoard(responseDataTenantBoardId);
-        // Update the formData state with the response data
         setResponseDataTenant(responseData);
-        setResponseDataTenantData(responseDataTenant);
-
+        setResponseDataTenantData(response.data.data.tenant);
+  
         // Separate boolean values and store them in booleanValues state
         const booleanValues = [];
         responseData.forEach((tenant) => {
@@ -161,96 +148,49 @@ function CreateBoard() {
             }
           }
         });
-
+  
         setBooleanValues(booleanValues);
       } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false); // Set loading to false when the request is complete
+        console.error("Error fetching tenant details:", error);
       }
-
-      // //Get Property from Board
-      // try {
-      //   const response = await axios.get(
-      //     `https://b8rliving.com/board/${boardId}`,
-      //     axiosConfig
-      //   );
-
-      //   const responseData = response.data.data.tenant.tenantDetails;
-      //   const responseDataTenant = response.data.data.tenant;
-      //   const responseDataTenantBoardId = response.data.data.tenant.boardId;
-      //   const responseDataTenantPropertyId =
-      //     response.data.data.tenant.propertyId;
-
-      //   setResponseDataTenantBoard(responseDataTenantBoardId);
-      //   // Update the formData state with the response data
-      //   setResponseDataTenant(responseData);
-      //   setResponseDataTenantData(responseDataTenant);
-
-      //   // Separate boolean values and store them in booleanValues state
-      //   const booleanValues = [];
-      //   responseData.forEach((tenant) => {
-      //     for (const key in tenant) {
-      //       if (typeof tenant[key] === "boolean") {
-      //         booleanValues[key] = tenant[key];
-      //         console.log(booleanValues);
-      //       }
-      //     }
-      //   });
-
-      //   setBooleanValues(booleanValues);
-      // } catch (error) {
-      //   console.error("Error fetching data:", error);
-      // } finally {
-      //   setLoading(false); // Set loading to false when the request is complete
-      // }
-
-      //Get All Properties
+    };
+    fetchTenantDetails();
+  }, [tenantId]);
+  
+  useEffect(() => {
+    const fetchProperties = async () => {
       try {
-        // setLoading(true);
         const response = await axios.get(
           `https://b8rliving.com/property`,
           axiosConfig
         );
-
-        const responseData = response.data.data.properties;
-
-        // Update the formData state with the response data
-        setResponseDataProperty(responseData);
-        // Check if the 'imagesApproved' property exists and has data
+  
         const properties = response.data.data.properties;
-        // console.log(properties);
-
+  
         if (properties) {
           // Filter properties where 'imagesApproved' is true
           const filteredProperties = properties.filter(
             (property) =>
-              property.status == "Verified" &&
-              property.closeListingDetails == null
+              property.status === "Verified" &&
+              property.closeListingDetails === null
           );
-
-          // console.log(filteredProperties);
           setResponseDataProperty(filteredProperties);
+  
           const closedPropertiesInBoard = boardData.filter(
             (boardProperty) => boardProperty.status === "Closed"
           );
-          console.log(closedPropertiesInBoard)
+  
           // Combine responseDataProperty and closedPropertiesInBoard
-          const final = [...responseDataProperty, ...closedPropertiesInBoard];
-          console.log(final)
-          
-          // Set the updated data to your state or variable
+          const final = [...filteredProperties, ...closedPropertiesInBoard];
           setUpdatedData(final);
         }
       } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false); // Set loading to false when the request is complete
+        console.error("Error fetching properties:", error);
       }
     };
-
-    fetchTenantDetails(); // Call the fetch function
-  }, [tenantId]);
+  
+    fetchProperties();
+  }, [boardData]);
   
   // console.log(booleanValues);
 

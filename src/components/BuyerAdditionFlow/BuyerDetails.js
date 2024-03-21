@@ -52,7 +52,7 @@ function BuyerDetails(){
 	  const handleSubmit = event => {
 		event.preventDefault();
 		console.log()
-		axios.post('http://127.0.0.1:5000/backend/tenantpref', formData)
+		axios.post('https://b8rliving.com/tenantpref', formData)
 		  .then(response => {
 			console.log(response.data);
 			alert("Your tenant preferences has been submitted");
