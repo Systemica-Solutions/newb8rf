@@ -97,6 +97,7 @@ function CreateBoard() {
   };
 
  useEffect(() => {
+ useEffect(() => {
     const fetchBoardDetails = async () => {
       if (boardId) {
         try {
@@ -194,9 +195,11 @@ function CreateBoard() {
           );
           setResponseDataProperty(filteredProperties);
   
+  
           const closedPropertiesInBoard = boardData.filter(
             (boardProperty) => boardProperty.status === "Closed"
           );
+  
   
           // Combine responseDataProperty and closedPropertiesInBoard
           const final = [...filteredProperties, ...closedPropertiesInBoard];
