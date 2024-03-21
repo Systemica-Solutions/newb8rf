@@ -82,6 +82,7 @@ function CreateBoard() {
   const [booleanValues, setBooleanValues] = useState([]); // Store boolean values here
   const [boardData, setBoardData] = useState([]);
   const [updatedData, setUpdatedData] = useState([]);
+  const [updatedData, setUpdatedData] = useState([]);
 
   const handleSearch = (searchTerm) => {
     setSearchValue(searchTerm);
@@ -95,7 +96,7 @@ function CreateBoard() {
     },
   };
 
-  useEffect(() => {
+ useEffect(() => {
     const fetchBoardDetails = async () => {
       if (boardId) {
         try {
@@ -106,20 +107,28 @@ function CreateBoard() {
   
           const responseDataPropertiesData = response.data.data.board.propertyId;
   
+  
+          const responseDataPropertiesData = response.data.data.board.propertyId;
+  
           if (responseDataPropertiesData) {
             // Filter properties where 'imagesApproved' is true
             const filteredProperties = responseDataPropertiesData.filter(
               (property) =>
                 property.status === "Verified" &&
                 property.closeListingDetails === null
+                property.status === "Verified" &&
+                property.closeListingDetails === null
             );
+            setBoardData(responseDataPropertiesData); // Set all properties added to the board
             setBoardData(responseDataPropertiesData); // Set all properties added to the board
           }
         } catch (error) {
           console.error("Error fetching board details:", error);
+          console.error("Error fetching board details:", error);
         }
       }
     };
+  
   
     fetchBoardDetails();
   }, [boardId]);
@@ -132,11 +141,15 @@ function CreateBoard() {
           axiosConfig
         );
   
+  
         const responseData = response.data.data.tenant.tenantDetails;
         const responseDataTenantBoardId = response.data.data.tenant.boardId;
   
+  
         setResponseDataTenantBoard(responseDataTenantBoardId);
         setResponseDataTenant(responseData);
+        setResponseDataTenantData(response.data.data.tenant);
+  
         setResponseDataTenantData(response.data.data.tenant);
   
         // Separate boolean values and store them in booleanValues state
@@ -148,6 +161,7 @@ function CreateBoard() {
             }
           }
         });
+  
   
         setBooleanValues(booleanValues);
       } catch (error) {
@@ -165,12 +179,16 @@ function CreateBoard() {
           axiosConfig
         );
   
+  
         const properties = response.data.data.properties;
+  
   
         if (properties) {
           // Filter properties where 'imagesApproved' is true
           const filteredProperties = properties.filter(
             (property) =>
+              property.status === "Verified" &&
+              property.closeListingDetails === null
               property.status === "Verified" &&
               property.closeListingDetails === null
           );
@@ -183,11 +201,24 @@ function CreateBoard() {
           // Combine responseDataProperty and closedPropertiesInBoard
           const final = [...filteredProperties, ...closedPropertiesInBoard];
           setUpdatedData(final);
+  
+          const closedPropertiesInBoard = boardData.filter(
+            (boardProperty) => boardProperty.status === "Closed"
+          );
+  
+          // Combine responseDataProperty and closedPropertiesInBoard
+          const final = [...filteredProperties, ...closedPropertiesInBoard];
+          setUpdatedData(final);
         }
       } catch (error) {
         console.error("Error fetching properties:", error);
+        console.error("Error fetching properties:", error);
       }
     };
+  
+    fetchProperties();
+  }, [boardData]);
+  
   
     fetchProperties();
   }, [boardData]);
@@ -393,6 +424,7 @@ function CreateBoard() {
                 </button>
               </div>
               <PropertyComp
+                props={updatedData}
                 props={updatedData}
                 boardId={boardId}
                 responseDataTenantData={responseDataTenantData}

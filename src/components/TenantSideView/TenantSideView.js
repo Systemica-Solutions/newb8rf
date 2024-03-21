@@ -68,6 +68,7 @@ function TenantSideView() {
           (property) => property.status != "Closed"
         );
 
+        console.log(responseDataBoardtData);
         // Update the formData state with the response data
         setResponseDataBoard(responseDataBoardtData);
         setResponseDataProperty(filteredProperties);
@@ -155,6 +156,7 @@ function TenantSideView() {
           Check them out and pick the one you like!
         </p>
       </div>
+
       <TenantSideViewComp boards={responseDataProperty} boardId={boardId} />
       <div style={{ display: 'flex', justifyContent: 'center',marginTop:"50px"}}>
             <button onClick={handleGoBack}>

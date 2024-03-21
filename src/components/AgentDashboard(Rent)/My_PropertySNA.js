@@ -45,6 +45,11 @@ function My_PropertySNA() {
         .then((response) => {
           console.log(response.data.data);
           var propertiesData = response.data.data.properties;
+
+          const sortedProperties = propertiesData.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          });
+
           // Filter out properties where propertyDetails.purposeSale is true
 
           // Filter out properties where propertyDetails.purposeSale is true
@@ -58,7 +63,7 @@ function My_PropertySNA() {
           // var myArrayPropertyCount = response.data.data.properties;
           //   setresponseNoImageProperty(noImageProperties);
 
-          setresponseProperty(yetToShareProperties);
+          setresponseProperty(yetToShareProperties || sortedProperties);
         })
         .catch((error) => {
           console.log(error);
