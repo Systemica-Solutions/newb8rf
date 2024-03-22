@@ -165,7 +165,7 @@ function TenantSideViewComp({ boards, boardId, boardData }) {
         "PropertyId",
         propertyid,
         "shortliststatus",
-        status,
+        updatedIsClick,
         "tenantId",
         globalTenantId
       );
