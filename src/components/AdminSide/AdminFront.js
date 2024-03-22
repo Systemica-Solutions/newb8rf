@@ -48,7 +48,7 @@ function AdminFront() {
             
             <Link to="/AuthCode"><CommonBtn title="Add Auth Code"  margin="52%" fontweight="bolder" /></Link>
             <Link to="/AssignProperty"><CommonBtn title="Assign Property"  marginTop="72%" fontweight="bolder" /></Link>
-            <Link to="/AllTenantOne"><CommonBtn title="Verify Images"  margin="52%" fontweight="bolder" /></Link>
+            <Link to="/"><CommonBtn title="Verify Images"  margin="52%" fontweight="bolder" /></Link>
             <Link to="/AllTenantOne"><CommonBtn title="Add 3D Tour Link"  margin="52%" fontweight="bolder" /></Link>
             </div>
        
