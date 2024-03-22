@@ -62,8 +62,7 @@ function TenantSideViewComp({ boards, boardId, boardData }) {
   // const { isClickArray, setIsClickArray } = useBoardState(boards.length, boardData);
   const [isClickArray, setIsClickArray] = useState([])
   //const ClickArray
-  console.log("isClickArray", isClickArray);
-  console.log(boards);
+  // console.log("isClickArray", isClickArray);
   //console.log("boardLength", boards.length)
 
   let axiosConfig = {
@@ -120,21 +119,29 @@ function TenantSideViewComp({ boards, boardId, boardData }) {
     navigate(-1);
   };
 
-  console.log("TID from -> " + globalTenantId);
+  // console.log("TID from -> " + globalTenantId);
 
   const shortlist = async (propertyid, index) => {
     // event.preventDefault();
     // setClick(true);
-
-    const status = !isClickArray[index]
-    if (isClickArray[index]) {
-      setClick(!isClick);
-      setshortListStatus(true);
-    } else {
-      setClick(false);
-      setshortListStatus(false);
-    }
-    console.log(shortListStatus)
+    
+    // if (isClickArray[index]) {
+    //   setClick(!isClick);
+     
+    // } else {
+    //   setClick(false);
+     
+    // }
+    setIsClickArray((prevState) => {
+      const updatedIsClickArray = [...prevState];
+      updatedIsClickArray[index] = !isClickArray[index]; // Use prevState here
+      return updatedIsClickArray;
+    });   
+    const updatedIsClick = !isClickArray[index];
+    setClick(updatedIsClick);
+    setshortListStatus(updatedIsClick); // Update shortListStatus based on updatedIsClick
+    
+    
     //setIsClickArray
     /*  
    if(isClick){
@@ -145,23 +152,15 @@ function TenantSideViewComp({ boards, boardId, boardData }) {
    */
     // console.log("Received Id:", propertyid);
     //console.log("Recieved BId", boardId);
-
-    setIsClickArray((prevState) => {
-      const updatedIsClickArray = [...prevState];
-      updatedIsClickArray[index] = !isClickArray[index];
-      //if(updatedIsClickArray[index]){
-      //setClick(!isClick)}
-      //else{
-      //setClick(isClick)
-      // }
-      //console.log(isClickArray)
-      //console.log(updatedIsClickArray)
-      return updatedIsClickArray;
-    });
-
+    // setIsClickArray((prevState) => {
+    //   const updatedIsClickArray = [...prevState];
+    //   updatedIsClickArray[index] = !isClickArray[index]; // Use prevState here
+    //   return updatedIsClickArray;
+    // });   
     try {
       // console.log("Final pid",propertyid)
       // console.log("Recieved BId", boardId);
+  
       console.log(
         "PropertyId",
         propertyid,
@@ -172,7 +171,7 @@ function TenantSideViewComp({ boards, boardId, boardData }) {
       );
       const response = await axios.put(
         `https://b8rliving.com/board/shortlist/${boardId}`,
-        { propertyid, shortListStatus: status, globalTenantId },
+        { propertyid, shortListStatus:updatedIsClick, globalTenantId },
         axiosConfig
       );
       console.log("Response fo apishortlist ", response);
@@ -184,6 +183,11 @@ function TenantSideViewComp({ boards, boardId, boardData }) {
       setLoading(false); // Set loading to false when the request is complete
     }
   };
+  useEffect(()=>{
+    console.log("inUseEffect"+" "+ isClickArray);
+
+  },[])
+  console.log(isClickArray)
 
   //console.log(boards);
 
