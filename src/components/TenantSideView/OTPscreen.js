@@ -59,7 +59,7 @@ function OTPscreen() {
         const responseDataBoardData = response.data.data.board;
         const responseDataTenantData = response.data.data.board.tenantId;
         const responseDataTenantId = response.data.data.board.tenantId._id;
-        console.log("teney id", responseDataTenantId);
+        console.log("teney id", responseDataBoardData);
         setResponseDataTenantNunber(
           response.data.data.board.tenantId.phoneNumber
         );

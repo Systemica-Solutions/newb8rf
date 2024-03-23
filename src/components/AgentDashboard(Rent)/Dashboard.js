@@ -123,7 +123,7 @@ function Dashboard() {
           // Create a function to get property count for a specific boardId
           function getPropertyCount(boardId) {
             return axios
-              .get(`https://b8rliving.com/board/${boardId}`, axiosConfig)
+              .get(`http:localhost:80/board/${boardId}`, axiosConfig)
               .then((response) => {
                 setSharedPropertyCount(
                   response.data.data.board.propertyId.length
