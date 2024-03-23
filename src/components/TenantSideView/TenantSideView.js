@@ -157,7 +157,7 @@ function TenantSideView() {
         </p>
       </div>
 
-      <TenantSideViewComp boards={responseDataProperty} boardId={boardId} />
+      <TenantSideViewComp boards={responseDataProperty} boardId={boardId} boardData={responseDataBoard} />
       <div style={{ display: 'flex', justifyContent: 'center',marginTop:"50px"}}>
             <button onClick={handleGoBack}>
               <CommonBtn title="Go Back" margin="90px" />

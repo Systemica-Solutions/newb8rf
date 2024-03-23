@@ -160,15 +160,14 @@ function TenantSideViewComp({ boards, boardId, boardData }) {
     try {
       // console.log("Final pid",propertyid)
       // console.log("Recieved BId", boardId);
-  
-      // console.log(
-      //   "PropertyId",
-      //   propertyid,
-      //   "shortliststatus",
-      //   status,
-      //   "tenantId",
-      //   globalTenantId
-      // );
+      console.log(
+        "PropertyId",
+        propertyid,
+        "shortliststatus",
+        updatedIsClick,
+        "tenantId",
+        globalTenantId
+      );
       const response = await axios.put(
         `https://b8rliving.com/board/shortlist/${boardId}`,
         { propertyid, shortListStatus:updatedIsClick, globalTenantId },

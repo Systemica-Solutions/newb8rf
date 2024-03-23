@@ -118,14 +118,15 @@ function CreateBoard() {
           }
         } catch (error) {
           console.error("Error fetching board details:", error);
-          console.error("Error fetching board details:", error);
         }
       }
     };
   
   
+  
     fetchBoardDetails();
   }, [boardId]);
+  
   
   useEffect(() => {
     const fetchTenantDetails = async () => {
@@ -136,16 +137,15 @@ function CreateBoard() {
         );
   
   
+  
         const responseData = response.data.data.tenant.tenantDetails;
         const responseDataTenantBoardId = response.data.data.tenant.boardId;
+  
   
   
         setResponseDataTenantBoard(responseDataTenantBoardId);
         setResponseDataTenant(responseData);
         setResponseDataTenantData(response.data.data.tenant);
-  
-        setResponseDataTenantData(response.data.data.tenant);
-  
         // Separate boolean values and store them in booleanValues state
         const booleanValues = [];
         responseData.forEach((tenant) => {
@@ -155,6 +155,7 @@ function CreateBoard() {
             }
           }
         });
+  
   
   
         setBooleanValues(booleanValues);
@@ -174,7 +175,9 @@ function CreateBoard() {
         );
   
   
+  
         const properties = response.data.data.properties;
+  
   
   
         if (properties) {
@@ -204,6 +207,7 @@ function CreateBoard() {
     fetchProperties();
   }, [boardData]);
   
+
   // console.log(booleanValues);
 
   // console.log(responseDataProperty);
@@ -405,6 +409,7 @@ function CreateBoard() {
                 </button>
               </div>
               <PropertyComp
+                props={updatedData}
                 props={updatedData}
                 props={updatedData}
                 boardId={boardId}
