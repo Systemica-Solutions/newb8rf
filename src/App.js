@@ -210,7 +210,7 @@ function App(props) {
             <Route exact path="PropertyClosed" element={<PropertyClosed />} />
             <Route
               exact
-              path="PropertyViewingStatus"
+              path="/PropertyViewingStatus/:id"
               element={<PropertyViewingStatus />}
             />
             <Route
