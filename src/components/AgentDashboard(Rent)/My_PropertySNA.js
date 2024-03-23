@@ -41,10 +41,10 @@ function My_PropertySNA() {
     const fetchPosts = async () => {
       setLoading(true);
       axios
-        .get(`https://b8rliving.com/property`, axiosConfig)
+        .get(`https://b8rliving.com/property/shared/1`, axiosConfig)
         .then((response) => {
           console.log(response.data.data);
-          var propertiesData = response.data.data.properties;
+          var propertiesData = response.data.data;
 
           const sortedProperties = propertiesData.sort((a, b) => {
             return new Date(b.createdAt) - new Date(a.createdAt);
@@ -53,17 +53,18 @@ function My_PropertySNA() {
           // Filter out properties where propertyDetails.purposeSale is true
 
           // Filter out properties where propertyDetails.purposeSale is true
-          const yetToShareProperties = propertiesData.filter((property) => {
-            return (
-              property.sharedProperty.length > 0 &&
-              property.status == "Verified"
-            );
-          });
+          // const yetToShareProperties = propertiesData.filter((property) => {
+          //   return (
+          //     property.sharedProperty.length > 0 &&
+          //     property.status == "Verified"
+          //   );
+          // });
 
           // var myArrayPropertyCount = response.data.data.properties;
           //   setresponseNoImageProperty(noImageProperties);
 
-          setresponseProperty(yetToShareProperties || sortedProperties);
+          // setresponseProperty(yetToShareProperties || sortedProperties);
+          setresponseProperty(sortedProperties);
         })
         .catch((error) => {
           console.log(error);

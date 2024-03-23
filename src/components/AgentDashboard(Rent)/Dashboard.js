@@ -75,26 +75,26 @@ function Dashboard() {
 
           setresponseProperties(response.data.data.properties);
 
-          const ytsCount = myArrayPropertyCount.filter((property) => {
-            return (
-              property.status === "Verified" &&
-              // (property.sharedBuyerProperty.length === 0
-              property.sharedProperty.length === 0
-            );
-          });
+          // const ytsCount = myArrayPropertyCount.filter((property) => {
+          //   return (
+          //     property.status === "Verified" &&
+          //     // (property.sharedBuyerProperty.length === 0
+          //     property.sharedProperty.length === 0
+          //   );
+          // });
 
-          setYtsCount(ytsCount.length);
+          // setYtsCount(ytsCount.length);
           // console.log(ytsCount);
 
-          const sharedPropertyCount = myArrayPropertyCount.filter(
-            (property) => {
-              return (
-                property.sharedProperty.length > 0 &&
-                property.status == "Verified"
-              );
-            }
-          );
-          setSharedPropertyCount(sharedPropertyCount.length);
+          // const sharedPropertyCount = myArrayPropertyCount.filter(
+          //   (property) => {
+          //     return (
+          //       property.sharedProperty.length > 0 &&
+          //       property.status == "Verified"
+          //     );
+          //   }
+          // );
+          // setSharedPropertyCount(sharedPropertyCount.length);
 
           // if(response.data.data.properties.status == "pending"){
 
@@ -178,6 +178,7 @@ function Dashboard() {
         );
         // Update the countProperties state with the response data
         setCountProperties(response.data.data.counts);
+        console.log(response.data.data.counts);
         // console.log(response.data.data.counts);
         setLoading(false);
       } catch (error) {
@@ -355,7 +356,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <TbShareOff className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {ytsCount && ytsCount!==0 ? ytsCount :ytsCount===0 ? 0 :"-"}
+                      {CountProperties.YetToShare && CountProperties.YetToShare!==0 ? CountProperties.YetToShare :CountProperties.YetToShare===0 ? 0 :"-"}
                     </p>
                   </div>
                   {/* text */}
@@ -372,7 +373,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <MdOutlineMobileScreenShare className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {SharedPropertyCount && SharedPropertyCount!==0 ?  SharedPropertyCount : SharedPropertyCount===0 ? 0 : "-"}
+                      {CountProperties.Shared && CountProperties.Shared!==0 ?  CountProperties.Shared : CountProperties.Shared===0 ? 0 : "-"}
                     </p>
                   </div>
                   {/* text */}
