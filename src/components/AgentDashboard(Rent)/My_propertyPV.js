@@ -1,4 +1,3 @@
-//--------------------------PROPERTY PENDING VERIFICATION---------------------------------//
 
 import React, { Component, useState, useEffect } from "react";
 import Dashboardcss from "../Dashboard.css";

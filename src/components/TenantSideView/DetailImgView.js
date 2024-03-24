@@ -104,7 +104,7 @@ function DetailImgView() {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:80/board/${boardId}`,
+          `https://b8rliving.com/board/${boardId}`,
           axiosConfig
         );
 

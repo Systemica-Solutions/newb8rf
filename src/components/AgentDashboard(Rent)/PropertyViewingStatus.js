@@ -14,6 +14,7 @@ import { MdOutlineMobileScreenShare } from "react-icons/md";
 import { MdOutlinePersonOutline} from "react-icons/md";
 import { BiHeart } from 'react-icons/bi';
 import { BiPersonFill } from 'react-icons/bi';
+import { useParams } from 'react-router-dom';
 
 
 function PropertyViewingStatus()
@@ -21,122 +22,8 @@ function PropertyViewingStatus()
   const [loading, setLoading] = useState(false);
   const [propertyViewing, setPropertyViewing] = useState([]);
   const [propertyData, setPropertyData] = useState({});
-  useEffect(() => {
-    const mockData = {
-      success: true,
-      data: {
-        tenantDetails: [
-          {
-            _id: "65b52536babc4f6ca77e77ef",
-            phoneNumber: "7906648310",
-            agentId: "65b12fe5babc4f6ca77e43e3",
-            status: "Shared",
-            name: "Sridhar",
-            numberShortlisted: 0,
-            numberShared: 2,
-            tenantDetails: ["65b52536babc4f6ca77e77ed"],
-            isOnBoard: true,
-            boardId: "65c38e699dd934019a1c3925",
-            createdAt: "2024-01-27T15:45:58.458Z",
-            updatedAt: "2024-02-07T14:07:10.354Z",
-            __v: 0,
-          },
-          {
-            _id: "65c390bb9dd934019a1c3973",
-            phoneNumber: "9958074152",
-            agentId: "65b12fe5babc4f6ca77e43e3",
-            status: "Shortlisted",
-            name: "Steyn",
-            numberShortlisted: 1,
-            numberShared: 2,
-            tenantDetails: ["65c390bb9dd934019a1c3971"],
-            isOnBoard: true,
-            boardId: "65c390de9dd934019a1c3993",
-            createdAt: "2024-02-07T14:16:27.652Z",
-            updatedAt: "2024-02-22T14:18:02.662Z",
-            __v: 0,
-          },
-          {
-            _id: "65d123456789012345678901",
-            phoneNumber: "9876543210",
-            agentId: "65b12fe5babc4f6ca77e43e3",
-            status: "Shared",
-            name: "John Doe",
-            numberShortlisted: 0,
-            numberShared: 1,
-            tenantDetails: ["65d123456789012345678902"],
-            isOnBoard: true,
-            boardId: "65c38e699dd934019a1c3925",
-            createdAt: "2024-03-01T12:00:00.000Z",
-            updatedAt: "2024-03-01T12:00:00.000Z",
-            __v: 0,
-          },
-          {
-            _id: "65d123456789012345678903",
-            phoneNumber: "1234567890",
-            agentId: "65b12fe5babc4f6ca77e43e3",
-            status: "Shortlisted",
-            name: "Jane Doe",
-            numberShortlisted: 1,
-            numberShared: 1,
-            tenantDetails: ["65d123456789012345678904"],
-            isOnBoard: true,
-            boardId: "65c390de9dd934019a1c3993",
-            createdAt: "2024-03-02T12:00:00.000Z",
-            updatedAt: "2024-03-02T12:00:00.000Z",
-            __v: 0,
-          },
-          {
-            _id: "65d123456789012345678905",
-            phoneNumber: "5678901234",
-            agentId: "65b12fe5babc4f6ca77e43e3",
-            status: "Shared",
-            name: "Alice Smith",
-            numberShortlisted: 0,
-            numberShared: 1,
-            tenantDetails: ["65d123456789012345678906"],
-            isOnBoard: true,
-            boardId: "65c38e699dd934019a1c3925",
-            createdAt: "2024-03-03T12:00:00.000Z",
-            updatedAt: "2024-03-03T12:00:00.000Z",
-            __v: 0,
-          },
-          {
-            _id: "65d123456789012345678907",
-            phoneNumber: "0123456789",
-            agentId: "65b12fe5babc4f6ca77e43e3",
-            status: "Shortlisted",
-            name: "Bob Smith",
-            numberShortlisted: 1,
-            numberShared: 1,
-            tenantDetails: ["65d123456789012345678908"],
-            isOnBoard: true,
-            boardId: "65c390de9dd934019a1c3993",
-            createdAt: "2024-03-04T12:00:00.000Z",
-            updatedAt: "2024-03-04T12:00:00.000Z",
-            __v: 0,
-          },
-        ],
-        tenantStatus: ["Shared", "Shortlisted", "Shared", "Shortlisted", "Shared", "Deactivate"],
-        shortListedDate: [-1, 24, 10, 15, -1, 5],
-        viewedDate: [-1, 24, -1, 15, 5, -1],
-      },
-      message: "Property status updated successfully.",
-      meta: {},
-      errors: [],
-    };
-
-   // Combine all arrays into one array
-  const combinedArray = mockData.data.tenantDetails.map((item, index) => ({
-    tenantDetail: item,
-    tenantStatus: mockData.data.tenantStatus[index],
-    shortListedDate: mockData.data.shortListedDate[index],
-    viewedDate: mockData.data.viewedDate[index],
-  }));
-
-  // Set propertyViewing to the combined array
-  setPropertyViewing(combinedArray);
-  }, []);
+  const { id } = useParams();
+  const propertyId = id;
   const token = localStorage.getItem("token");
   let axiosConfig = {
     headers: {
@@ -145,48 +32,79 @@ function PropertyViewingStatus()
       Authorization: `Basic ${token}`,
     },
   };
-  // useEffect(() =>{
-    // const fetchTenants = async () => {
-    //   setLoading(true);
-    //   try {
-    //     const response = await axios.get(
-    //       `http://localhost:80/property/viewing-status/${propertyId}`,
-    //       axiosConfig
-    //     );
-    //     // Update the countProperties state with the response data
-    //     setPropertyViewing(response.data.data);
-    //     // console.log(response.data.data.counts);
-    //     setLoading(false);
-    //   } catch (error) {
-    //     console.log(error);
-    //     // Handle the error
-    //     setLoading(false);
-    //   }
-    // };
-    // const fetchProperty = async () => {
-    //   setLoading(true);
-    //   try {
-    //     const response = await axios.get(
-    //       `http://localhost:80/property/${propertyId}`,
-    //       axiosConfig
-    //     );
-    //     // Update the countProperties state with the response data
-    //     setPropertyData(response.data.data);
-    //     // console.log(response.data.data.counts);
-    //     setLoading(false);
-    //   } catch (error) {
-    //     console.log(error);
-    //     // Handle the error
-    //     setLoading(false);
-    //   }
-    // };
-    // fetchProperty();
-    // fetchTenants();
-  // },[propertyId])
+  const fetchTenantDetails = async (tenantId) => {
+    try {
+      const tenantData = await axios.get(
+        `https://b8rliving.com/tenant/${tenantId}`,
+        axiosConfig
+      );
+      return tenantData.data.data.tenant.tenantDetails[0].name; // Assuming the tenant data is nested under 'data'
+    } catch (error) {
+      console.log(error);
+      return null; // Handle error accordingly
+    }
+  };
+  
+  // Fetch tenant details for all tenants
+  const fetchAllTenantDetails = async (tenantDetails) => {
+    const promises = tenantDetails.map((tenant) => fetchTenantDetails(tenant._id));
+    return await Promise.all(promises);
+  };
+
+  useEffect(() =>{
+    const fetchTenants = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `https://b8rliving.com/property/viewing-status/${propertyId}`,
+          axiosConfig,
+        );
+        // console.log(response.data.data)
+        const combinedArray = response.data.data.tenantDetails.map((item, index) => ({
+          tenantDetailName: null, // Placeholder, will be replaced with actual tenant details
+          tenantStatus: response.data.data.tenantStatus[index],
+          shortListedDate: response.data.data.shortListedDate[index],
+          viewedDate: response.data.data.viewedDate[index],
+        }));
+        const tenantDetails = await fetchAllTenantDetails(response.data.data.tenantDetails);
+        // console.log(tenantDetails)
+        // Update tenantDetailName in combinedArray
+        combinedArray.forEach((item, index) => {
+          item.tenantDetailName = tenantDetails[index];
+        });
+        setPropertyViewing(combinedArray);
+        // console.log(propertyViewing);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        // Handle the error
+        setLoading(false);
+      }
+    };
+    const fetchProperty = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `https://b8rliving.com/property/${propertyId}`,
+          axiosConfig
+        );
+        // Update the countProperties state with the response data
+        setPropertyData(response.data.data.property);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        // Handle the error
+        setLoading(false);
+      }
+    };
+    fetchProperty();
+    fetchTenants();
+  },[propertyId])
+  console.log(propertyViewing)
 
   const renderTenantDOM = (tenant, index) => {
-    const { tenantDetail, tenantStatus, shortListedDate, viewedDate } = tenant;
-    const tenantName = tenantDetail.name;
+    const { tenantDetailName, tenantStatus, shortListedDate, viewedDate } = tenant;
+    const tenantName = tenantDetailName;
 
     if (tenantStatus === "Shared") {
       if (shortListedDate === -1 && viewedDate === -1) {
@@ -202,17 +120,18 @@ function PropertyViewingStatus()
           <div key={index} style={{padding:"10px",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",width:"43%"}}>
             <FaUser className="text-[#52796F] text-[1.7rem]"/>
             <div style={{textDecoration:"underline",fontWeight:"700",fontSize:"17px"}}>{tenantName}</div>
-            <h4 style={{fontSize:"10px",fontWeight:"500",color:"#000000"}}>Viewed {viewedDate} days ago</h4>
+            <h4 style={{fontSize:"10px",fontWeight:"500",color:"#000000"}}>Viewed </h4>
           </div>
         );
       }
-    } else if (tenantStatus === "Shortlisted" && shortListedDate !== -1) {
+    } 
+    else if (tenantStatus === "Shortlisted") {
       return (
         <div key={index} style={{padding:"10px",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",width:"43%"}}>
           <FaUser className="text-[#52796F] text-[1.7rem]"/>
           <div style={{textDecoration:"underline",fontWeight:"700",fontSize:"17px"}}>{tenantName}</div>
           <div style={{display:"flex"}}>
-            <FaHeart style={{color:"#EF1C1C"}}/><p style={{fontSize:"10px",fontWeight:"500",marginLeft:"1px"}}>Shortlisted {shortListedDate} days ago</p>
+            <FaHeart style={{color:"#EF1C1C"}}/><p style={{fontSize:"10px",fontWeight:"500",marginLeft:"1px"}}>Shortlisted  </p>
           </div>
         </div>
       );
@@ -226,9 +145,24 @@ function PropertyViewingStatus()
       </div>
       )
     }
+    else if(tenantStatus==='CurrentlyViewing'){
+      return (
+        <div key={index} style={{padding:"10px",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",width:"43%"}}>
+        <FaUser className="text-[#52796F] text-[1.7rem]"/>
+        <div style={{textDecoration:"underline",fontWeight:"700",fontSize:"17px"}}>{tenantName}</div>
+        <h4 style={{fontSize:"10px",fontWeight:"850",color:"rgba(0, 0, 0, 0.7)"}}>Currently VIewing</h4>
+      </div>
+      )
+    }
     return null;
   };
-  console.log(propertyViewing);
+  const sharedPropertyLength = propertyData.sharedProperty? propertyData.sharedProperty.length : 0 ;
+
+  if (sharedPropertyLength !== undefined) {
+    console.log(sharedPropertyLength); // Output: 1
+  } else {
+    console.log("sharedProperty is undefined");
+  }
     return(
         <>
          <div
@@ -273,7 +207,7 @@ function PropertyViewingStatus()
                 {/* other-details */}
                 <div className="pl-[1rem] flex flex-col  w-[75%]">
                   <div className="flex flex-col pb-[0.5rem]">
-                    Singapakula, Oceanus
+                    {propertyData.houseName}, {propertyData.societyName}
                   </div>
                   {/* shared or View */}
                   <div className="grid grid-cols-2">
@@ -281,7 +215,7 @@ function PropertyViewingStatus()
                       <MdOutlineMobileScreenShare className="text-[#52796F] text-[1.7rem]" />
                       <div className="px-[0.2rem] text-[0.9rem]">
                         <p>Shared</p>
-                        <p> 4 tenants</p>
+                        <p> {sharedPropertyLength} tenants</p>
                       </div>
                     </div>
                     <div className="flex font-bold items-center">
