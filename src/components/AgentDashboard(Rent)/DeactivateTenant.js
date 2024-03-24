@@ -27,7 +27,7 @@ import { ImCross } from "react-icons/im";
 function DeactivateTenant() {
   const queryParameters = new URLSearchParams(window.location.search);
   const idTenant = queryParameters.get("tenantId");
-  // const name = queryParameters.get("name");
+  const name = queryParameters.get("name");
 
   const [stateRender, setStateRender] = useState("rent");
   const [loading, setLoading] = useState(false);
@@ -91,8 +91,8 @@ function DeactivateTenant() {
     try {
       const response = await axios.put(
         `https://b8rliving.com/tenant/deactivate/${idTenant}`,
+        axiosConfig,
         { deactivateStatus: deactivateStatus },
-        axiosConfig
       );
 
       // Log the updated state
@@ -127,7 +127,7 @@ function DeactivateTenant() {
         <div className="flex justify-center items-center flex-col py-[1rem]">
           <FcBusinessman className="text-[3rem]" />
           <p className="text-[1.5rem] font-bold text-center">
-            <u>Yash L</u>
+            <u>{name}</u>
           </p>
         </div>
         {/* container */}

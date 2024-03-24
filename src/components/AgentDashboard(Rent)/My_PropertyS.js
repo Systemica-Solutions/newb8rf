@@ -138,7 +138,7 @@ function My_PropertyS() {
                 bgColor="#D2D7D6"
                 borderColor="#DAF0EE"
                 color="#77A8A4"
-                text="Shared, No Action "
+                text="Shared "
                 //        onclicked={handlePageAvailable}
               />
             </Link>
