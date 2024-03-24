@@ -208,7 +208,7 @@ const AvailablePropertyComp = ({ props, name, activeProperies }) => {
                     fontWeight: "bold",
                   }}
                 >
-                  Edit
+                  Close Property
                 </text>
               </div>
             </Link>

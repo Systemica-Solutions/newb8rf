@@ -124,7 +124,8 @@ function UploadPhotos() {
     if (selectedImages.length !== 0) {
       var formData = new FormData();
       for (let i = 0; i < selectedImages.length; i++) {
-        formData.append("image", selectedImages[i]);
+        console.log(selectedImages[i]);
+        formData.append("images", selectedImages[i]);
       }
       formData.append("propertyId", propertyId);
       console.log(formData);

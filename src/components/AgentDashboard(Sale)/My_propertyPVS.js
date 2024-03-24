@@ -131,7 +131,7 @@ function My_propertyPVS(){
               bgColor= "#F5F5F5"
               borderColor= "#B3A8C8"
               color="#B3A8C8"
-               text="Shared, No Action "
+               text="Shared "
         //        onclicked={handlePageAvailable}
             /></Link>
 

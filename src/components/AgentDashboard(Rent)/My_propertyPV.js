@@ -1,4 +1,3 @@
-//--------------------------PROPERTY PENDING VERIFICATION---------------------------------//
 
 import React, { Component, useState, useEffect } from "react";
 import Dashboardcss from "../Dashboard.css";
@@ -60,8 +59,13 @@ function My_propertyPV() {
             );
           });
 
+          const sortedProperties = response.data.data.properties.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt)
+          });
+
           const noImageProperties = propertiesData.filter((property) => {
             return (
+              property.status !== "Closed" &&
               property.images.length == 0 &&
               (property.fieldAgentStatus === "DetailsCompleted" ||
                 property.fieldAgentStatus === "Unassigned")
@@ -69,7 +73,7 @@ function My_propertyPV() {
           });
 
           // var myArrayPropertyCount = response.data.data.properties;
-          setresponseProperty(underReviewProperties);
+          setresponseProperty(underReviewProperties || sortedProperties);
           setresponseNoImageProperty(noImageProperties);
         })
         .catch((error) => {
@@ -146,7 +150,7 @@ function My_propertyPV() {
                 bgColor="#D2D7D6"
                 borderColor="#DAF0EE"
                 color="#77A8A4"
-                text="Shared, No Action "
+                text="Shared "
                 //   onClick={() => updateFieldAgentStatus('verified')}
               />
             </Link>
@@ -162,8 +166,7 @@ function My_propertyPV() {
           </text> */}
           <p className="pb-[0.5rem] font-bold">Hey {name} ,</p>
           <p>
-            Properties shown here are <b>NOT VERIFIED</b>. Correct wherever
-            necessary to get them ready to share
+            Properties shown here are YET TO BE VERIFIED
           </p>
         </div>
         {/* --------------------------------------first tab-------------------------------------------- */}

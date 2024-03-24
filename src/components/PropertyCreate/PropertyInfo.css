@@ -44,7 +44,7 @@ background-color: rgb(243, 245, 246);
   .checkboxes > label{
     /* display: flex; */
     margin-left: 3%;
-    margin-top: 1%;
+    /* margin-top: 1%; */
     /* justify-content: space-evenly; */
   }
   

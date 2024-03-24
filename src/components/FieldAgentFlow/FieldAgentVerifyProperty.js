@@ -431,10 +431,10 @@ function FieldAgentVerifyProperty() {
       toast.error("Please capture door photo");
       return false;
     }
-    if (formData.propertyDetails.verifyInfo.homeEntry == false) {
-      toast.error("Please capture home entry photo");
-      return false;
-    }
+    // if (formData.propertyDetails.verifyInfo.homeEntry == false) {
+    //   toast.error("Please capture home entry photo");
+    //   return false;
+    // }
     if (formData.propertyDetails.verifyInfo.livingRoom == false) {
       toast.error("Please capture livingRoom photo");
       return false;
@@ -443,10 +443,10 @@ function FieldAgentVerifyProperty() {
       toast.error("Please capture kitchen photo");
       return false;
     }
-    if (formData.propertyDetails.verifyInfo.commonWashroom == false) {
-      toast.error("Please capture common washroom  photo");
-      return false;
-    }
+    // if (formData.propertyDetails.verifyInfo.commonWashroom == false) {
+    //   toast.error("Please capture common washroom  photo");
+    //   return false;
+    // }
     return true;
   };
 
@@ -666,7 +666,7 @@ function FieldAgentVerifyProperty() {
                           float: "left",
                         }}
                       >
-                        What is the House type?{" "}
+                        Property Type?{" "}
                         <span style={{ color: "red", fontSize: "1.5rem" }}>
                           *
                         </span>
@@ -717,7 +717,7 @@ function FieldAgentVerifyProperty() {
                           float: "left",
                         }}
                       >
-                        What is the house configuration?{" "}
+                        Property Configuration?{" "}
                         <span style={{ color: "red", fontSize: "1.5rem" }}>
                           *
                         </span>
@@ -797,7 +797,7 @@ function FieldAgentVerifyProperty() {
                         float: "left",
                       }}
                     >
-                      What is the Society?{" "}
+                      Society Name?{" "}
                       <span style={{ color: "red", fontSize: "1.5rem" }}>
                         *
                       </span>
@@ -842,6 +842,7 @@ function FieldAgentVerifyProperty() {
                       required
                       value={formData.pinCode}
                       onChange={handleChange}
+                      onWheel={(e) => e.target.blur()}
                       // onBlur={validatePincode}
                       placeholder="Pin code"
                       style={{
@@ -1268,6 +1269,7 @@ function FieldAgentVerifyProperty() {
                             name="your"
                             max={formData.propertyDetails.featureInfo.floors.total.toString()}
                             required
+                            onWheel={(e) => e.target.blur()}
                             placeholder="number*"
                             style={{
                               backgroundColor: "#F5F5F5",
@@ -1297,6 +1299,7 @@ function FieldAgentVerifyProperty() {
                             onChange={handleChange}
                             name="total"
                             placeholder="number*"
+                            onWheel={(e) => e.target.blur()}
                             required
                             style={{
                               backgroundColor: "#F5F5F5",
@@ -1358,7 +1361,7 @@ function FieldAgentVerifyProperty() {
                               selected
                               disabled
                             >
-                              {formData.propertyDetails.featureInfo.parking.car}
+                              {formData.propertyDetails.featureInfo.parking.car !== ""? formData.propertyDetails.featureInfo.parking.car: "No Car Parking"}
                             </option>
                             <option
                               style={
@@ -1367,13 +1370,13 @@ function FieldAgentVerifyProperty() {
                                   // backgroundColor: "red",
                                 }
                               }
-                              value="1Car"
+                              value="1 Car"
                             >
                               1 Car
                             </option>
-                            <option value="2Car">2 Car</option>
-                            <option value="3Car">3 Car</option>
-                            <option value="4Car">4 Car</option>
+                            <option value="2 Cars">2 Car</option>
+                          <option value="3 Cars">3 Car</option>
+                          <option value="">No Car Parking</option>
                           </select>
                         </div>
                         <div className="py-[0.5rem] flex flex-col">
@@ -1408,9 +1411,11 @@ function FieldAgentVerifyProperty() {
                               selected
                               disabled
                             >
-                              {
+                              {formData.propertyDetails.featureInfo.parking
+                                  .bike !== ""?
                                 formData.propertyDetails.featureInfo.parking
-                                  .bike
+                                  .bike :
+                                  "No Bike Parking"
                               }
                             </option>
 
@@ -1421,14 +1426,19 @@ function FieldAgentVerifyProperty() {
                                   // backgroundColor: "red",
                                 }
                               }
-                              value="1Bike"
+                              value="1 Bike"
                             >
                               1 Bike
                             </option>
-                            <option value="IncludedwithCar">
+                            <option value="2 Bikes">
+                              2 Bikes
+                            </option>
+                            <option value="Included with Car">
                               Included with Car
                             </option>
-                            <option value="Ownedgarage">Owned Garage</option>
+                            <option value="">
+                              No Bike Parking
+                            </option>
                           </select>
                         </div>
                         <div className="py-[0.5rem] flex flex-col">
@@ -2018,7 +2028,7 @@ function FieldAgentVerifyProperty() {
                       activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
                     />
                   </div>
-                  <div className="flex items-center flex-col text-[#AA223C]">
+                  {/* <div className="flex items-center flex-col text-[#AA223C]">
                     <GiCryptEntrance className="text-[2rem]" />
                     <p className="text-[0.9rem] font-semibold py-[0.2rem] text-center">
                       Home Entry
@@ -2046,7 +2056,7 @@ function FieldAgentVerifyProperty() {
                       boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
                       activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
                     />
-                  </div>
+                  </div> */}
                   <div className="flex items-center flex-col text-[#AA223C]">
                     <MdLiving className="text-[2rem]" />
                     <p className="text-[0.9rem] font-semibold py-[0.2rem] text-center">
@@ -2263,7 +2273,7 @@ function FieldAgentVerifyProperty() {
                 </p>
               </div>
               <div className="flex justify-center items-center py-[1rem]">
-                <CommonBtn title="Bedroom Photos" margin="18%" />
+                <CommonBtn title="Click Bedroom Photos" margin="18%" />
               </div>
             </form>
             <Footer />
@@ -2629,7 +2639,7 @@ function FieldAgentVerifyProperty() {
               <div className="flex justify-center items-center py-[1rem]">
                 {/* <BackButton title="Back" margin="" fontweight="bolder" /> */}
                 <CommonBtn
-                  title="Upload Photos"
+                  title="Click Society Photos"
                   margin="38%"
                   fontweight="bolder"
                 />

@@ -24,7 +24,7 @@ const TenantComp = ({ props, name }) => {
 
   const token = localStorage.getItem("token");
 
-  console.log(props);
+  // console.log(props);
 
   const handleSearch = (searchTerm) => {
     setSearchValue(searchTerm);
@@ -58,12 +58,12 @@ const TenantComp = ({ props, name }) => {
     console.log("name-> " + name);
     try {
       const res = await axios.get(
-        `http://localhost:8080/tenant/v2/board/${TId}`,
+        `https://b8rliving.com/tenant/v2/board/${TId}`,
         axiosConfig
       );
       const data = res.data;
       const boardId = data.data.board._id;
-      console.log(boardId);
+      // console.log(boardId);
       if (boardId) {
         window.location.href = `/PropertyViewBoard?boardId=${boardId}&tenantId=${TId}&name=${name}`;
       }
@@ -93,7 +93,7 @@ const TenantComp = ({ props, name }) => {
     // Initialize filteredData with all properties when the component loads
     const fetchPosts = async () => {
       setfilteredData(props);
-      console.log(filteredData);
+      // console.log(filteredData);
 
       const sharedTenantCount = props.filter(
         (tenant) => tenant.status == "Shared"
@@ -107,7 +107,6 @@ const TenantComp = ({ props, name }) => {
         boardIds.push(tenant.boardId);
       });
 
-      console.log(boardIds);
 
       for (const boardId of boardIds) {
         try {

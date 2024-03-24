@@ -56,7 +56,7 @@ function AllProperty() {
 
         // Sort the response data by the 'imagesApproved' property in descending order
         const sortedProperties = filterData.sort((a, b) => {
-          return a.imagesApproved - b.imagesApproved;
+          return new Date(b.createdAt) - new Date(a.createdAt);
         });
 
         const filteredProperties = sortedProperties.filter(
@@ -219,17 +219,17 @@ function AllProperty() {
               }}
             >
               <div style={{ marginRight: "8px" }}>
-                <CommonTopButton
+                {/* <CommonTopButton
                   text="Rented On B8R"
                   bgColor={isActive1 ? "#52796F" : "#D2D7D6"}
                   borderColor="#A9C0BA"
                   color={isActive1 ? "#FFFFFF" : "#77A8A4"}
                   onclicked={() => handlePageAvailables("Rented On B8R")}
-                />
+                /> */}
               </div>
 
               <div>
-                <CommonTopButton
+                {/* <CommonTopButton
                   text="Delisted Owner"
                   bgColor={isActive2 ? "#52796F" : "#D2D7D6"}
                   borderColor="#A9C0BA"
@@ -237,31 +237,33 @@ function AllProperty() {
                   onclicked={() => handlePageAvailables("Delisted Owner")}
 
                   // margin="0px 0px 0px 1px"
-                />
+                /> */}
               </div>
             </div>
             <div
               style={{ marginTop: "10px", width: "30px", marginRight: "10px" }}
             >
-              <CommonTopButton
+              {/* <CommonTopButton
                 text="Rented Outside"
                 bgColor={isActive3 ? "#52796F" : "#D2D7D6"}
                 borderColor="#A9C0BA"
                 color={isActive3 ? "#FFFFFF" : "#77A8A4"}
                 margin="0px 0px 0px 0px"
                 onclicked={() => handlePageAvailables("Rented Outside")}
-              />
+              /> */}
             </div>
 
             <AvailablePropertyComp
               props={responseArchiveProperties}
               name={name}
+              showCloseButton={false}
             />
           </>
         ) : (
           <AvailablePropertyComp
             props={responsePendingProperties}
             name={name}
+            showCloseButton={true}
           />
         )}
 

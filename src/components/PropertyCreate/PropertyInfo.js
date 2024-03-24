@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
-import PropertyInfocss from "./PropertyInfo.css";
+import "./PropertyInfo.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import backgroundSecond from "../Assets/Images/other_bg.png";
@@ -381,6 +381,7 @@ function PropertyInfo() {
     const swimmingPool = formData.propertyData.featureInfo.swimmingPool;
     const gym = formData.propertyData.featureInfo.gym;
     const clubHouse = formData.propertyData.featureInfo.clubHouse;
+
     if (
       (gatedSecurity ||
         powerBackup ||
@@ -545,7 +546,7 @@ function PropertyInfo() {
             </div>
 
             <form
-              className="login-form inner-background"
+              className="property-form inner-background"
               onSubmit={handleChangeOne}
             >
               <p
@@ -562,10 +563,10 @@ function PropertyInfo() {
                   display: "block",
                   marginBottom: "0.5rem",
                   fontWeight: "300",
-                  float: "left",
+                  float: "left"
                 }}
               >
-                What is the House type?{" "}
+                Property Type?{" "}
                 <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
               </label>
               <div className="">
@@ -612,7 +613,7 @@ function PropertyInfo() {
                   float: "left",
                 }}
               >
-                What is the house configuration?{" "}
+                Property Configuration?{" "}
                 <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
               </label>
               <div className="">
@@ -681,7 +682,7 @@ function PropertyInfo() {
                   float: "left",
                 }}
               >
-                What is the Society?{" "}
+                Society Name?{" "}
                 <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
               </label>
               <input
@@ -721,6 +722,7 @@ function PropertyInfo() {
                 required
                 value={formData.pinCode}
                 onChange={handleChange}
+                onWheel={(e) => e.target.blur()}
                 // onBlur={validatePincode}
                 placeholder="6 digit valid PIN Input"
                 style={{
@@ -920,7 +922,7 @@ function PropertyInfo() {
               style={{ borderRadius: "16px" }}
               className="inner-background"
             >
-              {/* Landlord FIRST NAME */}
+              {/* Owner's First NAME */}
               <div className="flex justify-center items-center pb-[1rem]">
                 <h4
                   style={{ color: "#52796f" }}
@@ -941,13 +943,13 @@ function PropertyInfo() {
                   float: "left",
                 }}
               >
-                Landlord First Name{" "}
+                Owner's First Name{" "}
                 <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
               </label>
               <input
                 type="text"
                 id="first"
-                placeholder="Landlord First Name"
+                placeholder="Owner's First Name"
                 name="first"
                 required
                 value={formData.propertyData.ownerInfo.name.first}
@@ -955,7 +957,7 @@ function PropertyInfo() {
                 style={styles}
               />
               {/* <br></br> */}
-              {/* Landlord LAST NAME */}
+              {/* Owner's Last NAME */}
               <label
                 className="mx-[0.2rem]"
                 for="last"
@@ -967,22 +969,22 @@ function PropertyInfo() {
                   float: "left",
                 }}
               >
-                Landlord Last Name{" "}
+                Owner's Last Name{" "}
                 <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
               </label>
               <input
                 type="text"
                 id="last"
-                placeholder="Landlord last name"
+                placeholder="Owner's Last name"
                 name="last"
                 required
                 value={formData.propertyData.ownerInfo.name.last}
                 onChange={handleChange}
                 style={styles}
               />
-              {/* <br></br> */}
+              <br></br>
               {/* CONTACT NUM */}
-              {/* <label
+              <label 
                 className="mx-[0.2rem]"
                 for="phoneNumber"
                 style={{
@@ -1002,14 +1004,14 @@ function PropertyInfo() {
                 placeholder="10 digit number"
                 name="phoneNumber"
                 // required
-                value={formData.propertyData.ownerInfo.phoneNumber}
+                // value={formData.propertyData.ownerInfo.phoneNumber}
+                defaultValue=""
                 onChange={handleChange}
                 style={styles}
-              /> */}
-              {/* <br></br> */}
-              {/* <br></br> */}
+              /> 
+              <br></br>
               {/* PAN CARD */}
-              {/* <label
+              <label
                 className="mx-[0.2rem] mt-[20px]"
                 for="panNumber"
                 style={{
@@ -1028,13 +1030,14 @@ function PropertyInfo() {
                 placeholder="Pan number"
                 name="panNumber"
                 // required
-                value={formData.propertyData.ownerInfo.panNumber}
+                // value={formData.propertyData.ownerInfo.panNumber}
+                defaultValue=""
                 onChange={handleChange}
                 style={styles}
-              /> */}
-              {/* <br></br> */}
+              />
+              <br></br>
               {/* Residing Country */}
-              {/* <label
+              <label
                 className="mx-[0.2rem]"
                 for="country"
                 style={{
@@ -1045,7 +1048,7 @@ function PropertyInfo() {
                   float: "left",
                 }}
               >
-                Country of residence of Landlord
+                Country of Residence 
               </label>
               <input
                 type="text"
@@ -1053,12 +1056,13 @@ function PropertyInfo() {
                 placeholder="residing country"
                 name="country"
                 // required
-                value={formData.propertyData.ownerInfo.country}
+                // value={formData.propertyData.ownerInfo.country}
+                defaultValue=""
                 onChange={handleChange}
                 style={styles}
-              /> */}
-              {/* <br></br> */}
-              {/* <label
+              />
+              <br></br>
+              <label
                 className="mx-[0.2rem]"
                 for="city"
                 style={{
@@ -1069,7 +1073,7 @@ function PropertyInfo() {
                   float: "left",
                 }}
               >
-                City of residence of Landlord
+                City of Residence
               </label>
               <input
                 type="text"
@@ -1077,10 +1081,11 @@ function PropertyInfo() {
                 placeholder="residing city"
                 name="city"
                 // required
-                value={formData.propertyData.ownerInfo.city}
+                // value={formData.propertyData.ownerInfo.city}
+                defaultValue=""
                 onChange={handleChange}
                 style={styles}
-              /> */}
+              />
               {/* <br></br> */}
               {/* <br></br> */}
               <div className="flex justify-around items-center">
@@ -1414,6 +1419,7 @@ function PropertyInfo() {
                         type="number"
                         id="carpetArea"
                         value={formData.propertyData.featureInfo.carpetArea}
+                        onWheel={(e) => e.target.blur()}
                         onChange={handleChange}
                         name="carpetArea"
                         required
@@ -1438,11 +1444,11 @@ function PropertyInfo() {
                       }}
                     >
                       <HiMiniBuildingOffice className="text-[2rem] my-[0.5rem]" />
-                      <p className="font-semibold">Floor Number</p>
+                      <p className="font-semibold">Property Floor Number</p>
                       <div className="grid grid-cols-2 text-center">
                         <div className="py-[0.5rem] flex flex-col justify-center items-center">
                           <label className="text-[0.9rem]">
-                            Your Floor{" "}
+                            Floor Number of Property{" "}
                             <span style={{ color: "red", fontSize: "1.2rem" }}>
                               *
                             </span>
@@ -1454,6 +1460,7 @@ function PropertyInfo() {
                             value={
                               formData.propertyData.featureInfo.floors.your
                             }
+                            onWheel={(e) => e.target.blur()}
                             onChange={handleChange}
                             name="your"
                             max={formData.propertyData.featureInfo.floors.total}
@@ -1472,7 +1479,7 @@ function PropertyInfo() {
                         </div>
                         <div className="py-[0.5rem] flex flex-col justify-center items-center">
                           <label className="text-[0.9rem]">
-                            Total Floor{" "}
+                            Total Floors in Apartment Complex{" "}
                             <span style={{ color: "red", fontSize: "1.2rem" }}>
                               *
                             </span>
@@ -1484,6 +1491,7 @@ function PropertyInfo() {
                             value={
                               formData.propertyData.featureInfo.floors.total
                             }
+                            onWheel={(e) => e.target.blur()}
                             onChange={handleChange}
                             name="total"
                             placeholder="number*"
@@ -1545,7 +1553,6 @@ function PropertyInfo() {
                           </option>
                           <option
                             style={{
-                              textAlign: "center",
                               backgroundColor: "red",
                             }}
                             value="1 Car"
@@ -1554,7 +1561,7 @@ function PropertyInfo() {
                           </option>
                           <option value="2 Cars">2 Car</option>
                           <option value="3 Cars">3 Car</option>
-                          <option value="No Car Parking">No Car Parking</option>
+                          <option value="">No Car Parking</option>
                         </select>
                       </div>
                       <div className="py-[0.5rem] flex flex-col">
@@ -1586,15 +1593,15 @@ function PropertyInfo() {
                           </option>
                           <option
                             style={{
-                              textAlign: "center",
                               backgroundColor: "red",
                             }}
-                            value="0"
+                            value="1 Bike"
                           >
                             1 Bike
                           </option>
-                          <option value="1">Included with Car</option>
-                          <option value="2">Owned Garage</option>
+                          <option value="2 Bikes">2 Bikes</option>
+                          <option value="Included with Car">Included with Car</option>
+                          <option value="">No Bike Parking</option>
                         </select>
                       </div>
                       <div className="py-[0.5rem] flex flex-col">
@@ -1626,7 +1633,6 @@ function PropertyInfo() {
                           </option>
                           <option
                             style={{
-                              textAlign: "center",
                               backgroundColor: "red",
                             }}
                             value="Covered Roof"
@@ -1634,6 +1640,7 @@ function PropertyInfo() {
                             Covered Roof
                           </option>
                           <option value="Open">Open</option>
+                          <option value="">No Parking Available</option>
                         </select>
                       </div>
                     </div>
@@ -1674,7 +1681,6 @@ function PropertyInfo() {
                         </option>
                         <option
                           style={{
-                            textAlign: "center",
                             backgroundColor: "red",
                           }}
                           value="1"
@@ -1721,7 +1727,6 @@ function PropertyInfo() {
                         </option>
                         <option
                           style={{
-                            textAlign: "center",
                             backgroundColor: "red",
                           }}
                           value="1"
@@ -1778,7 +1783,6 @@ function PropertyInfo() {
                           </option>
                           <option
                             style={{
-                              textAlign: "center",
                               backgroundColor: "red",
                             }}
                             value="1 Room"
@@ -1947,10 +1951,12 @@ function PropertyInfo() {
                         value={
                           formData.propertyData.featureInfo.constructionYear
                         }
+                        onWheel={(e) => e.target.blur()}
                         onChange={handleChange}
                         name="constructionYear"
                         placeholder="-year drop-down* -"
                         max={getCurrentYear()}
+                        min={getCurrentYear()-100}
                         style={{
                           backgroundColor: "white",
                           padding: "0.5rem",
@@ -2041,6 +2047,7 @@ function PropertyInfo() {
                           type="number"
                           id="rentAmount"
                           value={formData.propertyData.featureInfo.rentAmount}
+                          onWheel={(e) => e.target.blur()}
                           onChange={handleChange}
                           name="rentAmount"
                           required
@@ -2078,6 +2085,7 @@ function PropertyInfo() {
                           type="number"
                           id="rentDeposit"
                           value={formData.propertyData.featureInfo.rentDeposit}
+                          onWheel={(e) => e.target.blur()}
                           onChange={handleChange}
                           name="rentDeposit"
                           placeholder="-number only*-"
@@ -2120,6 +2128,7 @@ function PropertyInfo() {
                           value={
                             formData.propertyData.featureInfo.rentMaintenance
                           }
+                          onWheel={(e) => e.target.blur()}
                           onChange={handleChange}
                           name="rentMaintenance"
                           placeholder="-number only*-"
@@ -2157,6 +2166,7 @@ function PropertyInfo() {
                           type="number"
                           id="lockInPeriod"
                           value={formData.propertyData.featureInfo.lockInPeriod}
+                          onWheel={(e) => e.target.blur()}
                           onChange={handleChange}
                           name="lockInPeriod"
                           required
@@ -2219,6 +2229,7 @@ function PropertyInfo() {
                           type="number"
                           id="saleAmount"
                           value={formData.propertyData.featureInfo.saleAmount}
+                          onWheel={(e) => e.target.blur()}
                           onChange={handleChange}
                           name="saleAmount"
                           placeholder="-number only*-"
@@ -2255,6 +2266,7 @@ function PropertyInfo() {
                           type="number"
                           id="saleDeposit"
                           value={formData.propertyData.featureInfo.saleDeposit}
+                          onWheel={(e) => e.target.blur()}
                           onChange={handleChange}
                           name="saleDeposit"
                           placeholder="-number only*-"
@@ -2296,6 +2308,7 @@ function PropertyInfo() {
                           value={
                             formData.propertyData.featureInfo.saleMaintenance
                           }
+                          onWheel={(e) => e.target.blur()}
                           onChange={handleChange}
                           name="saleMaintenance"
                           placeholder="-number only*-"

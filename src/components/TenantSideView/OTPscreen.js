@@ -59,7 +59,7 @@ function OTPscreen() {
         const responseDataBoardData = response.data.data.board;
         const responseDataTenantData = response.data.data.board.tenantId;
         const responseDataTenantId = response.data.data.board.tenantId._id;
-        console.log("teney id", responseDataTenantId);
+        console.log("teney id", responseDataBoardData);
         setResponseDataTenantNunber(
           response.data.data.board.tenantId.phoneNumber
         );
@@ -274,6 +274,7 @@ function OTPscreen() {
                   type="number"
                   id="phone"
                   value={formData.phone}
+                  onWheel={(e) => e.target.blur()}
                   onChange={handleChange}
                   name="phone"
                   required
@@ -304,6 +305,7 @@ function OTPscreen() {
                   disabled={FormDisable}
                   id="enter_otp"
                   value={formData.enter_otp}
+                  onWheel={(e) => e.target.blur()}
                   onChange={handleChange}
                   style={{
                     width: "90%",

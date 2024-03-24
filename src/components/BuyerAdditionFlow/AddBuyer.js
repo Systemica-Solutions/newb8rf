@@ -15,6 +15,7 @@ import { MdVpnKey } from "react-icons/md";
 
 function AddBuyer() {
   const [checkedStateOne, setCheckedStateOne] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const [formData, setFormData] = useState({
     phoneNumber: "",
@@ -48,6 +49,21 @@ function AddBuyer() {
   const handleChange = (event) => {
     const { name, value } = event.target;
     console.log(name, value);
+    if (name === 'budget') {
+      if (value <= 15) {
+        setFormData({
+          ...formData,
+          buyerData: {
+            ...formData.buyerData,
+            [name]: value
+          }
+        });
+        setErrorMessage('');
+      } else {
+        setErrorMessage('Budget should not exceed 15');
+        return;
+      }
+    }
 
     if (name === "phoneNumber") {
       setFormData((prevState) => ({
@@ -367,11 +383,13 @@ function AddBuyer() {
                 className={"fieldInput-add"}
                 type="number"
                 id="budget"
+                onWheel={(e) => e.target.blur()}
                 name="budget"
                 value={formData.buyerData.budget}
                 onChange={handleChange}
                 required
               />
+              <p>{errorMessage}</p>
               <br></br>
               <div className="flex justify-center items-center py-[1rem]">
                 <div

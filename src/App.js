@@ -20,6 +20,7 @@ import AddTenant from "./components/TenantAdditionFlow/AddTenant";
 
 //Add Buyer
 import AddBuyer from "./components/BuyerAdditionFlow/AddBuyer";
+
 import BuyerDetails from "./components/BuyerAdditionFlow/BuyerDetails";
 import BuyerCreated from "./components/BuyerAdditionFlow/BuyerCreated";
 
@@ -52,8 +53,9 @@ import DeactivateTenant from "./components/AgentDashboard(Rent)/DeactivateTenant
 // _________________________________________________________________________
 
 import AuthCode from "./components/AdminSide/AuthCode";
-import AdminFront from "./components/AdminSide/AdminFront";
+import AddImage from "./components/AdminSide/AddImage";
 import AssignProperty from "./components/AdminSide/AssignProperty";
+import AdminFront from "./components/AdminSide/AdminFront";
 // AgentFlow --------------------------------------------------
 import FieldAgentHomeN from "./components/FieldAgentFlow/FieldAgentHomeN";
 import ConfirmOTPAgent from "./components/RegisterLoginUser/ConfirmOTPAgent";
@@ -129,6 +131,7 @@ import PropertyCreated from "./components/PropertyCreate/PropertyCreated";
 
 //footer
 import Footer from "./components/Footer";
+import Home from "./components/Home";
 
 function App(props) {
   const [isLogin, setIsLogin] = useState(true);
@@ -179,10 +182,12 @@ function App(props) {
 
             {/* RegisterLoginUser */}
             <Route exact path="/" element={<SignUp />} />
+            <Route exact path="/Home" element={<Home/>} />
             <Route exact path="FrontLogin" element={<FrontLogin />} />
             <Route exact path="AuthCode" element={<AuthCode />} />
-            <Route exact path="AdminFront" element={<AdminFront />} />
+            <Route exact path="addImage" element={<AddImage />} />
             <Route exact path="AssignProperty" element={<AssignProperty />} />
+            <Route exact path="AdminFront" element={<AdminFront />} />
             <Route exact path="ResetPassword" element={<ResetPassword />} />
             <Route exact path="EnterOTP" element={<EnterOTP />} />
             <Route exact path="VerifyPage" element={<VerifyPage />} />
@@ -207,7 +212,7 @@ function App(props) {
             <Route exact path="PropertyClosed" element={<PropertyClosed />} />
             <Route
               exact
-              path="PropertyViewingStatus"
+              path="/PropertyViewingStatus/:id"
               element={<PropertyViewingStatus />}
             />
             <Route

@@ -57,7 +57,7 @@ function ChangeStatusS(){
         <>
 
         <div className="form" style={{ borderRadius: "16px", marginTop: "10%", backgroundRepeat: 'no-repeat' , backgroundImage: `url(${PVbackground})`, backgroundRepeat: 'no-repeat' , backgroundSize : '100% 100%'}}>
-            <CommonHeader title="Change Status/ Edit Property" color= "#1E0058" />
+            <CommonHeader title="Change Status/Close Property" color= "#1E0058" />
         <div className="containered form" style={{height:"110px", borderRadius:"15px",boxShadow:"0px 4px 4px rgba(0, 0, 0, 0.25)",border:"1px solid #DAF0EE"}}>
             <div style={{display:"flex",flexDirection:"row",alignItems:"center"}}>
                 {/* for image */}

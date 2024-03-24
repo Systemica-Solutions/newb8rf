@@ -83,7 +83,8 @@ function DetailView() {
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
   const [booleanValues, setBooleanValues] = useState([]); // Store boolean values here
-  const { isClickArray, setIsClickArray } = useBoardState();
+  // const { isClickArray, setIsClickArray } = useBoardState();
+  const [isClickArray, setIsClickArray] = useState([]);
 
   let axiosConfig = {
     headers: {
@@ -100,6 +101,17 @@ function DetailView() {
   };
 
   useEffect(() => {
+
+    // const updateViewTime = async () => {
+    //   try{
+    //     const response = await axios.put(`https://b8rliving.com/board/view-property/${boardId}`, axiosConfig, propertyId);
+    //     console.log(response);
+    //   }
+    //   catch(err){
+    //     console.log(err);
+    //   }
+    // }
+
     const fetchTenantDetails = async () => {
       setLoading(true);
       //console.log("wuhssufeeteiUUUUU");
@@ -110,7 +122,14 @@ function DetailView() {
           `https://b8rliving.com/board/${boardId}`,
           axiosConfig
         );
-
+          const boardData = response.data.data.board;
+          if(boardData.propertyId){
+            let isClick = [];
+            boardData.propertyId.map((property) => {
+              isClick.push(boardData.isShortlisted[property._id] ? boardData.isShortlisted[property._id]: false)
+            })
+            setIsClickArray(isClick);
+          }
         // const responseData = response.data.data.board.propertyId;
         const responseDataProperty = response.data.data.board.propertyId;
         console.log("REsponse", response);
@@ -166,6 +185,7 @@ function DetailView() {
 
   //////////////////////////////////
   const shortlist = async (propertyid, propertIndex) => {
+    const status = !isClickArray[propertIndex];
     setIsClickArray((prevState) => {
       const updatedIsClickArray = [...prevState];
       updatedIsClickArray[propertIndex] = !isClickArray[propertIndex];
@@ -178,7 +198,7 @@ function DetailView() {
       console.log("Recieved BId", boardId);
       const response = await axios.put(
         `https://b8rliving.com/board/shortlist/${boardId}`,
-        { propertyid, shortListStatus, globalTenantId },
+        { propertyid, shortListStatus:status, globalTenantId },
         axiosConfig
       );
       console.log("Response fo apishortlist ", response);
@@ -311,6 +331,7 @@ function DetailView() {
                   About the Society
                 </p>
                 <div className="grid grid-cols-4 gap-x-[0.5rem]" style={{}}>
+                  {property.propertyDetails.featureInfo.gatedSecurity === true ? 
                   <div className="flex items-center flex-col text-center">
                     <MdOutlineSecurity className="text-[2rem]" />
                     <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
@@ -319,7 +340,15 @@ function DetailView() {
                     <p className="text-[#52796F] text-[0.8rem]">
                       always secure
                     </p>
+                  </div>:
+                    <div className="flex items-center flex-col text-center text-red-500">
+                    <MdOutlineSecurity className="text-[2rem] text-red-500" />
+                    <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                      No Gated Security
+                    </p>
                   </div>
+                  }
+                  {property.propertyDetails.featureInfo.powerBackup === true ?
                   <div className="flex items-center flex-col text-center">
                     <MdPower className="text-[2rem]" />
                     <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
@@ -328,23 +357,70 @@ function DetailView() {
                     <p className="text-[#52796F] text-[0.8rem]">
                       Power Back-Up
                     </p>
-                  </div>
+                  </div>:
+                  <div className="flex items-center flex-col text-center text-red-500">
+                  <MdPower className="text-[2rem] text-red-500" />
+                  <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                    No Power Backup
+                  </p>
+                </div>
+                  }
+                  {property.propertyDetails.featureInfo.swimmingPool === true ?
+                  <div className="flex items-center flex-col text-center">
+                    <BiSwim className="text-[2rem]" />
+                    <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                      Recreation in campus
+                    </p>
+                  </div>:
+                  <div className="flex items-center flex-col text-center text-red-500">
+                  <BiSwim className="text-[2rem] text-red-500" />
+                  <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                    No swimming pool
+                  </p>
+                </div>
+                  }
+                  {property.propertyDetails.featureInfo.clubHouse === true ?
                   <div className="flex items-center flex-col text-center">
                     <MdOutlineSportsHandball className="text-[2rem]" />
                     <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                      Club house
+                      Recreation in campus
                     </p>
-                    <p className="text-[#52796F] text-[0.8rem]">
-                      with Swimming Pool
-                    </p>
-                  </div>
+                  </div>:
+                  <div className="flex items-center flex-col text-center text-red-500">
+                  <MdOutlineSportsHandball className="text-[2rem] text-red-500" />
+                  <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                    No Club House
+                  </p>
+                </div>
+                  }
+                  {property.propertyDetails.featureInfo.groceryStore === true ?
                   <div className="flex items-center flex-col text-center">
                     <FaCartShopping className="text-[2rem]" />
                     <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                      Grocery Store
+                      Grocery Store in campus
                     </p>
-                    <p className="text-[#52796F] text-[0.8rem]">In Campus</p>
-                  </div>
+                  </div>:
+                  <div className="flex items-center flex-col text-center text-red-500">
+                  <FaCartShopping className="text-[2rem] text-red-500" />
+                  <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                    No Grocery Store
+                  </p>
+                </div>
+                  }
+                {property.propertyDetails.featureInfo.gym === true ?
+                  <div className="flex items-center flex-col text-center">
+                    <CgGym className="text-[2rem]" />
+                    <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                      Gym with basic equipments
+                    </p>
+                  </div>:
+                  <div className="flex items-center flex-col text-center text-red-500">
+                  <CgGym className="text-[2rem] text-red-500" />
+                  <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                      No Gym
+                    </p>
+                </div>
+                  }
                 </div>
               </div>
             </div>
@@ -380,18 +456,18 @@ function DetailView() {
                     <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
                       {property.propertyDetails.featureInfo.balconies} Balconies
                     </p>
-                    <p className="text-[#52796F] text-[0.8rem]">
+                    {/* <p className="text-[#52796F] text-[0.8rem]">
                       Bedroom, Living
-                    </p>
+                    </p> */}
                   </div>
                   <div className="flex items-center flex-col text-center">
                     <RxDimensions className="text-[2rem]" />
                     <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
                       {property.propertyDetails.featureInfo.carpetArea} sft
                     </p>
-                    <p className="text-[#52796F] text-[0.8rem]">
+                    {/* <p className="text-[#52796F] text-[0.8rem]">
                       Spacious than most
-                    </p>
+                    </p> */}
                   </div>
                   <div className="flex items-center flex-col text-center">
                     <HiMiniBuildingOffice className="text-[2rem]" />
@@ -464,7 +540,7 @@ function DetailView() {
                       <div className="flex items-center flex-col text-center">
                         <HiCurrencyRupee className="text-[2rem]" />
                         <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                          {property.propertyDetails.featureInfo.rentAmount} INR{" "}
+                          {property.propertyDetails.featureInfo.rentAmount+property.propertyDetails.featureInfo.rentMaintenance } INR{" "}
                           /month
                         </p>
                         <p className="text-[#52796F] text-[0.8rem]">
@@ -480,9 +556,18 @@ function DetailView() {
                           Security Deposit
                         </p>
                       </div>
+                      <div className="flex items-center flex-col text-center">
+                      <BsFillHouseLockFill className="text-[2rem]" />
+                        <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                          {property.propertyDetails.featureInfo.lockInPeriod} months
+                        </p>
+                        <p className="text-[#52796F] text-[0.8rem]">
+                          Lock-in Period
+                        </p>
+                      </div>
                     </>
                   )}
-                  {property.propertyDetails.featureInfo.saleAmount > 1 && (
+                  {/* {property.propertyDetails.featureInfo.saleAmount > 1 && (
                     <>
                       <div className="flex items-center flex-col text-center">
                         <HiCurrencyRupee className="text-[2rem]" />
@@ -506,7 +591,7 @@ function DetailView() {
                         </p>
                       </div>
                     </>
-                  )}
+                  )} */}
                 </div>
               </div>
             </div>

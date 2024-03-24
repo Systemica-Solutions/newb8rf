@@ -40,21 +40,25 @@ function My_PropertyS() {
     const fetchPosts = async () => {
       setLoading(true);
       axios
-        .get(`https://b8rliving.com/property`, axiosConfig)
+        .get(`https://b8rliving.com/property/shortlisted/1`, axiosConfig)
         .then((response) => {
           console.log(response.data.data);
-          var propertiesData = response.data.data.properties;
+          var propertiesData = response.data.data;
+
+          const sortedProperties = propertiesData.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          });
           // Filter out properties where propertyDetails.purposeSale is true
 
           // Filter out properties where propertyDetails.purposeSale is true
-          const yetToShareProperties = propertiesData.filter((property) => {
-            return property.status === "Shortlisted";
-          });
+          // const yetToShareProperties = propertiesData.filter((property) => {
+          //   return property.status === "Shortlisted";
+          // });
 
           // var myArrayPropertyCount = response.data.data.properties;
           //   setresponseNoImageProperty(noImageProperties);
 
-          setresponseProperty(yetToShareProperties);
+          setresponseProperty(sortedProperties);
         })
         .catch((error) => {
           console.log(error);
@@ -134,7 +138,7 @@ function My_PropertyS() {
                 bgColor="#D2D7D6"
                 borderColor="#DAF0EE"
                 color="#77A8A4"
-                text="Shared, No Action "
+                text="Shared "
                 //        onclicked={handlePageAvailable}
               />
             </Link>
@@ -151,7 +155,7 @@ function My_PropertyS() {
           </text> */}
           <p className="pb-[0.5rem] font-bold">Hey {name} ,</p>
           <p>
-            Awesome news, <b>1 Properties are shortlisted by Tenant</b>.
+            Awesome news, <b>{responseProperty.length} Properties are shortlisted by Tenant</b>.
           </p>
         </div>
 

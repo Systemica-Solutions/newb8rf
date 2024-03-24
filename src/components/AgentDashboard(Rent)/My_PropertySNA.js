@@ -41,24 +41,30 @@ function My_PropertySNA() {
     const fetchPosts = async () => {
       setLoading(true);
       axios
-        .get(`https://b8rliving.com/property`, axiosConfig)
+        .get(`https://b8rliving.com/property/shared/1`, axiosConfig)
         .then((response) => {
           console.log(response.data.data);
-          var propertiesData = response.data.data.properties;
+          var propertiesData = response.data.data;
+
+          const sortedProperties = propertiesData.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+          });
+
           // Filter out properties where propertyDetails.purposeSale is true
 
           // Filter out properties where propertyDetails.purposeSale is true
-          const yetToShareProperties = propertiesData.filter((property) => {
-            return (
-              property.sharedProperty.length > 0 &&
-              property.status == "Verified"
-            );
-          });
+          // const yetToShareProperties = propertiesData.filter((property) => {
+          //   return (
+          //     property.sharedProperty.length > 0 &&
+          //     property.status == "Verified"
+          //   );
+          // });
 
           // var myArrayPropertyCount = response.data.data.properties;
           //   setresponseNoImageProperty(noImageProperties);
 
-          setresponseProperty(yetToShareProperties);
+          // setresponseProperty(yetToShareProperties || sortedProperties);
+          setresponseProperty(sortedProperties);
         })
         .catch((error) => {
           console.log(error);
@@ -135,7 +141,7 @@ function My_PropertySNA() {
                 bgColor="#52796F"
                 borderColor="#DAF0EE"
                 color="#DAF0EE"
-                text="Shared, No Action"
+                text="Shared"
                 //        onclicked={handlePageAvailable}
               />
             </Link>
@@ -153,7 +159,7 @@ function My_PropertySNA() {
           <p className="pb-[0.5rem] font-bold">Hey {name} ,</p>
           <p>
             Properties here are active & shared{" "}
-            <b>but none of the Tenants have shortlisted them</b>
+            {/* <b>but none of the Tenants have shortlisted them</b> */}
           </p>
         </div>
         {/* --------------------------------------first tab-------------------------------------------- */}

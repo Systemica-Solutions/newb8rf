@@ -50,17 +50,19 @@ import { FaSearch } from "react-icons/fa";
 
 // import ActiveLeads from "./ActiveLeads";
 
-function TenantSideViewComp({ boards, boardId }) {
+function TenantSideViewComp({ boards, boardId, boardData }) {
   const token = localStorage.getItem("token");
   // console.log(token);
   //const shortListStatus = false;
+  console.log(boardData);
   const [isClick, setClick] = useState(false);
   const [shortListStatus, setshortListStatus] = useState(false);
   const [loading, setLoading] = useState(false);
   // Initialize isClick state as an array with the same length as boards
-  const { isClickArray, setIsClickArray } = useBoardState(boards.length);
+  // const { isClickArray, setIsClickArray } = useBoardState(boards.length, boardData);
+  const [isClickArray, setIsClickArray] = useState([])
   //const ClickArray
-  console.log("isClickArray", isClickArray);
+  // console.log("isClickArray", isClickArray);
   //console.log("boardLength", boards.length)
 
   let axiosConfig = {
@@ -70,6 +72,17 @@ function TenantSideViewComp({ boards, boardId }) {
       Authorization: `Basic ${token}`,
     },
   };
+
+  useEffect(() => {
+    console.log(boardData);
+    if(boardData.propertyId){
+      let isClick = [];
+      boardData.propertyId.map((property) => {
+        isClick.push(boardData.isShortlisted[property._id] ? boardData.isShortlisted[property._id]: false)
+      })
+      setIsClickArray(isClick);
+    }
+  }, [boardData])
 
   // useEffect(() => {
   //   const fetchPosts = async () => {
@@ -106,19 +119,29 @@ function TenantSideViewComp({ boards, boardId }) {
     navigate(-1);
   };
 
-  console.log("TID from -> " + globalTenantId);
+  // console.log("TID from -> " + globalTenantId);
 
   const shortlist = async (propertyid, index) => {
     // event.preventDefault();
     // setClick(true);
-
-    if (isClickArray[index]) {
-      setClick(!isClick);
-      setshortListStatus(true);
-    } else {
-      setClick(false);
-      setshortListStatus(false);
-    }
+    
+    // if (isClickArray[index]) {
+    //   setClick(!isClick);
+     
+    // } else {
+    //   setClick(false);
+     
+    // }
+    setIsClickArray((prevState) => {
+      const updatedIsClickArray = [...prevState];
+      updatedIsClickArray[index] = !isClickArray[index]; // Use prevState here
+      return updatedIsClickArray;
+    });   
+    const updatedIsClick = !isClickArray[index];
+    setClick(updatedIsClick);
+    setshortListStatus(updatedIsClick); // Update shortListStatus based on updatedIsClick
+    
+    
     //setIsClickArray
     /*  
    if(isClick){
@@ -129,34 +152,28 @@ function TenantSideViewComp({ boards, boardId }) {
    */
     // console.log("Received Id:", propertyid);
     //console.log("Recieved BId", boardId);
-
-    setIsClickArray((prevState) => {
-      const updatedIsClickArray = [...prevState];
-      updatedIsClickArray[index] = !isClickArray[index];
-      //if(updatedIsClickArray[index]){
-      //setClick(!isClick)}
-      //else{
-      //setClick(isClick)
-      // }
-      //console.log(isClickArray)
-      //console.log(updatedIsClickArray)
-      return updatedIsClickArray;
-    });
-
+    // setIsClickArray((prevState) => {
+    //   const updatedIsClickArray = [...prevState];
+    //   updatedIsClickArray[index] = !isClickArray[index]; // Use prevState here
+    //   return updatedIsClickArray;
+    // });   
     try {
       // console.log("Final pid",propertyid)
       // console.log("Recieved BId", boardId);
+  
+
       console.log(
         "PropertyId",
         propertyid,
         "shortliststatus",
-        shortListStatus,
+        // status,
         "tenantId",
         globalTenantId
       );
+
       const response = await axios.put(
         `https://b8rliving.com/board/shortlist/${boardId}`,
-        { propertyid, shortListStatus, globalTenantId },
+        { propertyid, shortListStatus:updatedIsClick, globalTenantId },
         axiosConfig
       );
       console.log("Response fo apishortlist ", response);
@@ -168,6 +185,11 @@ function TenantSideViewComp({ boards, boardId }) {
       setLoading(false); // Set loading to false when the request is complete
     }
   };
+  useEffect(()=>{
+    console.log("inUseEffect"+" "+ isClickArray);
+
+  },[])
+  console.log(isClickArray)
 
   //console.log(boards);
 
@@ -289,8 +311,8 @@ function TenantSideViewComp({ boards, boardId }) {
                 <div className="flex justify-center items-center flex-col">
                   <LuParkingCircle className="text-[1.5rem] mb-[0.2rem]" />
                   <p className="font-bold text-center">
-                    {property.propertyDetails.featureInfo.parking.car != "" ||
-                    property.propertyDetails.featureInfo.parking.bike > 0
+                    {property.propertyDetails.featureInfo.parking.car !== "" ||
+                    property.propertyDetails.featureInfo.parking.bike !== ""
                       ? "Available"
                       : "No"}
                   </p>

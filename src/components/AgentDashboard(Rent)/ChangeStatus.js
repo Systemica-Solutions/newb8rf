@@ -29,10 +29,10 @@ function ChangeStatus() {
   console.log(propertyId);
 
   const [RenderRent, setRenderRent] = useState("rent");
-  const [RenderRentName, setRenderRentName] = useState("Rented of B8R");
+  const [RenderRentName, setRenderRentName] = useState("Rented on B8R");
   const [propertyDetails, setPropertyDetails] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [closeListingReason, setCloseListingReason] = useState("Rented of B8R");
+  const [closeListingReason, setCloseListingReason] = useState("Delist (Owner Denied)");
   const [tenantName, setTenantName] = useState("");
   const [tenancyStartDate, setTenancyStartDate] = useState("");
   const [rentAmount, setRentAmount] = useState("");
@@ -92,6 +92,9 @@ function ChangeStatus() {
 
         const responseData = response.data.data.property;
         setPropertyDetails(responseData);
+        if (responseData.status === 'pendingVerification') {
+          setCloseListingReason("Rented Outside");
+        }
       } catch (error) {
         // Handle any errors that occur during the API request
         console.error("Error fetching data:", error);
@@ -110,13 +113,13 @@ function ChangeStatus() {
         setIsActive2(false);
         setIsActive3(false);
         setRenderRent(condition);
-        setRenderRentName("Rented of B8R");
-        setFormData({ closeListingReason: "Rented of B8R" });
+        setRenderRentName("Rented on B8R");
+        setFormData({ closeListingReason: "Rented on B8R" });
         break;
 
       case "delist":
         setIsActive2(true);
-        setFormDataTwo({ closeListingReason: "Rented of B8R" });
+        setFormDataTwo({ closeListingReason: "Rented on B8R" });
         setRenderRentName("Delist (Owner Denied)");
         setRenderRent(condition);
 
@@ -280,7 +283,7 @@ function ChangeStatus() {
           backgroundSize: "100% 100%",
         }}
       >
-        <CommonHeader title="Change Status/ Edit Property" color="#52796F" />
+        <CommonHeader title="Change Status/Close Property" color="#52796F" />
         <div className="px-[1rem]">
           <div
             className="bg-white px-[1rem] py-[0.5rem]"
@@ -321,17 +324,18 @@ function ChangeStatus() {
           >
             <p className="text-[1.2rem] font-bold">Close Listing</p>
             <div className="flex justify-center  items-center flex-col w-[75%] py-[1rem] gap-y-[1.5rem]">
-              <CommonTopButton
+            {propertyDetails.status === 'verified' && (  <CommonTopButton
                 bgColor={
-                  closeListingReason === "Rented of B8R" ? "#52796F" : "#D2D7D6"
+                  closeListingReason === "Rented on B8R" ? "#52796F" : "#D2D7D6"
                 }
                 borderColor="#DAF0EE"
                 color={
-                  closeListingReason === "Rented of B8R" ? "#FFFFFF" : "#77A8A4"
+                  closeListingReason === "Rented on B8R" ? "#FFFFFF" : "#77A8A4"
                 }
                 text="Rented On B8R"
-                onclicked={() => setCloseListingReason("Rented of B8R")}
+                onclicked={() => setCloseListingReason("Rented on B8R")}
               />
+            )}
               <CommonTopButton
                 bgColor={
                   closeListingReason === "Delist (Owner Denied)"
@@ -369,7 +373,7 @@ function ChangeStatus() {
         {/* -----------------------------------------------2nd div----------------------------------------------------- */}
 
         {/* -----------------------------------------------3rd div----------------------------------------------------- */}
-        {closeListingReason === "Rented of B8R" ? (
+        {closeListingReason === "Rented on B8R" ? (
           <form className="login-form" onSubmit={submitRent}>
             <div className="px-[1rem]">
               <div
@@ -433,7 +437,7 @@ function ChangeStatus() {
                         float: "left",
                       }}
                     >
-                      Select Rent Amaount (Rent + Maintenance)
+                      Select Rent Amount (Rent + Maintenance)
                     </label>
                     <input
                       type="text"
@@ -555,7 +559,7 @@ function ChangeStatus() {
           <div>
             <form className="login-form" onSubmit={submitRent}>
               <p className="text-[1.2rem] py-[1rem]">
-                <b>Write your Feedback here</b>
+                <b>Write the reason for Delisting</b>
               </p>
               <div className="px-[1rem]">
                 <div
@@ -583,9 +587,9 @@ function ChangeStatus() {
                     }}
                     required
                     placeholder="
-                    enter your feedback"
+                    Enter your reason"
                   >
-                    Enter Feed Back
+                    Enter your reason
                   </textarea>
                 </div>
               </div>
@@ -657,7 +661,7 @@ function ChangeStatus() {
                       float: "left",
                     }}
                   >
-                    Select Rent Amaount (Rent + Maintenance)
+                    Select Rent Amount (Rent + Maintenance)
                   </label>
                   <input
                     type="text"

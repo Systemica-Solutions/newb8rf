@@ -71,30 +71,30 @@ function Dashboard() {
           // console.log(response.data.data.properties);
           var myArrayPropertyCount = response.data.data.properties;
           setresponseCountProperties(myArrayPropertyCount.length);
-          console.log(myArrayPropertyCount.length);
+          // console.log(myArrayPropertyCount.length);
 
           setresponseProperties(response.data.data.properties);
 
-          const ytsCount = myArrayPropertyCount.filter((property) => {
-            return (
-              property.status === "Verified" &&
-              // (property.sharedBuyerProperty.length === 0
-              property.sharedProperty.length === 0
-            );
-          });
+          // const ytsCount = myArrayPropertyCount.filter((property) => {
+          //   return (
+          //     property.status === "Verified" &&
+          //     // (property.sharedBuyerProperty.length === 0
+          //     property.sharedProperty.length === 0
+          //   );
+          // });
 
-          setYtsCount(ytsCount.length);
+          // setYtsCount(ytsCount.length);
           // console.log(ytsCount);
 
-          const sharedPropertyCount = myArrayPropertyCount.filter(
-            (property) => {
-              return (
-                property.sharedProperty.length > 0 &&
-                property.status == "Verified"
-              );
-            }
-          );
-          setSharedPropertyCount(sharedPropertyCount.length);
+          // const sharedPropertyCount = myArrayPropertyCount.filter(
+          //   (property) => {
+          //     return (
+          //       property.sharedProperty.length > 0 &&
+          //       property.status == "Verified"
+          //     );
+          //   }
+          // );
+          // setSharedPropertyCount(sharedPropertyCount.length);
 
           // if(response.data.data.properties.status == "pending"){
 
@@ -179,6 +179,7 @@ function Dashboard() {
         // Update the countProperties state with the response data
         setCountProperties(response.data.data.counts);
         console.log(response.data.data.counts);
+        // console.log(response.data.data.counts);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -194,10 +195,12 @@ function Dashboard() {
           "https://b8rliving.com/tenant/count",
           axiosConfig
         );
+        console.log(response);
+        console.log(response);
         // Update the countProperties state with the response data
         setCountTenants(response.data.data.tenant);
-        console.log("Count count", response.data.data.counts);
-        console.log("Count tenants", response.data.data.tenant);
+        // console.log("Count count", response.data.data.counts);
+        // console.log("Count tenants", response.data.data.tenant);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -210,14 +213,21 @@ function Dashboard() {
     fetchPropertiesCounts();
     fetchTententCounts();
     // console.log(CountTenants.Total)
-  }, [CountProperties]);
+  }, []);
 
   // console.log(CountProperties);
 
   var pendingCounting = 0;
   var activeCounting = 0;
-  const number = CountTenants.Total - CountTenants.Deactivate;
-  const AvailablePropertyNumber = CountProperties.Total - CountProperties.Closed;
+  const difference = CountTenants.Total - CountTenants.Deactivate;
+
+  const number = difference && difference !== 0
+    ? difference
+    : difference === 0
+    ? 0
+    : "-";
+  const difference2= CountProperties.Total - CountProperties.Closed;
+  const AvailablePropertyNumber =  difference2 && difference2!==0 ? difference2 : difference2===0 ? 0 : "-";
   responseProperties.map((element) => {
     // console.log(element.status);
     if (
@@ -231,12 +241,14 @@ function Dashboard() {
     }
     return null; // You should return something when using map to avoid React warnings.
   });
+  
 
   let route = {
     WaitingForProperty: "WaitingForProperty",
     CurrentlyViewing: "CurrentlyViewing",
     Shortlisted: "Shortlisted",
     Deactivate: "Deactivate",
+    BoardShared: "BoardShared",
   };
 
   return (
@@ -292,9 +304,10 @@ function Dashboard() {
                   {/* icon */}
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <TbBrandGoogleHome className="text-[#52796F] text-[2.5rem]" />
+                    
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountProperties.Total}
-                    </p>
+                     {AvailablePropertyNumber}
+                     </p>
                   </div>
                   {/* text */}
                   <div className="font-bold flex justify-center items-center">
@@ -310,7 +323,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <RiQuestionnaireFill className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountProperties.Pending}
+                      {CountProperties.Pending && CountProperties.Pending!==0  ? CountProperties.Pending : CountProperties.Pending===0 ? 0 : "-"}
                     </p>
                   </div>
                   <div className="font-bold flex justify-center items-center flex-col">
@@ -326,7 +339,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <BsFillBookmarkCheckFill className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountProperties.Verified}
+                      {CountProperties.Verified && CountProperties.Verified!==0 ? CountProperties.Verified : CountProperties.Verified===0 ? 0 : "-"}
                     </p>
                   </div>
                   {/* text */}
@@ -343,7 +356,8 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <TbShareOff className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {ytsCount}
+                     {CountProperties.YetToShare && CountProperties.YetToShare!==0 ? (Math.max(CountProperties.YetToShare,0)):CountProperties.YetToShare===0 ? 0 :"-"}
+
                     </p>
                   </div>
                   {/* text */}
@@ -360,7 +374,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <MdOutlineMobileScreenShare className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {SharedPropertyCount}
+                      {CountProperties.Shared && CountProperties.Shared!==0 ?  CountProperties.Shared : CountProperties.Shared===0 ? 0 : "-"}
                     </p>
                   </div>
                   {/* text */}
@@ -377,7 +391,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <RiHomeHeartLine className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountProperties.Shortlisted}
+                      {CountProperties.Shortlisted && CountProperties.Shortlisted!==0 ? CountProperties.Shortlisted: CountProperties.Shortlisted===0 ? 0 : "-"}
                     </p>
                   </div>
                   {/* text */}
@@ -387,7 +401,7 @@ function Dashboard() {
                 </Link>
               </div>
               <p className="font-bold text-[1.2rem] text-center py-[1rem]">
-                {CountProperties.Closed} Closed
+                {CountProperties.Closed && CountProperties.Closed!==0 ? CountProperties.Closed : CountProperties.Closed===0? 0 : "-"} Closed
               </p>
             </div>
             {/* right-container */}
@@ -419,12 +433,29 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <RiQuestionnaireFill className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountTenants.WaitingForProperty}
+                      {CountTenants.WaitingForProperty && CountTenants.WaitingForProperty!==0? CountTenants.WaitingForProperty : CountTenants.WaitingForProperty===0? 0 : "-"}
                     </p>
                   </div>
                   {/* text */}
                   <div className="font-bold flex justify-center items-center flex-col">
                     <p className="text-center">Waiting for Property</p>
+                  </div>
+                </Link>
+                {/*board shared*/}
+                <Link
+                  className="p-[0.5rem] bg-[#FFFFFF] rounded-[0.8rem] flex justify-between items-center w-[100%] flex-col"
+                  to={`/AllTenantOne?route=${route.BoardShared}`}
+                >
+                  {/* icon */}
+                  <div className="flex justify-center items-center pb-[0.5rem]">
+                  <MdOutlineMobileScreenShare className="text-[#52796F] text-[2.5rem]" />
+                    <p className="text-[2rem] text-center px-[0.5rem] font-bold">
+                      {(CountTenants.Total-CountTenants.WaitingForProperty - CountTenants.Deactivate) && (CountTenants.Total-CountTenants.WaitingForProperty - CountTenants.Deactivate)!==0 ?  (CountTenants.Total-CountTenants.WaitingForProperty - CountTenants.Deactivate) : (CountTenants.Total-CountTenants.WaitingForProperty - CountTenants.Deactivate)===0? 0: "-"}
+                    </p>
+                  </div>
+                  {/* text */}
+                  <div className="font-bold flex justify-center items-center flex-col">
+                    <p className="text-center">Board shared</p>
                   </div>
                 </Link>
                 {/* currently viewing */}
@@ -436,7 +467,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <FaEye className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountTenants.CurrentlyViewing + CountTenants.Shortlisted}
+                      {(CountTenants.CurrentlyViewing+CountTenants.Shortlisted) && (CountTenants.CurrentlyViewing+CountTenants.Shortlisted)!==0 ?  (CountTenants.CurrentlyViewing+CountTenants.Shortlisted) : (CountTenants.CurrentlyViewing+CountTenants.Shortlisted)===0? 0: "-"}
                     </p>
                   </div>
                   {/* text */}
@@ -453,7 +484,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <RiHomeHeartLine className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountTenants.Shortlisted}
+                      {CountTenants.Shortlisted && CountTenants.Shortlisted!==0? CountTenants.Shortlisted : CountTenants.Shortlisted ===0? 0 : "-"}
                     </p>
                   </div>
                   {/* text */}
@@ -461,9 +492,11 @@ function Dashboard() {
                     <p className="text-center">Shortlisted</p>
                   </div>
                 </Link>
+                
+                
               </div>
               <p className="font-bold text-[1.2rem] text-center py-[1rem]">
-                {CountTenants.Deactivate} Closed
+                {CountTenants.Deactivate && CountTenants.Deactivate!==0 ? CountTenants.Deactivate : CountTenants.Deactivate===0? 0 : "-"} Closed
               </p>
             </div>
           </div>
