@@ -1,5 +1,4 @@
 import {React,useState,useEffect} from "react";
-import {React,useState,useEffect} from "react";
 import CommonHeader from "../CommonHeader";
 import CommonBtn from "../CommonButton";
 import CommonTopButton from '../CommonTopButton';
@@ -25,7 +24,6 @@ function PropertyViewingStatus()
   const [propertyData, setPropertyData] = useState({});
   const { id } = useParams();
   const propertyId = id;
-  
   const token = localStorage.getItem("token");
   let axiosConfig = {
     headers: {
@@ -34,25 +32,48 @@ function PropertyViewingStatus()
       Authorization: `Basic ${token}`,
     },
   };
+  const fetchTenantDetails = async (tenantId) => {
+    try {
+      const tenantData = await axios.get(
+        `https://b8rliving.com/tenant/${tenantId}`,
+        axiosConfig
+      );
+      return tenantData.data.data.tenant.tenantDetails[0].name; // Assuming the tenant data is nested under 'data'
+    } catch (error) {
+      console.log(error);
+      return null; // Handle error accordingly
+    }
+  };
+  
+  // Fetch tenant details for all tenants
+  const fetchAllTenantDetails = async (tenantDetails) => {
+    const promises = tenantDetails.map((tenant) => fetchTenantDetails(tenant._id));
+    return await Promise.all(promises);
+  };
+
   useEffect(() =>{
     const fetchTenants = async () => {
       setLoading(true);
       try {
         const response = await axios.get(
           `https://b8rliving.com/property/viewing-status/${propertyId}`,
-          axiosConfig
+          axiosConfig,
         );
-        // Combine all arrays into one array
+        // console.log(response.data.data)
         const combinedArray = response.data.data.tenantDetails.map((item, index) => ({
-          tenantDetail: item,
+          tenantDetailName: null, // Placeholder, will be replaced with actual tenant details
           tenantStatus: response.data.data.tenantStatus[index],
           shortListedDate: response.data.data.shortListedDate[index],
           viewedDate: response.data.data.viewedDate[index],
         }));
-      
-        // Set propertyViewing to the combined array
+        const tenantDetails = await fetchAllTenantDetails(response.data.data.tenantDetails);
+        // console.log(tenantDetails)
+        // Update tenantDetailName in combinedArray
+        combinedArray.forEach((item, index) => {
+          item.tenantDetailName = tenantDetails[index];
+        });
         setPropertyViewing(combinedArray);
-        console.log(response.data.data);
+        // console.log(propertyViewing);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -79,10 +100,11 @@ function PropertyViewingStatus()
     fetchProperty();
     fetchTenants();
   },[propertyId])
+  console.log(propertyViewing)
 
   const renderTenantDOM = (tenant, index) => {
-    const { tenantDetail, tenantStatus, shortListedDate, viewedDate } = tenant;
-    const tenantName = tenantDetail.name;
+    const { tenantDetailName, tenantStatus, shortListedDate, viewedDate } = tenant;
+    const tenantName = tenantDetailName;
 
     if (tenantStatus === "Shared") {
       if (shortListedDate === -1 && viewedDate === -1) {
@@ -98,17 +120,18 @@ function PropertyViewingStatus()
           <div key={index} style={{padding:"10px",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",width:"43%"}}>
             <FaUser className="text-[#52796F] text-[1.7rem]"/>
             <div style={{textDecoration:"underline",fontWeight:"700",fontSize:"17px"}}>{tenantName}</div>
-            <h4 style={{fontSize:"10px",fontWeight:"500",color:"#000000"}}>Viewed {viewedDate} days ago</h4>
+            <h4 style={{fontSize:"10px",fontWeight:"500",color:"#000000"}}>Viewed </h4>
           </div>
         );
       }
-    } else if (tenantStatus === "Shortlisted" && shortListedDate !== -1) {
+    } 
+    else if (tenantStatus === "Shortlisted") {
       return (
         <div key={index} style={{padding:"10px",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",width:"43%"}}>
           <FaUser className="text-[#52796F] text-[1.7rem]"/>
           <div style={{textDecoration:"underline",fontWeight:"700",fontSize:"17px"}}>{tenantName}</div>
           <div style={{display:"flex"}}>
-            <FaHeart style={{color:"#EF1C1C"}}/><p style={{fontSize:"10px",fontWeight:"500",marginLeft:"1px"}}>Shortlisted {shortListedDate} days ago</p>
+            <FaHeart style={{color:"#EF1C1C"}}/><p style={{fontSize:"10px",fontWeight:"500",marginLeft:"1px"}}>Shortlisted  </p>
           </div>
         </div>
       );
@@ -122,8 +145,24 @@ function PropertyViewingStatus()
       </div>
       )
     }
+    else if(tenantStatus==='CurrentlyViewing'){
+      return (
+        <div key={index} style={{padding:"10px",display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",width:"43%"}}>
+        <FaUser className="text-[#52796F] text-[1.7rem]"/>
+        <div style={{textDecoration:"underline",fontWeight:"700",fontSize:"17px"}}>{tenantName}</div>
+        <h4 style={{fontSize:"10px",fontWeight:"850",color:"rgba(0, 0, 0, 0.7)"}}>Currently VIewing</h4>
+      </div>
+      )
+    }
     return null;
   };
+  const sharedPropertyLength = propertyData.sharedProperty? propertyData.sharedProperty.length : 0 ;
+
+  if (sharedPropertyLength !== undefined) {
+    console.log(sharedPropertyLength); // Output: 1
+  } else {
+    console.log("sharedProperty is undefined");
+  }
     return(
         <>
          <div
@@ -176,7 +215,7 @@ function PropertyViewingStatus()
                       <MdOutlineMobileScreenShare className="text-[#52796F] text-[1.7rem]" />
                       <div className="px-[0.2rem] text-[0.9rem]">
                         <p>Shared</p>
-                        <p> {propertyData.sharedProperty.length} tenants</p>
+                        <p> {sharedPropertyLength} tenants</p>
                       </div>
                     </div>
                     <div className="flex font-bold items-center">

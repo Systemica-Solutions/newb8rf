@@ -123,7 +123,7 @@ function Dashboard() {
           // Create a function to get property count for a specific boardId
           function getPropertyCount(boardId) {
             return axios
-              .get(`http:localhost:80/board/${boardId}`, axiosConfig)
+              .get(`https://b8rliving.com/board/${boardId}`, axiosConfig)
               .then((response) => {
                 setSharedPropertyCount(
                   response.data.data.board.propertyId.length
@@ -356,7 +356,7 @@ function Dashboard() {
                   <div className="flex justify-center items-center pb-[0.5rem]">
                     <TbShareOff className="text-[#52796F] text-[2.5rem]" />
                     <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountProperties.YetToShare && CountProperties.YetToShare!==0 ? CountProperties.YetToShare :CountProperties.YetToShare===0 ? 0 :"-"}
+                      {CountProperties.YetToShare && CountProperties.YetToShare!==0 ? (Math.max(CountProperties.YetToShare,0)) :CountProperties.YetToShare===0 ? 0 :"-"}
                     </p>
                   </div>
                   {/* text */}

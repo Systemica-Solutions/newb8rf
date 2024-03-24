@@ -8,6 +8,7 @@ import { MdOutlineHideImage } from "react-icons/md";
 import { FaHeart } from "react-icons/fa6";
 
 const MyPropertyComp = ({ responseProperty }) => {
+  console.log(responseProperty)
   return (
     <>
       {responseProperty.map((values, index) => (
