@@ -82,7 +82,6 @@ function CreateBoard() {
   const [booleanValues, setBooleanValues] = useState([]); // Store boolean values here
   const [boardData, setBoardData] = useState([]);
   const [updatedData, setUpdatedData] = useState([]);
-  const [updatedData, setUpdatedData] = useState([]);
 
   const handleSearch = (searchTerm) => {
     setSearchValue(searchTerm);
@@ -97,7 +96,6 @@ function CreateBoard() {
   };
 
  useEffect(() => {
- useEffect(() => {
     const fetchBoardDetails = async () => {
       if (boardId) {
         try {
@@ -108,15 +106,10 @@ function CreateBoard() {
   
           const responseDataPropertiesData = response.data.data.board.propertyId;
   
-  
-          const responseDataPropertiesData = response.data.data.board.propertyId;
-  
           if (responseDataPropertiesData) {
             // Filter properties where 'imagesApproved' is true
             const filteredProperties = responseDataPropertiesData.filter(
               (property) =>
-                property.status === "Verified" &&
-                property.closeListingDetails === null
                 property.status === "Verified" &&
                 property.closeListingDetails === null
             );
@@ -150,8 +143,7 @@ function CreateBoard() {
         setResponseDataTenantBoard(responseDataTenantBoardId);
         setResponseDataTenant(responseData);
         setResponseDataTenantData(response.data.data.tenant);
-  
-        setResponseDataTenantData(response.data.data.tenant);
+
   
         // Separate boolean values and store them in booleanValues state
         const booleanValues = [];
@@ -190,8 +182,6 @@ function CreateBoard() {
             (property) =>
               property.status === "Verified" &&
               property.closeListingDetails === null
-              property.status === "Verified" &&
-              property.closeListingDetails === null
           );
           setResponseDataProperty(filteredProperties);
   
@@ -205,13 +195,6 @@ function CreateBoard() {
           const final = [...filteredProperties, ...closedPropertiesInBoard];
           setUpdatedData(final);
   
-          const closedPropertiesInBoard = boardData.filter(
-            (boardProperty) => boardProperty.status === "Closed"
-          );
-  
-          // Combine responseDataProperty and closedPropertiesInBoard
-          const final = [...filteredProperties, ...closedPropertiesInBoard];
-          setUpdatedData(final);
         }
       } catch (error) {
         console.error("Error fetching properties:", error);
@@ -222,9 +205,7 @@ function CreateBoard() {
     fetchProperties();
   }, [boardData]);
   
-  
-    fetchProperties();
-  }, [boardData]);
+
   
   // console.log(booleanValues);
 
@@ -427,7 +408,6 @@ function CreateBoard() {
                 </button>
               </div>
               <PropertyComp
-                props={updatedData}
                 props={updatedData}
                 boardId={boardId}
                 responseDataTenantData={responseDataTenantData}
