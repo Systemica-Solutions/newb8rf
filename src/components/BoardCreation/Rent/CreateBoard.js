@@ -95,6 +95,7 @@ function CreateBoard() {
     },
   };
 
+
  useEffect(() => {
     const fetchBoardDetails = async () => {
       if (boardId) {
@@ -106,6 +107,7 @@ function CreateBoard() {
   
           const responseDataPropertiesData = response.data.data.board.propertyId;
   
+
           if (responseDataPropertiesData) {
             // Filter properties where 'imagesApproved' is true
             const filteredProperties = responseDataPropertiesData.filter(
@@ -114,10 +116,9 @@ function CreateBoard() {
                 property.closeListingDetails === null
             );
             setBoardData(responseDataPropertiesData); // Set all properties added to the board
-            setBoardData(responseDataPropertiesData); // Set all properties added to the board
+           
           }
         } catch (error) {
-          console.error("Error fetching board details:", error);
           console.error("Error fetching board details:", error);
         }
       }
@@ -195,9 +196,9 @@ function CreateBoard() {
           const final = [...filteredProperties, ...closedPropertiesInBoard];
           setUpdatedData(final);
   
+
         }
       } catch (error) {
-        console.error("Error fetching properties:", error);
         console.error("Error fetching properties:", error);
       }
     };
@@ -409,6 +410,7 @@ function CreateBoard() {
               </div>
               <PropertyComp
                 props={updatedData}
+
                 boardId={boardId}
                 responseDataTenantData={responseDataTenantData}
                 loading={loading}
