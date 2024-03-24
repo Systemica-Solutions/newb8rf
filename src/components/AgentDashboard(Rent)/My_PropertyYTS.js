@@ -139,7 +139,7 @@ function My_PropertyYTS() {
                 bgColor="#D2D7D6"
                 borderColor="#A9C0BA"
                 color="#77A8A4"
-                text="Shared, No Action "
+                text="Shared "
                 //        onclicked={handlePageAvailable}
               />
             </Link>

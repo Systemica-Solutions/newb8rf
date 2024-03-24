@@ -151,7 +151,7 @@ function My_propertyPV() {
                 bgColor="#D2D7D6"
                 borderColor="#DAF0EE"
                 color="#77A8A4"
-                text="Shared, No Action "
+                text="Shared "
                 //   onClick={() => updateFieldAgentStatus('verified')}
               />
             </Link>
@@ -167,8 +167,7 @@ function My_propertyPV() {
           </text> */}
           <p className="pb-[0.5rem] font-bold">Hey {name} ,</p>
           <p>
-            Properties shown here are <b>NOT VERIFIED</b>. Correct wherever
-            necessary to get them ready to share
+            Properties shown here are YET TO BE VERIFIED
           </p>
         </div>
         {/* --------------------------------------first tab-------------------------------------------- */}
