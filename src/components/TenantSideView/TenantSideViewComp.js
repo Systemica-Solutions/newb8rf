@@ -161,6 +161,7 @@ function TenantSideViewComp({ boards, boardId, boardData }) {
       // console.log("Final pid",propertyid)
       // console.log("Recieved BId", boardId);
   
+
       console.log(
         "PropertyId",
         propertyid,
@@ -169,6 +170,7 @@ function TenantSideViewComp({ boards, boardId, boardData }) {
         "tenantId",
         globalTenantId
       );
+
       const response = await axios.put(
         `https://b8rliving.com/board/shortlist/${boardId}`,
         { propertyid, shortListStatus:updatedIsClick, globalTenantId },
@@ -309,8 +311,8 @@ function TenantSideViewComp({ boards, boardId, boardData }) {
                 <div className="flex justify-center items-center flex-col">
                   <LuParkingCircle className="text-[1.5rem] mb-[0.2rem]" />
                   <p className="font-bold text-center">
-                    {property.propertyDetails.featureInfo.parking.car != "" ||
-                    property.propertyDetails.featureInfo.parking.bike > 0
+                    {property.propertyDetails.featureInfo.parking.car !== "" ||
+                    property.propertyDetails.featureInfo.parking.bike !== ""
                       ? "Available"
                       : "No"}
                   </p>

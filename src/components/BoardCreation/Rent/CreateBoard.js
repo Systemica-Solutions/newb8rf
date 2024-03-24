@@ -95,7 +95,7 @@ function CreateBoard() {
     },
   };
 
- 
+
  useEffect(() => {
     const fetchBoardDetails = async () => {
       if (boardId) {
@@ -107,8 +107,7 @@ function CreateBoard() {
   
           const responseDataPropertiesData = response.data.data.board.propertyId;
   
-  
-  
+
           if (responseDataPropertiesData) {
             // Filter properties where 'imagesApproved' is true
             const filteredProperties = responseDataPropertiesData.filter(
@@ -145,7 +144,7 @@ function CreateBoard() {
         setResponseDataTenantBoard(responseDataTenantBoardId);
         setResponseDataTenant(responseData);
         setResponseDataTenantData(response.data.data.tenant);
-  
+
   
         // Separate boolean values and store them in booleanValues state
         const booleanValues = [];
@@ -197,7 +196,7 @@ function CreateBoard() {
           const final = [...filteredProperties, ...closedPropertiesInBoard];
           setUpdatedData(final);
   
-         
+
         }
       } catch (error) {
         console.error("Error fetching properties:", error);
@@ -207,8 +206,7 @@ function CreateBoard() {
     fetchProperties();
   }, [boardData]);
   
-  
-  
+
   
   // console.log(booleanValues);
 

@@ -195,8 +195,8 @@ const ViewBoardComp = ({ props, loading, Id, responseDataBoard }) => {
                           {values.propertyDetails.propertyInfo.houseConfig}
                         </p>
                       </div>
-                      {values.propertyDetails.featureInfo.parking.car > 0 &&
-                      values.propertyDetails.featureInfo.parking.bike > 0 ? (
+                      {values.propertyDetails.featureInfo.parking.car !== "" &&
+                      values.propertyDetails.featureInfo.parking.bike !== "" ? (
                         <div className="flex flex-col items-center">
                           <LuParkingCircle className="text-[1.1rem] mx-[0.3rem]" />
                           <p className="text-[0.6rem]">Available</p>
