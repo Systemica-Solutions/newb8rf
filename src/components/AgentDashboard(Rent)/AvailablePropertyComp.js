@@ -70,8 +70,7 @@ const AvailablePropertyComp = ({ props, name,showCloseButton }) => {
 
       {/* header-text */}
       <div className="px-[1rem] text-[1.2rem]">
-        Hey <b>{name}</b>, Here are all the rent properties that are available
-        for renting out.
+        Hey <b>{name}</b>, Here are the properties, ACTIVE and READY to be shared.
       </div>
 
       {/* properties */}

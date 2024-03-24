@@ -141,7 +141,7 @@ function My_PropertySNA() {
                 bgColor="#52796F"
                 borderColor="#DAF0EE"
                 color="#DAF0EE"
-                text="Shared, No Action"
+                text="Shared"
                 //        onclicked={handlePageAvailable}
               />
             </Link>
@@ -159,7 +159,7 @@ function My_PropertySNA() {
           <p className="pb-[0.5rem] font-bold">Hey {name} ,</p>
           <p>
             Properties here are active & shared{" "}
-            <b>but none of the Tenants have shortlisted them</b>
+            {/* <b>but none of the Tenants have shortlisted them</b> */}
           </p>
         </div>
         {/* --------------------------------------first tab-------------------------------------------- */}

@@ -49,15 +49,15 @@ const SharedNoactcomp = ({ responseProperty }) => {
                     <div className="flex font-bold items-center">
                       <MdOutlineMobileScreenShare className="text-[#52796F] text-[1.7rem]" />
                       <div className="px-[0.2rem] text-[0.9rem]">
-                        <p>Shared</p>
-                        <p> {values.sharedProperty.length} tenants</p>
+                        {/* <p>Shared</p>
+                        <p> {values.sharedProperty.length} tenants</p> */}
                       </div>
                     </div>
                     <div className="flex font-bold items-center">
                       <FaEye className="text-[#52796F] text-[1.7rem]" />
                       <div className="px-[0.2rem] text-[0.9rem]">
-                        <p>Viewed</p>
-                        <p>4 tenants</p>
+                        {/* <p>Viewed</p>
+                        <p>4 tenants</p> */}
                       </div>
                     </div>
                   </div>
@@ -65,7 +65,7 @@ const SharedNoactcomp = ({ responseProperty }) => {
               </div>
               {/* right-container */}
               <Link
-                to={`/PropertyViewingStatus/${values._id}`}
+                to="/PropertyViewingStatus"
                 className="bg-[#E8E7E7] p-[0.5rem] w-[15%] flex justify-center items-center text-[#5D6560] flex-col"
                 style={{
                   borderRadius: "15px",

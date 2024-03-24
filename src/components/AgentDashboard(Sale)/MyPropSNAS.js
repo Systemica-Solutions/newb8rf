@@ -124,7 +124,7 @@ function MyPropSNAS(){
   bgColor= "#1E0058"
   borderColor= "#F5F5F5"
   color="#DAF0EE"
-   text="Shared, No Action "
+   text="Shared "
 //        onclicked={handlePageAvailable}
 /></Link>
 

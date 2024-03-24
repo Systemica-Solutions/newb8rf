@@ -95,6 +95,7 @@ function CreateBoard() {
     },
   };
 
+
  useEffect(() => {
     const fetchBoardDetails = async () => {
       if (boardId) {
@@ -106,7 +107,7 @@ function CreateBoard() {
   
           const responseDataPropertiesData = response.data.data.board.propertyId;
   
-  
+
           if (responseDataPropertiesData) {
             // Filter properties where 'imagesApproved' is true
             const filteredProperties = responseDataPropertiesData.filter(
@@ -115,6 +116,7 @@ function CreateBoard() {
                 property.closeListingDetails === null
             );
             setBoardData(responseDataPropertiesData); // Set all properties added to the board
+           
           }
         } catch (error) {
           console.error("Error fetching board details:", error);
@@ -123,10 +125,8 @@ function CreateBoard() {
     };
   
   
-  
     fetchBoardDetails();
   }, [boardId]);
-  
   
   useEffect(() => {
     const fetchTenantDetails = async () => {
@@ -137,15 +137,15 @@ function CreateBoard() {
         );
   
   
-  
         const responseData = response.data.data.tenant.tenantDetails;
         const responseDataTenantBoardId = response.data.data.tenant.boardId;
-  
   
   
         setResponseDataTenantBoard(responseDataTenantBoardId);
         setResponseDataTenant(responseData);
         setResponseDataTenantData(response.data.data.tenant);
+
+  
         // Separate boolean values and store them in booleanValues state
         const booleanValues = [];
         responseData.forEach((tenant) => {
@@ -155,7 +155,6 @@ function CreateBoard() {
             }
           }
         });
-  
   
   
         setBooleanValues(booleanValues);
@@ -175,9 +174,7 @@ function CreateBoard() {
         );
   
   
-  
         const properties = response.data.data.properties;
-  
   
   
         if (properties) {
@@ -198,9 +195,11 @@ function CreateBoard() {
           // Combine responseDataProperty and closedPropertiesInBoard
           const final = [...filteredProperties, ...closedPropertiesInBoard];
           setUpdatedData(final);
+  
+
         }
       } catch (error) {
-        console.error("Error fetching properties:", error)
+        console.error("Error fetching properties:", error);
       }
     };
   
@@ -208,6 +207,7 @@ function CreateBoard() {
   }, [boardData]);
   
 
+  
   // console.log(booleanValues);
 
   // console.log(responseDataProperty);
@@ -410,8 +410,7 @@ function CreateBoard() {
               </div>
               <PropertyComp
                 props={updatedData}
-                props={updatedData}
-                props={updatedData}
+
                 boardId={boardId}
                 responseDataTenantData={responseDataTenantData}
                 loading={loading}

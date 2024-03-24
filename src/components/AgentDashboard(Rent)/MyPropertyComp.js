@@ -8,7 +8,6 @@ import { MdOutlineHideImage } from "react-icons/md";
 import { FaHeart } from "react-icons/fa6";
 
 const MyPropertyComp = ({ responseProperty }) => {
-  console.log(responseProperty)
   return (
     <>
       {responseProperty.map((values, index) => (
@@ -122,7 +121,7 @@ const MyPropertyComp = ({ responseProperty }) => {
                   {/* Awaiting Photos */}
                   <div className="py-[0.3rem] flex justify-center items-center rounded-[10px] px-[1rem] font-bold">
                     <FaHeart className="text-[2rem] text-[#B30808]" />
-                    <p className="px-[0.5rem]">4 tenants</p>
+                    {/* <p className="px-[0.5rem]">4 tenants</p> */}
                   </div>
                 </div>
               </div>
