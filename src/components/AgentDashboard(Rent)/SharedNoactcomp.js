@@ -10,7 +10,7 @@ import { FaEye } from "react-icons/fa6"; //eye
 import { MdOutlineMobileScreenShare } from "react-icons/md"; //share
 
 const SharedNoactcomp = ({ responseProperty }) => {
-  console.log(responseProperty)
+  console.log(responseProperty);
   return (
     <>
       {responseProperty.map((values, index) => (

@@ -39,7 +39,7 @@ function AllTenantOne() {
   const [isActive4, setIsActive4] = useState(false);
 
   const token = localStorage.getItem("token");
-  // console.log(token);
+  console.log(token);
   let axiosConfig = {
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
@@ -109,7 +109,7 @@ function AllTenantOne() {
       case "CurrentlyViewing":
         setIsActive2(true);
         setFilteredTenants(
-          responseTenat.filter((tenant) => tenant.status === "CurrentlyViewing")
+          responseTenat.filter((tenant) => tenant.status !== "Deactivate" && "WaitingForProperty")
         );
         break;
       case "Shortlisted":
