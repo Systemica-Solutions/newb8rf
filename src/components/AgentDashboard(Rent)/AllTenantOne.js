@@ -26,7 +26,7 @@ function AllTenantOne() {
 
   const [responseTenat, setResponseTenat] = useState([]);
   const [filteredTenants, setFilteredTenants] = useState([]);
-  const [activeCondition, setActiveCondition] = useState("all");
+  const [activeCondition, setActiveCondition] = useState();
 
   const [responseTenatWaitingForProperty, setresponseTenatWaitingForProperty] =
     useState();
@@ -39,12 +39,12 @@ function AllTenantOne() {
   const [isActive4, setIsActive4] = useState(false);
 
   const token = localStorage.getItem("token");
-  console.log(token);
+  // console.log(token);
   let axiosConfig = {
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
       "Access-Control-Allow-Origin": "*",
-      Authorization: `Basic ${token}`,
+      Authorization:` Basic ${token}`,
     },
   };
 
@@ -52,14 +52,14 @@ function AllTenantOne() {
     // console.log(activeCondition)
     const fetchPosts = async () => {
       setLoading(true);
-      axios
+      await axios
         .get("https://b8rliving.com/tenant", axiosConfig)
         .then((response) => {
           console.log("Tenatas api ka data ", response.data.data.tenants);
           // this is tenants model ka data
           // var myArrayPropertyCount = response.data.data.properties;
           setResponseTenat(response.data.data.tenants);
-          setFilteredTenants(response.data.data.tenants);
+          // setFilteredTenants(response.data.data.tenants);
           // filterTenants();
           // alert("Your data has been submitted");
           // do something with the response
@@ -79,7 +79,6 @@ function AllTenantOne() {
   // Function to handle button clicks and trigger filtering
   const handlePageAvailable = (condition) => {
     setActiveCondition(condition);
-    // console.log(condition);
     filterTenants(condition); // Trigger the filtering
   };
   // useEffect(() => {
@@ -87,12 +86,12 @@ function AllTenantOne() {
   // }, [activeCondition]);
 
   useEffect(() => {
-    if (filteredTenants.length !== 0 && route !== null && activeCondition !== null) {
+    if (route !== null && responseTenat.length!==0) {
       handlePageAvailable(route);
       // Set the route value to null after handling the initial condition
       setRoute(null);
     }
-  }, [filteredTenants, route, activeCondition]);
+  }, [route,activeCondition,responseTenat]);
   
   // console.log(activeCondition);
   const prevRouteRef = useRef(null);
@@ -109,10 +108,11 @@ function AllTenantOne() {
       case "CurrentlyViewing":
         setIsActive2(true);
         setFilteredTenants(
-          responseTenat.filter((tenant) => tenant.status !== "Deactivate" && "WaitingForProperty")
+          responseTenat.filter((tenant) => tenant.status === "CurrentlyViewing" || tenant.status === "Shortlisted")
         );
         break;
       case "Shortlisted":
+        
         setIsActive3(true);
         setFilteredTenants(
           responseTenat.filter((tenant) => tenant.status === "Shortlisted")
@@ -349,7 +349,7 @@ function AllTenantOne() {
           </p>
         )} */}
 
-        <TenantComp props={filteredTenants} name={name} />
+         {responseTenat && <TenantComp props={filteredTenants} name={name} /> }
 
         <Footer />
       </div>
