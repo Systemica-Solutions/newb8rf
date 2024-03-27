@@ -10,7 +10,7 @@ import { FaEye } from "react-icons/fa6"; //eye
 import { MdOutlineMobileScreenShare } from "react-icons/md"; //share
 
 const SharedNoactcomp = ({ responseProperty }) => {
-  console.log(responseProperty)
+  console.log(responseProperty);
   return (
     <>
       {responseProperty.map((values, index) => (
@@ -40,21 +40,24 @@ const SharedNoactcomp = ({ responseProperty }) => {
                   />
                 </div>
                 {/* other-details */}
-                <div className="pl-[1rem] flex flex-col  w-[75%]">
+                <div
+                  className="pl-[1rem] flex justify-between
+                  w-[75%]"
+                >
                   <div className="flex flex-col font-bold pb-[0.5rem]">
                     {values.houseName}, {values.societyName}
                   </div>
                   {/* shared or View */}
-                  <div className="grid grid-cols-2">
+                  <div className="m-3">
                     <div className="flex font-bold items-center">
-                      <MdOutlineMobileScreenShare className="text-[#52796F] text-[1.7rem]" />
+                      <MdOutlineMobileScreenShare className="text-[#52796F] text-[1.7rem] mr-1" />
+                      <FaEye className="text-[#52796F] text-[1.7rem]" />
                       <div className="px-[0.2rem] text-[0.9rem]">
                         {/* <p>Shared</p>
                         <p> {values.sharedProperty.length} tenants</p> */}
                       </div>
                     </div>
                     <div className="flex font-bold items-center">
-                      <FaEye className="text-[#52796F] text-[1.7rem]" />
                       <div className="px-[0.2rem] text-[0.9rem]">
                         {/* <p>Viewed</p>
                         <p>4 tenants</p> */}
