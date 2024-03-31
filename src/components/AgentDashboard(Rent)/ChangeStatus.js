@@ -29,16 +29,19 @@ function ChangeStatus() {
   console.log(propertyId);
 
   const [RenderRent, setRenderRent] = useState("rent");
-  const [RenderRentName, setRenderRentName] = useState("Rented on B8R");
+  const [RenderRentName, setRenderRentName] = useState("Rented of B8R");
   const [propertyDetails, setPropertyDetails] = useState([]);
   const [loading, setLoading] = useState(false);
   const [closeListingReason, setCloseListingReason] = useState("Delist (Owner Denied)");
   const [tenantName, setTenantName] = useState("");
   const [tenancyStartDate, setTenancyStartDate] = useState("");
   const [rentAmount, setRentAmount] = useState("");
-  const [agreementFor, setAgreementFor] = useState("");
+  const [agreementFor, setAgreementFor] = useState();
   const [phoneNumber, setPhoneNumber] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [isShared, setIsShared] = useState(false);
+  const [tenants, setTenants] = useState([]);
+  const [tenantId, setTenantId] = useState("");
 
   // console.log("name -:> " + tenantName);
 
@@ -92,8 +95,16 @@ function ChangeStatus() {
 
         const responseData = response.data.data.property;
         setPropertyDetails(responseData);
-        if (responseData.status === 'pendingVerification') {
-          setCloseListingReason("Rented Outside");
+        // if (responseData.status === 'pendingVerification') {
+        //   setCloseListingReason("Rented Outside");
+        // }
+        if (responseData.status === 'Verified') {
+          const response1 = await axios.get(`https://b8rliving.com/property/get-tenants/${propertyId}`, axiosConfig);
+          console.log(response1);
+          if (response1.data.data.length > 0) {
+            setIsShared(true);
+            setTenants(response1.data.data);
+          }
         }
       } catch (error) {
         // Handle any errors that occur during the API request
@@ -113,13 +124,13 @@ function ChangeStatus() {
         setIsActive2(false);
         setIsActive3(false);
         setRenderRent(condition);
-        setRenderRentName("Rented on B8R");
-        setFormData({ closeListingReason: "Rented on B8R" });
+        setRenderRentName("Rented of B8R");
+        setFormData({ closeListingReason: "Rented of B8R" });
         break;
 
       case "delist":
         setIsActive2(true);
-        setFormDataTwo({ closeListingReason: "Rented on B8R" });
+        setFormDataTwo({ closeListingReason: "Rented of B8R" });
         setRenderRentName("Delist (Owner Denied)");
         setRenderRent(condition);
 
@@ -195,10 +206,27 @@ function ChangeStatus() {
       }
   };
 
+  const resetData = (condition) => {
+    setCloseListingReason(condition);
+    setFeedback("");
+    setTenantName("");
+    setTenancyStartDate("");
+    setRentAmount("");
+    setAgreementFor("");
+    setPhoneNumber("");
+    setTenantId("");
+  }
+
+  const setTenantDetails = (index) => {
+    setTenantName(tenants[index].tenantDetails[tenants[index].tenantDetails.length - 1].name);
+    setTenantId(tenants[index]._id);
+    setPhoneNumber(tenants[index].phoneNumber);
+  }
+
   const submitRent = async (event) => {
     event.preventDefault();
 
-    //  console.log(formData);
+    // console.log(formData);
     // console.log(JSON.stringify(formData));
     if (
       closeListingReason !== "" &&
@@ -235,9 +263,15 @@ function ChangeStatus() {
     } else {
       console.log("else case");
       try {
+        if(closeListingReason === "Rented of B8R" && (tenantId === "" || tenantName === "")) {
+          alert("Please select a tenant to close the listing.")
+          return;
+        }
+
         const response = await axios.put(
           `https://b8rliving.com/property/close-listing/${propertyId}`,
           {
+            tenantId,
             closeListingReason,
             closeListingDetails: {
               tenantName,
@@ -324,16 +358,16 @@ function ChangeStatus() {
           >
             <p className="text-[1.2rem] font-bold">Close Listing</p>
             <div className="flex justify-center  items-center flex-col w-[75%] py-[1rem] gap-y-[1.5rem]">
-            {propertyDetails.status === 'verified' && (  <CommonTopButton
+            {(propertyDetails.status === 'Verified' && isShared) && (  <CommonTopButton
                 bgColor={
-                  closeListingReason === "Rented on B8R" ? "#52796F" : "#D2D7D6"
+                  closeListingReason === "Rented of B8R" ? "#52796F" : "#D2D7D6"
                 }
                 borderColor="#DAF0EE"
                 color={
-                  closeListingReason === "Rented on B8R" ? "#FFFFFF" : "#77A8A4"
+                  closeListingReason === "Rented of B8R" ? "#FFFFFF" : "#77A8A4"
                 }
-                text="Rented On B8R"
-                onclicked={() => setCloseListingReason("Rented on B8R")}
+                text="Rented of B8R"
+                onclicked={() => resetData("Rented of B8R")}
               />
             )}
               <CommonTopButton
@@ -349,7 +383,7 @@ function ChangeStatus() {
                     : "#77A8A4"
                 }
                 text="Delist (Owner Denied)"
-                onclicked={() => setCloseListingReason("Delist (Owner Denied)")}
+                onclicked={() => resetData("Delist (Owner Denied)")}
               />
               <CommonTopButton
                 bgColor={
@@ -364,7 +398,7 @@ function ChangeStatus() {
                     : "#77A8A4 "
                 }
                 text="Rented Outside"
-                onclicked={() => setCloseListingReason("Rented Outside")}
+                onclicked={() => resetData("Rented Outside")}
               />
             </div>
           </div>
@@ -373,7 +407,7 @@ function ChangeStatus() {
         {/* -----------------------------------------------2nd div----------------------------------------------------- */}
 
         {/* -----------------------------------------------3rd div----------------------------------------------------- */}
-        {closeListingReason === "Rented on B8R" ? (
+        {closeListingReason === "Rented of B8R" ? (
           <form className="login-form" onSubmit={submitRent}>
             <div className="px-[1rem]">
               <div
@@ -394,7 +428,7 @@ function ChangeStatus() {
                 >
                   {/* for image */}
                   <div className="text-[1.2rem]">
-                    <b>Enter Details if Rented on B8R</b>
+                    <b>Enter Details if Rented of B8R</b>
                   </div>
                   {/* for title and text */}
 
@@ -411,7 +445,29 @@ function ChangeStatus() {
                     >
                       Select Tenant Name
                     </label>
-                    <input
+                    <select name="tenant" 
+                    style={{
+                      width: "90%",
+                      backgroundColor: "#F5F5F5",
+                      padding: "10px",
+                      borderRadius: "10px",
+                      border: "2px solid #52796F",
+                    }}
+                    onChange={(e) => {
+                        console.log(e.target.value);
+                        setTenantDetails(e.target.value);
+                      }}
+                    required
+                    >
+                      <option disabled selected value>
+                        {" "}
+                        -- select an option --{" "}
+                      </option>
+                      {tenants.map((tenant, id) => {
+                        return <option value={id}>{tenant.tenantDetails[tenant.tenantDetails.length - 1].name}</option>
+                      })}
+                    </select>
+                    {/* <input
                       type="text"
                       id="tenantName"
                       name="tenantName"
@@ -425,7 +481,7 @@ function ChangeStatus() {
                         border: "1px solid #52796F",
                       }}
                       required
-                    />
+                    /> */}
 
                     <label
                       for="rentAmount"
@@ -523,7 +579,8 @@ function ChangeStatus() {
                       Agreement For
                     </label>
                     <input
-                      type="text"
+                      type="number"
+                      onWheel={(e) => e.target.blur()}
                       id="agreementFor"
                       name="agreementFor"
                       value={agreementFor}
@@ -543,11 +600,13 @@ function ChangeStatus() {
             </div>
             <div className="py-[1rem] flex justify-center items-center">
               {/* <BackButton title="Go Back" margin="" fontweight="bolder" /> */}
+              <div onClick={submitRent}>
               <CommonBtn
                 title="Yes, close listing"
                 margin="40%"
                 fontweight="bolder"
               />
+              </div>
             </div>
           </form>
         ) : null}
@@ -595,11 +654,13 @@ function ChangeStatus() {
               </div>
               <div className="flex justify-center items-center py-[1rem]">
                 {/* <BackButton title="Go Back" margin="" fontweight="bolder" /> */}
+                <div onClick={submitRent}>
                 <CommonBtn
                   title="Yes, close listing"
                   margin="40%"
                   fontweight="bolder"
                 />
+                </div>
               </div>
             </form>
           </div>
@@ -746,7 +807,8 @@ function ChangeStatus() {
                     Agreement For
                   </label>
                   <input
-                    type="text"
+                    type="number"
+                    onWheel={(e) => e.target.blur()}
                     id="agreementFor"
                     name="agreementFor"
                     value={agreementFor}
@@ -767,12 +829,13 @@ function ChangeStatus() {
               {/* <div>
                 <BackButton title="Go Back" margin="" fontweight="bolder" />
               </div> */}
-
+              <div onClick={submitRent}>
               <CommonBtn
                 title="Yes, close listing"
                 margin="40%"
                 fontweight="bolder"
               />
+              </div>
             </div>
           </div>
         ) : null}
