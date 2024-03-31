@@ -39,29 +39,14 @@ function My_PropertyYTS() {
     const fetchPosts = async () => {
       setLoading(true);
       axios
-        .get(`https://b8rliving.com/property`, axiosConfig)
+        .get(`https://b8rliving.com/property/yetToShare/1`, axiosConfig)
         .then((response) => {
           console.log(response.data.data);
-          var propertiesData = response.data.data.properties;
-
-          const sortedProperties = propertiesData.sort((a, b) => {
-            return new Date(b.createdAt) - new Date(a.createdAt);
-          });
-          
-          // Filter out properties where propertyDetails.purposeSale is true
-
-          // Filter out properties where propertyDetails.purposeSale is true
-          const yetToShareProperties = propertiesData.filter((property) => {
-            return (
-              property.status === "Verified" &&
-              property.sharedProperty.length === 0
-            );
-          });
-
-          // var myArrayPropertyCount = response.data.data.properties;
-          //   setresponseNoImageProperty(noImageProperties);
-
-          setresponseProperty(yetToShareProperties || sortedProperties);
+          var propertiesData = response.data.data;
+          // const sortedProperties = propertiesData.sort((a, b) => {
+          //   return new Date(b.createdAt) - new Date(a.createdAt);
+          // });
+          setresponseProperty(propertiesData);
         })
         .catch((error) => {
           console.log(error);
@@ -164,8 +149,9 @@ function My_PropertyYTS() {
           </p>
         </div>
 
+        {responseProperty && responseProperty.length > 0 && (
         <YetToShareComp responseProperty={responseProperty} />
-
+      )}
         <div className="py-[2rem] flex justify-center items-center">
           <Link to="/AllTenantOne">
             <CommonBtn title="Share with Tenant" />
