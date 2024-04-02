@@ -62,6 +62,7 @@ import { HiCurrencyRupee } from "react-icons/hi2";
 import { FaUserLock } from "react-icons/fa";
 import { GrHostMaintenance } from "react-icons/gr";
 import { BsFillHouseLockFill } from "react-icons/bs";
+import AlertHeader from "../AlertHeader";
 
 function AddTenant() {
   const [checkedStateOne, setCheckedStateOne] = useState(true);
@@ -284,7 +285,8 @@ function AddTenant() {
             }}
           >
             {/* <h2 style={{color:"#52796F"}}>Add Tenant</h2> */}
-            <CommonHeader title="Add Tenant" color="#52796F" />
+            {/* <CommonHeader title="Add Tenant" color="#52796F" /> */}
+            <AlertHeader title="Add Tenant" color="#52796F" />
 
             <form
               onSubmit={handleChangeOne}
@@ -462,7 +464,7 @@ function AddTenant() {
                   id="numberOfMonth"
                   min="1"
                   max="12"
-                  value={formData.tenantData.numberOfMonth  }
+                  value={formData.tenantData.numberOfMonth}
                   onWheel={(e) => e.target.blur()}
                   onChange={handleChange}
                   maxLength="2"
@@ -514,7 +516,9 @@ function AddTenant() {
                 Studio
               </option> */}
                   {/* <option value="1BHK">1BHK</option> */}
-                  <option value="" disabled selected>Select from Drop Down</option>
+                  <option value="" disabled selected>
+                    Select from Drop Down
+                  </option>
 
                   <option value="Studio">Studio</option>
                   <option value="1 BHK">1 BHK</option>
@@ -752,7 +756,7 @@ function AddTenant() {
             >
               {/* <div class="form" style={{  borderRadius: "16px", marginTop: "10%", backgroundRepeat: 'no-repeat' , backgroundRepeat: 'no-repeat' , backgroundSize : '100% 100%' }} > */}
               {/* <h2 style={{color:"#52796F"}}>Tenant Details (2/2)</h2> */}
-              <CommonHeader title="Tenant Details (2/2)" color="#52796F" />
+              <AlertHeader title="Tenant Details (2/2)" color="#52796F" />
               <div className="text-left p-[1rem] text-[1.2rem]">
                 <p> What all facilitites are must for tenant?</p>
                 <p>
@@ -780,8 +784,8 @@ function AddTenant() {
                             ...prevState,
                             tenantData: {
                               ...prevState.tenantData,
-                              ["gatedSecurity"]:
-                                !formData.tenantData.gatedSecurity,
+                              ["gatedSecurity"]: !formData.tenantData
+                                .gatedSecurity,
                             },
                           }))
                         }
@@ -834,8 +838,8 @@ function AddTenant() {
                             ...prevState,
                             tenantData: {
                               ...prevState.tenantData,
-                              ["groceryStore"]:
-                                !formData.tenantData.groceryStore,
+                              ["groceryStore"]: !formData.tenantData
+                                .groceryStore,
                             },
                           }))
                         }
@@ -858,8 +862,8 @@ function AddTenant() {
                             ...prevState,
                             tenantData: {
                               ...prevState.tenantData,
-                              ["swimmingPool"]:
-                                !formData.tenantData.swimmingPool,
+                              ["swimmingPool"]: !formData.tenantData
+                                .swimmingPool,
                             },
                           }))
                         }

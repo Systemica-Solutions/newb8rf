@@ -22,6 +22,7 @@ import CommonHeader from "../CommonHeader";
 import CommonBtn from "../CommonButton";
 import CommonTopButton from "../CommonTopButton";
 import SharedNoactcomp from "./SharedNoactcomp";
+import Back from "../Back";
 
 function My_PropertySNA() {
   const token = localStorage.getItem("token");
@@ -166,6 +167,7 @@ function My_PropertySNA() {
         <SharedNoactcomp responseProperty={responseProperty} />
         {/* --------------------------------------first tab-------------------------------------------- */}
         <div className="pt-[2rem] pb-[1rem]">
+        <Back/>
           <Footer />
         </div>
       </div>

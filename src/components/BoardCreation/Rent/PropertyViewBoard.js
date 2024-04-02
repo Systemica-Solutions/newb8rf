@@ -14,6 +14,7 @@ import PropertyComp from "./PropertyComp";
 import ViewBoardComp from "./ViewBoardComp";
 import { FcBusinessman } from "react-icons/fc";
 import { ImCross } from "react-icons/im";
+import Back from "../../Back";
 
 function PropertyViewBoard() {
   const queryParameters = new URLSearchParams(window.location.search);
@@ -176,19 +177,20 @@ function PropertyViewBoard() {
               />
             </p>
           </div>
-          <div className="flex justify-center items-center py-[2rem]">
+          <div className="flex flex-col justify-center items-center py-[2rem]">
             <Link
               to={`/DeactivateTenant?tenantId=${boardId}&name=${name} `}
-              className="bg-[#FBF1F1] flex justify-center items-center py-[1rem] flex-col rounded-[1rem]"
+              className="flex bg-[#FBF1F1] justify-center items-center border-[#daf0ee] border-2 rounded-[0.5rem] px-[0.6rem] py-[0.2rem]"
               style={{
                 border: "1px solid #E13018",
               }}
             >
-              <ImCross className="text-[#CC3333] text-[3rem] my-[1rem]" />
-              <p className="text-[1.5rem] font-bold px-[1rem]">Deactivate</p>
-              <p className="text-[1.5rem] font-bold px-[1rem]">Tenant</p>
+              <ImCross className="text-[#CC3333]  lg:text-[2rem]  mr-[0.5rem]" />
+              <p className="text-[1.5rem] font-bold px-[1rem]">Deactivate Tenet</p>
             </Link>
+            <Back/>
           </div>
+          
         </div>
         <Footer />
       </div>

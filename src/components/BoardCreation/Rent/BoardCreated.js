@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { FaHandshake } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import Back from "../../Back";
 
 function BoardCreated() {
   const queryParameters = new URLSearchParams(window.location.search);
@@ -148,6 +149,7 @@ function BoardCreated() {
             </div>
           </div>
         </div>
+        
         <div className="flex justify-center items-center flex-col py-[1rem]">
           <Link to={`/TenantSideView?boardId=${boardId}`}>
             <CommonBtn title="Preview Board" margin="90px" />
@@ -165,6 +167,7 @@ function BoardCreated() {
           >
             <CommonBtn title="View Board" margin="90px" />
           </button>
+          <Back/>
         </div>
         <div className="mb-[3rem]" />
         <Footer />

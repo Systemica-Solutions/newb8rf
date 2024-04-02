@@ -96,17 +96,17 @@ const AvailablePropertyComp = ({ props, name,showCloseButton }) => {
                       <img
                         src={values.images[0]}
                         alt="img"
-                        // style={{
-                        //   marginLeft: "10px",
-                        //   marginTop: "10px",
-                        //   borderRadius: "15px",
-                        // }}
-                        // height="60px"
+                        style={{
+                          marginLeft: "10px",
+                          marginTop: "10px",
+                          borderRadius: "15px",
+                        }}
+                        height="60px"
                       />
                     </>
                   ) : (
                     <>
-                      <MdOutlineHideImage className="text-[3.5rem]" />
+                      <MdOutlineHideImage className="text-[3.5rem] h-20 lg:h-60" />
                     </>
                   )}
                 </div>

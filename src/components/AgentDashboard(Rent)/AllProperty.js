@@ -13,6 +13,7 @@ import { IoSearch } from "react-icons/io5";
 import searchImg from "../Assets/Search.png";
 import propertyComp from "./propertyComp";
 import AvailablePropertyComp from "./AvailablePropertyComp";
+import Back from "../Back";
 
 function AllProperty() {
   const [loading, setLoading] = useState(false);
@@ -268,7 +269,7 @@ function AllProperty() {
         )}
 
         {/* {archiveData ? "" : <AvailablePropertyComp props={responsePendingProperties} name={name}/>} */}
-
+         <Back/>
         <Footer />
       </div>
     </>

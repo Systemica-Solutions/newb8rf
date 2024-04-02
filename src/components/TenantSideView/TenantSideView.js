@@ -7,6 +7,7 @@ import Footer from "../Footer";
 import logo from "../Assets/Images/Logo.png";
 import TenantSideViewComp from "./TenantSideViewComp";
 import CommonBtn from "../CommonButton";
+import Back from "../Back";
 
 //export  {globalTenantId};
 let globalTenantId;
@@ -159,9 +160,7 @@ function TenantSideView() {
 
       <TenantSideViewComp boards={responseDataProperty} boardId={boardId} boardData={responseDataBoard} />
       <div style={{ display: 'flex', justifyContent: 'center',marginTop:"50px"}}>
-            <button onClick={handleGoBack}>
-              <CommonBtn title="Go Back" margin="90px" />
-            </button>
+            <Back/>
       </div>
       <div className="flex justify-center items-center py-[2rem] text-[1.2rem] font-bold">
         <p style={{ fontFamily: "GlidaDisplay" }} className="text-center">

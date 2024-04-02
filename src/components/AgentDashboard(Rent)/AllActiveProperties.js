@@ -9,6 +9,7 @@ import oneBg from "../Assets/Images/AgentDashboard/oneBg.png";
 import searchImg from "../Assets/Search.png";
 import SearchBar from "../SearchBar";
 import AvailablePropertyComp from "./AvailablePropertyComp";
+import Back from "../Back";
 
 function AllActiveProperties() {
   const [responsePendingProperties, setresponsePendingProperties] = useState(
@@ -101,6 +102,7 @@ function AllActiveProperties() {
           name={name}
           activeProperies="true"
         />
+        <Back/>
 
         <Footer />
       </div>

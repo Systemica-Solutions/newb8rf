@@ -21,6 +21,7 @@ import CommonHeader from "../CommonHeader";
 import CommonBtn from "../CommonButton";
 import CommonTopButton from "../CommonTopButton";
 import MyPropertyComp from "./MyPropertyComp";
+import Back from "../Back";
 
 function My_PropertyS() {
   const token = localStorage.getItem("token");
@@ -165,6 +166,7 @@ function My_PropertyS() {
 
         <div style={{ marginTop: "310px" }}></div>
 
+        <Back/>
         <Footer />
       </div>
     </>

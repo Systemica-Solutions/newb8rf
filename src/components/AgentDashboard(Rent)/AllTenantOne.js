@@ -14,6 +14,7 @@ import propertyComp from "./propertyComp";
 import checkP from "../Assets/Images/AgentDashboard/CheckP.png";
 import PendingVerification from "../Assets/Images/AgentDashboard/PendingVerification.png";
 import TenantComp from "./TenantComp";
+import Back from "../Back";
 
 function AllTenantOne() {
   const [archiveData, setArchiveData] = useState(false);
@@ -350,7 +351,7 @@ function AllTenantOne() {
         )} */}
 
          {responseTenat && <TenantComp props={filteredTenants} name={name} /> }
-
+        <Back/>
         <Footer />
       </div>
     </>

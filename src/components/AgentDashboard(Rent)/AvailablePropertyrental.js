@@ -13,6 +13,7 @@ import SearchBar from "../SearchBar";
 import AvailablePropertiesRentalI from "../Assets/Images/AgentDashboard/AvailablePropertyRentalsI.png";
 import AvailablePropertiesRentalI2 from "../Assets/Images/AgentDashboard/AvailablePropertyRentalsI2.png";
 import AvailablePropertyComp from "./AvailablePropertyComp";
+import Back from "../Back";
 
 function AvailablePropertyrental() {
   const [loading, setLoading] = useState(false);
@@ -77,6 +78,7 @@ function AvailablePropertyrental() {
         }}
       >
         <AvailablePropertyComp props={responsePendingProperties} name={name} />
+        <Back/>
         <Footer />
       </div>
     </>

@@ -42,7 +42,7 @@ style={{
        
       </div> */}
       <div
-        className=""
+        className=" m-6"
         // style={{
         //   background: bgColor ? `${bgColor}` : "#52796f",
         //   margin: margin ? `${margin}` : "0%",
@@ -50,7 +50,7 @@ style={{
         // }}
       >
         <button
-          className="flex text-white justify-center items-center border-[#daf0ee] border-2 rounded-[0.5rem] px-[0.6rem] py-[0.2rem] commonbtn"
+          className=" flex text-white justify-center items-center border-[#daf0ee] border-2 rounded-[0.5rem] px-[0.6rem] py-[0.2rem] commonbtn"
           style={{
             background: bgColor ? `${bgColor}` : "#818683",
           }}
