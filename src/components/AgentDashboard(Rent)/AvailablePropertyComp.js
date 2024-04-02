@@ -106,7 +106,7 @@ const AvailablePropertyComp = ({ props, name,showCloseButton }) => {
                     </>
                   ) : (
                     <>
-                      <MdOutlineHideImage className="text-[3.5rem]" />
+                      <MdOutlineHideImage className="text-[3.5rem]  h-20 lg:h-60" />
                     </>
                   )}
                 </div>
