@@ -11,6 +11,7 @@ import { LuArmchair } from "react-icons/lu";
 
 const YetToShareComp = ({ responseProperty }) => {
   // console.log(responseProperty);
+  console.log(responseProperty)
 
   function formatDate(startDate) {
     const options = { day: "numeric", month: "long" };
@@ -65,7 +66,7 @@ const YetToShareComp = ({ responseProperty }) => {
                   </p>
                   <div className="flex">
                     <HiOutlineCurrencyRupee className="text-[1.3rem] mr-[0.2rem]" />
-                    <p>{values.propertyDetails.featureInfo.rentAmount}/month</p>
+                    <p>{values.propertyDetails[0].featureInfo.rentAmount}/month</p>
                   </div>
                   {/* feature-con
               er */}
@@ -74,21 +75,21 @@ const YetToShareComp = ({ responseProperty }) => {
                     <div className="flex justify-center items-center flex-col font-bold">
                       <RxDimensions className="text-[1.5rem] my-[0.2rem]" />
                       <p className="text-center">
-                        {values.propertyDetails.featureInfo.carpetArea} sft
+                        {values.propertyDetails[0].featureInfo.carpetArea} sft
                       </p>
                     </div>
                     {/* config */}
                     <div className="flex justify-center items-center flex-col font-bold">
                       <MdBed className="text-[1.5rem] my-[0.2rem]" />
                       <p className="text-center">
-                        {values.propertyDetails.propertyInfo.houseConfig}
+                        {values.propertyDetails[0].propertyInfo.houseConfig}
                       </p>
                     </div>
                     {/* furnishingType */}
                     <div className="flex justify-center items-center flex-col font-bold">
                       <LuArmchair className="text-[1.5rem] my-[0.2rem]" />
                       <p className="text-center">
-                        {values.propertyDetails.featureInfo.furnishingType}
+                        {values.propertyDetails[0].featureInfo.furnishingType}
                       </p>
                     </div>
                   </div>
