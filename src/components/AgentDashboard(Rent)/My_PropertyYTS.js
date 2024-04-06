@@ -20,6 +20,7 @@ import CommonHeader from "../CommonHeader";
 import CommonBtn from "../CommonButton";
 import CommonTopButton from "../CommonTopButton";
 import YetToShareComp from "./YetToShareComp";
+import Back from "../Back";
 
 function My_PropertyYTS() {
   const token = localStorage.getItem("token");
@@ -157,6 +158,7 @@ function My_PropertyYTS() {
             <CommonBtn title="Share with Tenant" />
           </Link>
         </div>
+        <Back/>
 
         <Footer />
       </div>

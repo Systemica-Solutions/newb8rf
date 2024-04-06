@@ -62,6 +62,7 @@ import { HiCurrencyRupee } from "react-icons/hi2";
 import { FaUserLock } from "react-icons/fa";
 import { GrHostMaintenance } from "react-icons/gr";
 import { BsFillHouseLockFill } from "react-icons/bs";
+import AlertHeader from "../AlertHeader";
 
 function PropertyInfo() {
   const [checkedStateOne, setCheckedStateOne] = useState(true);
@@ -509,7 +510,7 @@ function PropertyInfo() {
             }}
           >
             {/* <h2 style={{ color:"#52796f" }}>Create New Listing </h2> */}
-            <CommonHeader title="Create New Listing" color="#52796f" />
+            <AlertHeader title="Create New Listing" color="#52796f" />
             {/* <img src={num_1} alt="Image description" height={55} width={300} /> */}
             {/* stageCount */}
             <div className="grid grid-cols-3 py-[0.5rem]">

@@ -62,6 +62,7 @@ import { HiCurrencyRupee } from "react-icons/hi2";
 import { FaUserLock } from "react-icons/fa";
 import { GrHostMaintenance } from "react-icons/gr";
 import { BsFillHouseLockFill } from "react-icons/bs";
+import AlertHeader from "../AlertHeader";
 
 function AddTenant() {
   const [checkedStateOne, setCheckedStateOne] = useState(true);
@@ -284,7 +285,7 @@ function AddTenant() {
             }}
           >
             {/* <h2 style={{color:"#52796F"}}>Add Tenant</h2> */}
-            <CommonHeader title="Add Tenant" color="#52796F" />
+            <AlertHeader title="Add Tenant" color="#52796F" />
 
             <form
               onSubmit={handleChangeOne}
