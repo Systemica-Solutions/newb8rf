@@ -50,8 +50,6 @@ const SharedNoactcomp = ({ responseProperty }) => {
                   {/* shared or View */}
                   <div className="m-3">
                     <div className="flex font-bold items-center">
-                      <MdOutlineMobileScreenShare className="text-[#52796F] text-[1.7rem] mr-1" />
-                      <FaEye className="text-[#52796F] text-[1.7rem]" />
                       <div className="px-[0.2rem] text-[0.9rem]">
                         {/* <p>Shared</p>
                         <p> {values.sharedProperty.length} tenants</p> */}

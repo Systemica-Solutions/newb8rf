@@ -29,7 +29,7 @@ function ListingComp(responseNoImageProperty, responseProperty) {
                 <div className="flex justify-between gap-x-[0.5rem]">
                   {/* left-container */}
                   <div
-                    className="bg-white p-[0.5rem] w-[85%] flex items-center"
+                    className="bg-white p-[0.5rem] w-[100%] flex items-center"
                     style={{
                       border: " 1px solid #DAF0EE",
                       boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
@@ -51,16 +51,7 @@ function ListingComp(responseNoImageProperty, responseProperty) {
                       </div>
                     </div>
                   </div>
-                  {/* right-container */}
-                  <div
-                    className="bg-[#E8E7E7] p-[0.5rem] w-[15%] flex justify-center items-center text-[#5D6560] flex-col"
-                    style={{
-                      borderRadius: "15px",
-                    }}
-                  >
-                    <IoIosArrowDroprightCircle className="text-[1.5rem]" />
-                    <p className="font-bold">email</p>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -89,7 +80,7 @@ function ListingComp(responseNoImageProperty, responseProperty) {
                   <div className="flex justify-between gap-x-[0.5rem]">
                     {/* left-container */}
                     <div
-                      className="bg-white p-[0.5rem] w-[85%] flex items-center"
+                      className="bg-white p-[0.5rem] w-[100%] flex items-center"
                       style={{
                         border: " 1px solid #DAF0EE",
                         boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
@@ -111,16 +102,7 @@ function ListingComp(responseNoImageProperty, responseProperty) {
                         </div>
                       </div>
                     </div>
-                    {/* right-container */}
-                    <div
-                      className="bg-[#E8E7E7] p-[0.5rem] w-[15%] flex justify-center items-center text-[#5D6560] flex-col"
-                      style={{
-                        borderRadius: "15px",
-                      }}
-                    >
-                      <IoIosArrowDroprightCircle className="text-[1.5rem]" />
-                      <p className="font-bold">email</p>
-                    </div>
+                    
                   </div>
                 </div>
               </div>

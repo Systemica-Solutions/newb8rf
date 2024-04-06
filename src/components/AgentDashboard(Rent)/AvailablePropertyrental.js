@@ -77,7 +77,7 @@ function AvailablePropertyrental() {
           backgroundSize: "100% 100%",
         }}
       >
-        <AvailablePropertyComp props={responsePendingProperties} name={name} />
+        <AvailablePropertyComp props={responsePendingProperties} name={name} status="available"/>
         <Back/>
         <Footer />
       </div>

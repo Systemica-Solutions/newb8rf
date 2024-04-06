@@ -50,14 +50,16 @@ function AllActiveProperties() {
         const properties = response.data.data.properties;
         console.log(properties);
 
-        const sort = properties.sort((a,b) =>{
-          return new Date(b.createdAt) - new Date(a.createdAt)
-        })
+        const sort = properties.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
 
         if (properties) {
           // Filter properties where 'imagesApproved' is true
           const filteredProperties = properties.filter(
-            (property) => property.imagesApproved === true
+            (property) =>
+              property.imagesApproved === true &&
+              property.closeListingReason == null
           );
 
           console.log(filteredProperties);
@@ -66,7 +68,7 @@ function AllActiveProperties() {
             return b.imagesApproved - a.imagesApproved;
           });
 
-          setresponsePendingProperties(sortedProperties || sort );
+          setresponsePendingProperties(sortedProperties || sort);
         } else {
           // Handle the case where 'imagesApproved' is empty or doesn't exist
           console.log("No properties with images approved found.");
@@ -101,8 +103,9 @@ function AllActiveProperties() {
           props={responsePendingProperties}
           name={name}
           activeProperies="true"
+          status="active"
         />
-        <Back/>
+        <Back />
 
         <Footer />
       </div>
