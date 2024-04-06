@@ -22,6 +22,7 @@ import CommonHeader from "../CommonHeader";
 import CommonBtn from "../CommonButton";
 import CommonTopButton from "../CommonTopButton";
 import ListingComp2 from "../AgentDashboard(Rent)/ListingComp";
+import Back from "../Back";
 
 function My_propertyPV() {
   const [loading, setLoading] = useState(false);
@@ -176,7 +177,7 @@ function My_propertyPV() {
         />
 
         {/* --------------------------------------Second tab-------------------------------------------- */}
-
+        <Back/>
         <Footer />
       </div>
     </>
