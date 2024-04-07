@@ -164,7 +164,7 @@ function My_PropertyS() {
         <MyPropertyComp responseProperty={responseProperty} />
         {/* --------------------------------------first tab-------------------------------------------- */}
 
-        <div style={{ marginTop: "310px" }}></div>
+        {/* <div style={{ marginTop: "310px" }}></div> */}
         <Back/>
 
         <Footer />

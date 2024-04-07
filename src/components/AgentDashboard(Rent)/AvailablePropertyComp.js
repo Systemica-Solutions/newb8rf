@@ -13,7 +13,7 @@ import { MdOutlineHideImage } from "react-icons/md";
 import { RiQuestionnaireFill } from "react-icons/ri";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 
-const AvailablePropertyComp = ({ props, name,showCloseButton }) => {
+const AvailablePropertyComp = ({ props, name,showCloseButton,status }) => {
   const [filteredData, setfilteredData] = useState(props);
   const [searchValue, setSearchValue] = useState("");
 
@@ -70,7 +70,7 @@ const AvailablePropertyComp = ({ props, name,showCloseButton }) => {
 
       {/* header-text */}
       <div className="px-[1rem] text-[1.2rem]">
-        Hey <b>{name}</b>, Here are the properties, ACTIVE and READY to be shared.
+        Hey <b>{name}</b>, Here are the {status} properties.
       </div>
 
       {/* properties */}

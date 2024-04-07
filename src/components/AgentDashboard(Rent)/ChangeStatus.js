@@ -764,6 +764,7 @@ function ChangeStatus() {
                 </div>
               </form>
             </div>
+            
             <div className="flex flex-col justify-center items-center py-[1rem]">
               {/* <div>
                 <BackButton title="Go Back" margin="" fontweight="bolder" />
@@ -778,6 +779,9 @@ function ChangeStatus() {
             </div>
           </div>
         ) : null}
+
+        <Back/>
+        
 
         <div className="py-[1rem]">
      
