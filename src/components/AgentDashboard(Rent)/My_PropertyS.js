@@ -161,7 +161,7 @@ function My_PropertyS() {
         </div>
 
         {/* --------------------------------------first tab-------------------------------------------- */}
-        <MyPropertyComp responseProperty={responseProperty} />
+        <MyPropertyComp responseProperty={responseProperty} showCloseButton={true}/>
         {/* --------------------------------------first tab-------------------------------------------- */}
 
         {/* <div style={{ marginTop: "310px" }}></div> */}

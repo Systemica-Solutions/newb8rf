@@ -13,7 +13,7 @@ import { MdOutlineHideImage } from "react-icons/md";
 import { RiQuestionnaireFill } from "react-icons/ri";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 
-const AvailablePropertyComp = ({ props, name,showCloseButton,status }) => {
+const AvailablePropertyComp = ({ props, name,showChangeStatus,showCloseButton,status }) => {
   const [filteredData, setfilteredData] = useState(props);
   const [searchValue, setSearchValue] = useState("");
 
@@ -151,12 +151,27 @@ const AvailablePropertyComp = ({ props, name,showCloseButton,status }) => {
               {/* right/edit section */}
               {showCloseButton && ( 
                   <Link
-                className="w-[15%] bg-[#E8E7E7] flex justify-center items-center p-[0.5rem] flex-col rounded-[0.5rem]"
+                className="w-[15%] bg-[#E8E7E7] flex justify-center items-center p-[0.5rem] flex-col rounded-[0.5rem] border-2 border-slate-300"
                 to={`/Changestatus?propertyId=${values._id}`}
               >
                 <IoIosArrowDroprightCircle className="text-[1.7rem] text-[#5D6560]" />
                 <p className="font-bold py-[0.2rem] text-[#5D6560]">Close Property</p>
               </Link> 
+              )}
+
+              {showChangeStatus &&(
+                <Link
+                to={`/PropertyViewingStatus/${values._id}`}
+                className="bg-[#E8E7E7] p-[0.5rem] w-[15%] flex justify-center items-center text-[#5D6560] flex-col border-2 border-slate-300"
+                style={{
+                  borderRadius: "15px",
+                }}
+              >
+                <IoIosArrowDroprightCircle className="text-[1.5rem]" />
+                <p className="font-bold text-[0.9rem] text-center">
+                  View Status
+                </p>
+              </Link>
               )}
             </div>
           </div>
