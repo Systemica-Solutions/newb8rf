@@ -11,6 +11,7 @@ import searchImg from "../Assets/Search.png";
 import SearchBar from "../SearchBar";
 import ActiveLeadsI from "../Assets/Images/AgentDashboard/ActiveLeadsI.png";
 import TenantComp from "./TenantComp";
+import Back from "../Back";
 
 function ActiveLeads() {
   const [loading, setLoading] = useState(false);
@@ -104,6 +105,7 @@ function ActiveLeads() {
         </div> */}
 
         <TenantComp props={responsePendingTenants} name={name} />
+        <Back/>
 
         <Footer />
       </div>
