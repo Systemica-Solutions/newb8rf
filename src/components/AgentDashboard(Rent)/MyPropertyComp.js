@@ -140,6 +140,7 @@ const MyPropertyComp = ({ responseProperty }) => {
                   View Status
                 </p>
               </Link>
+     
             </div>
           </div>
         </div>

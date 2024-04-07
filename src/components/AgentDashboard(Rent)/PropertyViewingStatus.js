@@ -15,6 +15,7 @@ import { MdOutlinePersonOutline} from "react-icons/md";
 import { BiHeart } from 'react-icons/bi';
 import { BiPersonFill } from 'react-icons/bi';
 import { useParams } from 'react-router-dom';
+import Back from "../Back";
 
 
 function PropertyViewingStatus()
@@ -236,6 +237,7 @@ function PropertyViewingStatus()
         <div style={{ border: " 1px solid #DAF0EE",boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",borderRadius: "15px",width: '95%',display:"flex",flexWrap:"wrap",flexDirection:"row",margin:"10px",textAlign:"center",justifyContent:"center",gap:"20px"}}>
         {propertyViewing  && propertyViewing.map((tenant, index) => renderTenantDOM(tenant, index))}
         </div>
+        <Back/>
         <Footer/>
         </div>
         </>

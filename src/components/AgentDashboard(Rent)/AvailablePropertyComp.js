@@ -151,7 +151,7 @@ const AvailablePropertyComp = ({ props, name,showCloseButton,status }) => {
               {/* right/edit section */}
               {showCloseButton && ( 
                   <Link
-                className="w-[15%] bg-[#E8E7E7] flex justify-center items-center p-[0.5rem] flex-col rounded-[0.5rem]"
+                className="w-[15%] bg-[#E8E7E7] flex justify-center items-center p-[0.5rem] flex-col rounded-[0.5rem] border-2 border-black"
                 to={`/Changestatus?propertyId=${values._id}`}
               >
                 <IoIosArrowDroprightCircle className="text-[1.7rem] text-[#5D6560]" />

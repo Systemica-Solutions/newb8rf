@@ -774,11 +774,12 @@ function ChangeStatus() {
                 margin="40%"
                 fontweight="bolder"
               />
-               <Back/>
+               
             </div>
            
           </div>
         ) : null}
+        <Back/>
 
         <div className="py-[1rem]">
           <Footer />
