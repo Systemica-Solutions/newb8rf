@@ -22,6 +22,7 @@ import CommonTopButton from "../CommonTopButton";
 import BackButton from "../CommonButtonBack";
 import editButton from "../Assets/Button.png";
 import { useNavigate } from "react-router-dom";
+import Back from "../Back";
 
 function ChangeStatus() {
   const queryParameters = new URLSearchParams(window.location.search);
@@ -763,7 +764,7 @@ function ChangeStatus() {
                 </div>
               </form>
             </div>
-            <div className="flex justify-center items-center py-[1rem]">
+            <div className="flex flex-col justify-center items-center py-[1rem]">
               {/* <div>
                 <BackButton title="Go Back" margin="" fontweight="bolder" />
               </div> */}
@@ -773,11 +774,13 @@ function ChangeStatus() {
                 margin="40%"
                 fontweight="bolder"
               />
+                 <Back/>
             </div>
           </div>
         ) : null}
 
         <div className="py-[1rem]">
+     
           <Footer />
         </div>
       </div>
