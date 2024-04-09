@@ -56,7 +56,9 @@ function AllActiveProperties() {
         if (properties) {
           // Filter properties where 'imagesApproved' is true
           const filteredProperties = properties.filter(
-            (property) => property.imagesApproved === true
+            (property) =>
+              property.imagesApproved === true &&
+              property.closeListingReason == null
           );
 
           console.log(filteredProperties);
@@ -100,6 +102,7 @@ function AllActiveProperties() {
           props={responsePendingProperties}
           name={name}
           activeProperies="true"
+          status="activity"
         />
 
         <Footer />

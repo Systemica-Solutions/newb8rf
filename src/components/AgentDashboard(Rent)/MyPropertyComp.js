@@ -9,7 +9,7 @@ import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { MdOutlineHideImage } from "react-icons/md";
 import { FaHeart } from "react-icons/fa6";
 
-const MyPropertyComp = ({ responseProperty }) => {
+const MyPropertyComp = ({ responseProperty,showCloseButton }) => {
   return (
     <>
       {responseProperty.map((values, index) => (
@@ -128,7 +128,7 @@ const MyPropertyComp = ({ responseProperty }) => {
                 </div>
               </div>
               {/* right-container */}
-              <Link
+              {/* <Link
                 to={`/PropertyViewingStatus/${values._id}`}
                 className="bg-[#E8E7E7] p-[0.5rem] w-[15%] flex justify-center items-center text-[#5D6560] flex-col"
                 style={{
@@ -139,7 +139,16 @@ const MyPropertyComp = ({ responseProperty }) => {
                 <p className="font-bold text-[0.9rem] text-center">
                   View Status
                 </p>
-              </Link>
+              </Link> */}
+     {showCloseButton && ( 
+                  <Link
+                className="w-[15%] bg-[#E8E7E7] flex justify-center items-center p-[0.5rem] flex-col rounded-[0.5rem] border-2 border-slate-300"
+                to={`/Changestatus?propertyId=${values._id}`}
+              >
+                <IoIosArrowDroprightCircle className="text-[1.7rem] text-[#5D6560]" />
+                <p className="font-bold py-[0.2rem] text-[#5D6560]">Close Property</p>
+              </Link> 
+              )}
             </div>
           </div>
         </div>

@@ -265,7 +265,8 @@ function Dashboard() {
               color="#DAF0EE"
             />
           </div>
-          <Link to="/DashboardS">
+          {/* <Link to="/DashboardS"> */}
+          <Link to="#">
             <CommonTopButton
               text="For Sale"
               bgColor="#F5F5F5"

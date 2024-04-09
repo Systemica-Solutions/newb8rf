@@ -369,13 +369,13 @@ function DetailView() {
                   <div className="flex items-center flex-col text-center">
                     <BiSwim className="text-[2rem]" />
                     <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                      Recreation in campus
+                    Swimming Pool
                     </p>
                   </div>:
                   <div className="flex items-center flex-col text-center text-red-500">
                   <BiSwim className="text-[2rem] text-red-500" />
                   <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                    No swimming pool
+                    No Swimming Pool
                   </p>
                 </div>
                   }
@@ -383,7 +383,7 @@ function DetailView() {
                   <div className="flex items-center flex-col text-center">
                     <MdOutlineSportsHandball className="text-[2rem]" />
                     <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                      Recreation in campus
+                    Club House
                     </p>
                   </div>:
                   <div className="flex items-center flex-col text-center text-red-500">
