@@ -67,11 +67,11 @@ function My_propertyPV() {
           const noImageProperties = propertiesData.filter((property) => {
             return (
               property.status !== "Closed" &&
-              property.images.length == 0 &&
               (property.fieldAgentStatus === "DetailsCompleted" ||
-                property.fieldAgentStatus === "Unassigned")
+                property.fieldAgentStatus === "Unassigned" || property.fieldAgentStatus==="Pending")
             );
           });
+
 
           // var myArrayPropertyCount = response.data.data.properties;
           setresponseProperty(underReviewProperties || sortedProperties);

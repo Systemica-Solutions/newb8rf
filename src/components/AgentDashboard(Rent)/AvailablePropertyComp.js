@@ -91,7 +91,7 @@ const AvailablePropertyComp = ({ props, name,showChangeStatus,showCloseButton,st
               >
                 {/* image */}
                 <div className="w-[30%] flex justify-center items-center">
-                  {values.imagesApproved ? (
+                  {values.imagesApproved && values.status==="Verified" ? (
                     <>
                       <img
                         src={values.images[0]}
@@ -125,7 +125,7 @@ const AvailablePropertyComp = ({ props, name,showChangeStatus,showCloseButton,st
               </div>
             )}
                     </p>
-                    {values.imagesApproved ? (
+                    {values.imagesApproved && values.status==="Verified" ? (
                       <>
                         <BsFillBookmarkCheckFill className="text-[#52796F] text-[2.5rem]" />
                       </>
@@ -139,10 +139,10 @@ const AvailablePropertyComp = ({ props, name,showChangeStatus,showCloseButton,st
                   <div
                     className="font-bold flex justify-end items-center pt-[0.5rem] text-[#E13018]"
                     style={{
-                      color: values.imagesApproved ? "#2F9E3A" : "#E13018",
+                      color: values.imagesApproved && values.status==="Verified" ? "#2F9E3A" : "#E13018",
                     }}
                   >
-                    {values.imagesApproved
+                    {values.imagesApproved && values.status==="Verified"
                       ? "  Active Listing"
                       : "   Pending Verification"}
                   </div>

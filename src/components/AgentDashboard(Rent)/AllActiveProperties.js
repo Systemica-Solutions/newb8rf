@@ -56,9 +56,7 @@ function AllActiveProperties() {
         if (properties) {
           // Filter properties where 'imagesApproved' is true
           const filteredProperties = properties.filter(
-            (property) =>
-              property.imagesApproved === true &&
-              property.closeListingReason == null
+            (property) => property.status === "Verified"
           );
 
           console.log(filteredProperties);
