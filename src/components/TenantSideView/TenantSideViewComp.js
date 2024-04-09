@@ -249,7 +249,8 @@ function TenantSideViewComp({ boards, boardId, boardData }) {
                       {property.propertyDetails.featureInfo.rentAmount} /month
                     </p>
                   </div>
-                  <p className="text-[0.9rem]"> (incl. Maintenance )</p>
+                  <p className="text-[0.7rem]"> ( + Maintenance {property.propertyDetails.featureInfo.rentMaintenance}
+)</p>
                 </div>
                 {globalTenantId && (
                   <div className="flex justify-center items-center">
