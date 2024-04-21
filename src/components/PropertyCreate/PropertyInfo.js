@@ -1602,7 +1602,7 @@ function PropertyInfo() {
                           </option>
                           <option value="2 Bikes">2 Bikes</option>
                           <option value="Included with Car">Included with Car</option>
-                          <option value="0 Bike">No Bike Parking</option>
+                          <option value="No Bike Parking">No Bike Parking</option>
                         </select>
                       </div>
                       <div className="py-[0.5rem] flex flex-col">
