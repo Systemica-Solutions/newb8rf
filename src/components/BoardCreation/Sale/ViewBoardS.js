@@ -29,24 +29,32 @@ function ViewBoardS() {
     },
   };
   const createNewBoard = async () => {
-    try {
-      const response = await axios.post(
-        `https://b8rliving.com/board`,
-        { buyerId: buyerId },
-        axiosConfig
-      );
-
-      // const responseData = response.data.data.tenant.tenantDetails;
-      const responseDataBoard = response.data.data.board.buyerId.boardId;
-      console.log(responseDataBoard);
-      //Redirect
-      window.location.href = `/CreateBoardS?buyerId=${buyerId}&name=${name}&boardId=${responseDataBoard}`;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setLoading(false); // Set loading to false when the request is complete
-    }
+      window.location.href = `/CreateBoardS?buyerId=${buyerId}&name=${name}`;
   };
+
+  useEffect(() => {
+    const fetchTenantDetails = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `https://b8rliving.com/buyer/${buyerId}`,
+          axiosConfig
+        );
+
+        // const responseData = response.data.data.tenant.tenantDetails;
+        const responseDataTenant = response.data.data.buyer;
+
+        // Update the formData state with the response data
+        // setResponseDataTenant(responseData);
+        setResponseDataTenantData(responseDataTenant);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false); // Set loading to false when the request is complete
+      }
+    };
+    fetchTenantDetails(); // Call the fetch function
+  }, [buyerId]);
 
   return (
     <>

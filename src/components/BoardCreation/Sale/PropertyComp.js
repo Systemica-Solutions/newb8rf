@@ -19,19 +19,23 @@ import { RxDimensions } from "react-icons/rx";
 import { LuPlusCircle } from "react-icons/lu";
 import { FaSquareCheck } from "react-icons/fa6";
 
-const PropertyComp = ({
+const PropertyCompS = ({
   props,
   Id,
-  responseDataTenantData,
-  responseDataTenantBoard,
+  responseDataBuyerData,
+  responseDataBuyerBoard,
+  name,
+  boardId,
+  boardData,
 }) => {
   const [visibleItems, setVisibleItems] = useState(3);
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(false);
-
+  const [responseDataBoard, setResponseDataBoard] = useState([]);
+  const [responseDataProperty, setResponseDataProperty] = useState([]);
   const [addedItems, setAddedItems] = useState([]);
 
-  console.log(responseDataTenantData);
+  console.log(responseDataBuyerData+"hello");
 
   let axiosConfig = {
     headers: {
@@ -41,8 +45,14 @@ const PropertyComp = ({
     },
   };
 
+  const filteredProps = props.filter(property=>{
+    return property.propertyDetails.propertyInfo.purposeSale===true;
+  })
+
+
   const addToBoard = async (pId) => {
-    console.log(pId);
+    console.log("addToBoard",pId);
+
     // setLoading(true);
 
     if (!addedItems.includes(pId)) {
@@ -54,43 +64,99 @@ const PropertyComp = ({
     }
   };
 
-  const viewToBoard = async (pId) => {
-    try {
-      const response = await axios.put(
-        `https://b8rliving.com/board/property/${responseDataTenantBoard}`,
-        { propertyId: pId },
-        axiosConfig
-      );
-      console.log(response);
-      // setAddedProperty(true);
-      // console.log(addedProperty);
-      // alert(response.data.message)
-    } catch (error) {
-      // Handle any errors that occur during the API request
-      console.error("Error fetching data:", error);
-      // alert(error.message)
-    } finally {
-      setLoading(false); // Set loading to false when the request is complete
+  console.log("added Items->" + addedItems);
+
+  const viewToBoard = async () => {
+    var bId;
+    const propertyId = [...addedItems];
+    if (addedItems.length === 0) {
+      alert("Please select at least one property.");
+      return; // Stop further execution
+    }
+    console.log("boardID -> " + boardId);
+    if (boardId !== null && boardId !== undefined) {
+      console.log("Buyer board already exist");
+      try {
+        if (boardId) {
+          console.log(addedItems)
+          var res;
+          const response = await axios.put(
+            `https://b8rliving.com/board/property/${boardId}`,
+            { propertyId: addedItems },  // Ensure propertyId is an array
+            axiosConfig
+          );
+          if (response.status === 200) {
+            window.location.href = `/PropertyViewBoardS?boardId=${boardId}&buyerId=${Id}&name=${name}`;
+          }
+        }
+      } catch (error) {
+        // Handle any errors that occur during the API request
+        console.error("Error fetching data:", error);
+        // alert(error.message)
+      } finally {
+        setLoading(false); // Set loading to false when the request is complete
+      }
+    } else {
+      console.log("creating new board");
+      try {
+        // create new board
+        const res = await axios.post(
+          `https://b8rliving.com/board`,
+          { tenantId: Id },
+          axiosConfig
+        );
+        // console.log(res.data);
+        // const responseData = response.data.data.tenant.tenantDetails;
+        console.log(res.data);
+        bId = res.data.data.board.buyerId.boardId;
+        console.log("newboardId-> " + bId);
+      } catch (error) {
+        console.log(error);
+      }
+
+      try {
+        if (bId !== undefined && bId !== null) {
+          const response = await axios.put(
+            `https://b8rliving.com/board/property/${bId}`,
+            { propertyId: addedItems },  // Ensure propertyId is an array
+            axiosConfig
+          );
+          if (response.status === 200) {
+            window.location.href = `/PropertyViewBoardS?boardId=${bId}&buyerId=${Id}&name=${name}`;
+          }
+        }
+        
+      } catch (error) {
+        // Handle any errors that occur during the API request
+        console.error("Error fetching data:", error);
+        // alert(error.message)
+      } finally {
+        setLoading(false); // Set loading to false when the request is complete
+      }
     }
   };
   const handleLoadMore = () => {
     setVisibleItems(visibleItems + 3);
   };
-
+  useEffect(() => {
+    if (boardData.length !== 0) {
+      setAddedItems(boardData.map((data) => data._id));
+    }
+  }, [boardData]);
   return (
     <>
       {loading ? (
         ""
       ) : (
         <div>
-          {props.slice(0, visibleItems).map((values, key) => (
+          {filteredProps.slice(0, visibleItems).map((values, key) => (
             <div key={key} className="py-[1rem]">
               <div className="flex w-[100%] gap-x-[0.5rem]">
                 {/* left side */}
                 <div
                   className="w-[85%] px-[1rem] py-[0.5rem] flex justify-between items-center"
                   style={{
-                    background: "#F5F5F5",
+                    background: values.status === "Closed" ? "rgb(250, 203, 203)" : "#F5F5F5",
                     border: "1px solid #000000",
                     borderRadius: "0.5rem",
                     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
@@ -180,28 +246,28 @@ const PropertyComp = ({
                         ? "Available"
                         : "No"}
                     </text> */}
-                      <div className="flex flex-col items-center">
+                      <div className="flex flex-col justify-center items-center">
                         <RxDimensions className="text-[1.5rem] mx-[0.3rem]" />
-                        <p className="text-[0.9rem]">
+                        <p className="text-[0.9rem] text-center">
                           {values.propertyDetails.featureInfo.carpetArea} sft
                         </p>
                       </div>
-                      <div className="flex flex-col items-center">
+                      <div className="flex flex-col justify-center items-center">
                         <MdBed className="text-[1.5rem] mx-[0.3rem]" />
-                        <p className="text-[0.9rem]">
+                        <p className="text-[0.9rem] text-center">
                           {values.propertyDetails.propertyInfo.houseConfig}
                         </p>
                       </div>
                       {values.propertyDetails.featureInfo.parking.car > 0 &&
                       values.propertyDetails.featureInfo.parking.bike > 0 ? (
-                        <div className="flex flex-col items-center">
+                        <div className="flex flex-col justify-center items-center">
                           <LuParkingCircle className="text-[1.5rem] mx-[0.3rem]" />
-                          <p className="text-[0.9rem]">Available</p>
+                          <p className="text-[0.9rem] text-center">Available</p>
                         </div>
                       ) : (
-                        <div className="flex flex-col items-center">
+                        <div className="flex flex-col justify-center items-center">
                           <LuParkingCircleOff className="text-[1.5rem] mx-[0.3rem]" />
-                          <p className="text-[0.9rem]">Not Available</p>
+                          <p className="text-[0.9rem] text-center">No</p>
                         </div>
                       )}
                     </div>
@@ -216,7 +282,7 @@ const PropertyComp = ({
                 ) : (
                   <> */}
                 <div
-                  className="w-[15%] bg-[#E8E7E7] flex justify-center items-center rounded-[0.5rem] flex-col font-bold"
+                   className={`w-[15%] flex justify-center items-center rounded-[0.5rem] flex-col font-bold ${values.status === "Closed" ? "bg-[#FACBCB]" : "bg-[#E8E7E7]"}`}
                   key={values._id}
                   onClick={() => addToBoard(values._id)}
                 >
@@ -250,17 +316,18 @@ const PropertyComp = ({
         </div>
       )}
       <div
-        // onClick={() => viewToBoard()}
+        onClick={() => viewToBoard()}
         className="flex justify-center items-center py-[1rem]"
       >
-        <Link
+        {/* <Link
           to={`/PropertyViewBoardS?boardId=${responseDataTenantData.boardId}`}
         >
+          </Link> */}
           <CommonBtn title="View Board" bgColor="#3F007F" />
-        </Link>
+      
       </div>
     </>
   );
 };
 
-export default PropertyComp;
+export default PropertyCompS;

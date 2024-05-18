@@ -114,8 +114,8 @@ function PropertyInfo() {
         country: "India",
         city: "Mumbai",
         name: {
-          first: "",
-          last: "",
+          first: "first",
+          last: "last",
         },
       },
       featureInfo: {
@@ -513,7 +513,7 @@ function PropertyInfo() {
             <AlertHeader title="Create New Listing" color="#52796f" />
             {/* <img src={num_1} alt="Image description" height={55} width={300} /> */}
             {/* stageCount */}
-            <div className="grid grid-cols-3 py-[0.5rem]">
+            <div className="grid grid-cols-2 py-[0.5rem]">
               <div className="flex justify-center items-center">
                 <div
                   className="flex justify-center items-center bg-[#52796F] rounded-[999rem] w-[3rem] h-[3rem] text-[#DAF0EE] text-[1.3rem] font-bold"
@@ -532,16 +532,6 @@ function PropertyInfo() {
                   }}
                 >
                   2
-                </div>
-              </div>
-              <div className="flex justify-center items-center">
-                <div
-                  className="flex justify-center items-center bg-[#F0FBF8] rounded-[999rem] w-[3rem] h-[3rem] text-[#5D6560] text-[1.3rem] font-bold"
-                  style={{
-                    border: "4px solid #DAF0EE",
-                  }}
-                >
-                  3
                 </div>
               </div>
             </div>
@@ -778,14 +768,15 @@ function PropertyInfo() {
                 }}
               >
                 Select Map Location{" "}
+                <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
               </label>
               <input
                 type="text"
                 id="mapLocation"
                 name="mapLocation"
+                required
                 value={formData.propertyData.propertyInfo.mapLocation}
                 onChange={handleChange}
-                defaultValue={"N/A"}
                 placeholder="Google Maps Plug-in"
                 style={{
                   backgroundColor: "white",
@@ -865,260 +856,10 @@ function PropertyInfo() {
             <Footer />
           </div>
         </div>
-      ) : (
+      ) :  (
         ""
       )}
       {checkedStateTwo ? (
-        <div className="">
-          <div
-            class=""
-            style={{
-              // borderRadius: "16px",
-              // marginTop: "10%",
-              backgroundRepeat: "no-repeat",
-              backgroundImage: `url(${backgroundSecond})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "100% 100%",
-            }}
-          >
-            {/* <h2> Add Landlord Details </h2> */}
-            <CommonHeader title="Add Landlord/Owner Details" color="#52796F" />
-            {/* <img src={num_2} alt="Image description" height={55} /> */}
-            {/* stageCount */}
-            <div className="grid grid-cols-3 py-[0.5rem]">
-              <div className="flex justify-center items-center">
-                <div
-                  className="flex justify-center items-center bg-[#F0FBF8] rounded-[999rem] w-[3rem] h-[3rem] text-[#5D6560] text-[1.3rem] font-bold"
-                  style={{
-                    border: "4px solid #DAF0EE",
-                  }}
-                >
-                  1
-                </div>
-              </div>
-              <div className="flex justify-center items-center">
-                <div
-                  className="flex justify-center items-center bg-[#52796F] rounded-[999rem] w-[3rem] h-[3rem] text-[#DAF0EE] text-[1.3rem] font-bold"
-                  style={{
-                    border: "4px solid #DAF0EE",
-                  }}
-                >
-                  2
-                </div>
-              </div>
-              <div className="flex justify-center items-center">
-                <div
-                  className="flex justify-center items-center bg-[#F0FBF8] rounded-[999rem] w-[3rem] h-[3rem] text-[#5D6560] text-[1.3rem] font-bold"
-                  style={{
-                    border: "4px solid #DAF0EE",
-                  }}
-                >
-                  3
-                </div>
-              </div>
-            </div>
-            <form
-              onSubmit={handleChangeTwo}
-              style={{ borderRadius: "16px" }}
-              className="inner-background"
-            >
-              {/* Owner's First NAME */}
-              <div className="flex justify-center items-center pb-[1rem]">
-                <h4
-                  style={{ color: "#52796f" }}
-                  className="text-[1.3rem] font-bold"
-                >
-                  {" "}
-                  Who owns this Property?
-                </h4>
-              </div>
-              <label
-                className="mx-[0.2rem]"
-                for="first"
-                style={{
-                  textAlign: "left",
-                  display: "block",
-                  marginBottom: "0.5rem",
-                  fontWeight: "300",
-                  float: "left",
-                }}
-              >
-                Owner's First Name{" "}
-              </label>
-              <input
-                type="text"
-                id="first"
-                placeholder="Owner's First Name"
-                name="first"
-                defaultValue={"N/A"}
-                
-                value={formData.propertyData.ownerInfo.name.first}
-                onChange={handleChange}
-                style={styles}
-              />
-              {/* <br></br> */}
-              {/* Owner's Last NAME */}
-              <label
-                className="mx-[0.2rem]"
-                for="last"
-                style={{
-                  textAlign: "left",
-                  display: "block",
-                  marginBottom: "0.5rem",
-                  fontWeight: "300",
-                  float: "left",
-                }}
-              >
-                Owner's Last Name{" "}
-              </label>
-              <input
-                type="text"
-                id="last"
-                placeholder="Owner's Last name"
-                name="last"
-                defaultValue={"N/A"}
-                
-                value={formData.propertyData.ownerInfo.name.last}
-                onChange={handleChange}
-                style={styles}
-              />
-              <br></br>
-              {/* CONTACT NUM */}
-              <label 
-                className="mx-[0.2rem]"
-                for="phoneNumber"
-                style={{
-                  textAlign: "left",
-                  display: "block",
-                  marginBottom: "0.5rem",
-                  fontWeight: "300",
-                  float: "left",
-                }}
-              >
-                Contact Number
-              </label>
-              <input
-                type="tel"
-                id="phoneNumber"
-                maxLength="10"
-                placeholder="10 digit number"
-                name="phoneNumber"
-                // required
-                // value={formData.propertyData.ownerInfo.phoneNumber}
-                defaultValue=""
-                onChange={handleChange}
-                style={styles}
-              /> 
-              <br></br>
-              {/* PAN CARD */}
-              <label
-                className="mx-[0.2rem] mt-[20px]"
-                for="panNumber"
-                style={{
-                  textAlign: "left",
-                  display: "block",
-                  marginBottom: "0.5rem",
-                  fontWeight: "300",
-                  float: "left",
-                }}
-              >
-                Pan Card(Useful for Rental Agreement)
-              </label>
-              <input
-                type="text"
-                id="panNumber"
-                placeholder="Pan number"
-                name="panNumber"
-                // required
-                // value={formData.propertyData.ownerInfo.panNumber}
-                defaultValue=""
-                onChange={handleChange}
-                style={styles}
-              />
-              <br></br>
-              {/* Residing Country */}
-              <label
-                className="mx-[0.2rem]"
-                for="country"
-                style={{
-                  textAlign: "left",
-                  display: "block",
-                  marginBottom: "0.5rem",
-                  fontWeight: "300",
-                  float: "left",
-                }}
-              >
-                Country of Residence 
-              </label>
-              <input
-                type="text"
-                id="country"
-                placeholder="residing country"
-                name="country"
-                // required
-                // value={formData.propertyData.ownerInfo.country}
-                defaultValue=""
-                onChange={handleChange}
-                style={styles}
-              />
-              <br></br>
-              <label
-                className="mx-[0.2rem]"
-                for="city"
-                style={{
-                  textAlign: "left",
-                  display: "block",
-                  marginBottom: "0.5rem",
-                  fontWeight: "300",
-                  float: "left",
-                }}
-              >
-                City of Residence
-              </label>
-              <input
-                type="text"
-                id="city"
-                placeholder="residing city"
-                name="city"
-                // required
-                // value={formData.propertyData.ownerInfo.city}
-                defaultValue=""
-                onChange={handleChange}
-                style={styles}
-              />
-              {/* <br></br> */}
-              {/* <br></br> */}
-              <div className="flex justify-around items-center">
-                {/* <div>
-                  <BackButton
-                    title="Back"
-                    fontweight="bolder"
-                    onClick={handleClick}
-                  />
-                </div> */}
-                <div
-                  onClick={() => {
-                    setCheckedStateTwo(!checkedStateTwo);
-                    setCheckedStateOne(!checkedStateOne);
-                  }}
-                >
-                  <BackButton title="Back" />
-                </div>
-                <CommonBtn
-                  title="Save and next"
-                  margin="40%"
-                  fontweight="bolder"
-                  type="submit"
-                />
-              </div>
-            </form>
-            <Footer />
-          </div>
-        </div>
-      ) : (
-        ""
-      )}
-      {checkedStateThree ? (
         <div className="login-page">
           <div
             class="form"
@@ -1134,7 +875,7 @@ function PropertyInfo() {
             <CommonHeader title="Property Features" color="#52796F" />
             {/* <img src={num3} alt="Image description" height={55} /> */}
             {/* stageCount */}
-            <div className="grid grid-cols-3 py-[0.5rem]">
+            <div className="grid grid-cols-2 py-[0.5rem]">
               <div className="flex justify-center items-center">
                 <div
                   className="flex justify-center items-center bg-[#F0FBF8] rounded-[999rem] w-[3rem] h-[3rem] text-[#5D6560] text-[1.3rem] font-bold"
@@ -1147,22 +888,12 @@ function PropertyInfo() {
               </div>
               <div className="flex justify-center items-center">
                 <div
-                  className="flex justify-center items-center bg-[#F0FBF8] rounded-[999rem] w-[3rem] h-[3rem] text-[#5D6560] text-[1.3rem] font-bold"
-                  style={{
-                    border: "4px solid #DAF0EE",
-                  }}
-                >
-                  2
-                </div>
-              </div>
-              <div className="flex justify-center items-center">
-                <div
                   className="flex justify-center items-center bg-[#52796F] rounded-[999rem] w-[3rem] h-[3rem] text-[#DAF0EE] text-[1.3rem] font-bold"
                   style={{
                     border: "4px solid #DAF0EE",
                   }}
                 >
-                  3
+                  2
                 </div>
               </div>
             </div>
@@ -1576,7 +1307,6 @@ function PropertyInfo() {
                           name="bike"
                           value={formData.propertyData.featureInfo.parking.bike}
                           onChange={handleChange}
-                          defaultValue={0}
                           style={{
                             backgroundColor: "white",
                             padding: "0.5rem",
@@ -1602,7 +1332,7 @@ function PropertyInfo() {
                           </option>
                           <option value="2 Bikes">2 Bikes</option>
                           <option value="Included with Car">Included with Car</option>
-                          <option value="No Bike Parking">No Bike Parking</option>
+                          <option value="">No Bike Parking</option>
                         </select>
                       </div>
                       <div className="py-[0.5rem] flex flex-col">
@@ -2370,7 +2100,7 @@ function PropertyInfo() {
               <div className="flex justify-around items-center py-[1rem]">
                 <div
                   onClick={() => {
-                    setCheckedStateThree(!checkedStateThree);
+                    setCheckedStateOne(!checkedStateOne);
                     setCheckedStateTwo(!checkedStateTwo);
                   }}
                 >

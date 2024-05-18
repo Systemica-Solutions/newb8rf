@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Back from "../Back";
+
 
 function VirtualTour() {
   
@@ -39,7 +41,7 @@ function VirtualTour() {
       {/* Virtual Tour Component  */}
       <iframe
         width="100%"
-        height="640"
+        height="940"
         frameborder="0"
         allow="xr-spatial-tracking; gyroscope; accelerometer"
         allowfullscreen
@@ -47,6 +49,8 @@ function VirtualTour() {
         src={tourLink}
         id="tourIframe"
       ></iframe>
+
+<div style={{display:"flex",justifyContent:"center"}}><Back/></div>
     </div>
   );
 }

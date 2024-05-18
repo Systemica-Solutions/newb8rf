@@ -44,6 +44,11 @@ const PropertyComp = ({
       Authorization: `Basic ${token}`,
     },
   };
+
+  const filteredProps = props.filter(property=>{
+    return property.propertyDetails.propertyInfo.purposeRent===true;
+  })
+
   // console.log("boardData=>"+boardData)
 
   // useEffect(() => {
@@ -221,7 +226,7 @@ const PropertyComp = ({
         ""
       ) : (
         <div>
-          {props.slice(0, visibleItems).map((values, key) => (
+          {filteredProps.slice(0, visibleItems).map((values, key) => (
             <div key={key} className="py-[1rem]">
               <div className="flex w-[100%] gap-x-[0.5rem]">
                 {/* left side */}
@@ -330,8 +335,8 @@ const PropertyComp = ({
                           {values.propertyDetails.propertyInfo.houseConfig}
                         </p>
                       </div>
-                      {values.propertyDetails.featureInfo.parking.car > 0 &&
-                      values.propertyDetails.featureInfo.parking.bike > 0 ? (
+                      {values.propertyDetails.featureInfo.parking.car!=="No Car Parking" &&
+                      values.propertyDetails.featureInfo.parking.bike!=="No Bike Parking"  ? (
                         <div className="flex flex-col justify-center items-center">
                           <LuParkingCircle className="text-[1.5rem] mx-[0.3rem]" />
                           <p className="text-[0.9rem] text-center">Available</p>
