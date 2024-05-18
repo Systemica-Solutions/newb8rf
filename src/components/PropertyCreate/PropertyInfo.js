@@ -778,15 +778,14 @@ function PropertyInfo() {
                 }}
               >
                 Select Map Location{" "}
-                <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
               </label>
               <input
                 type="text"
                 id="mapLocation"
                 name="mapLocation"
-                required
                 value={formData.propertyData.propertyInfo.mapLocation}
                 onChange={handleChange}
+                defaultValue={"N/A"}
                 placeholder="Google Maps Plug-in"
                 style={{
                   backgroundColor: "white",
@@ -945,14 +944,14 @@ function PropertyInfo() {
                 }}
               >
                 Owner's First Name{" "}
-                <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
               </label>
               <input
                 type="text"
                 id="first"
                 placeholder="Owner's First Name"
                 name="first"
-                required
+                defaultValue={"N/A"}
+                
                 value={formData.propertyData.ownerInfo.name.first}
                 onChange={handleChange}
                 style={styles}
@@ -971,14 +970,14 @@ function PropertyInfo() {
                 }}
               >
                 Owner's Last Name{" "}
-                <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
               </label>
               <input
                 type="text"
                 id="last"
                 placeholder="Owner's Last name"
                 name="last"
-                required
+                defaultValue={"N/A"}
+                
                 value={formData.propertyData.ownerInfo.name.last}
                 onChange={handleChange}
                 style={styles}
@@ -1577,6 +1576,7 @@ function PropertyInfo() {
                           name="bike"
                           value={formData.propertyData.featureInfo.parking.bike}
                           onChange={handleChange}
+                          defaultValue={0}
                           style={{
                             backgroundColor: "white",
                             padding: "0.5rem",
@@ -1602,7 +1602,7 @@ function PropertyInfo() {
                           </option>
                           <option value="2 Bikes">2 Bikes</option>
                           <option value="Included with Car">Included with Car</option>
-                          <option value="">No Bike Parking</option>
+                          <option value="No Bike Parking">No Bike Parking</option>
                         </select>
                       </div>
                       <div className="py-[0.5rem] flex flex-col">
