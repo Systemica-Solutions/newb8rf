@@ -113,7 +113,16 @@ const MyPropertyComp = ({ responseProperty,showCloseButton }) => {
               >
                 {/* img/icon */}
                 <div className="flex justify-center items-center w-[25%]">
-                  <MdOutlineHideImage className="text-[3.5rem]" />
+                  <img
+                    src={values.images[0]}
+                    alt="imgOne"
+                    style={{
+                      // marginLeft: "10px",
+                      // marginTop: "10px",
+                      borderRadius: "15px",
+                    }}
+                    //   height="60px"
+                  />
                 </div>
                 {/* other-details */}
                 <div className="flex flex-col justify-center items-center w-[75%]">

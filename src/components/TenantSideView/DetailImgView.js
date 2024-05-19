@@ -232,7 +232,7 @@ function DetailImgView() {
                   {index === 1 ? (
                     <div>
                       {/*   <img src={image}  style={{ borderRadius: '5px', objectFit: 'cover', width :'100%' }} />*/}
-                      <Link to={property.tourLink3D}>
+                      <Link to={`/VirtualTour/?propertyId=${propertyId}`}>
                         <div
                           id="container"
                           height="100%"

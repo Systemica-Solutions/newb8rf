@@ -126,6 +126,7 @@ import UserLoginDetails from "./components/UserLoginDetails";
 // import UploadPhotos3 from "./components/FieldAgentFlow/UploadPhotos3";
 
 import PropertyCreated from "./components/PropertyCreate/PropertyCreated";
+import PropertyViewBoardS from "./components/BoardCreation/Sale/PropertyViewBoardS";
 
 //Field Agent
 
@@ -239,6 +240,11 @@ function App(props) {
               exact
               path="PropertyViewBoard"
               element={<PropertyViewBoard />}
+            />
+             <Route
+              exact
+              path="PropertyViewBoardS"
+              element={<PropertyViewBoardS />}
             />
             <Route exact path="ViewBoardS" element={<ViewBoardS />} />
             <Route exact path="BoardCreatedS" element={<BoardCreatedS />} />
