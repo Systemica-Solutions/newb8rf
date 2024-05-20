@@ -10,6 +10,8 @@ import CommonBtn from "../CommonButton";
 import { FaRegEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa6";
 import Modal from "react-modal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function FrontLogin() {
   //States
@@ -54,7 +56,7 @@ function FrontLogin() {
   // };
 
   const handleChange = (event) => {
-    console.log("in handle submit start")
+    console.log("in handle submit start");
     const { name, value } = event.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
@@ -96,11 +98,13 @@ function FrontLogin() {
         //set token to axios common header
         //  setAuthToken(token);
         console.log("Invite Code:", inviteCode);
-console.log("User Type:", usertype);
-console.log("Redirecting to:", inviteCode.substring(0, 2) == "FA" ? "/FieldAgentHomeN" : "/dashboard");
+        console.log("User Type:", usertype);
+        console.log(
+          "Redirecting to:",
+          inviteCode.substring(0, 2) == "FA" ? "/FieldAgentHomeN" : "/dashboard"
+        );
 
-
-        alert("You're Logged In");
+        toast.success("You're Logged In");
         //redirect user to Dashboard
         if (inviteCode.substring(0, 2) == "FA") {
           window.location.href = "/FieldAgentHomeN";
@@ -113,9 +117,9 @@ console.log("Redirecting to:", inviteCode.substring(0, 2) == "FA" ? "/FieldAgent
       .catch((error) => {
         console.log(error);
         // handle the error
-        alert(error.response.data.message);
+        toast.error(error.response.data.message);
       });
-      console.log("in handle submit end")
+    console.log("in handle submit end");
   };
 
   // console.log(data);
@@ -130,6 +134,11 @@ console.log("Redirecting to:", inviteCode.substring(0, 2) == "FA" ? "/FieldAgent
 
   return (
     <>
+      <ToastContainer
+        className="my-[3rem] text-[1.1rem] font-bold"
+        autoClose={1000}
+        // hideProgressBar={true}
+      />
       <div className="login-page">
         <div
           class="form"
@@ -222,11 +231,17 @@ console.log("Redirecting to:", inviteCode.substring(0, 2) == "FA" ? "/FieldAgent
               <CommonBtn title="Sign In" margin="25%" fontweight="bolder" />
             </div>
           </form>
+          <div className="text-[#51796f] mb-[0.5rem]">
+            or
+          </div>
+          <Link className="text-[#51796f] font-semibold text-[1.1rem] my-[1rem]" to = "/">
+            New here? <t className="messageUnderline">Register</t>
+          </Link>
           <Footer />
           <br />
         </div>
       </div>
-
+                  
       {/* Success & error model */}
       {/* <button
         onClick={() => {

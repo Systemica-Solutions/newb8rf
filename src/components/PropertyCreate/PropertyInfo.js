@@ -110,7 +110,7 @@ function PropertyInfo() {
       },
       ownerInfo: {
         phoneNumber: "8009832805",
-        panNumber: "BIGPV7008G",
+        panNumber: "PV1009BHG90",
         country: "India",
         city: "Mumbai",
         name: {
@@ -452,7 +452,7 @@ function PropertyInfo() {
         .post("https://b8rliving.com/property", formDataCopy, axiosConfig)
         .then((response) => {
           console.log(response.data);
-          alert("Your Property details has been submitted");
+          toast.success("Your Property details has been submitted");
           // do something with the response
           if (response.data.data.property.propertyDetails.length > 0) {
             const rentAmountConst =
@@ -463,7 +463,19 @@ function PropertyInfo() {
                 .saleAmount;
             console.log("Rent Amount:", rentAmountConst);
             if (rentAmountConst > 1 && saleAmountConst > 1) {
-              window.location.href = `/PropertyCreated?name=${formData.houseName}&furnishingType=${formData.propertyData.featureInfo.furnishingType}&rentAmount=${formData.propertyData.featureInfo.rentAmount}&rentDeposit=${formData.propertyData.featureInfo.rentDeposit}&saleAmount=${formData.propertyData.featureInfo.saleAmount}&saleDeposit=${formData.propertyData.featureInfo.saleDeposit}&houseConfig=${formData.propertyData.propertyInfo.houseConfig}`;
+              window.location.href = `/PropertyCreated?name=${
+                formData.houseName + formData.societyName
+              }&furnishingType=${
+                formData.propertyData.featureInfo.furnishingType
+              }&rentAmount=${
+                formData.propertyData.featureInfo.rentAmount
+              }&rentDeposit=${
+                formData.propertyData.featureInfo.rentDeposit
+              }&saleAmount=${
+                formData.propertyData.featureInfo.saleAmount
+              }&saleDeposit=${
+                formData.propertyData.featureInfo.saleDeposit
+              }&houseConfig=${formData.propertyData.propertyInfo.houseConfig}`;
             } else if (rentAmountConst > 1) {
               window.location.href = `/PropertyCreated?name=${formData.houseName}&furnishingType=${formData.propertyData.featureInfo.furnishingType}&rentAmount=${formData.propertyData.featureInfo.rentAmount}&rentDeposit=${formData.propertyData.featureInfo.rentDeposit}&houseConfig=${formData.propertyData.propertyInfo.houseConfig}`;
             } else if (saleAmountConst > 1) {
@@ -564,7 +576,7 @@ function PropertyInfo() {
                   display: "block",
                   marginBottom: "0.5rem",
                   fontWeight: "300",
-                  float: "left"
+                  float: "left",
                 }}
               >
                 Property Type?{" "}
@@ -951,7 +963,6 @@ function PropertyInfo() {
                 placeholder="Owner's First Name"
                 name="first"
                 defaultValue={"N/A"}
-                
                 value={formData.propertyData.ownerInfo.name.first}
                 onChange={handleChange}
                 style={styles}
@@ -977,14 +988,13 @@ function PropertyInfo() {
                 placeholder="Owner's Last name"
                 name="last"
                 defaultValue={"N/A"}
-                
                 value={formData.propertyData.ownerInfo.name.last}
                 onChange={handleChange}
                 style={styles}
               />
               <br></br>
               {/* CONTACT NUM */}
-              <label 
+              <label
                 className="mx-[0.2rem]"
                 for="phoneNumber"
                 style={{
@@ -1008,7 +1018,7 @@ function PropertyInfo() {
                 defaultValue=""
                 onChange={handleChange}
                 style={styles}
-              /> 
+              />
               <br></br>
               {/* PAN CARD */}
               <label
@@ -1048,7 +1058,7 @@ function PropertyInfo() {
                   float: "left",
                 }}
               >
-                Country of Residence 
+                Country of Residence
               </label>
               <input
                 type="text"
@@ -1561,7 +1571,7 @@ function PropertyInfo() {
                           </option>
                           <option value="2 Cars">2 Car</option>
                           <option value="3 Cars">3 Car</option>
-                          <option value="">No Car Parking</option>
+                          <option value="No Car Parking">No Car Parking</option>
                         </select>
                       </div>
                       <div className="py-[0.5rem] flex flex-col">
@@ -1596,13 +1606,17 @@ function PropertyInfo() {
                             style={{
                               backgroundColor: "red",
                             }}
-                            value="1 Bike"
+                            value="1"
                           >
                             1 Bike
                           </option>
-                          <option value="2 Bikes">2 Bikes</option>
-                          <option value="Included with Car">Included with Car</option>
-                          <option value="No Bike Parking">No Bike Parking</option>
+                          <option value="2">2 Bikes</option>
+                          <option value="Included with Car">
+                            Included with Car
+                          </option>
+                          <option value="0">
+                            No Bike Parking
+                          </option>
                         </select>
                       </div>
                       <div className="py-[0.5rem] flex flex-col">
@@ -1641,7 +1655,9 @@ function PropertyInfo() {
                             Covered Roof
                           </option>
                           <option value="Open">Open</option>
-                          <option value="">No Parking Available</option>
+                          <option value="0">
+                            No Parking Available
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -1957,7 +1973,7 @@ function PropertyInfo() {
                         name="constructionYear"
                         placeholder="-year drop-down* -"
                         max={getCurrentYear()}
-                        min={getCurrentYear()-100}
+                        min={getCurrentYear() - 100}
                         style={{
                           backgroundColor: "white",
                           padding: "0.5rem",

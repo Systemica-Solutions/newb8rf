@@ -38,7 +38,7 @@ import space_or_area from "../Assets/Images/PropertyAdditionPageIcons/space_or_a
 import swimming_pool from "../Assets/Images/PropertyAdditionPageIcons/swimming_pool/24.png";
 import veg_nonveg from "../Assets/Images/PropertyAdditionPageIcons/veg_non-veg_1/24.png";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer , toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   MdOutlineSecurity,
@@ -463,7 +463,7 @@ function AddTenant() {
                   id="numberOfMonth"
                   min="1"
                   max="12"
-                  value={formData.tenantData.numberOfMonth  }
+                  value={formData.tenantData.numberOfMonth}
                   onWheel={(e) => e.target.blur()}
                   onChange={handleChange}
                   maxLength="2"
@@ -515,7 +515,9 @@ function AddTenant() {
                 Studio
               </option> */}
                   {/* <option value="1BHK">1BHK</option> */}
-                  <option value="" disabled selected>Select from Drop Down</option>
+                  <option value="" disabled selected>
+                    Select from Drop Down
+                  </option>
 
                   <option value="Studio">Studio</option>
                   <option value="1 BHK">1 BHK</option>

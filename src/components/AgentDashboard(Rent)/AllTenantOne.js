@@ -182,6 +182,10 @@ function AllTenantOne() {
   //   };
   // };
 
+  useEffect(()=> {
+    setFilteredTenants(responseTenat);
+  } , [responseTenat])
+
   return (
     <>
       <div
