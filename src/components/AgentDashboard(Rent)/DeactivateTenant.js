@@ -94,8 +94,8 @@ function DeactivateTenant() {
     try {
       const response = await axios.put(
         `https://b8rliving.com/tenant/deactivate/${idTenant}`,
+        { deactivateStatus: deactivateStatus },
         axiosConfig,
-        { deactivateStatus: deactivateStatus }
       );
 
       // Log the updated state
