@@ -114,8 +114,8 @@ function PropertyInfo() {
         country: "India",
         city: "Mumbai",
         name: {
-          first: "",
-          last: "",
+          first: "first",
+          last: "last",
         },
       },
       featureInfo: {
@@ -525,7 +525,7 @@ function PropertyInfo() {
             <AlertHeader title="Create New Listing" color="#52796f" />
             {/* <img src={num_1} alt="Image description" height={55} width={300} /> */}
             {/* stageCount */}
-            <div className="grid grid-cols-3 py-[0.5rem]">
+            <div className="grid grid-cols-2 py-[0.5rem]">
               <div className="flex justify-center items-center">
                 <div
                   className="flex justify-center items-center bg-[#52796F] rounded-[999rem] w-[3rem] h-[3rem] text-[#DAF0EE] text-[1.3rem] font-bold"
@@ -544,16 +544,6 @@ function PropertyInfo() {
                   }}
                 >
                   2
-                </div>
-              </div>
-              <div className="flex justify-center items-center">
-                <div
-                  className="flex justify-center items-center bg-[#F0FBF8] rounded-[999rem] w-[3rem] h-[3rem] text-[#5D6560] text-[1.3rem] font-bold"
-                  style={{
-                    border: "4px solid #DAF0EE",
-                  }}
-                >
-                  3
                 </div>
               </div>
             </div>
@@ -790,14 +780,15 @@ function PropertyInfo() {
                 }}
               >
                 Select Map Location{" "}
+                <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
               </label>
               <input
                 type="text"
                 id="mapLocation"
                 name="mapLocation"
+                required
                 value={formData.propertyData.propertyInfo.mapLocation}
                 onChange={handleChange}
-                defaultValue={"N/A"}
                 placeholder="Google Maps Plug-in"
                 style={{
                   backgroundColor: "white",
@@ -877,7 +868,7 @@ function PropertyInfo() {
             <Footer />
           </div>
         </div>
-      ) : (
+      ) :  (
         ""
       )}
       {checkedStateTwo ? (
@@ -1144,7 +1135,7 @@ function PropertyInfo() {
             <CommonHeader title="Property Features" color="#52796F" />
             {/* <img src={num3} alt="Image description" height={55} /> */}
             {/* stageCount */}
-            <div className="grid grid-cols-3 py-[0.5rem]">
+            <div className="grid grid-cols-2 py-[0.5rem]">
               <div className="flex justify-center items-center">
                 <div
                   className="flex justify-center items-center bg-[#F0FBF8] rounded-[999rem] w-[3rem] h-[3rem] text-[#5D6560] text-[1.3rem] font-bold"
@@ -1157,22 +1148,12 @@ function PropertyInfo() {
               </div>
               <div className="flex justify-center items-center">
                 <div
-                  className="flex justify-center items-center bg-[#F0FBF8] rounded-[999rem] w-[3rem] h-[3rem] text-[#5D6560] text-[1.3rem] font-bold"
-                  style={{
-                    border: "4px solid #DAF0EE",
-                  }}
-                >
-                  2
-                </div>
-              </div>
-              <div className="flex justify-center items-center">
-                <div
                   className="flex justify-center items-center bg-[#52796F] rounded-[999rem] w-[3rem] h-[3rem] text-[#DAF0EE] text-[1.3rem] font-bold"
                   style={{
                     border: "4px solid #DAF0EE",
                   }}
                 >
-                  3
+                  2
                 </div>
               </div>
             </div>
@@ -1586,7 +1567,6 @@ function PropertyInfo() {
                           name="bike"
                           value={formData.propertyData.featureInfo.parking.bike}
                           onChange={handleChange}
-                          defaultValue={0}
                           style={{
                             backgroundColor: "white",
                             padding: "0.5rem",
@@ -2386,7 +2366,7 @@ function PropertyInfo() {
               <div className="flex justify-around items-center py-[1rem]">
                 <div
                   onClick={() => {
-                    setCheckedStateThree(!checkedStateThree);
+                    setCheckedStateOne(!checkedStateOne);
                     setCheckedStateTwo(!checkedStateTwo);
                   }}
                 >

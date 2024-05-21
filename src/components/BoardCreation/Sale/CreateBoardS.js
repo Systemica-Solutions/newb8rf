@@ -69,13 +69,15 @@ function CreateBoardS() {
   console.log(buyerId);
 
   const [searchValue, setSearchValue] = useState("");
-  const [responseDataTenantBoard, setResponseDataTenantBoard] = useState("");
-  const [responseDataTenant, setResponseDataTenant] = useState([]);
-  const [responseDataTenantData, setResponseDataTenantData] = useState([]);
+  const [responseDataBuyerBoard, setResponseDataBuyerBoard] = useState("");
+  const [responseDataBuyer, setResponseDataBuyer] = useState([]);
+  const [responseDataBuyerData, setResponseDataBuyerData] = useState([]);
   const [responseDataProperty, setResponseDataProperty] = useState([]);
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
   const [booleanValues, setBooleanValues] = useState([]); // Store boolean values here
+  const [boardData, setBoardData] = useState([]);
+  const [updatedData, setUpdatedData] = useState([]);
 
   const handleSearch = (searchTerm) => {
     setSearchValue(searchTerm);
@@ -89,8 +91,44 @@ function CreateBoardS() {
     },
   };
 
+
   useEffect(() => {
-    const fetchTenantDetails = async () => {
+    const fetchBoardDetails = async () => {
+      if (boardId) {
+        try {
+          const response = await axios.get(
+            `https://b8rliving.com/board/${boardId}`,
+            axiosConfig
+          );
+  
+          const responseDataPropertiesData = response.data.data.board.propertyId;
+  
+
+          if (responseDataPropertiesData) {
+            // Filter properties where 'imagesApproved' is true
+            const filteredProperties = responseDataPropertiesData.filter(
+              (property) =>
+                property.status === "Verified" &&
+                property.closeListingDetails === null
+            );
+            setBoardData(responseDataPropertiesData); // Set all properties added to the board
+           
+          }
+        } catch (error) {
+          console.error("Error fetching board details:", error);
+        }
+      }
+    };
+  
+  
+    fetchBoardDetails();
+  }, [boardId]);
+  
+
+
+
+  useEffect(() => {
+    const fetchBuyerDetails = async () => {
       // setLoading(true);
       try {
         const response = await axios.get(
@@ -99,14 +137,13 @@ function CreateBoardS() {
         );
 
         const responseData = response.data.data.buyer.buyerDetails;
-        const responseDataTenant = response.data.data.buyer.boardId;
         console.log(response.data.data.buyer.boardId);
-        const responseDataTenantBoardId = response.data.data.buyer.boardId;
+        const responseDataBuyerBoardId = response.data.data.buyer.boardId;
 
-        setResponseDataTenantBoard(responseDataTenantBoardId);
+        setResponseDataBuyerBoard(responseDataBuyerBoardId);
         // Update the formData state with the response data
-        setResponseDataTenant(responseData);
-        setResponseDataTenantData(responseDataTenant);
+        setResponseDataBuyer(responseData);
+        setResponseDataBuyerData(response.data.data.buyer);
 
         // Separate boolean values and store them in booleanValues state
         const booleanValues = [];
@@ -121,44 +158,55 @@ function CreateBoardS() {
         setBooleanValues(booleanValues);
       } catch (error) {
         console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false); // Set loading to false when the request is complete
-      }
+      } 
 
-      //Get All Properties
+    };
+
+    fetchBuyerDetails(); // Call the fetch function
+  }, [buyerId]);
+
+
+
+  useEffect(() => {
+    const fetchProperties = async () => {
       try {
-        // setLoading(true);
         const response = await axios.get(
           `https://b8rliving.com/property`,
           axiosConfig
         );
-
-        const responseData = response.data.data.properties;
-
-        // Update the formData state with the response data
-        setResponseDataProperty(responseData);
-        // Check if the 'imagesApproved' property exists and has data
+  
+  
         const properties = response.data.data.properties;
-        // console.log(properties);
-
+  
+  
         if (properties) {
           // Filter properties where 'imagesApproved' is true
           const filteredProperties = properties.filter(
-            (property) => property.status == "Verified"
+            (property) =>
+              property.status === "Verified" &&
+              property.closeListingDetails === null
           );
-
-          console.log(filteredProperties);
           setResponseDataProperty(filteredProperties);
+  
+  
+          const closedPropertiesInBoard = boardData.filter(
+            (boardProperty) => boardProperty.status === "Closed"
+          );
+  
+  
+          // Combine responseDataProperty and closedPropertiesInBoard
+          const final = [...filteredProperties, ...closedPropertiesInBoard];
+          setUpdatedData(final);
+  
+
         }
       } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false); // Set loading to false when the request is complete
+        console.error("Error fetching properties:", error);
       }
     };
-
-    fetchTenantDetails(); // Call the fetch function
-  }, [buyerId]);
+  
+    fetchProperties();
+  }, [boardData]);
 
   console.log(responseDataProperty);
 
@@ -231,20 +279,20 @@ function CreateBoardS() {
                     <div className="flex items-center justify-center flex-col">
                       <MdBed className="text-[2.5rem]" />
                       <p className="font-bold text-center">
-                        {responseDataTenant.length !== 0 &&
-                          responseDataTenant[0].houseConfiguration}
+                        {responseDataBuyer.length !== 0 &&
+                          responseDataBuyer[0].houseConfiguration}
                       </p>
                     </div>
                     <div className="flex items-center justify-center flex-col">
                       <MdChair className="text-[2.5rem]" />
                       <p className="font-bold text-center">
-                        {responseDataTenant.length !== 0 &&
-                          responseDataTenant[0].furnishingType}
+                        {responseDataBuyer.length !== 0 &&
+                          responseDataBuyer[0].furnishingType}
                       </p>
                     </div>
-                    {responseDataTenant.length !== 0 &&
-                    (responseDataTenant[0].carParking ||
-                      responseDataTenant[0].bikeParking) ? (
+                    {responseDataBuyer.length !== 0 &&
+                    (responseDataBuyer[0].carParking ||
+                      responseDataBuyer[0].bikeParking) ? (
                       <>
                         <div className="flex items-center justify-center flex-col">
                           <LuParkingCircle className="text-[2.5rem]" />
@@ -266,8 +314,8 @@ function CreateBoardS() {
                     <div className="flex justify-start items-center">
                       <HiCurrencyRupee className="text-[2rem]" />
                       <span className="text-[1.3rem] font-bold px-[0.2rem]">
-                        {responseDataTenant.length !== 0 &&
-                          responseDataTenant[0].budget}{" "}
+                        {responseDataBuyer.length !== 0 &&
+                          responseDataBuyer[0].budget}{" "}
                         Cr
                       </span>
                     </div>
@@ -281,8 +329,8 @@ function CreateBoardS() {
                       >
                         <HiMiniBuildingOffice className="text-[2.5rem]" />
                         <span className="text-[0.9rem] font-bold px-[1rem]">
-                          {responseDataTenant.length !== 0 &&
-                            responseDataTenant[0].houseType}
+                          {responseDataBuyer.length !== 0 &&
+                            responseDataBuyer[0].houseType}
                         </span>
                       </div>
                     </div>
@@ -359,11 +407,15 @@ function CreateBoardS() {
                 </button>
               </div>
               <PropertyComp
-                props={responseDataProperty}
-                responseDataTenantData={responseDataTenantData}
+                props={updatedData}
+
+                boardId={boardId}
+                responseDataBuyerData={responseDataBuyerData}
                 loading={loading}
                 Id={buyerId}
-                responseDataTenantBoard={responseDataTenantBoard}
+                name={name}
+                boardData={boardData}
+                responseDataBuyerBoard={responseDataBuyerBoard}
               />
             </div>
           </>

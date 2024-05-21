@@ -125,7 +125,7 @@ const TenantComp = ({ props, name }) => {
             <Link
               className="bg-[#E8E7E7] rounded-[0.5rem] flex justify-center items-center flex-col p-[0.5rem] w-[15%]"
               // to={`/createboard?tenantId=${values._id}&name=${values.tenantDetails.name}&boardId=${values.boardId} `}
-              to={`/createboardS?buyerId=${values._id}&name=${values.buyerDetails.name} `}
+              to={`/PropertyViewBoardS?boardId=${values.boardId}&buyerId=${values._id}&name=${values.buyerDetails.name} `}
             >
               <IoIosArrowDroprightCircle className="text-[#5D6560] text-[1.5rem]" />
               <p className="text-[0.8rem] text-center font-semibold">
@@ -138,7 +138,7 @@ const TenantComp = ({ props, name }) => {
               //   fetchTenantBoard(values._id, values.tenantDetails.name)
               // }
               className="bg-[#E8E7E7] rounded-[0.5rem] flex justify-center items-center flex-col p-[0.5rem] w-[15%]"
-              to={`/ViewBoardS?buyerId=${values._id}&name=${values.buyerDetails.name}`}
+              to={`/ViewBoardS?buyerId=${values._id}&name=${values.buyerDetails.name}&boardId=${values.boardId}`}
             >
               <IoIosArrowDroprightCircle className="text-[#5D6560] text-[1.5rem]" />
               <p className="text-[0.8rem] text-center font-semibold">
