@@ -35,7 +35,7 @@ const PropertyCompS = ({
   const [responseDataProperty, setResponseDataProperty] = useState([]);
   const [addedItems, setAddedItems] = useState([]);
 
-  console.log(responseDataBuyerData+"hello");
+  console.log(responseDataBuyerData + "hello");
 
   let axiosConfig = {
     headers: {
@@ -45,13 +45,12 @@ const PropertyCompS = ({
     },
   };
 
-  const filteredProps = props.filter(property=>{
-    return property.propertyDetails.propertyInfo.purposeSale===true;
-  })
-
+  const filteredProps = props.filter((property) => {
+    return property.propertyDetails.propertyInfo.purposeSale === true;
+  });
 
   const addToBoard = async (pId) => {
-    console.log("addToBoard",pId);
+    console.log("addToBoard", pId);
 
     // setLoading(true);
 
@@ -78,11 +77,11 @@ const PropertyCompS = ({
       console.log("Buyer board already exist");
       try {
         if (boardId) {
-          console.log(addedItems)
+          console.log(addedItems);
           var res;
           const response = await axios.put(
             `https://b8rliving.com/board/property/${boardId}`,
-            { propertyId: addedItems },  // Ensure propertyId is an array
+            { propertyId: addedItems }, // Ensure propertyId is an array
             axiosConfig
           );
           if (response.status === 200) {
@@ -102,7 +101,7 @@ const PropertyCompS = ({
         // create new board
         const res = await axios.post(
           `https://b8rliving.com/board`,
-          { tenantId: Id },
+          { buyerId: Id },
           axiosConfig
         );
         // console.log(res.data);
@@ -118,14 +117,13 @@ const PropertyCompS = ({
         if (bId !== undefined && bId !== null) {
           const response = await axios.put(
             `https://b8rliving.com/board/property/${bId}`,
-            { propertyId: addedItems },  // Ensure propertyId is an array
+            { propertyId: addedItems }, // Ensure propertyId is an array
             axiosConfig
           );
           if (response.status === 200) {
             window.location.href = `/PropertyViewBoardS?boardId=${bId}&buyerId=${Id}&name=${name}`;
           }
         }
-        
       } catch (error) {
         // Handle any errors that occur during the API request
         console.error("Error fetching data:", error);
@@ -156,7 +154,10 @@ const PropertyCompS = ({
                 <div
                   className="w-[85%] px-[1rem] py-[0.5rem] flex justify-between items-center"
                   style={{
-                    background: values.status === "Closed" ? "rgb(250, 203, 203)" : "#F5F5F5",
+                    background:
+                      values.status === "Closed"
+                        ? "rgb(250, 203, 203)"
+                        : "#F5F5F5",
                     border: "1px solid #000000",
                     borderRadius: "0.5rem",
                     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
@@ -282,7 +283,9 @@ const PropertyCompS = ({
                 ) : (
                   <> */}
                 <div
-                   className={`w-[15%] flex justify-center items-center rounded-[0.5rem] flex-col font-bold ${values.status === "Closed" ? "bg-[#FACBCB]" : "bg-[#E8E7E7]"}`}
+                  className={`w-[15%] flex justify-center items-center rounded-[0.5rem] flex-col font-bold ${
+                    values.status === "Closed" ? "bg-[#FACBCB]" : "bg-[#E8E7E7]"
+                  }`}
                   key={values._id}
                   onClick={() => addToBoard(values._id)}
                 >
@@ -323,8 +326,7 @@ const PropertyCompS = ({
           to={`/PropertyViewBoardS?boardId=${responseDataTenantData.boardId}`}
         >
           </Link> */}
-          <CommonBtn title="View Board" bgColor="#3F007F" />
-      
+        <CommonBtn title="View Board" bgColor="#3F007F" />
       </div>
     </>
   );
