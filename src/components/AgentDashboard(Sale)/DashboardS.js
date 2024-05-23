@@ -1,4 +1,4 @@
-import React, { Component, useEffect,useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import "./DashboardS.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -40,7 +40,7 @@ import ExtraCommonButton from "../ExtraCommonButton";
 
 function DashboardS() {
   const token = localStorage.getItem("token");
-  const [countBuyer,setCountBuyer] = useState([]);
+  const [countBuyer, setCountBuyer] = useState([]);
   const [loading, setLoading] = useState(false);
   console.log(token);
 
@@ -56,7 +56,7 @@ function DashboardS() {
       Authorization: `Basic ${token}`,
     },
   };
-  useEffect(() =>{
+  useEffect(() => {
     const fetchBuyerCounts = async () => {
       setLoading(true);
       try {
@@ -75,15 +75,20 @@ function DashboardS() {
       }
     };
     fetchBuyerCounts();
-  },[])
+  }, []);
   console.log(countBuyer);
   const difference = countBuyer.Total - countBuyer.Deactivate;
 
-  const number = difference && difference !== 0
-    ? difference
-    : difference === 0
-    ? 0
-    : "-";
+  const number =
+    difference && difference !== 0 ? difference : difference === 0 ? 0 : "-";
+
+  let route = {
+    WaitingForProperty: "WaitingForProperty",
+    CurrentlyViewing: "CurrentlyViewing",
+    Shortlisted: "Shortlisted",
+    Deactivate: "Deactivate",
+    BoardShared: "BoardShared",
+  };
 
   return (
     <>
@@ -254,7 +259,7 @@ function DashboardS() {
                   {/* active leads */}
                   <Link
                     className="p-[0.5rem] bg-[#FFFFFF] rounded-[0.8rem] flex justify-between items-center w-[100%] flex-col"
-                    to="/ActiveLeads"
+                    to="/ActiveLeadsS"
                   >
                     {/* icon */}
                     <div className="flex justify-center items-center pb-[0.5rem]">
@@ -271,7 +276,7 @@ function DashboardS() {
                   {/* waiting for property */}
                   <Link
                     className="p-[0.5rem] bg-[#FFFFFF] rounded-[0.8rem] flex justify-between items-center w-[100%] flex-col"
-                    to="/AllTenantOne"
+                    to={`/AllTenantOneS?route=${route.WaitingForProperty}`}
                   >
                     {/* icon */}
                     <div className="flex justify-center items-center pb-[0.5rem]">
@@ -288,7 +293,7 @@ function DashboardS() {
                   {/* currently viewing */}
                   <Link
                     className="p-[0.5rem] bg-[#FFFFFF] rounded-[0.8rem] flex justify-between items-center w-[100%] flex-col"
-                    to="/AllTenantOne"
+                    to={`/AllTenantOneS?route=${route.CurrentlyViewing}`}
                   >
                     {/* icon */}
                     <div className="flex justify-center items-center pb-[0.5rem]">
@@ -305,7 +310,7 @@ function DashboardS() {
                   {/* shortlisted */}
                   <Link
                     className="p-[0.5rem] bg-[#FFFFFF] rounded-[0.8rem] flex justify-between items-center w-[100%] flex-col"
-                    to="/AllTenantOne"
+                    to={`/AllTenantOneS?route=${route.Shortlisted}`}
                   >
                     {/* icon */}
                     <div className="flex justify-center items-center pb-[0.5rem]">
