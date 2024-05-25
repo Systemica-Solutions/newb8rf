@@ -1586,15 +1586,15 @@ function PropertyInfo() {
                             style={{
                               backgroundColor: "red",
                             }}
-                            value="1"
+                            value="1 Bike"
                           >
                             1 Bike
                           </option>
-                          <option value="2">2 Bikes</option>
+                          <option value="2 Bikes">2 Bikes</option>
                           <option value="Included with Car">
                             Included with Car
                           </option>
-                          <option value="0">
+                          <option value="">
                             No Bike Parking
                           </option>
                         </select>
@@ -1635,7 +1635,7 @@ function PropertyInfo() {
                             Covered Roof
                           </option>
                           <option value="Open">Open</option>
-                          <option value="0">
+                          <option value="">
                             No Parking Available
                           </option>
                         </select>
