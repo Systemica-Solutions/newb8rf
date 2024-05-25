@@ -91,7 +91,6 @@ function CreateBoardS() {
     },
   };
 
-
   useEffect(() => {
     const fetchBoardDetails = async () => {
       if (boardId) {
@@ -100,9 +99,9 @@ function CreateBoardS() {
             `https://b8rliving.com/board/${boardId}`,
             axiosConfig
           );
-  
-          const responseDataPropertiesData = response.data.data.board.propertyId;
-  
+
+          const responseDataPropertiesData =
+            response.data.data.board.propertyId;
 
           if (responseDataPropertiesData) {
             // Filter properties where 'imagesApproved' is true
@@ -112,20 +111,15 @@ function CreateBoardS() {
                 property.closeListingDetails === null
             );
             setBoardData(responseDataPropertiesData); // Set all properties added to the board
-           
           }
         } catch (error) {
           console.error("Error fetching board details:", error);
         }
       }
     };
-  
-  
+
     fetchBoardDetails();
   }, [boardId]);
-  
-
-
 
   useEffect(() => {
     const fetchBuyerDetails = async () => {
@@ -158,14 +152,11 @@ function CreateBoardS() {
         setBooleanValues(booleanValues);
       } catch (error) {
         console.error("Error fetching data:", error);
-      } 
-
+      }
     };
 
     fetchBuyerDetails(); // Call the fetch function
   }, [buyerId]);
-
-
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -174,11 +165,9 @@ function CreateBoardS() {
           `https://b8rliving.com/property`,
           axiosConfig
         );
-  
-  
+
         const properties = response.data.data.properties;
-  
-  
+
         if (properties) {
           // Filter properties where 'imagesApproved' is true
           const filteredProperties = properties.filter(
@@ -187,28 +176,26 @@ function CreateBoardS() {
               property.closeListingDetails === null
           );
           setResponseDataProperty(filteredProperties);
-  
-  
+
           const closedPropertiesInBoard = boardData.filter(
             (boardProperty) => boardProperty.status === "Closed"
           );
-  
-  
+
           // Combine responseDataProperty and closedPropertiesInBoard
           const final = [...filteredProperties, ...closedPropertiesInBoard];
           setUpdatedData(final);
-  
-
         }
       } catch (error) {
         console.error("Error fetching properties:", error);
       }
     };
-  
+
     fetchProperties();
   }, [boardData]);
 
   console.log(responseDataProperty);
+
+  console.log(responseDataBuyer);
 
   // console.log(responseDataTenantData);
 
@@ -290,7 +277,7 @@ function CreateBoardS() {
                           responseDataBuyer[0].furnishingType}
                       </p>
                     </div>
-                    {responseDataBuyer.length !== 0 &&
+                    {/* {responseDataBuyer.length !== 0 &&
                     (responseDataBuyer[0].carParking ||
                       responseDataBuyer[0].bikeParking) ? (
                       <>
@@ -306,7 +293,7 @@ function CreateBoardS() {
                           <p className="font-bold text-center">Not Available</p>
                         </div>
                       </>
-                    )}
+                    )} */}
                   </div>
                   {/* rent and ApartmentType */}
                   <div className="pt-[1rem] grid grid-cols-2">
@@ -408,7 +395,6 @@ function CreateBoardS() {
               </div>
               <PropertyComp
                 props={updatedData}
-
                 boardId={boardId}
                 responseDataBuyerData={responseDataBuyerData}
                 loading={loading}
