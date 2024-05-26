@@ -169,7 +169,7 @@ function PropertyViewingStatus()
         className="form"
         style={{
           borderRadius: "16px",
-          marginTop: "10%",
+          // marginTop: "10%",
           backgroundRepeat: "no-repeat",
           backgroundImage: `url(${oneBg})`,
           backgroundRepeat: "no-repeat",
@@ -178,7 +178,7 @@ function PropertyViewingStatus()
       >
         <CommonHeader title="Property Viewing Status" color="#52796F" />
         <div >
-          <div className="px-[1rem] py-[0.5rem]" >
+          <div className="px-[1rem] py-[1rem]" >
             <div className="flex justify-between gap-x-[0.5rem]">
               {/* left-container */}
               <div

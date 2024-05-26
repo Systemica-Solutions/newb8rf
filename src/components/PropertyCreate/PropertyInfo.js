@@ -110,7 +110,7 @@ function PropertyInfo() {
       },
       ownerInfo: {
         phoneNumber: "8009832805",
-        panNumber: "BIGPV7008G",
+        panNumber: "PV1009BHG90",
         country: "India",
         city: "Mumbai",
         name: {
@@ -452,7 +452,7 @@ function PropertyInfo() {
         .post("https://b8rliving.com/property", formDataCopy, axiosConfig)
         .then((response) => {
           console.log(response.data);
-          alert("Your Property details has been submitted");
+          toast.success("Your Property details has been submitted");
           // do something with the response
           if (response.data.data.property.propertyDetails.length > 0) {
             const rentAmountConst =
@@ -463,7 +463,19 @@ function PropertyInfo() {
                 .saleAmount;
             console.log("Rent Amount:", rentAmountConst);
             if (rentAmountConst > 1 && saleAmountConst > 1) {
-              window.location.href = `/PropertyCreated?name=${formData.houseName}&furnishingType=${formData.propertyData.featureInfo.furnishingType}&rentAmount=${formData.propertyData.featureInfo.rentAmount}&rentDeposit=${formData.propertyData.featureInfo.rentDeposit}&saleAmount=${formData.propertyData.featureInfo.saleAmount}&saleDeposit=${formData.propertyData.featureInfo.saleDeposit}&houseConfig=${formData.propertyData.propertyInfo.houseConfig}`;
+              window.location.href = `/PropertyCreated?name=${
+                formData.houseName + formData.societyName
+              }&furnishingType=${
+                formData.propertyData.featureInfo.furnishingType
+              }&rentAmount=${
+                formData.propertyData.featureInfo.rentAmount
+              }&rentDeposit=${
+                formData.propertyData.featureInfo.rentDeposit
+              }&saleAmount=${
+                formData.propertyData.featureInfo.saleAmount
+              }&saleDeposit=${
+                formData.propertyData.featureInfo.saleDeposit
+              }&houseConfig=${formData.propertyData.propertyInfo.houseConfig}`;
             } else if (rentAmountConst > 1) {
               window.location.href = `/PropertyCreated?name=${formData.houseName}&furnishingType=${formData.propertyData.featureInfo.furnishingType}&rentAmount=${formData.propertyData.featureInfo.rentAmount}&rentDeposit=${formData.propertyData.featureInfo.rentDeposit}&houseConfig=${formData.propertyData.propertyInfo.houseConfig}`;
             } else if (saleAmountConst > 1) {
@@ -554,7 +566,7 @@ function PropertyInfo() {
                   display: "block",
                   marginBottom: "0.5rem",
                   fontWeight: "300",
-                  float: "left"
+                  float: "left",
                 }}
               >
                 Property Type?{" "}
@@ -860,6 +872,254 @@ function PropertyInfo() {
         ""
       )}
       {checkedStateTwo ? (
+        <div className="">
+          <div
+            class=""
+            style={{
+              // borderRadius: "16px",
+              // marginTop: "10%",
+              backgroundRepeat: "no-repeat",
+              backgroundImage: `url(${backgroundSecond})`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "100% 100%",
+            }}
+          >
+            {/* <h2> Add Landlord Details </h2> */}
+            <CommonHeader title="Add Landlord/Owner Details" color="#52796F" />
+            {/* <img src={num_2} alt="Image description" height={55} /> */}
+            {/* stageCount */}
+            <div className="grid grid-cols-3 py-[0.5rem]">
+              <div className="flex justify-center items-center">
+                <div
+                  className="flex justify-center items-center bg-[#F0FBF8] rounded-[999rem] w-[3rem] h-[3rem] text-[#5D6560] text-[1.3rem] font-bold"
+                  style={{
+                    border: "4px solid #DAF0EE",
+                  }}
+                >
+                  1
+                </div>
+              </div>
+              <div className="flex justify-center items-center">
+                <div
+                  className="flex justify-center items-center bg-[#52796F] rounded-[999rem] w-[3rem] h-[3rem] text-[#DAF0EE] text-[1.3rem] font-bold"
+                  style={{
+                    border: "4px solid #DAF0EE",
+                  }}
+                >
+                  2
+                </div>
+              </div>
+              <div className="flex justify-center items-center">
+                <div
+                  className="flex justify-center items-center bg-[#F0FBF8] rounded-[999rem] w-[3rem] h-[3rem] text-[#5D6560] text-[1.3rem] font-bold"
+                  style={{
+                    border: "4px solid #DAF0EE",
+                  }}
+                >
+                  3
+                </div>
+              </div>
+            </div>
+            <form
+              onSubmit={handleChangeTwo}
+              style={{ borderRadius: "16px" }}
+              className="inner-background"
+            >
+              {/* Owner's First NAME */}
+              <div className="flex justify-center items-center pb-[1rem]">
+                <h4
+                  style={{ color: "#52796f" }}
+                  className="text-[1.3rem] font-bold"
+                >
+                  {" "}
+                  Who owns this Property?
+                </h4>
+              </div>
+              <label
+                className="mx-[0.2rem]"
+                for="first"
+                style={{
+                  textAlign: "left",
+                  display: "block",
+                  marginBottom: "0.5rem",
+                  fontWeight: "300",
+                  float: "left",
+                }}
+              >
+                Owner's First Name{" "}
+              </label>
+              <input
+                type="text"
+                id="first"
+                placeholder="Owner's First Name"
+                name="first"
+                defaultValue={"N/A"}
+                value={formData.propertyData.ownerInfo.name.first}
+                onChange={handleChange}
+                style={styles}
+              />
+              {/* <br></br> */}
+              {/* Owner's Last NAME */}
+              <label
+                className="mx-[0.2rem]"
+                for="last"
+                style={{
+                  textAlign: "left",
+                  display: "block",
+                  marginBottom: "0.5rem",
+                  fontWeight: "300",
+                  float: "left",
+                }}
+              >
+                Owner's Last Name{" "}
+              </label>
+              <input
+                type="text"
+                id="last"
+                placeholder="Owner's Last name"
+                name="last"
+                defaultValue={"N/A"}
+                value={formData.propertyData.ownerInfo.name.last}
+                onChange={handleChange}
+                style={styles}
+              />
+              <br></br>
+              {/* CONTACT NUM */}
+              <label
+                className="mx-[0.2rem]"
+                for="phoneNumber"
+                style={{
+                  textAlign: "left",
+                  display: "block",
+                  marginBottom: "0.5rem",
+                  fontWeight: "300",
+                  float: "left",
+                }}
+              >
+                Contact Number
+              </label>
+              <input
+                type="tel"
+                id="phoneNumber"
+                maxLength="10"
+                placeholder="10 digit number"
+                name="phoneNumber"
+                // required
+                // value={formData.propertyData.ownerInfo.phoneNumber}
+                defaultValue=""
+                onChange={handleChange}
+                style={styles}
+              />
+              <br></br>
+              {/* PAN CARD */}
+              <label
+                className="mx-[0.2rem] mt-[20px]"
+                for="panNumber"
+                style={{
+                  textAlign: "left",
+                  display: "block",
+                  marginBottom: "0.5rem",
+                  fontWeight: "300",
+                  float: "left",
+                }}
+              >
+                Pan Card(Useful for Rental Agreement)
+              </label>
+              <input
+                type="text"
+                id="panNumber"
+                placeholder="Pan number"
+                name="panNumber"
+                // required
+                // value={formData.propertyData.ownerInfo.panNumber}
+                defaultValue=""
+                onChange={handleChange}
+                style={styles}
+              />
+              <br></br>
+              {/* Residing Country */}
+              <label
+                className="mx-[0.2rem]"
+                for="country"
+                style={{
+                  textAlign: "left",
+                  display: "block",
+                  marginBottom: "0.5rem",
+                  fontWeight: "300",
+                  float: "left",
+                }}
+              >
+                Country of Residence
+              </label>
+              <input
+                type="text"
+                id="country"
+                placeholder="residing country"
+                name="country"
+                // required
+                // value={formData.propertyData.ownerInfo.country}
+                defaultValue=""
+                onChange={handleChange}
+                style={styles}
+              />
+              <br></br>
+              <label
+                className="mx-[0.2rem]"
+                for="city"
+                style={{
+                  textAlign: "left",
+                  display: "block",
+                  marginBottom: "0.5rem",
+                  fontWeight: "300",
+                  float: "left",
+                }}
+              >
+                City of Residence
+              </label>
+              <input
+                type="text"
+                id="city"
+                placeholder="residing city"
+                name="city"
+                // required
+                // value={formData.propertyData.ownerInfo.city}
+                defaultValue=""
+                onChange={handleChange}
+                style={styles}
+              />
+              {/* <br></br> */}
+              {/* <br></br> */}
+              <div className="flex justify-around items-center">
+                {/* <div>
+                  <BackButton
+                    title="Back"
+                    fontweight="bolder"
+                    onClick={handleClick}
+                  />
+                </div> */}
+                <div
+                  onClick={() => {
+                    setCheckedStateTwo(!checkedStateTwo);
+                    setCheckedStateOne(!checkedStateOne);
+                  }}
+                >
+                  <BackButton title="Back" />
+                </div>
+                <CommonBtn
+                  title="Save and next"
+                  margin="40%"
+                  fontweight="bolder"
+                  type="submit"
+                />
+              </div>
+            </form>
+            <Footer />
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+      {checkedStateThree ? (
         <div className="login-page">
           <div
             class="form"
@@ -1292,7 +1552,7 @@ function PropertyInfo() {
                           </option>
                           <option value="2 Cars">2 Car</option>
                           <option value="3 Cars">3 Car</option>
-                          <option value="">No Car Parking</option>
+                          <option value="No Car Parking">No Car Parking</option>
                         </select>
                       </div>
                       <div className="py-[0.5rem] flex flex-col">
@@ -1331,8 +1591,12 @@ function PropertyInfo() {
                             1 Bike
                           </option>
                           <option value="2 Bikes">2 Bikes</option>
-                          <option value="Included with Car">Included with Car</option>
-                          <option value="">No Bike Parking</option>
+                          <option value="Included with Car">
+                            Included with Car
+                          </option>
+                          <option value="">
+                            No Bike Parking
+                          </option>
                         </select>
                       </div>
                       <div className="py-[0.5rem] flex flex-col">
@@ -1371,7 +1635,9 @@ function PropertyInfo() {
                             Covered Roof
                           </option>
                           <option value="Open">Open</option>
-                          <option value="">No Parking Available</option>
+                          <option value="">
+                            No Parking Available
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -1687,7 +1953,7 @@ function PropertyInfo() {
                         name="constructionYear"
                         placeholder="-year drop-down* -"
                         max={getCurrentYear()}
-                        min={getCurrentYear()-100}
+                        min={getCurrentYear() - 100}
                         style={{
                           backgroundColor: "white",
                           padding: "0.5rem",

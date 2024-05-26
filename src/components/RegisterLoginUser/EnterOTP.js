@@ -61,7 +61,14 @@ function EnterOTP() {
     }
     // If all checks pass, the password is considered strong
     return (
-      <p style={{ fontSize: "10px", color: "green", marginTop: "-10px",textAlign:"right"}}>
+      <p
+        style={{
+          fontSize: "10px",
+          color: "green",
+          marginTop: "-10px",
+          textAlign: "right",
+        }}
+      >
         Strong: Password meets all strength criteria.{" "}
       </p>
     );
@@ -158,14 +165,11 @@ function EnterOTP() {
           alert(OTP_CHECK);
 
           axios
-            .put(
-              "https://b8rliving.com/agent/reset-password",
-              {
-                password: formData.password,
-                phoneNumber: formData.phone,
-                confirmPassword: formData.c_password,
-              }
-            )
+            .put("https://b8rliving.com/agent/reset-password", {
+              password: formData.password,
+              phoneNumber: formData.phone,
+              confirmPassword: formData.c_password,
+            })
             .then((response) => {
               console.log(response.data);
               alert(response.data.message);
@@ -178,8 +182,6 @@ function EnterOTP() {
               alert(errorMessage);
             });
           console.log(OTP_CHECK);
-
-         
         })
         .catch((error) => {
           console.log(error);
@@ -199,20 +201,22 @@ function EnterOTP() {
             className="form"
             style={{
               borderRadius: "16px",
-              marginTop: "10%",
+              // marginTop: "10%",
               backgroundRepeat: "no-repeat",
               backgroundImage: `url(${backgroundthird})`,
               backgroundSize: "100% 100%",
             }}
           >
-            <div className="MainLogoDesign">
+            <div className="w-[20vw] m-[0.5rem]">
               <Link to="/dashboard">
                 <img src={logo} height={40} alt="fireSpot" />
               </Link>
             </div>
+            <div className="font-bold text-[1.3rem] py-[1rem] text-[#52796F]">
+              {" "}
+              Reset Password Link
+            </div>
             <form onSubmit={handleSubmit} className="login-form">
-              <h3 className="Htitle">Reset Password</h3>
-
               <label htmlFor="enter_otp" className="form-label">
                 Enter OTP (Check Phone)
               </label>
@@ -248,7 +252,14 @@ function EnterOTP() {
                 required
               />
 
-              <p style={{ fontSize: "10px", color: "red", marginTop: "-10px",textAlign:"right" }}>
+              <p
+                style={{
+                  fontSize: "10px",
+                  color: "red",
+                  marginTop: "-10px",
+                  textAlign: "right",
+                }}
+              >
                 {passwordStrength}
               </p>
 
@@ -263,16 +274,23 @@ function EnterOTP() {
                 name="c_password"
                 required
               />
-              { passwordMatch ? (
-             "Password Matched"
-              ) : ( 
-              <>
-                <p style={{ fontSize: "10px", color: "red", marginTop: "-10px",textAlign:"right" }}>
-                  Password did not match!!! 
+              {passwordMatch ? (
+                "Password Matched"
+              ) : (
+                <>
+                  <p
+                    style={{
+                      fontSize: "10px",
+                      color: "red",
+                      marginTop: "-10px",
+                      textAlign: "right",
+                    }}
+                  >
+                    Password did not match!!!
                   </p>
                 </>
-                ) }
-              <div style={{ display: "flex", flexDirection: "row" }}>
+              )}
+              <div className="flex justify-center items-center py-[1rem] gap-x-[1rem]">
                 <BackButton title="Back" margin="" fontweight="bolder" />
                 <CommonBtn
                   title="Set Password"

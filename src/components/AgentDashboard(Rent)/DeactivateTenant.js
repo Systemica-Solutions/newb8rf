@@ -23,6 +23,8 @@ import BackButton from "../CommonButtonBack";
 import Deactivateimg from "../Assets/Deactivate.png";
 import { FcBusinessman } from "react-icons/fc";
 import { ImCross } from "react-icons/im";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function DeactivateTenant() {
   const queryParameters = new URLSearchParams(window.location.search);
@@ -68,6 +70,7 @@ function DeactivateTenant() {
 
   const token = localStorage.getItem("token");
   console.log(token);
+  console.log("id" + idTenant);
 
   // const [deactivateStatus, setDeactivateStatus] = useState("Rented From B8R");
   const [deactivateStatus, setDeactivateStatus] = useState({
@@ -97,11 +100,11 @@ function DeactivateTenant() {
 
       // Log the updated state
       console.log(response);
-      alert("Tenant Deactivated sucessfully!");
+      toast.success("Tenant Deactivated sucessfully!");
       window.location.href = "/Dashboard";
     } catch (error) {
       // Handle any errors that occur during the API request
-      alert(error);
+      toast.error(error.response.data.message);
     } finally {
       setLoading(false); // Set loading to false when the request is complete
     }
@@ -109,6 +112,11 @@ function DeactivateTenant() {
 
   return (
     <>
+      <ToastContainer
+        className="my-[3rem] text-[1.1rem] font-bold"
+        autoClose={1000}
+        // hideProgressBar={true}
+      />
       <div
         className=""
         style={{
