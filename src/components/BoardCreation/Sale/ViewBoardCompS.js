@@ -144,7 +144,7 @@ const ViewBoardComp = ({ props, loading , Id, responseDataBoard }) => {
                         {values.societyName}
                       </p>
                       <p className="font-bold">
-                        Rent:{values.propertyDetails.featureInfo.rentAmount}{" "}
+                        Sale:{values.propertyDetails.featureInfo.rentAmount}{" "}
                         INR/month
                       </p>
                       <div className="pt-[0.8rem] flex items-center text-[#3B413D] font-semibold justify-center py-[0.5rem]">
@@ -195,8 +195,8 @@ const ViewBoardComp = ({ props, loading , Id, responseDataBoard }) => {
                           {values.propertyDetails.propertyInfo.houseConfig}
                         </p>
                       </div>
-                      {values.propertyDetails.featureInfo.parking.car !== "" &&
-                      values.propertyDetails.featureInfo.parking.bike !== "" ? (
+                      {values.propertyDetails.featureInfo.parking.car!=="No Car Parking" &&
+                      values.propertyDetails.featureInfo.parking.bike!=="No Bike Parking"   ? (
                         <div className="flex flex-col items-center">
                           <LuParkingCircle className="text-[1.1rem] mx-[0.3rem]" />
                           <p className="text-[0.6rem]">Available</p>

@@ -105,7 +105,7 @@ function AddBuyer() {
     };
 
     axios
-      .post("https://b8rliving.com/buyer", formData, axiosConfig)
+      .post("https://b8rliving.com/buyer/1", formData, axiosConfig)
       .then((response) => {
         alert("Your Buyer details has been submitted");
         //redirect user to Dashboard

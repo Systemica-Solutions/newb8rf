@@ -36,7 +36,7 @@ function AvailablePropertyrentalS()
       setLoading(true);
       try {
         const response = await axios.get(
-          "https://b8rliving.com/property",
+          "https://b8rliving.com/property?purposeType=purposeSale",
           axiosConfig
         );
 
@@ -89,8 +89,7 @@ function AvailablePropertyrentalS()
         }}
       >
         <CommonHeader title="Available Properties Sale" color= "#1E0058" />
-        <SearchBar onSearch={handleSearch} placeholder="Search by property Name"/>
-        <p style={{textAlign:"left"}}>Hey <b>{name}</b>, 
+        <p style={{textAlign:"left",marginLeft:"20px"}}>Hey <b>{name}</b>, 
 
         Here are all the sale properties that are available for sale</p>
         <AvailablePropertyComp props={responsePendingProperties} name={name} />
