@@ -11,6 +11,7 @@ import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { FaHeart } from "react-icons/fa";
 import { FaEye } from "react-icons/fa6";
 import { MdOutlineAirplanemodeActive } from "react-icons/md";
+import { MdOutlineMobileScreenShare } from "react-icons/md";
 
 const TenantComp = ({ props, name }) => {
   // console.log(props);
@@ -41,112 +42,134 @@ const TenantComp = ({ props, name }) => {
   return (
     <>
       {/* Mapping */}
-      {filteredData.map((values, index) => (
-        <div
-          key={index}
-          className="px-[1rem] py-[0.5rem] flex gap-x-[0.5rem] w-[100%]"
-        >
+      {filteredData
+        .sort((a, b) => {
+          const statusOrder = {
+            WaitingForProperty: 0,
+            Shortlisted: 1,
+            CurrentlyViewing: 2,
+            Shared: 3,
+            Deactivate: 4,
+          };
+          return statusOrder[a.status] - statusOrder[b.status];
+        })
+        .map((values, index) => (
           <div
-            className="flex justify-between items-center p-[0.5rem] bg-white w-[85%]"
-            style={{
-              border: "1px solid #DAF0EE",
-              borderRadius: "0.5rem",
-              boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-            }}
+            key={index}
+            className="px-[1rem] py-[0.5rem] flex gap-x-[0.5rem] w-[100%]"
           >
-            {/* left-container */}
             <div
-              className="flex items-center"
+              className="flex justify-between items-center p-[0.5rem] bg-white w-[85%]"
               style={{
-                borderRight: "2px solid black",
-                padding: "1rem 0",
+                border: "1px solid #DAF0EE",
+                borderRadius: "0.5rem",
+                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               }}
             >
-              {values.status === "WaitingForProperty" && (
-                <>
-                  <div>
-                    <RiQuestionnaireFill className="text-[#52796F] text-[2.5rem]" />
-                  </div>
+              {/* left-container */}
+              <div
+                className="flex items-center"
+                style={{
+                  borderRight: "2px solid black",
+                  padding: "1rem 0",
+                }}
+              >
+                {values.status === "WaitingForProperty" && (
+                  <>
+                    <div>
+                      <RiQuestionnaireFill className="text-[#52796F] text-[2.5rem]" />
+                    </div>
 
-                  <div className="text-[0.9rem] font-semibold px-[0.2rem]">
-                    Waiting for property
-                  </div>
-                </>
-              )}
-              {values.status === "Shortlisted" && (
-                <>
-                  <div>
-                    <FaHeart className="text-[#B30808] text-[2.5rem]" />
-                  </div>
+                    <div className="text-[0.9rem] font-semibold px-[0.2rem]">
+                      Waiting for property
+                    </div>
+                  </>
+                )}
+                {values.status === "Shortlisted" && (
+                  <>
+                    <div>
+                      <FaHeart className="text-[#B30808] text-[2.5rem]" />
+                    </div>
 
-                  <div className="text-[0.9rem] font-semibold px-[0.2rem]">
-                    2 properties shortlisted
-                  </div>
-                </>
-              )}
-              {values.status === "CurrentlyViewing" && (
-                <>
-                  <div>
-                    <FaEye className="text-[#52796F] text-[2.5rem]" />
-                  </div>
+                    <div className="text-[0.9rem] font-semibold px-[0.2rem]">
+                      2 properties shortlisted
+                    </div>
+                  </>
+                )}
+                {values.status === "Shared" && (
+                  <>
+                    <div>
+                      <MdOutlineMobileScreenShare className="text-[#52796F] text-[2.5rem]" />
+                    </div>
 
-                  <div className="text-[0.9rem] font-semibold px-[0.2rem]">
-                    4 properties shared
-                  </div>
-                </>
-              )}
-              {values.status === "Deactivate" && (
-                <>
-                  <div>
-                    <MdOutlineAirplanemodeActive className="text-[#52796F] text-[2.5rem]" />
-                  </div>
+                    <div className="text-[0.9rem] font-semibold px-[0.2rem]">
+                      {values.numberShared} properties shared
+                    </div>
+                  </>
+                )}
+                {values.status === "CurrentlyViewing" && (
+                  <>
+                    <div>
+                      <FaEye className="text-[#52796F] text-[2.5rem]" />
+                    </div>
 
-                  <div className="text-[0.9rem] font-semibold px-[0.2rem]">
-                    Deactivated
-                  </div>
-                </>
-              )}
+                    <div className="text-[0.9rem] font-semibold px-[0.2rem]">
+                      4 properties shared
+                    </div>
+                  </>
+                )}
+                {values.status === "Deactivate" && (
+                  <>
+                    <div>
+                      <MdOutlineAirplanemodeActive className="text-[#52796F] text-[2.5rem]" />
+                    </div>
+
+                    <div className="text-[0.9rem] font-semibold px-[0.2rem]">
+                      Deactivated
+                    </div>
+                  </>
+                )}
+              </div>
+              {/* right-container-take action one */}
+              <div className="px-[1rem]">
+                <p className="text-[1.1rem] font-bold pb-[0.8rem]">
+                  {values.buyerDetails.name}
+                </p>
+                <p className="text-[1rem] font-semibold">
+                  <u>Preference</u>
+                </p>
+                <p className="text-[1rem] font-semibold">
+                  Rs.{values.buyerDetails.budget} Cr &{" "}
+                  {values.buyerDetails.houseConfiguration}
+                </p>
+              </div>
             </div>
-            {/* right-container-take action one */}
-            <div className="px-[1rem]">
-              <p className="text-[1.1rem] font-bold pb-[0.8rem]">
-                {values.buyerDetails.name}
-              </p>
-              <p className="text-[1rem] font-semibold">
-                <u>Preference</u>
-              </p>
-              <p className="text-[1rem] font-semibold">
-                Rs.{values.buyerDetails.budget} Cr &{" "}
-                {values.buyerDetails.houseConfiguration}
-              </p>
-            </div>
-          </div>
-          {values.isOnBoard ? (
-            <Link
-              className="bg-[#E8E7E7] rounded-[0.5rem] flex justify-center items-center flex-col p-[0.5rem] w-[15%]"
-              // to={`/createboard?tenantId=${values._id}&name=${values.tenantDetails.name}&boardId=${values.boardId} `}
-              to={`/createboardS?buyerId=${values._id}&name=${values.buyerDetails.name} `}
-            >
-              <IoIosArrowDroprightCircle className="text-[#5D6560] text-[1.5rem]" />
-              <p className="text-[0.8rem] text-center font-semibold">
-                Take Action
-              </p>
-            </Link>
-          ) : (
-            <Link
-              // onClick={() =>
-              //   fetchTenantBoard(values._id, values.tenantDetails.name)
-              // }
-              className="bg-[#E8E7E7] rounded-[0.5rem] flex justify-center items-center flex-col p-[0.5rem] w-[15%]"
-              to={`/ViewBoardS?buyerId=${values._id}&name=${values.buyerDetails.name}`}
-            >
-              <IoIosArrowDroprightCircle className="text-[#5D6560] text-[1.5rem]" />
-              <p className="text-[0.8rem] text-center font-semibold">
-                Take Action
-              </p>
-            </Link>
-          )}
-          {/* {values.isOnBoard && values.status == "Shortlisted" ? (
+            {values.isOnBoard ? (
+              <Link
+                className="bg-[#E8E7E7] rounded-[0.5rem] flex justify-center items-center flex-col p-[0.5rem] w-[15%]"
+                // to={`/createboard?tenantId=${values._id}&name=${values.tenantDetails.name}&boardId=${values.boardId} `}
+                to={`/PropertyViewBoardS?boardId=${values.boardId}&buyerId=${values._id}&name=${values.buyerDetails.name} `}
+              >
+                <IoIosArrowDroprightCircle className="text-[#5D6560] text-[1.5rem]" />
+                <p className="text-[0.8rem] text-center font-semibold">
+                  Take Action
+                </p>
+              </Link>
+            ) : (
+              <Link
+                // onClick={() =>
+                //   fetchTenantBoard(values._id, values.tenantDetails.name)
+                // }
+                className="bg-[#E8E7E7] rounded-[0.5rem] flex justify-center items-center flex-col p-[0.5rem] w-[15%]"
+                to={`/ViewBoardS?buyerId=${values._id}&name=${values.buyerDetails.name}&boardId=${values.boardId}`}
+              >
+                <IoIosArrowDroprightCircle className="text-[#5D6560] text-[1.5rem]" />
+                <p className="text-[0.8rem] text-center font-semibold">
+                  Take Action
+                </p>
+              </Link>
+            )}
+            {/* {values.isOnBoard && values.status == "Shortlisted" ? (
             <Link
               to={`/PropertyViewBoardS?buyerId=${values._id}&name=${values.buyerDetails.name} `}
             >
@@ -171,8 +194,8 @@ const TenantComp = ({ props, name }) => {
           ) : (
             ""
           )} */}
-        </div>
-      ))}
+          </div>
+        ))}
     </>
   );
 };

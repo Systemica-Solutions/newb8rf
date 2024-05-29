@@ -19,7 +19,7 @@ import Back from "../Back";
 function AllTenantOne() {
   const [archiveData, setArchiveData] = useState(false);
   const queryParameters = new URLSearchParams(window.location.search);
-  const [route,setRoute] = useState(queryParameters.get("route"));
+  const [route, setRoute] = useState(queryParameters.get("route"));
   const [ActivebgColor, setActivebgColor] = useState("#D2D7D6");
   const [ActiveBorderColor, setBorderColor] = useState("#A9C0BA");
   const [activeColor, setColor] = useState("#77A8A4");
@@ -45,7 +45,7 @@ function AllTenantOne() {
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
       "Access-Control-Allow-Origin": "*",
-      Authorization:` Basic ${token}`,
+      Authorization: ` Basic ${token}`,
     },
   };
 
@@ -87,13 +87,19 @@ function AllTenantOne() {
   // }, [activeCondition]);
 
   useEffect(() => {
-    if (route !== null && responseTenat.length!==0) {
+    if (route !== null && responseTenat.length !== 0) {
       handlePageAvailable(route);
       // Set the route value to null after handling the initial condition
       setRoute(null);
     }
-  }, [route,activeCondition,responseTenat]);
-  
+  }, [route, activeCondition, responseTenat]);
+
+  // useEffect(() => {
+  //   if (!route) {
+  //     setFilteredTenants(responseTenat);
+  //   }
+  // }, [responseTenat]);
+
   // console.log(activeCondition);
   const prevRouteRef = useRef(null);
 
@@ -103,17 +109,22 @@ function AllTenantOne() {
       case "WaitingForProperty":
         setIsActive1(true);
         setFilteredTenants(
-          responseTenat.filter((tenant) => tenant.status === "WaitingForProperty")
+          responseTenat.filter(
+            (tenant) => tenant.status === "WaitingForProperty"
+          )
         );
         break;
       case "CurrentlyViewing":
         setIsActive2(true);
         setFilteredTenants(
-          responseTenat.filter((tenant) => tenant.status === "CurrentlyViewing" || tenant.status === "Shortlisted")
+          responseTenat.filter(
+            (tenant) =>
+              tenant.status === "CurrentlyViewing" ||
+              tenant.status === "Shortlisted"
+          )
         );
         break;
       case "Shortlisted":
-        
         setIsActive3(true);
         setFilteredTenants(
           responseTenat.filter((tenant) => tenant.status === "Shortlisted")
@@ -181,6 +192,10 @@ function AllTenantOne() {
   //     setLoading(false);
   //   };
   // };
+
+  // useEffect(()=> {
+  //   setFilteredTenants(responseTenat);
+  // } , [responseTenat])
 
   return (
     <>
@@ -277,9 +292,7 @@ function AllTenantOne() {
                 />
               )} */}
               <CommonTopButton
-                bgColor={
-                  activeCondition === "Archived" ? "#52796F" : "#D2D7D6"
-                }
+                bgColor={activeCondition === "Archived" ? "#52796F" : "#D2D7D6"}
                 borderColor="#DAF0EE"
                 color={activeCondition === "Archived" ? "#FFFFFF" : "#77A8A4"}
                 text="Archived"
@@ -350,8 +363,8 @@ function AllTenantOne() {
           </p>
         )} */}
 
-         {responseTenat && <TenantComp props={filteredTenants} name={name} /> }
-         <Back/>
+        {responseTenat && <TenantComp props={filteredTenants} name={name} />}
+        <Back />
 
         <Footer />
       </div>

@@ -288,28 +288,8 @@ function DetailView() {
             </div>
 
 
-            <Link to={property.tourLink3D}>
-              <div className="px-[1rem]">
-                <div className="flex justify-center items-center flex-col">
-                  <img
-                    src={property.images[0]}
-                    className="w-[80%] opacity-50"
-                    style={{
-                      borderRadius: "1rem 1rem 0 0 ",
-                    }}
-                  />
-                  <div
-                    className="font-bold py-[0.5rem] px-[1rem] bg-[#666666] w-[80%] flex justify-center items-center"
-                    style={{
-                      borderRadius: "0 0 1rem 1rem",
-                    }}
-                  >
-                    <p className="text-white font-bold text-[1.3rem]">
-                      3D Virtual Tour
-                    </p>
-                  </div>
-                </div>
-              </div>
+            <Link to={`/VirtualTour/?propertyId=${propertyId}`}>
+            <div style={{display:"flex",textAlign:"center",justifyContent:"center",background:"#52796F",width:"90%",padding:"10px",margin:"20px",borderRadius:"5px"}}><button><span style={{fontWeight:"600",color:"white",marginRight:"10px"}}>3D Virtual Tour </span><span style={{textDecoration:"underline",color:"white"}}>Click here</span></button></div>
             </Link>
             {/* property-name */}
             <div className="flex justify-center items-center py-[1rem]">

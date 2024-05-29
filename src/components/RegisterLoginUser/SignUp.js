@@ -8,14 +8,18 @@ import background from "../Assets/Images/RegisterLoginUser/main_bg.png";
 import backgroundthird from "../Assets/Images/other_bg.png";
 import BackButton from "../CommonButtonBack";
 import CommonHeader from "../CommonHeader";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Footer from "../Footer";
 import CommonBtn from "../CommonButton";
+import { useNavigate } from "react-router-dom";
+
 
 function SignUp() {
   const [isOTP, setIsOTP] = useState(true);
   const [OTPSESSION, setOTP_SESSION] = useState("");
   const [enter_otp, setEnter_otp] = useState("");
+  const [validPass, setValidPass] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -36,46 +40,47 @@ function SignUp() {
   const [timer, setTimer] = useState(60); // Initial timer value in seconds
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
-  useEffect(() => {
-    let timerInterval;
+  // useEffect(() => {
+  //   let timerInterval;
 
-    if (isTimerRunning) {
-      timerInterval = setInterval(() => {
-        if (timer > 0) {
-          setTimer((prevTimer) => prevTimer - 1);
-        } else {
-          clearInterval(timerInterval);
-          setIsTimerRunning(false);
-        }
-      }, 1000); // Update timer every 1 second
-      console.log(timer);
-      if (timer == 0) {
-        handleSubmit();
-      }
-    }
+  //   if (isTimerRunning) {
+  //     timerInterval = setInterval(() => {
+  //       if (timer > 0) {
+  //         setTimer((prevTimer) => prevTimer - 1);
+  //       } else {
+  //         clearInterval(timerInterval);
+  //         setIsTimerRunning(false);
+  //       }
+  //     }, 1000); // Update timer every 1 second
+  //     console.log(timer);
+  //     if (timer == 0) {
+  //       handleSubmit();
+  //     }
+  //   }
 
-    return () => {
-      clearInterval(timerInterval); // Clear the interval on unmount
-    };
-  }, [timer, isTimerRunning]);
-  useEffect(() => {
-    // Start the timer automatically when the component mounts
-    startTimer();
-  }, []);
+  //   return () => {
+  //     clearInterval(timerInterval); // Clear the interval on unmount
+  //   };
+  // }, [timer, isTimerRunning]);
 
-  const startTimer = () => {
-    if (!isOTP) {
-      if (!isTimerRunning) {
-        setIsTimerRunning(true);
-      }
-    }
-  };
+  // useEffect(() => {
+  //   // Start the timer automatically when the component mounts
+  //   startTimer();
+  // }, []);
 
-  const resetTimer = () => {
-    // Reset the timer to its initial value and stop it
-    setTimer(60); // You can adjust the initial timer value here
-    setIsTimerRunning(false);
-  };
+  // const startTimer = () => {
+  //   if (!isOTP) {
+  //     if (!isTimerRunning) {
+  //       setIsTimerRunning(true);
+  //     }
+  //   }
+  // };
+
+  // const resetTimer = () => {
+  //   // Reset the timer to its initial value and stop it
+  //   setTimer(60); // You can adjust the initial timer value here
+  //   setIsTimerRunning(false);
+  // };
 
   // console.log(timer);
 
@@ -127,6 +132,7 @@ function SignUp() {
       return "Weak: Password must be at least 8 characters long.";
     }
     // If all checks pass, the password is considered strong
+    // () => setValidPass(true);
     return (
       <p
         style={{
@@ -146,53 +152,69 @@ function SignUp() {
 
   const passwordStrength = getPasswordStrength(formData.password);
 
+  const validate = () => {
+    if (formData.password !== formData.confirmPassword) {
+      toast.error("Password and confirm password should be same");
+      return false;
+    }
+    // if (!validPass) {
+    //   toast.error("please enter valid password");
+    //   return false;
+    // }
+    return true;
+  };
+
   const handleSubmit = (event) => {
     if (event) {
       event.preventDefault();
-      startTimer();
+      // startTimer();
       setIsTimerRunning(true);
 
       //Validation
-      let inputError = {
-        email: "",
-        password: "",
-        confirmPassword: "",
-        phoneNumber: "",
-      };
+      // let inputError = {
+      //   email: "",
+      //   password: "",
+      //   confirmPassword: "",
+      //   phoneNumber: "",
+      // };
 
-      if (!formData.email && !formData.password) {
-        setFormError({
-          ...inputError,
-          email: "Enter valid email address",
-          password: "Password should not be empty",
-        });
-        return;
-      }
+      // if (!formData.email && !formData.password) {
+      //   setFormError({
+      //     ...inputError,
+      //     email: "Enter valid email address",
+      //     password: "Password should not be empty",
+      //   });
+      //   return;
+      // }
 
-      if (!formData.email) {
-        setFormError({
-          ...inputError,
-          email: "Enter valid email address",
-        });
-        return;
-      }
+      // if (!formData.email) {
+      //   setFormError({
+      //     ...inputError,
+      //     email: "Enter valid email address",
+      //   });
+      //   return;
+      // }
 
-      if (formData.confirmPassword !== formData.password) {
-        setFormError({
-          ...inputError,
-          confirmPassword: "Password and confirm password should be same",
-        });
-        return;
-      }
+      // if (formData.confirmPassword !== formData.password) {
+      //   setFormError({
+      //     ...inputError,
+      //     confirmPassword: "Password and confirm password should be same",
+      //   });
+      //   return;
+      // }
 
-      if (!formData.password) {
-        setFormError({
-          ...inputError,
-          password: "Password should not be empty",
-        });
-        return;
-      }
-      setFormError(inputError);
+      // if (!formData.password) {
+      //   setFormError({
+      //     ...inputError,
+      //     password: "Password should not be empty",
+      //   });
+      //   return;
+      // }
+      // if(!validPass)
+      // {
+      // toast.error("Please select stay duration ");
+      // }
+      // setFormError(inputError);
     }
     // alert("Register Hit");
     console.log("Submit Clicked");
@@ -200,6 +222,116 @@ function SignUp() {
     const phone = formData["phoneNumber"];
 
     // Get OTP
+    if (validate()) {
+      axios
+        .get(
+          `https://2factor.in/API/V1/c68dfb13-f09f-11ed-addf-0200cd936042/SMS/+91.${phone}/AUTOGEN`,
+          formData
+        )
+        .then((response) => {
+          console.log(response.data);
+          // do something with the response
+          // const token = response.data.token;
+
+          setOTP_SESSION(response.data.Details);
+
+          toast.success("OTP has been send!");
+          setIsOTP(false);
+          console.log("hello");
+          //redirect user to Dashboard
+          // window.location.href = `/ConfirmOTPAgent?sessionId=${OTP_SESSION}&phone=${phone}&username=${username}`;
+        })
+        // .catch((error) => {
+        //   alert( error );
+        //   // handle the OTP error
+        // });
+
+        .catch((error) => {
+          // console.log(error);
+          console.warn(error.response.data.message);
+          toast.error(error.response.data.message);
+          // handle the form error
+        });
+    }
+
+    // Handle Submit
+  };
+
+  const handleSubmitConfirm = (event) => {
+    event.preventDefault();
+    // console.log("134")
+    // console.log(formData);
+    console.log(enter_otp);
+
+    if (enter_otp !== "") {
+      try {
+        axios
+          .get(
+            `https://2factor.in/API/V1/c68dfb13-f09f-11ed-addf-0200cd936042/SMS/VERIFY/${OTPSESSION}/${enter_otp}`,
+            enter_otp
+          )
+          .then((response) => {
+            // alert(response.data);
+            console.log(response.data);
+            const OTP_CHECK = response.data.Details;
+            // toast.error(OTP_CHECK);
+
+            axios
+              .post("https://b8rliving.com/agent/signup", formData)
+              .then((response) => {
+                console.log(response.data);
+                // do something with the response 144221
+                const token = response.data.token;
+                const username = response.data.name;
+                //set JWT token to local
+                localStorage.setItem("token", token);
+                localStorage.setItem("username", username);
+
+                window.location.href = "/FrontLogin";
+
+                toast.success("You're Registerd!");
+              })
+              .catch((error) => {
+                console.log(error.response.data.message);
+                toast.error(error.response.data.message);
+              });
+            toast.success("OTP is valid!");
+          })
+          .catch((error) => {
+            toast.error(error.response.data.Details);
+          });
+      } catch (error) {
+        // console.log("ASYNC ERROR:", error);
+        alert("ASYNC ERROR:", error);
+      }
+    }
+  };
+
+  const navigate = useNavigate();
+
+  //re-send otp
+
+  const [isResendDisabled, setIsResendDisabled] = useState(true);
+  const [countdown, setCountdown] = useState(timer);
+
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setCountdown((prevCountdown) => {
+        if (prevCountdown > 0) {
+          return prevCountdown - 1;
+        } else {
+          clearInterval(timerId);
+          setIsResendDisabled(false);
+          return 0;
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(timerId); // Cleanup interval on unmount
+  }, [isOTP]);
+
+  const handleResendClick = () => {
+    const phone = formData["phoneNumber"];
     axios
       .get(
         `https://2factor.in/API/V1/c68dfb13-f09f-11ed-addf-0200cd936042/SMS/+91.${phone}/AUTOGEN`,
@@ -207,82 +339,42 @@ function SignUp() {
       )
       .then((response) => {
         console.log(response.data);
-        // do something with the response
-        // const token = response.data.token;
-
         setOTP_SESSION(response.data.Details);
-
-        alert("OTP has been send!");
-        setIsOTP(false);
-        console.log("hello")
-        //redirect user to Dashboard
-        // window.location.href = `/ConfirmOTPAgent?sessionId=${OTP_SESSION}&phone=${phone}&username=${username}`;
+        toast.success("OTP has been resend!");
       })
-      // .catch((error) => {
-      //   alert( error );
-      //   // handle the OTP error
-      // });
-
       .catch((error) => {
         // console.log(error);
         console.warn(error.response.data.message);
-        alert(error.response.data.message);
+        toast.error(error.response.data.message);
         // handle the form error
       });
+    setIsResendDisabled(true);
+    setCountdown(60); // Reset countdown to 60 seconds
 
-    //Handle Submit
-  };
-
-  const handleSubmitConfirm = (event) => {
-    event.preventDefault();
-    console.log(formData);
-
-    try {
-      axios
-        .get(
-          `https://2factor.in/API/V1/c68dfb13-f09f-11ed-addf-0200cd936042/SMS/VERIFY/${OTPSESSION}/${enter_otp}`,
-          enter_otp
-        )
-        .then((response) => {
-          // alert(response.data);
-          const OTP_CHECK = response.data.Details;
-          alert(OTP_CHECK);
-
-          axios
-            .post("https://b8rliving.com/agent/signup", formData)
-            .then((response) => {
-              console.log(response.data);
-              // do something with the response 144221
-              const token = response.data.token;
-              const username = response.data.name;
-              //set JWT token to local
-              localStorage.setItem("token", token);
-              localStorage.setItem("username", username);
-
-              window.location.href = "/FrontLogin";
-
-              alert("You're Registerd!");
-            })
-            .catch((error) => {
-              // console.log(error);
-              alert(error);
-            });
-          alert("OTP is valid!");
-
-          //redirect user to Dashboard
-          // window.location.href = "/FrontLogin";
-        });
-    } catch (error) {
-      // console.log("ASYNC ERROR:", error);
-      alert("ASYNC ERROR:", error);
-    }
+    // Start the countdown again
+    const timerId = setInterval(() => {
+      setCountdown((prevCountdown) => {
+        if (prevCountdown > 0) {
+          return prevCountdown - 1;
+        } else {
+          clearInterval(timerId);
+          setIsResendDisabled(false);
+          return 0;
+        }
+      });
+    }, 1000);
   };
 
   return (
     <>
+      <ToastContainer
+        className="my-[3rem] text-[1.1rem] font-bold"
+        autoClose={1000}
+        // hideProgressBar={true}
+      />
       {isOTP ? (
         <>
-          <div className="startPage ">
+          <div className="startPage">
             <div
               className="form"
               style={{
@@ -400,6 +492,7 @@ function SignUp() {
                   value={formData.inviteCode}
                   onChange={handleChange}
                   name="inviteCode"
+                  required
                 />
 
                 <label htmlFor="phoneNumber" className="label-phoneNumber">
@@ -447,8 +540,8 @@ function SignUp() {
                 className="form"
                 style={{
                   borderRadius: "16px",
-                  marginTop: "40%",
-                  borderRadius: "16px",
+                  // marginTop: "40%",
+                  // borderRadius: "16px",
                   backgroundRepeat: "no-repeat",
                   backgroundImage: `url(${backgroundthird})`,
                   backgroundRepeat: "no-repeat",
@@ -469,7 +562,7 @@ function SignUp() {
                       fontWeight: "300",
                     }}
                   >
-                    Enter OTP (Check Phone)
+                    <b>Enter OTP (Check Phone)</b>
                   </label>
                   <input
                     type="text"
@@ -478,6 +571,7 @@ function SignUp() {
                     onChange={handleChangeOTP}
                     name="enter_otp"
                     required
+                    maxLength={6}
                   />
 
                   {/* <p
@@ -488,28 +582,44 @@ function SignUp() {
               }}
             >
               <b> */}
-                  <u
-                    style={{
-                      marginTop: "-9px",
-                      marginRight: "-230px",
-                      fontSize: "10px",
-                    }}
-                    onClick={resetTimer}
-                  >
-                    Resend OTP? ({timer}s)
-                  </u>
-                  {/* </b>
-            </p> */}
+                  <div className="flex justify-end items-center px-[1rem]">
+                    <button
+                      type="button"
+                      onClick={handleResendClick}
+                      disabled={isResendDisabled}
+                      style={{
+                        backgroundColor: isResendDisabled
+                          ? "#fbf1f1"
+                          : "transparent",
+                        cursor: isResendDisabled ? "not-allowed" : "pointer",
+                        border: "none",
+                        padding: "0",
+                        fontSize: "inherit",
+                      }}
+                    >
+                      <u>Resend OTP? ({countdown}s)</u>
+                    </button>
+                  </div>
 
-                  <div style={{ marginTop: "50px" }}></div>
+                  {/* <div style={{ marginTop: "50px" }}></div> */}
 
-                  <div style={{ display: "flex", flexDirection: "row" }}>
-                    <BackButton title="Back" margin="" fontweight="bolder" />
-                    <CommonBtn
-                      title="Submit"
-                      margin="50%"
-                      fontweight="bolder"
-                    />
+                  <div className="flex justify-center items-center flex-row py-[2rem] gap-x-[1rem]">
+                    {/* <BackButton title="Back" margin="" fontweight="bolder" /> */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsOTP(true);
+                      }}
+                    >
+                      <BackButton title="Back" />
+                    </button>
+                    <button type="submit">
+                      <CommonBtn
+                        title="Submit"
+                        margin="50%"
+                        fontweight="bolder"
+                      />
+                    </button>
                   </div>
 
                   <Footer />

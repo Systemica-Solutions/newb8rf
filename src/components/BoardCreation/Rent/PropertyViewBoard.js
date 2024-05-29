@@ -51,7 +51,7 @@ function PropertyViewBoard() {
             `https://b8rliving.com/board/${boardId}`,
             axiosConfig
           );
-          console.log(response.data)
+          console.log(response.data);
           // const responseData = response.data.data.tenant.tenantDetails;
           const responseDataBoardData = response.data.data.board;
           const responseDataPropertiesData =
@@ -186,9 +186,9 @@ function PropertyViewBoard() {
               }}
             >
               <ImCross className="text-[#CC3333]  lg:text-[2rem]  mr-[0.5rem]" />
-              <p className="text-[1.5rem] font-bold px-[1rem]">Deactivate Tenet</p>
+              <p className="text-[1.5rem] font-bold px-[1rem]">Deactivate Tenant</p>
             </Link>
-            <Back/>
+            <Back />
           </div>
         </div>
         <Footer />

@@ -29,6 +29,7 @@ import Footer from "../Footer";
 import { FcImageFile } from "react-icons/fc";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Hourglass } from "react-loader-spinner";
 
 function UploadPhotos() {
   const queryParameters = new URLSearchParams(window.location.search);
@@ -41,6 +42,7 @@ function UploadPhotos() {
   const [selectedImages, setSelectedImages] = useState([]);
   const [imgpreview, setImgpreview] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const script = document.createElement("script");
 
@@ -120,6 +122,7 @@ function UploadPhotos() {
     //   formData.append("images", image);
     //   formData.append("propertyId", propertyId);
     // });
+    setLoading(true);
     console.log(selectedImages);
     if (selectedImages.length !== 0) {
       var formData = new FormData();
@@ -133,7 +136,7 @@ function UploadPhotos() {
         .post("https://b8rliving.com/property/upload", formData, axiosConfig)
         .then((response) => {
           console.log(response.data);
-
+          setLoading(false);
           setUploadStatus("upload successful");
           toast.success("Images upload successful");
           window.location.href = `/VerificationComplete?propertyId=${propertyId}`;
@@ -141,10 +144,12 @@ function UploadPhotos() {
           // console.log(uploadStatus);
         })
         .catch((error) => {
+          setLoading(false);
           console.log(error);
           setUploadStatus("Upload failed..");
         });
     } else {
+      setLoading(false);
       toast.error("please select images to upload");
     }
   };
@@ -281,7 +286,39 @@ function UploadPhotos() {
         </div>
       </div>
 
-      <div
+      {loading ? (
+        <>
+          <div className="flex justify-center items-center">
+            <Hourglass
+              visible={true}
+              height="100"
+              width="100"
+              ariaLabel="hourglass-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              colors={["#52796f", "#377C64"]}
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <div
+            onClick={onUpload}
+            // onClick={() => {
+            //   window.location.href = `/VerificationComplete?propertyId=${propertyId}`;
+            // }}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <CommonBtn title="Save & Upload" />
+          </div>
+        </>
+      )}
+
+      {/* <div
         onClick={onUpload}
         // onClick={() => {
         //   window.location.href = `/VerificationComplete?propertyId=${propertyId}`;
@@ -294,6 +331,17 @@ function UploadPhotos() {
       >
         <CommonBtn title="Save & Upload" />
       </div>
+      <div className="flex justify-center items-center">
+        <Hourglass
+          visible={true}
+          height="100"
+          width="100"
+          ariaLabel="hourglass-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          colors={["#52796f", "#377C64"]}
+        />
+      </div> */}
       <Footer />
     </>
   );

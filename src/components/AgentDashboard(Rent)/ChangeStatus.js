@@ -23,6 +23,8 @@ import BackButton from "../CommonButtonBack";
 import editButton from "../Assets/Button.png";
 import { useNavigate } from "react-router-dom";
 import Back from "../Back";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ChangeStatus() {
   const queryParameters = new URLSearchParams(window.location.search);
@@ -33,7 +35,9 @@ function ChangeStatus() {
   const [RenderRentName, setRenderRentName] = useState("Rented on B8R");
   const [propertyDetails, setPropertyDetails] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [closeListingReason, setCloseListingReason] = useState("Delist (Owner Denied)");
+  const [closeListingReason, setCloseListingReason] = useState(
+    "Delist (Owner Denied)"
+  );
   const [tenantName, setTenantName] = useState("");
   const [tenancyStartDate, setTenancyStartDate] = useState("");
   const [rentAmount, setRentAmount] = useState("");
@@ -93,7 +97,7 @@ function ChangeStatus() {
 
         const responseData = response.data.data.property;
         setPropertyDetails(responseData);
-        if (responseData.status === 'pendingVerification') {
+        if (responseData.status === "pendingVerification") {
           setCloseListingReason("Rented Outside");
         }
       } catch (error) {
@@ -224,11 +228,11 @@ function ChangeStatus() {
         var nameResponse2 = response.data.data.property.societyName;
         var ClosedStatus = response.data.data.property.closeListingReason;
 
-        alert("Property Closed sucessfully!");
+        toast.success("Property Closed sucessfully!");
         window.location.href = `/PropertyClosed?name=${nameResponse}&closed=${ClosedStatus}&societyname=${nameResponse2}`;
       } catch (error) {
         // Handle any errors that occur during the API request
-        alert(error);
+        toast.error(error);
         console.log(error);
       } finally {
         setLoading(false);
@@ -257,11 +261,11 @@ function ChangeStatus() {
         var nameResponse2 = response.data.data.property.societyName;
         var ClosedStatus = response.data.data.property.closeListingReason;
 
-        alert("Property Closed sucessfully!");
+        toast.success("Property Closed sucessfully!");
         window.location.href = `/PropertyClosed?name=${nameResponse}&closed=${ClosedStatus}&societyname=${nameResponse2}`;
       } catch (error) {
         // Handle any errors that occur during the API request
-        alert(error);
+        toast.error(error);
         console.log(error);
       } finally {
         setLoading(false);
@@ -273,6 +277,11 @@ function ChangeStatus() {
 
   return (
     <>
+      <ToastContainer
+        className="my-[3rem] text-[1.1rem] font-bold"
+        autoClose={1000}
+        // hideProgressBar={true}
+      />
       <div
         className="form"
         style={{
@@ -325,18 +334,23 @@ function ChangeStatus() {
           >
             <p className="text-[1.2rem] font-bold">Close Listing</p>
             <div className="flex justify-center  items-center flex-col w-[75%] py-[1rem] gap-y-[1.5rem]">
-            {propertyDetails.status === 'verified' && (  <CommonTopButton
-                bgColor={
-                  closeListingReason === "Rented on B8R" ? "#52796F" : "#D2D7D6"
-                }
-                borderColor="#DAF0EE"
-                color={
-                  closeListingReason === "Rented on B8R" ? "#FFFFFF" : "#77A8A4"
-                }
-                text="Rented On B8R"
-                onclicked={() => setCloseListingReason("Rented on B8R")}
-              />
-            )}
+              {propertyDetails.status === "verified" && (
+                <CommonTopButton
+                  bgColor={
+                    closeListingReason === "Rented on B8R"
+                      ? "#52796F"
+                      : "#D2D7D6"
+                  }
+                  borderColor="#DAF0EE"
+                  color={
+                    closeListingReason === "Rented on B8R"
+                      ? "#FFFFFF"
+                      : "#77A8A4"
+                  }
+                  text="Rented On B8R"
+                  onclicked={() => setCloseListingReason("Rented on B8R")}
+                />
+              )}
               <CommonTopButton
                 bgColor={
                   closeListingReason === "Delist (Owner Denied)"
@@ -764,7 +778,7 @@ function ChangeStatus() {
                 </div>
               </form>
             </div>
-            
+
             <div className="flex flex-col justify-center items-center py-[1rem]">
               {/* <div>
                 <BackButton title="Go Back" margin="" fontweight="bolder" />
@@ -775,16 +789,14 @@ function ChangeStatus() {
                 margin="40%"
                 fontweight="bolder"
               />
-                 <Back/>
+              <Back />
             </div>
           </div>
         ) : null}
 
-        <Back/>
-        
+        <Back />
 
         <div className="py-[1rem]">
-     
           <Footer />
         </div>
       </div>

@@ -6,8 +6,19 @@ import checkP from "../Assets/Images/AgentDashboard/CheckP.png";
 import ActiveListing from "../Assets/Images/AgentDashboard/ActiveListingSale.png";
 import PendingVerification from "../Assets/Images/AgentDashboard/PendingVerificationSale.png";
 import SearchBar from "../SearchBar";
+import { FaSearch } from "react-icons/fa";
+import { IoIosArrowDroprightCircle } from "react-icons/io";
+import { MdOutlineHideImage } from "react-icons/md";
+import { RiQuestionnaireFill } from "react-icons/ri";
+import { BsFillBookmarkCheckFill } from "react-icons/bs";
 
-const AvailablePropertyComp = ({ props, name, activeProperies }) => {
+const AvailablePropertyComp = ({
+  props,
+  name,
+  activeProperies,
+  showChangeStatus,
+  showCloseButton,
+}) => {
   const [filteredData, setfilteredData] = useState(props);
   const [searchValue, setSearchValue] = useState("");
 
@@ -33,185 +44,142 @@ const AvailablePropertyComp = ({ props, name, activeProperies }) => {
 
   return (
     <>
-      {/* <input
-        type="text"
-        value={searchValue}
-        onChange={(e) => handleSearch(e.target.value)}
-        placeholder="Search by property Name"
-      /> */}
+      {/* input-box */}
+      <div className="px-[1rem] py-[1.5rem]">
+        <div
+          className="bg-[#F5F5F5] px-[1rem] rounded-[0.6rem] flex justify-between items-center"
+          style={{
+            border: "1px solid #52796F",
+          }}
+        >
+          <input
+            type="text"
+            value={searchValue}
+            onChange={(e) => handleSearch(e.target.value)}
+            placeholder="Search by property Name"
+            style={{
+              border: "none",
+              boxShadow: "none",
+              background: "transparent",
+              width: "100%",
+              margin: "0",
+            }}
+          />
+          <button>
+            <FaSearch className="text-[1.5rem]" />
+          </button>
+        </div>
+      </div>
 
-        {/* <p style={{ textAlign: "left" }}>
-          Hey <b>{name}</b>, <br />
-          Here are all the rent properties that you have onboarded{" "}
-        </p> */}
-      {/* // ) : (
-      //   <p style={{ textAlign: "left" }}>
-      //     Hey <b>{name}</b>, Here are all the rent properties that are available
-      //     for renting out.
-      //   </p> */}
-      
+      {/* header-text */}
+      <div className="px-[1rem] text-[1.2rem]">
+        Hey <b>{name}</b>, Here are the properties.
+      </div>
 
       {/* Mapping */}
       {filteredData.map((values, index) => (
         <div key={index}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              marginTop: "10px",
-              padding: "5%",
-            }}
-          >
-            {/* left side */}
-            <div
-              style={{
-                height: "78px",
-                width: "302px",
-                background: "#FFFFFF",
-                border: "1px solid #DAF0EE",
-                borderRadius: "15px",
-                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                display: "flex",
-              }}
-            >
-              {/* img */}
-              <div>
-                <img
-                  src={imgOne}
-                  alt="imgOne"
-                  style={{ marginLeft: "10px", marginTop: "10px" }}
-                />
-              </div>
-              {/* <p style={{fontSize:"12px", marginLeft:"20px", width:"400%"}}>904, Central Park Homes</p> */}
+          <div className="px-[1rem] py-[0.5rem]">
+            <div className="flex justify-between gap-x-[0.5rem]">
+              {/* left-section */}
               <div
+                className="bg-white w-[100%] p-[0.5rem] rounded-[0.5rem] flex "
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  marginLeft: "20px",
-                  textAlign: "left",
+                  border: "1px solid #DAF0EE",
+                  boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                 }}
               >
-                <p style={{ fontSize: "12px" }}>{values.houseName},</p>
-                <p style={{ fontSize: "12px", marginTop: "-10px" }}>
-                  {values.societyName}
-                </p>
-              </div>
-              <div style={{ marginTop: "10px", marginLeft: "-30px" }}>
-                {activeProperies ? (
-                  ""
-                ) : values.imagesApproved ? (
-                  <>
-                    <img
-                      style={{ marginLeft: "20px" }}
-                      src={ActiveListing}
-                      height={30}
-                    />
-                  </>
-                ) : (
-                  <img src={PendingVerification} height={25} />
-                )}
-
-                <div
-                  style={{
-                    width: "150px",
-                    height: "20px",
-                    borderRadius: "10px",
-                    marginTop: "10px",
-                    marginLeft: "90px",
-                  }}
-                >
-
-        {activeProperies ? (
-                  ""
-                ) : values.imagesApproved ? (
-                  <text
-                    style={{
-                      fontSize: "12px",
-                      color: "#2F9E3A",
-                      marginLeft: "-100px",
-                      fontFamily: "Inter",
-                      fontStyle: "normal",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Active Listing
-                  </text>
-                ) : (
-                  <text
-                    style={{
-                      fontSize: "12px",
-                      color: "#E13018",
-                      marginLeft: "-120px",
-                      fontFamily: "Inter",
-                      fontStyle: "normal",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Pending Verification
-                  </text>
-                )}
-
-                  {/* {values.imagesApproved ? (
-                    <text
-                      style={{
-                        fontSize: "12px",
-                        color: "#2F9E3A",
-                        marginLeft: "-100px",
-                        fontFamily: "Inter",
-                        fontStyle: "normal",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Active Listing
-                    </text>
+                {/* image */}
+                <div className="w-[30%] flex justify-center items-center">
+                  {values.imagesApproved && values.status === "Verified" ? (
+                    <>
+                      <img
+                        src={values.images[0]}
+                        alt="img"
+                        // style={{
+                        //   marginLeft: "10px",
+                        //   marginTop: "10px",
+                        //   borderRadius: "15px",
+                        // }}
+                        // height="60px"
+                      />
+                    </>
                   ) : (
-                    <text
-                      style={{
-                        fontSize: "12px",
-                        color: "#E13018",
-                        marginLeft: "-120px",
-                        fontFamily: "Inter",
-                        fontStyle: "normal",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Pending Verification
-                    </text>
-                  )} */}
+                    <>
+                      <MdOutlineHideImage className="text-[3.5rem]  h-20 lg:h-60" />
+                    </>
+                  )}
+                </div>
+                {/* other-containt */}
+                <div className="w-[70%]">
+                  {/* name & icon */}
+                  <div className="flex justify-between items-center pl-[0.5rem]">
+                    <p className="font-semibold px-[0.2rem]">
+                      {values.houseName} , {values.societyName}
+                      {values.closeListingReason && (
+                        <div
+                          className="flex justify-between items-center  pl-[0.5rem]"
+                          style={{ color: "#E13018" }}
+                        >
+                          {values.closeListingReason}
+                        </div>
+                      )}
+                    </p>
+                    {values.imagesApproved && values.status === "Verified" ? (
+                      <>
+                        <BsFillBookmarkCheckFill className="text-[#52796F] text-[2.5rem]" />
+                      </>
+                    ) : (
+                      <>
+                        <RiQuestionnaireFill className="text-[#52796F] text-[2.5rem]" />
+                      </>
+                    )}
+                  </div>
+                  {/* status */}
+                  <div
+                    className="font-bold flex justify-end items-center pt-[0.5rem] text-[#E13018]"
+                    style={{
+                      color:
+                        values.imagesApproved && values.status === "Verified"
+                          ? "#2F9E3A"
+                          : "#E13018",
+                    }}
+                  >
+                    {values.imagesApproved && values.status === "Verified"
+                      ? "  Active Listing"
+                      : "   Pending Verification"}
+                  </div>
                 </div>
               </div>
-            </div>
+              {/* right/edit section */}
+              {showCloseButton && (
+                <Link
+                  className="w-[15%] bg-[#E8E7E7] flex justify-center items-center p-[0.5rem] flex-col rounded-[0.5rem] border-2 border-slate-300"
+                  to={`/Changestatus?propertyId=${values._id}`}
+                >
+                  <IoIosArrowDroprightCircle className="text-[1.7rem] text-[#5D6560]" />
+                  <p className="font-bold py-[0.2rem] text-[#5D6560] text-[0.85rem]">
+                    Close Property
+                  </p>
+                </Link>
+              )}
 
-            <Link to={`/Changestatus?propertyId=${values._id}`}>
-              <div
-                style={{
-                  height: "75px",
-                  width: "52px",
-                  background: "#E8E7E7",
-                  borderRadius: "10px",
-                  marginLeft: "10px",
-                }}
-              >
-                <img
-                  src={checkP}
+              {showChangeStatus && (
+                <Link
+                  to={`/PropertyViewingStatus/${values._id}`}
+                  className="bg-[#E8E7E7] p-[0.5rem] w-[15%] flex justify-center items-center text-[#5D6560] flex-col border-2 border-slate-300"
                   style={{
-                    height: "27px",
-                    marginTop: "20px",
-                    marginBottom: "-8px",
-                  }}
-                />
-                <text
-                  style={{
-                    fontSize: "15px",
-                    color: "#5D6560",
-                    fontWeight: "bold",
+                    borderRadius: "15px",
                   }}
                 >
-                  Close Property
-                </text>
-              </div>
-            </Link>
+                  <IoIosArrowDroprightCircle className="text-[1.5rem]" />
+                  <p className="font-bold text-[0.9rem] text-center">
+                    View Status
+                  </p>
+                           
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       ))}

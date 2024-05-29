@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { FaHandshake } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function BoardCreated() {
   const queryParameters = new URLSearchParams(window.location.search);
@@ -48,7 +50,7 @@ function BoardCreated() {
     document.body.removeChild(input);
 
     // Optionally, you can provide some user feedback (e.g., a notification)
-    alert(`Link copied to clipboard: ${linkToCopy}`);
+    toast.success(`Link copied to clipboard: ${linkToCopy}`);
 
     try {
       const response = await axios.put(
@@ -57,7 +59,7 @@ function BoardCreated() {
         axiosConfig
       );
       console.log(response);
-      alert(response.data.message);
+      toast.success(response.data.message);
     } catch (error) {
       // Handle any errors that occur during the API request
       console.error("Error fetching data:", error);
@@ -102,6 +104,11 @@ function BoardCreated() {
 
   return (
     <>
+      <ToastContainer
+        className="my-[3rem] text-[1.1rem] font-bold"
+        autoClose={1000}
+        // hideProgressBar={true}
+      />
       <div
         className=""
         style={

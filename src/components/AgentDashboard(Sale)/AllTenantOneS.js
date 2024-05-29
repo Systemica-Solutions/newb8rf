@@ -17,13 +17,16 @@ function AllTenantOneS() {
   const [shortListedData, setshortListed] = useState(false);
   const [currentViewData, setcurrentView] = useState(false);
   const [archiveData, setArchiveData] = useState(false);
-
+  const queryParameters = new URLSearchParams(window.location.search);
+  const [route, setRoute] = useState(queryParameters.get("route"));
   const [ActivebgColor, setActivebgColor] = useState("#D2D7D6");
   const [ActiveBorderColor, setBorderColor] = useState("#A9C0BA");
   const [activeColor, setColor] = useState("#77A8A4");
   const [loading, setLoading] = useState(false);
 
   const [responseBuyer, setresponseBuyer] = useState([]);
+  const [filteredBuyers, setFilteredBuyers] = useState([]);
+  const [activeCondition, setActiveCondition] = useState();
 
   // const [responseTenatWaitingForProperty, setresponseTenatWaitingForProperty] =
   //   useState();
@@ -70,18 +73,69 @@ function AllTenantOneS() {
     fetchPosts();
   }, []);
 
-  const handlePageAvailable = () => {
-    // Custom search handling logic
-    if (archiveData) {
-      setArchiveData(false);
-    } else {
-      setArchiveData(true);
-      setActivebgColor("#52796F");
-      setBorderColor("#DAF0EE");
-    }
+  const handlePageAvailable = (condition) => {
+    setActiveCondition(condition);
+    filterBuyers(condition);
   };
 
   console.log(responseBuyer);
+
+  useEffect(() => {
+    if (route !== null && responseBuyer.length !== 0) {
+      handlePageAvailable(route);
+      // Set the route value to null after handling the initial condition
+      setRoute(null);
+    }
+  }, [route, activeCondition, responseBuyer]);
+
+  const filterBuyers = (condition) => {
+    switch (condition) {
+      case "WaitingForProperty":
+        // setIsActive1(true);
+        setFilteredBuyers(
+          responseBuyer.filter((buyer) => buyer.status === "WaitingForProperty")
+        );
+        break;
+      case "CurrentlyViewing":
+        // setIsActive2(true);
+        setFilteredBuyers(
+          responseBuyer.filter(
+            (buyer) =>
+              buyer.status === "CurrentlyViewing" ||
+              buyer.status === "Shortlisted"
+          )
+        );
+        break;
+      case "Shortlisted":
+        // setIsActive3(true);
+        setFilteredBuyers(
+          responseBuyer.filter((buyer) => buyer.status === "Shortlisted")
+        );
+        break;
+      case "Archived":
+        setFilteredBuyers(
+          responseBuyer.filter((buyer) => buyer.status === "Deactivate")
+        );
+        break;
+      case "BoardShared":
+        // setIsActive4(true);
+        setFilteredBuyers(
+          responseBuyer.filter(
+            (buyer) =>
+              buyer.status !== "WaitingForProperty" &&
+              buyer.status !== "Deactivate"
+          )
+        );
+        break;
+      default:
+        setFilteredBuyers(responseBuyer); // Show all tenants when no specific condition is selected
+        break;
+    }
+  };
+
+  // useEffect(() => {
+  //   setFilteredBuyers(responseBuyer);
+  // }, [responseBuyer]);
 
   const username = localStorage.getItem("username");
   const name = username.substring(0, username.indexOf(" "));
@@ -101,8 +155,8 @@ function AllTenantOneS() {
       >
         <CommonHeader title="All Buyer" color="#1E0058" />
 
-        <div className="p-[1rem]">
-          {/* grid-container */}
+        {/* <div className="p-[1rem]">
+          grid-container
           <div className="grid grid-cols-2 gap-[1rem]">
             <div>
               {waitingProperyData ? (
@@ -181,9 +235,114 @@ function AllTenantOneS() {
               )}
             </div>
           </div>
+        </div> */}
+        {/* Body */}
+
+        <div className="p-[1rem]">
+          {/* grid-container */}
+          <div className="grid grid-cols-2 gap-[1rem]">
+            <div>
+              <CommonTopButton
+                bgColor={
+                  activeCondition === "WaitingForProperty"
+                    ? "#1E0058"
+                    : "#F5F5F5"
+                }
+                borderColor={
+                  activeCondition === "WaitingForProperty"
+                    ? "#DAF0EE"
+                    : "#B3A8C8"
+                }
+                color={
+                  activeCondition === "WaitingForProperty"
+                    ? "#DAF0EE"
+                    : "#B3A8C8"
+                }
+                text="Waiting For Property"
+                onclicked={() => handlePageAvailable("WaitingForProperty")}
+              />
+            </div>
+            {/* Shortlisted */}
+            <div>
+              <CommonTopButton
+                bgColor={
+                  activeCondition === "Shortlisted" ? "#1E0058" : "#F5F5F5"
+                }
+                borderColor={
+                  activeCondition === "Shortlisted" ? "#DAF0EE" : "#B3A8C8"
+                }
+                color={
+                  activeCondition === "Shortlisted" ? "#DAF0EE" : "#B3A8C8"
+                }
+                text="Shortlisted"
+                onclicked={() => handlePageAvailable("Shortlisted")}
+              />
+            </div>
+            {/* CurrentlyViewing */}
+            <div>
+              <CommonTopButton
+                bgColor={
+                  activeCondition === "CurrentlyViewing" ? "#1E0058" : "#F5F5F5"
+                }
+                borderColor={
+                  activeCondition === "CurrentlyViewing" ? "#DAF0EE" : "#B3A8C8"
+                }
+                color={
+                  activeCondition === "CurrentlyViewing" ? "#DAF0EE" : "#B3A8C8"
+                }
+                text="Currently Viewing"
+                onclicked={() => handlePageAvailable("CurrentlyViewing")}
+              />
+            </div>
+            {/* BoardShared */}
+            <div>
+              <CommonTopButton
+                bgColor={
+                  activeCondition === "BoardShared" ? "#1E0058" : "#F5F5F5"
+                }
+                borderColor={
+                  activeCondition === "BoardShared" ? "#DAF0EE" : "#B3A8C8"
+                }
+                color={
+                  activeCondition === "BoardShared" ? "#DAF0EE" : "#B3A8C8"
+                }
+                text="BoardShared"
+                onclicked={() => handlePageAvailable("BoardShared")}
+              />
+            </div>
+            <div>
+              {/* {archiveData ? (
+                <CommonTopButton
+                  bgColor="#52796F"
+                  borderColor="#DAF0EE"
+                  color="#DAF0EE"
+                  text="Archived"
+                  onclicked={() => handlePageAvailable("Deactivate")}
+                />
+              ) : (
+                <CommonTopButton
+                  bgColor="#D2D7D6"
+                  borderColor="#DAF0EE"
+                  color="#77A8A4"
+                  text="Archived"
+                  onclicked={() => handlePageAvailable("Deactivate")}
+                />
+              )} */}
+              {/* Archived */}
+              <CommonTopButton
+                bgColor={activeCondition === "Archived" ? "#1E0058" : "#F5F5F5"}
+                borderColor={
+                  activeCondition === "Archived" ? "#DAF0EE" : "#B3A8C8"
+                }
+                color={activeCondition === "Archived" ? "#DAF0EE" : "#B3A8C8"}
+                text="Archived"
+                onclicked={() => handlePageAvailable("Archived")}
+              />
+            </div>
+          </div>
         </div>
 
-        <SearchBar onSearch={handleSearch} placeholder="Search by Buyer name" />
+        {/* <SearchBar onSearch={handleSearch} placeholder="Search by Buyer name" /> */}
 
         {/* <div className="p-[1rem] text-[1.2rem]">
           <p className="font-bold py-[1rem]">Hey {name},</p>
@@ -246,8 +405,7 @@ function AllTenantOneS() {
             Here are all the Buyer that you have onboarded
           </p>
         )} */}
-
-        <TenantComp props={responseBuyer} name="test" />
+        {responseBuyer && <TenantComp props={filteredBuyers} name={name} />}
 
         <Footer />
       </div>
