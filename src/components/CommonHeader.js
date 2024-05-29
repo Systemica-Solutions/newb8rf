@@ -1,6 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
 import vector from "./Assets/Images/RegisterLoginUser/vector.png";
-// import vector from "./Assets/Images/RegisterLoginUser/vector.png"
 import "./commonHeader.css";
 import { Link } from "react-router-dom";
 
@@ -67,7 +66,7 @@ if (confirmLogout) {
       <div className="flex justify-between items-center px-[0.5rem] py-[0.5rem]">
         <div className="w-[15vw]">
           {usertype == "PA" ? (
-            <Link to="/dashboard">
+            <Link to="/Dashboard">
               <img src={logo} height={35} alt="fireSpot" />
             </Link>
           ) : (

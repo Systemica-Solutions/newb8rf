@@ -37,12 +37,20 @@ import { TbShareOff } from "react-icons/tb"; //yet to share
 import { FaEye } from "react-icons/fa6"; //eye
 import { RiQuestionnaireFill } from "react-icons/ri"; //question
 import ExtraCommonButton from "../ExtraCommonButton";
+import CommonHeaderS from "../CommonHeaderS";
 
 function DashboardS() {
   const token = localStorage.getItem("token");
   const [countBuyer, setCountBuyer] = useState([]);
   const [loading, setLoading] = useState(false);
   console.log(token);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -103,7 +111,7 @@ function DashboardS() {
           backgroundSize: "100% 100%",
         }}
       >
-        <CommonHeader title="Sale Dashboard" color="#1E0058" />
+        <CommonHeaderS title="Sale Dashboard" color="#1E0058" />
         {/* top-btn */}
         <div className="p-[1rem]">
           <div className="grid grid-cols-2 gap-x-[1rem]">
@@ -288,6 +296,23 @@ function DashboardS() {
                     {/* text */}
                     <div className="font-bold flex justify-center items-center flex-col">
                       <p className="text-center">Waiting for Property</p>
+                    </div>
+                  </Link>
+                  {/*board shared*/}
+                  <Link
+                    className="p-[0.5rem] bg-[#FFFFFF] rounded-[0.8rem] flex justify-between items-center w-[100%] flex-col"
+                    to={`/AllTenantOneS?route=${route.BoardShared}`}
+                  >
+                    {/* icon */}
+                    <div className="flex justify-center items-center pb-[0.5rem]">
+                      <MdOutlineMobileScreenShare className="text-[#1E0058] text-[2.5rem]" />
+                      <p className="text-[2rem] text-center px-[0.5rem] font-bold">
+                        1
+                      </p>
+                    </div>
+                    {/* text */}
+                    <div className="font-bold flex justify-center items-center flex-col">
+                      <p className="text-center">Board shared</p>
                     </div>
                   </Link>
                   {/* currently viewing */}

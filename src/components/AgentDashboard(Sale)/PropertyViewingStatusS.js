@@ -1,17 +1,17 @@
 import React from "react";
 import CommonHeader from "../CommonHeader";
+import CommonHeaderS from "../CommonHeaderS";
 import CommonBtn from "../CommonButton";
-import CommonTopButton from '../CommonTopButton';
+import CommonTopButton from "../CommonTopButton";
 import Footer from "../Footer";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import oneBg from "../Assets/Images/AgentDashboard/oneBg.png";
 
-function PropertyViewingStatusS()
-{
-    return(
-        <>
-         <div
+function PropertyViewingStatusS() {
+  return (
+    <>
+      <div
         className="form"
         style={{
           borderRadius: "16px",
@@ -22,14 +22,10 @@ function PropertyViewingStatusS()
           backgroundSize: "100% 100%",
         }}
       >
-        <CommonHeader title="Property Viewing Status" color= "#1E0058" />
-        <Footer/>
-        </div>
-        </>
-        
-    );
-
-    
-
+        <CommonHeaderS title="Property Viewing Status" color="#1E0058" />
+        <Footer />
+      </div>
+    </>
+  );
 }
 export default PropertyViewingStatusS;

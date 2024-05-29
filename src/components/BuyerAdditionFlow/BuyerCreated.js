@@ -5,7 +5,7 @@ import axios from "axios";
 // import vector from "../Assets/Images/RegisterLoginUser/vector.png";
 import bgm from "../Assets/Images/BuyerAdditionFlow/BuyerBg.png";
 import "./BuyerDesign.css";
-
+import CommonHeaderS from "../CommonHeaderS";
 import Footer from "../Footer";
 import CommonBtn from "../CommonButton";
 import CommonHeader from "../CommonHeader";
@@ -32,7 +32,7 @@ function BuyerCreated() {
               backgroundSize: "100% 100%",
             }}
           >
-            <CommonHeader title="Buyer Created" color="#1E0058" />
+            <CommonHeaderS title="Buyer Created" color="#1E0058" />
             {/* buyer Created container */}
             <div className="flex justify-center items-center flex-col py-[2rem]">
               <FaCheckCircle className="text-[#3dd700] text-[5rem]" />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import CommonHeaderS from "../../CommonHeaderS";
 import backgroundImg from "../../Assets/Images/Sale/RestBg.png";
 import CommonHeader from "../../CommonHeader";
 import CommonBtn from "../../CommonButton";
@@ -29,7 +29,7 @@ function ViewBoardS() {
     },
   };
   const createNewBoard = async () => {
-      window.location.href = `/CreateBoardS?buyerId=${buyerId}&name=${name}`;
+    window.location.href = `/CreateBoardS?buyerId=${buyerId}&name=${name}`;
   };
 
   useEffect(() => {
@@ -69,7 +69,7 @@ function ViewBoardS() {
           backgroundSize: "100% 100%",
         }}
       >
-        <CommonHeader title="View Board" color="#1E0058" />
+        <CommonHeaderS title="View Board" color="#1E0058" />
         {/* name and status  */}
         <div className="flex justify-center items-center flex-col py-[2rem]">
           <FcBusinessman className="text-[3rem]" />

@@ -1,8 +1,9 @@
 import React from "react";
 import CommonHeader from "../CommonHeader";
+import CommonHeaderS from "../CommonHeaderS";
 import Footer from "../Footer";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import oneBg from "../Assets/Images/AgentDashboard/oneBg.png";
 import BackButton from "../CommonButtonBack";
 import CommonBtn from "../CommonButton";
@@ -20,16 +21,12 @@ function ReactivePropertyS() {
         padding: "20px",
       }}
     >
-      <CommonHeader title="Reactivate(Archived Properties)" color= "#1E0058"  />
+      <CommonHeaderS title="Reactivate(Archived Properties)" color="#1E0058" />
 
-
-
-
-       <div style={{display:"flex", flexDirection:"row" }}>
-            
-            <BackButton title="No, Go Back" margin="" fontweight="bolder"   />
-            <CommonBtn title="Yes, Vacant again"  margin="40%" fontweight="bolder" />
-        </div>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <BackButton title="No, Go Back" margin="" fontweight="bolder" />
+        <CommonBtn title="Yes, Vacant again" margin="40%" fontweight="bolder" />
+      </div>
       <Footer />
     </div>
   );

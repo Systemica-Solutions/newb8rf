@@ -11,6 +11,7 @@ import { BsSearchHeart } from "react-icons/bs";
 import { IoSearch } from "react-icons/io5";
 import searchImg from "../Assets/Search.png";
 import TenantComp from "./TenantComp";
+import CommonHeaderS from "../CommonHeaderS";
 
 function AllTenantOneS() {
   const [waitingProperyData, setwaitingPropery] = useState(false);
@@ -153,7 +154,7 @@ function AllTenantOneS() {
           backgroundSize: "100% 100%",
         }}
       >
-        <CommonHeader title="All Buyer" color="#1E0058" />
+        <CommonHeaderS title="All Buyer" color="#1E0058" />
 
         {/* <div className="p-[1rem]">
           grid-container

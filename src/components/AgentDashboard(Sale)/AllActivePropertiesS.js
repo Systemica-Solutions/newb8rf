@@ -1,26 +1,26 @@
 import React from "react";
 import CommonHeader from "../CommonHeader";
 import CommonBtn from "../CommonButton";
-import CommonTopButton from '../CommonTopButton';
+import CommonTopButton from "../CommonTopButton";
 import Footer from "../Footer";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import oneBg from "../Assets/Images/AgentDashboard/oneBg.png";
 import searchImg from "../Assets/Search.png";
 import SearchBar from "../SearchBar";
+import CommonHeaderS from "../CommonHeaderS";
 
-function AllActivePropertiesS()
-{
+function AllActivePropertiesS() {
   const handleSearch = (searchValue) => {
     // Custom search handling logic
     console.log("Searching for:", searchValue);
 
     // Perform search operations here
   };
-  
-    return(
-        <>
-         <div
+
+  return (
+    <>
+      <div
         className="form"
         style={{
           borderRadius: "16px",
@@ -31,19 +31,20 @@ function AllActivePropertiesS()
           backgroundSize: "100% 100%",
         }}
       >
-        <CommonHeader title="All Active Properties" color= "#1E0058"/>
+        <CommonHeaderS title="All Active Properties" color="#1E0058" />
 
-        <SearchBar onSearch={handleSearch} placeholder="Search by Tenant Name"/>
-        <p style={{textAlign:"left"}}>Hey Yash, <br/>
+        <SearchBar
+          onSearch={handleSearch}
+          placeholder="Search by Tenant Name"
+        />
+        <p style={{ textAlign: "left" }}>
+          Hey Yash, <br />
+          Here are all the rent properties that you have onboarded{" "}
+        </p>
 
-
-            Here are all the rent properties that you have onboarded </p>
-
-        <Footer/>
-        </div>
-        </>
-        
-    );
-
+        <Footer />
+      </div>
+    </>
+  );
 }
 export default AllActivePropertiesS;

@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
-
+import CommonHeaderS from "../../CommonHeaderS";
 import backgroundImg from "../../Assets/Images/Sale/RestBg.png";
 import CommonHeader from "../../CommonHeader";
 import CommonBtn from "../../CommonButton";
-import CommonTopButton from '../../CommonTopButton';
+import CommonTopButton from "../../CommonTopButton";
 import Footer from "../../Footer";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 
 import { FaHandshake } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-function BoardCreatedS(){
-
-const queryParameters = new URLSearchParams(window.location.search);
+function BoardCreatedS() {
+  const queryParameters = new URLSearchParams(window.location.search);
   const boardId = queryParameters.get("boardId");
   const path = queryParameters.get("path");
   // console.log(boardId);
@@ -102,9 +101,9 @@ const queryParameters = new URLSearchParams(window.location.search);
     fetchBoardDetails(); // Call the fetch function
   }, [boardId]);
 
-    return(
-        <>
-          <div
+  return (
+    <>
+      <div
         className=""
         style={
           {
@@ -114,14 +113,20 @@ const queryParameters = new URLSearchParams(window.location.search);
           }
         }
       >
-        <CommonHeader title="Board Created" color="#3F007F" />
+        <CommonHeaderS title="Board Created" color="#3F007F" />
         <div className="flex justify-between items-center flex-col">
           <div className="flex py-[2rem]">
             <div>
-              <FaHandshake className="text-[3rem] text-[#52796F] background-rgba(59, 65, 61, 0.70)" style={{color:"#3F007F"}}/>
+              <FaHandshake
+                className="text-[3rem] text-[#52796F] background-rgba(59, 65, 61, 0.70)"
+                style={{ color: "#3F007F" }}
+              />
             </div>
             <div className="px-[1rem]">
-              <p className="text-[2rem] text-[#52796F] font-bold text-center color-#3F007F" style={{color:"#3F007F"}}>
+              <p
+                className="text-[2rem] text-[#52796F] font-bold text-center color-#3F007F"
+                style={{ color: "#3F007F" }}
+              >
                 {responseDataTotalProperties} properties
               </p>
               <p className="text-[1.2rem] font-semibold text-center">
@@ -134,7 +139,10 @@ const queryParameters = new URLSearchParams(window.location.search);
               <p className="text-[1.2rem] font-semibold text-center">
                 Buyer Name
               </p>
-              <p className="text-[2rem] text-[#52796F] font-bold text-center" style={{color:"#3F007F"}}>
+              <p
+                className="text-[2rem] text-[#52796F] font-bold text-center"
+                style={{ color: "#3F007F" }}
+              >
                 {responseDataBuyerName}
               </p>
             </div>
@@ -144,7 +152,10 @@ const queryParameters = new URLSearchParams(window.location.search);
               <p className="text-[1.2rem] font-semibold text-center">
                 Log-in Mobile Number
               </p>
-              <p className="text-[2rem] text-[#52796F] font-bold text-center" style={{color:"#3F007F"}}>
+              <p
+                className="text-[2rem] text-[#52796F] font-bold text-center"
+                style={{ color: "#3F007F" }}
+              >
                 {responseDataBuyer.phoneNumber}
               </p>
             </div>
@@ -152,7 +163,7 @@ const queryParameters = new URLSearchParams(window.location.search);
         </div>
         <div className="flex justify-center items-center flex-col py-[1rem]">
           <Link to={`/TenantSideView?boardId=${boardId}`}>
-            <CommonBtn title="Preview Board" margin="90px" bgColor="#3F007F"/>
+            <CommonBtn title="Preview Board" margin="90px" bgColor="#3F007F" />
           </Link>
           <p onClick={handleClick} className="py-[1rem]">
             <CommonBtn
@@ -166,14 +177,13 @@ const queryParameters = new URLSearchParams(window.location.search);
               navigate(-1);
             }}
           >
-            <CommonBtn title="View Board" margin="90px" bgColor="#3F007F"/>
+            <CommonBtn title="View Board" margin="90px" bgColor="#3F007F" />
           </button>
         </div>
         <div className="mb-[3rem]" />
         <Footer />
       </div>
-        </>
-        
-    );
+    </>
+  );
 }
 export default BoardCreatedS;

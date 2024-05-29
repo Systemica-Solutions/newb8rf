@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import CommonHeaderS from "../../CommonHeaderS";
 import backgroundImg from "../../Assets/Images/BoardCreation/BackgroundBoard.png";
 import CommonHeader from "../../CommonHeader";
 import CommonBtn from "../../CommonButton";
@@ -27,7 +27,6 @@ function PropertyViewBoardS() {
 
   console.log("addedPropetyId -> " + addedItemsId);
 
-
   const [responseDataBoard, setResponseDataBoard] = useState([]);
   const [responseDataProperty, setResponseDataProperty] = useState([]);
   const [addedProperty, setAddedProperty] = useState([]);
@@ -53,7 +52,7 @@ function PropertyViewBoardS() {
             `https://b8rliving.com/board/${boardId}`,
             axiosConfig
           );
-          console.log(response.data)
+          console.log(response.data);
           // const responseData = response.data.data.tenant.tenantDetails;
           const responseDataBoardData = response.data.data.board;
           const responseDataPropertiesData =
@@ -84,12 +83,15 @@ function PropertyViewBoardS() {
     fetchBoardDetails(); // Call the fetch function
   }, [boardId]);
 
-  const finalizeBoard =  () => {
-
+  const finalizeBoard = () => {
     console.log("Finalize");
 
     if (typeof window !== "undefined") {
-      var path = window.location.origin + "/OTPScreen?boardId=" + boardId + "&sharing=true";
+      var path =
+        window.location.origin +
+        "/OTPScreen?boardId=" +
+        boardId +
+        "&sharing=true";
       console.log(path);
 
       try {
@@ -127,7 +129,11 @@ function PropertyViewBoardS() {
           backgroundSize: "100% 100%",
         }}
       >
-        <CommonHeader title="View Board" color="#3F007F" style={{fontWeight:"600"}}/>
+        <CommonHeaderS
+          title="View Board"
+          color="#3F007F"
+          style={{ fontWeight: "600" }}
+        />
 
         <div style={{ Display: "flex" }}>
           <div>
@@ -144,20 +150,29 @@ function PropertyViewBoardS() {
           />
 
           <div className="flex justify-center items-center py-[1rem] gap-x-[1rem]">
-          <Link
+            <Link
               to={`/CreateBoardS?buyerId=${buyerId}&name=${name}&boardId=${boardId}`}
             >
-         <p><CommonBtn bgColor="#3F007F" title="Add More" margin="0px" marginRight="0px" width="120px" /></p>
-         </Link>
-          <p onClick={finalizeBoard} > <CommonBtn
-              onClick={finalizeBoard}
-              title="Finalize Board"
-              margin="160px"
-              bgColor="#3F007F"
-            />
-          </p>
+              <p>
+                <CommonBtn
+                  bgColor="#3F007F"
+                  title="Add More"
+                  margin="0px"
+                  marginRight="0px"
+                  width="120px"
+                />
+              </p>
+            </Link>
+            <p onClick={finalizeBoard}>
+              {" "}
+              <CommonBtn
+                onClick={finalizeBoard}
+                title="Finalize Board"
+                margin="160px"
+                bgColor="#3F007F"
+              />
+            </p>
           </div>
-
 
           <div className="flex flex-col justify-center items-center py-[2rem]">
             <Link
@@ -168,9 +183,11 @@ function PropertyViewBoardS() {
               }}
             >
               <ImCross className="text-[#CC3333]  lg:text-[2rem]  mr-[0.5rem]" />
-              <p className="text-[1.5rem] font-bold px-[1rem]">Deactivate Tenet</p>
+              <p className="text-[1.5rem] font-bold px-[1rem]">
+                Deactivate Tenet
+              </p>
             </Link>
-            <Back/>
+            <Back />
           </div>
         </div>
         <Footer />

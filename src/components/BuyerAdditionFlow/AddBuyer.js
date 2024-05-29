@@ -5,24 +5,33 @@ import axios from "axios";
 import bgm from "../Assets/Images/BuyerAdditionFlow/BuyerBg.png";
 import key_1 from "../PropertyAdditionPageIcons/key_1/24.png";
 import "./BuyerDesign.css";
-
+import CommonHeaderS from "../CommonHeaderS";
 import Footer from "../Footer";
 import CommonBtn from "../CommonButton";
 import BackButton from "../CommonButtonBack";
 import CommonHeader from "../CommonHeader";
 import { useNavigate } from "react-router-dom";
 import { MdVpnKey } from "react-icons/md";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AddBuyer() {
   const [checkedStateOne, setCheckedStateOne] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [checkedStateOne]);
 
   const [formData, setFormData] = useState({
     phoneNumber: "",
     buyerData: {
       name: "",
       email: "",
-      panNumber: "",
+      panNumber: "PAP10007G",
       houseConfiguration: "",
       houseType: "",
       furnishingType: "",
@@ -49,18 +58,18 @@ function AddBuyer() {
   const handleChange = (event) => {
     const { name, value } = event.target;
     console.log(name, value);
-    if (name === 'budget') {
+    if (name === "budget") {
       if (value <= 15) {
         setFormData({
           ...formData,
           buyerData: {
             ...formData.buyerData,
-            [name]: value
-          }
+            [name]: value,
+          },
         });
-        setErrorMessage('');
+        setErrorMessage("");
       } else {
-        setErrorMessage('Budget should not exceed 15');
+        setErrorMessage("Budget should not exceed 15");
         return;
       }
     }
@@ -107,7 +116,7 @@ function AddBuyer() {
     axios
       .post("https://b8rliving.com/buyer", formData, axiosConfig)
       .then((response) => {
-        alert("Your Buyer details has been submitted");
+        toast.success("Your Buyer details has been submitted");
         //redirect user to Dashboard
         window.location.href = `/BuyerCreated?name=${formData.buyerData.name}&budget=${formData.buyerData.budget}`;
         // do something with the response
@@ -115,13 +124,19 @@ function AddBuyer() {
       .catch((error) => {
         console.log(error);
         // handle the error
+        toast.error(error.response.data.message);
       });
     console.log("Finale In state:", formData);
-    alert("Buyer Added!");
+    // alert("Buyer Added!");
   };
 
   return (
     <>
+      <ToastContainer
+        className="my-[3rem] text-[1.1rem] font-bold"
+        autoClose={1000}
+        // hideProgressBar={true}
+      />
       {checkedStateOne ? (
         <div className="startPage">
           <div className="">
@@ -136,7 +151,7 @@ function AddBuyer() {
                 backgroundSize: "100% 100%",
               }}
             >
-              <CommonHeader title="Add Buyer" color="#1E0058" />
+              <CommonHeaderS title="Add Buyer" color="#1E0058" />
 
               <form
                 onSubmit={handleChangeOne}
@@ -184,7 +199,7 @@ function AddBuyer() {
                   onChange={handleChange}
                   required
                 />
-                <label htmlFor="panNumber" className="fieldTitle">
+                {/* <label htmlFor="panNumber" className="fieldTitle">
                   Pan Card Number{" "}
                   <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
                 </label>
@@ -196,7 +211,7 @@ function AddBuyer() {
                   value={formData.buyerData.panNumber}
                   onChange={handleChange}
                   required
-                />
+                /> */}
 
                 <div className="flex justify-center items-center py-[1rem]">
                   {/* <div onClick={handleClick}>
@@ -232,7 +247,7 @@ function AddBuyer() {
             }}
           >
             {/* <h2 style={{color:"#52796F"}}>Tenant Details (1/2)</h2> */}
-            <CommonHeader title="Buyer Details" color="#1E0058" />
+            <CommonHeaderS title="Buyer Details" color="#1E0058" />
 
             <form className="login-form pt-[2rem]" onSubmit={handleSubmit}>
               <label
@@ -261,7 +276,9 @@ function AddBuyer() {
                 }}
               >
                 [Studio, 1 BHK, 2 BHK, 3 BHK, 4 BHK, 0, 1, 2, 3, 4]
-                <option value=" ">Select from Drop Down</option>
+                <option value="" disabled selected>
+                  Select from Drop Down
+                </option>
                 <option value="Studio">Studio</option>
                 <option value="1 BHK">1 BHK</option>
                 <option value="2 BHK">2 BHK</option>
@@ -294,7 +311,9 @@ function AddBuyer() {
                   border: "1px solid #52796F",
                 }}
               >
-                <option value=" ">Type of Furnishing</option>
+                <option value=" " disabled selected>
+                  Select from Drop Down
+                </option>
                 <option value="Full-furnished">Full-Furnished</option>
                 <option value="Semi-furnished">Semi-Furnished</option>
                 <option value="Un-furnished">UnFurnished</option>
@@ -325,7 +344,7 @@ function AddBuyer() {
                   border: "1px solid #52796F",
                 }}
               >
-                <option value="Selectfromdropdown">
+                <option value="Selectfromdropdown" disabled selected>
                   Select from Drop Down
                 </option>
                 {/* houseType" must be one of [Flat (in Gated Society…r Floor,

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import checkP from "../Assets/Images/AgentDashboard/CheckP.png";
-
 import PendingVerification from "../Assets/Images/AgentDashboard/PendingVerification.png";
 import seen from "../Assets/Images/Seen.png";
 import Like from "../Assets/Images/AgentDashboard/Like.png";
