@@ -23,6 +23,7 @@ import CommonBtn from "../CommonButton";
 import CommonTopButton from "../CommonTopButton";
 import SharedNoactcompS from "./ShareNoactcompS";
 import Back from "../Back";
+import MyPropertyCompS from "./MyPropertyCompS";
 
 function My_PropertySNAS() {
   const token = localStorage.getItem("token");
@@ -168,7 +169,7 @@ function My_PropertySNAS() {
           </p>
         </div>
         {/* --------------------------------------first tab-------------------------------------------- */}
-        <SharedNoactcompS responseProperty={responseProperty} />
+        <MyPropertyCompS responseProperty={responseProperty} showCloseButton={true}/>
         {/* --------------------------------------first tab-------------------------------------------- */}
         
         <Back/>

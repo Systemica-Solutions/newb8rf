@@ -9,7 +9,7 @@ import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { MdOutlineHideImage } from "react-icons/md";
 import { FaHeart } from "react-icons/fa6";
 
-const MyPropertyComp = ({ responseProperty,showCloseButton }) => {
+const MyPropertyCompS = ({ responseProperty,showCloseButton }) => {
   return (
     <>
       {responseProperty.map((values, index) => (
@@ -165,4 +165,4 @@ const MyPropertyComp = ({ responseProperty,showCloseButton }) => {
     </>
   );
 };
-export default MyPropertyComp;
+export default MyPropertyCompS;
