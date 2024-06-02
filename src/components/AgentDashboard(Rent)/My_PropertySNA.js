@@ -23,6 +23,7 @@ import CommonBtn from "../CommonButton";
 import CommonTopButton from "../CommonTopButton";
 import SharedNoactcomp from "./SharedNoactcomp";
 import Back from "../Back";
+import MyPropertyComp from "./MyPropertyComp";
 
 function My_PropertySNA() {
   const token = localStorage.getItem("token");
@@ -42,7 +43,7 @@ function My_PropertySNA() {
     const fetchPosts = async () => {
       setLoading(true);
       axios
-        .get(`https://b8rliving.com/property/shared/1`, axiosConfig)
+        .get(`https://b8rliving.com/property/shared/1?purposeType=purposeRent`, axiosConfig)
         .then((response) => {
           console.log(response.data.data);
           var propertiesData = response.data.data;
@@ -164,7 +165,7 @@ function My_PropertySNA() {
           </p>
         </div>
         {/* --------------------------------------first tab-------------------------------------------- */}
-        <SharedNoactcomp responseProperty={responseProperty} />
+        <MyPropertyComp responseProperty={responseProperty} showCloseButton={true}/>
         {/* --------------------------------------first tab-------------------------------------------- */}
         
         <Back/>

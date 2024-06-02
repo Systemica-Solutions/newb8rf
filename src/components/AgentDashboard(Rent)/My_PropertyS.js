@@ -41,7 +41,7 @@ function My_PropertyS() {
     const fetchPosts = async () => {
       setLoading(true);
       axios
-        .get(`https://b8rliving.com/property/shortlisted/1`, axiosConfig)
+        .get(`https://b8rliving.com/property/shortlisted/1?purposeType=purposeRent`, axiosConfig)
         .then((response) => {
           console.log(response.data.data);
           var propertiesData = response.data.data;

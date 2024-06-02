@@ -2,126 +2,126 @@
 
 /* Left side container */
 .left-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 10px;
-  }
-  
-  /* Left side content */
-  .left-content {
-    height: 78px;
-    width: 320px;
-    background: #FFFFFF;
-    border: 1px solid #DAF0EE;
-    border-radius: 15px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    display: flex;
-  }
-  
-  /* Left side image */
-  .left-image {
-    margin-left: 10px;
-    margin-top: 10px;
-  }
-  
-  /* Left side text container */
-  .left-text-container {
-    margin-top: 10px;
-  }
-  
-  /* Left side address text */
-  .left-address-text {
-    font-size: 13px;
-    padding: 1%;
-    /* white-space: nowrap; */
-    word-wrap: break-word;
-  }
-  
-  .left-address-text-s{
-    font-size: 12px;
-    width: 100%;
-    white-space: nowrap;
-
-  }
-  /* Left side info box */
-  .left-info-box {
-    width: 150px;
-    height: 25px;
-    background: #E8ECEC;
-    border-radius: 10px;
-    margin-top: 20px;
-    margin-left: 10px;
-  }
-  .left-info-box-s {
-    width: 150px;
-    height: 25px;
-    /* background: #E8ECEC; */
-    border-radius: 10px;
-    margin-top: 20px;
-    margin-left: 10px;
-  }
-  .left-info-box-await {
-    width: 150px;
-    height: 25px;
-    background: #FCECEF;
-    border-radius: 10px;
-    margin-top: 20px;
-    margin-left: 10px;
-  }
-  /* Left side info text */
-  .left-info-text {
-    font-size: 12px;
-    color: #5D6560;
-    margin-left: -50px;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: bold;
-  }
-  
-.left-info-text-await{
-    font-size: 12px;
-    color: #AA223C;
-    background-color: #FCECEF; 
-    margin-left: -50px;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
 }
 
-  /* Right side container */
-  .right-container {
-    height: 75px;
-    width: 52px;
-    background: #E8E7E7;
-    border-radius: 10px;
-    margin-left: 10px;
-  }
-  
-  /* Right side image */
-  .right-image {
-    height: 27px;
-    margin-top: 20px;
-    margin-bottom: -8px;
-  }
-  
-  /* Right side text */
-  .right-text {
-    font-size: 12px;
-    color: #5D6560;
-    font-weight: bold;
-    line-height: 0.1;
-  }
-  
-  .left-info-box-shared-main{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1%;
-    margin-left: 10%;
-  }
+/* Left side content */
+.left-content {
+  height: 78px;
+  width: 320px;
+  background: #FFFFFF;
+  border: 1px solid #DAF0EE;
+  border-radius: 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+}
 
-  .left-info-box-shared , .left-info-box-seen {
-    display: flex;
-    justify-content: space-between;
-    margin-left: 3px;
-  }
+/* Left side image */
+.left-image {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+/* Left side text container */
+.left-text-container {
+  margin-top: 10px;
+}
+
+/* Left side address text */
+.left-address-text {
+  font-size: 13px;
+  padding: 1%;
+  /* white-space: nowrap; */
+  word-wrap: break-word;
+}
+
+.left-address-text-s{
+  font-size: 12px;
+  width: 100%;
+  white-space: nowrap;
+
+}
+/* Left side info box */
+.left-info-box {
+  width: 150px;
+  height: 25px;
+  background: #E8ECEC;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+.left-info-box-s {
+  width: 150px;
+  height: 25px;
+  /* background: #E8ECEC; */
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+.left-info-box-await {
+  width: 150px;
+  height: 25px;
+  background: #FCECEF;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+/* Left side info text */
+.left-info-text {
+  font-size: 12px;
+  color: #5D6560;
+  margin-left: -50px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold;
+}
+
+.left-info-text-await{
+  font-size: 12px;
+  color: #AA223C;
+  background-color: #FCECEF; 
+  margin-left: -50px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold;
+}
+
+/* Right side container */
+.right-container {
+  height: 75px;
+  width: 52px;
+  background: #E8E7E7;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+/* Right side image */
+.right-image {
+  height: 27px;
+  margin-top: 20px;
+  margin-bottom: -8px;
+}
+
+/* Right side text */
+.right-text {
+  font-size: 12px;
+  color: #5D6560;
+  font-weight: bold;
+  line-height: 0.1;
+}
+
+.left-info-box-shared-main{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1%;
+  margin-left: 10%;
+}
+
+.left-info-box-shared , .left-info-box-seen {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 3px;
+}

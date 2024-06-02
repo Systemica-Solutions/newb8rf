@@ -41,7 +41,7 @@ function AllActiveProperties() {
       setLoading(true);
       try {
         const response = await axios.get(
-          "https://b8rliving.com/property",
+          "https://b8rliving.com/property?purposeType=purposeRent",
           axiosConfig
         );
 

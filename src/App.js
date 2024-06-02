@@ -79,6 +79,13 @@ import OTPscreen from "./components/TenantSideView/OTPscreen";
 import TenantSideView from "./components/TenantSideView/TenantSideView";
 import VirtualTour from "./components/TenantSideView/VirtualTour";
 
+//BuyerSideView
+import DetailImgViewS from "./components/BuyerSideView/DetailImgViewS";
+import DetailViewS from "./components/BuyerSideView/DetailViewS";
+import OTPscreenS from "./components/BuyerSideView/OTPscreenS";
+import TenantSideViewS from "./components/BuyerSideView/TenantSideViewS";
+import VirtualTourS from "./components/BuyerSideView/VirtualTourS";
+import AllActivePropertiesS from "./components/AgentDashboard(Sale)/AllActivePropertiesS";
 //PropertyCreate -Imports ---------------------------------------------------
 // import PropertyDetails from "./components/PropertyDetails";
 import PropertyInfo from "./components/PropertyCreate/PropertyInfo";
@@ -300,6 +307,22 @@ function App(props) {
             <Route exact path="VirtualTour" element={<VirtualTour />} />
 
             {/* OTP VERIFY */}
+            {/* BuyerSide View */}
+            <Route exact path="OTPscreenS" element={<OTPscreenS />} />
+            <Route exact path="DetailViewS" element={<DetailViewS/>} />
+
+            <Route exact path="TenantSideViewS" element={<TenantSideViewS />} />
+            <Route exact path="DetailImgViewS" element={<DetailImgViewS />} />
+            <Route exact path="VirtualTourS" element={<VirtualTourS />} />
+
+            {/* <Route exact path="SuccesfulSignup" element={<SuccessfulSignup />} /> */}
+
+            <Route
+              exact
+              path="AllActivePropertiesS"
+              element={<AllActivePropertiesS />}
+            />
+
 
             {/* <Route exact path="SuccesfulSignup" element={<SuccessfulSignup />} /> */}
 

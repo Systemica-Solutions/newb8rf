@@ -92,7 +92,7 @@ const TenantComp = ({ props, name }) => {
                     </div>
 
                     <div className="text-[0.9rem] font-semibold px-[0.2rem]">
-                      2 properties shortlisted
+                      {values.numberShortlisted} properties shortlisted
                     </div>
                   </>
                 )}
@@ -114,7 +114,7 @@ const TenantComp = ({ props, name }) => {
                     </div>
 
                     <div className="text-[0.9rem] font-semibold px-[0.2rem]">
-                      4 properties shared
+                     CurrentlyViewing
                     </div>
                   </>
                 )}
