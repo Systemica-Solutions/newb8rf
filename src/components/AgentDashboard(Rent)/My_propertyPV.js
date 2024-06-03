@@ -46,7 +46,7 @@ function My_propertyPV() {
     const fetchPosts = async () => {
       setLoading(true);
       axios
-        .get(`https://b8rliving.com/property`, axiosConfig)
+        .get(`https://b8rliving.com/property?purposeType=purposeRent`, axiosConfig)
         .then((response) => {
           console.log(response.data.data);
           var propertiesData = response.data.data.properties;

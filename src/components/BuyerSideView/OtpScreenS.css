@@ -1,0 +1,47 @@
+.Inputfield{
+    color:"#5D6560" !important;
+    font-family:"Inter" !important;
+    font-style: "Regular" !important;
+    margin-left: 30px;
+
+}
+.InputF{
+    border-radius: 10%;
+    border-color: #52796F;
+    
+}
+.SpaceAbove{
+    margin-top: 70px;
+    margin-left: 13.5px;
+    
+}
+
+.TenantSideF{
+    height: 160px;
+    width: 355px;
+    background-color: #F0FBF8;
+    border-radius: 20px;
+    margin: 10% auto;
+    text-align: center;
+  
+    /* Use flexbox to center the contents */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.TenantSideF .titleF{
+    margin-top: 5%; /* Adjust the top margin as needed */
+    margin-bottom: 0%; /* Adjust the bottom margin as needed */
+}
+
+.newBtn{
+    height: 50px;
+    width: 250px;
+    background-color: #3B413D;
+    font-family:"Glida Display";
+    color: #F0FBF8;
+    font-size: larger;
+    border-radius: 10px;
+}
+

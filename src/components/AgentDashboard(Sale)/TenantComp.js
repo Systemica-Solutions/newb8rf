@@ -11,6 +11,7 @@ import { FaHeart } from "react-icons/fa";
 import { FaEye } from "react-icons/fa6";
 import { MdOutlineAirplanemodeActive } from "react-icons/md";
 import { MdOutlineMobileScreenShare } from "react-icons/md";
+import { MdOutlineMobileScreenShare } from "react-icons/md";
 
 const TenantComp = ({ props, name }) => {
   // console.log(props);
@@ -91,7 +92,7 @@ const TenantComp = ({ props, name }) => {
                     </div>
 
                     <div className="text-[0.9rem] font-semibold px-[0.2rem]">
-                      2 properties shortlisted
+                      {values.numberShortlisted} properties shortlisted
                     </div>
                   </>
                 )}
@@ -113,7 +114,7 @@ const TenantComp = ({ props, name }) => {
                     </div>
 
                     <div className="text-[0.9rem] font-semibold px-[0.2rem]">
-                      4 properties shared
+                     CurrentlyViewing
                     </div>
                   </>
                 )}

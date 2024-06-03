@@ -87,11 +87,7 @@ function PropertyViewBoardS() {
     console.log("Finalize");
 
     if (typeof window !== "undefined") {
-      var path =
-        window.location.origin +
-        "/OTPScreen?boardId=" +
-        boardId +
-        "&sharing=true";
+      var path = window.location.origin + "/OTPScreenS?boardId=" + boardId + "&sharing=true";
       console.log(path);
 
       try {

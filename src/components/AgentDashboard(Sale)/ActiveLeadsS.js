@@ -9,7 +9,6 @@ import backgroundSecond from "../Assets/Images/Sale/SaleBg.png";
 import searchImg from "../Assets/Search.png";
 import SearchBar from "../SearchBar";
 import TenantComp from "./TenantComp";
-import CommonHeaderS from "../CommonHeaderS";
 // import Back from "../Back";
 
 function ActiveLeadsS() {
@@ -106,7 +105,7 @@ function ActiveLeadsS() {
         <p style={{textAlign:"left"}}>Hey Yash, <br/>
 
         Here are all the tenants that you have onboarded </p> */}
-        <div className="mt-[1rem]" />
+        <div className="mt-[1rem]"/>
         <TenantComp props={responsePendingBuyers} name={name} />
         <Footer />
       </div>

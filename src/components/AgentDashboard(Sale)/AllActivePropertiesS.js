@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component, useState, useEffect } from "react";
 import CommonHeader from "../CommonHeader";
 import CommonBtn from "../CommonButton";
 import CommonTopButton from "../CommonTopButton";
@@ -8,9 +8,14 @@ import axios from "axios";
 import oneBg from "../Assets/Images/AgentDashboard/oneBg.png";
 import searchImg from "../Assets/Search.png";
 import SearchBar from "../SearchBar";
-import CommonHeaderS from "../CommonHeaderS";
+import AvailablePropertyComp from "./AvailablePropertyComp";
 
 function AllActivePropertiesS() {
+  const [responsePendingProperties, setresponsePendingProperties] = useState(
+    []
+  );
+  const [loading, setLoading] = useState(false);
+
   const handleSearch = (searchValue) => {
     // Custom search handling logic
     console.log("Searching for:", searchValue);
@@ -18,29 +23,86 @@ function AllActivePropertiesS() {
     // Perform search operations here
   };
 
+  const token = localStorage.getItem("token");
+
+  const username = localStorage.getItem("username");
+  const name = username.substring(0, username.indexOf(" "));
+
+  let axiosConfig = {
+    headers: {
+      "Content-Type": "application/json;charset=UTF-8",
+      "Access-Control-Allow-Origin": "*",
+      Authorization: `Basic ${token}`,
+    },
+  };
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          "https://b8rliving.com/property?purposeType=purposeSale",
+          axiosConfig
+        );
+
+        // Check if the 'imagesApproved' property exists and has data
+        const properties = response.data.data.properties;
+        console.log(properties);
+
+        const sort = properties.sort((a,b) =>{
+          return new Date(b.createdAt) - new Date(a.createdAt)
+        })
+
+        if (properties) {
+          // Filter properties where 'imagesApproved' is true
+          const filteredProperties = properties.filter(
+            (property) => property.status === "Verified"
+          );
+
+
+          console.log(filteredProperties);
+          // Sort the filtered properties by 'imagesApproved' in descending order
+          const sortedProperties = filteredProperties.sort((a, b) => {
+            return b.imagesApproved - a.imagesApproved;
+          });
+
+          setresponsePendingProperties(sortedProperties || sort );
+        } else {
+          // Handle the case where 'imagesApproved' is empty or doesn't exist
+          console.log("No properties with images approved found.");
+        }
+      } catch (error) {
+        console.log(error);
+        // Handle the error here if needed
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
   return (
     <>
       <div
-        className="form"
+        className=""
         style={{
-          borderRadius: "16px",
-          marginTop: "10%",
+          // borderRadius: "16px",
+          // marginTop: "10%",
           backgroundRepeat: "no-repeat",
           backgroundImage: `url(${oneBg})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "100% 100%",
         }}
       >
-        <CommonHeaderS title="All Active Properties" color="#1E0058" />
+        <CommonHeader title="All Active Properties" color="#1E0058" />
 
-        <SearchBar
-          onSearch={handleSearch}
-          placeholder="Search by Tenant Name"
+        <AvailablePropertyComp
+          props={responsePendingProperties}
+          name={name}
+          activeProperies="true"
+          status="activity"
         />
-        <p style={{ textAlign: "left" }}>
-          Hey Yash, <br />
-          Here are all the rent properties that you have onboarded{" "}
-        </p>
 
         <Footer />
       </div>
