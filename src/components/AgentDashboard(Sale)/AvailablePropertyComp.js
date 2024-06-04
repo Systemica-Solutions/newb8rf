@@ -13,7 +13,13 @@ import { MdOutlineHideImage } from "react-icons/md";
 import { RiQuestionnaireFill } from "react-icons/ri";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 
-const AvailablePropertyComp = ({ props, name,showChangeStatus,showCloseButton,status }) => {
+const AvailablePropertyComp = ({
+  props,
+  name,
+  showChangeStatus,
+  showCloseButton,
+  status,
+}) => {
   const [filteredData, setfilteredData] = useState(props);
   const [searchValue, setSearchValue] = useState("");
 
@@ -26,9 +32,10 @@ const AvailablePropertyComp = ({ props, name,showChangeStatus,showCloseButton,st
       setfilteredData(props);
     } else {
       // Filter properties based on houseName
-      const filtered = props.filter((property) =>
-        property.houseName.toLowerCase().includes(searchTerm.toLowerCase()) ||  
-        property.societyName.toLowerCase().includes(searchTerm.toLowerCase())
+      const filtered = props.filter(
+        (property) =>
+          property.houseName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          property.societyName.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setfilteredData(filtered);
     }
@@ -69,8 +76,9 @@ const AvailablePropertyComp = ({ props, name,showChangeStatus,showCloseButton,st
       </div>
 
       {/* header-text */}
-      <div className="px-[rem] text-[1.2rem]">
-        Hey <b>{name}</b>, Here are the {status} properties.
+      <div className="px-[1rem] text-[1.2rem] text-left">
+        Hey <b>{name}</b>, Here are all the sale properties that are available
+        for sale
       </div>
 
       {/* properties */}
@@ -80,7 +88,6 @@ const AvailablePropertyComp = ({ props, name,showChangeStatus,showCloseButton,st
         <div key={index}>
           <div className="px-[1rem] py-[0.5rem]">
             <div className="flex justify-between gap-x-[0.5rem]">
-              
               {/* left-section */}
               <div
                 className="bg-white w-[100%] p-[0.5rem] rounded-[0.5rem] flex "
@@ -91,7 +98,7 @@ const AvailablePropertyComp = ({ props, name,showChangeStatus,showCloseButton,st
               >
                 {/* image */}
                 <div className="w-[30%] flex justify-center items-center">
-                  {values.imagesApproved && values.status==="Verified"? (
+                  {values.imagesApproved && values.status === "Verified" ? (
                     <>
                       <img
                         src={values.images[0]}
@@ -115,23 +122,23 @@ const AvailablePropertyComp = ({ props, name,showChangeStatus,showCloseButton,st
                   {/* name & icon */}
                   <div className="flex justify-between items-center pl-[0.5rem]">
                     <p className="font-semibold px-[0.2rem]">
-                    {values.houseName} , {values.societyName}
-                    { values.closeListingReason && (
-              <div
-                className="flex justify-between items-center  pl-[0.5rem]"
-                style={{ color: "#E13018" }}
-              >
-               {values.closeListingReason}
-              </div>
-            )}
+                      {values.houseName} , {values.societyName}
+                      {values.closeListingReason && (
+                        <div
+                          className="flex justify-between items-center  pl-[0.5rem]"
+                          style={{ color: "#E13018" }}
+                        >
+                          {values.closeListingReason}
+                        </div>
+                      )}
                     </p>
-                    {values.imagesApproved && values.status==="Verified" ? (
+                    {values.imagesApproved && values.status === "Verified" ? (
                       <>
                         <BsFillBookmarkCheckFill className="text-[#1E0058] text-[2.5rem]" />
                       </>
                     ) : (
                       <>
-                        <RiQuestionnaireFill className="text-[rgb(30, 0, 88)] text-[2.5rem] " />
+                        <RiQuestionnaireFill className="text-[#1E0058] text-[2.5rem] " />
                       </>
                     )}
                   </div>
@@ -139,39 +146,44 @@ const AvailablePropertyComp = ({ props, name,showChangeStatus,showCloseButton,st
                   <div
                     className="font-bold flex justify-end items-center pt-[0.5rem] text-[#E13018]"
                     style={{
-                      color: values.imagesApproved && values.status==="Verified" ? "rgb(30, 0, 88)" : "#E13018",
+                      color:
+                        values.imagesApproved && values.status === "Verified"
+                          ? "rgb(30, 0, 88)"
+                          : "#E13018",
                     }}
                   >
-                    {values.imagesApproved && values.status==="Verified"
+                    {values.imagesApproved && values.status === "Verified"
                       ? "  Active Listing"
                       : "   Pending Verification"}
                   </div>
                 </div>
               </div>
               {/* right/edit section */}
-              {showCloseButton && ( 
-                  <Link
-                className="w-[15%] bg-[#E8E7E7] flex justify-center items-center p-[0.5rem] flex-col rounded-[0.5rem] border-2 border-slate-300"
-                to={`/Changestatus?propertyId=${values._id}`}
-              >
-                <IoIosArrowDroprightCircle className="text-[1.7rem] text-[#5D6560]" />
-                <p className="font-bold py-[0.2rem] text-[#5D6560]">Close Property</p>
-              </Link> 
+              {showCloseButton && (
+                <Link
+                  className="w-[15%] bg-[#E8E7E7] flex justify-center items-center p-[0.5rem] flex-col rounded-[0.5rem] border-2 border-slate-300"
+                  to={`/Changestatus?propertyId=${values._id}`}
+                >
+                  <IoIosArrowDroprightCircle className="text-[1.7rem] text-[#5D6560]" />
+                  <p className="font-bold py-[0.2rem] text-[#5D6560]">
+                    Close Property
+                  </p>
+                </Link>
               )}
 
-              {showChangeStatus &&(
+              {showChangeStatus && (
                 <Link
-                to={`/PropertyViewingStatus/${values._id}`}
-                className="bg-[#E8E7E7] p-[0.5rem] w-[15%] flex justify-center items-center text-[#5D6560] flex-col border-2 border-slate-300"
-                style={{
-                  borderRadius: "15px",
-                }}
-              >
-                <IoIosArrowDroprightCircle className="text-[1.5rem]" />
-                <p className="font-bold text-[0.9rem] text-center">
-                  View Status
-                </p>
-              </Link>
+                  to={`/PropertyViewingStatus/${values._id}`}
+                  className="bg-[#E8E7E7] p-[0.5rem] w-[15%] flex justify-center items-center text-[#5D6560] flex-col border-2 border-slate-300"
+                  style={{
+                    borderRadius: "15px",
+                  }}
+                >
+                  <IoIosArrowDroprightCircle className="text-[1.5rem]" />
+                  <p className="font-bold text-[0.9rem] text-center">
+                    View Status
+                  </p>
+                </Link>
               )}
             </div>
           </div>

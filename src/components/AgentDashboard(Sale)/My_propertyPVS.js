@@ -33,6 +33,13 @@ function My_propertyPVS() {
   const token = localStorage.getItem("token");
   //   console.log(token);
 
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
+
   let axiosConfig = {
     headers: {
       "Content-Type": "application/json;charset=UTF-8",
@@ -45,12 +52,14 @@ function My_propertyPVS() {
     const fetchPosts = async () => {
       setLoading(true);
       axios
-        .get(`https://b8rliving.com/property?purposeType=purposeSale`, axiosConfig)
+        .get(
+          `https://b8rliving.com/property?purposeType=purposeSale`,
+          axiosConfig
+        )
         .then((response) => {
           console.log(response.data.data);
           var propertiesData = response.data.data.properties;
-                
-          
+
           // Filter out properties where propertyDetails.purposeSale is true
 
           // Filter out properties where propertyDetails.purposeSale is true
@@ -61,15 +70,18 @@ function My_propertyPVS() {
             );
           });
 
-          const sortedProperties = response.data.data.properties.sort((a, b) => {
-            return new Date(b.createdAt) - new Date(a.createdAt)
-          });
+          const sortedProperties = response.data.data.properties.sort(
+            (a, b) => {
+              return new Date(b.createdAt) - new Date(a.createdAt);
+            }
+          );
 
           const noImageProperties = propertiesData.filter((property) => {
             return (
               property.status !== "Closed" &&
               (property.fieldAgentStatus === "DetailsCompleted" ||
-                property.fieldAgentStatus === "Unassigned" || property.fieldAgentStatus==="Pending")
+                property.fieldAgentStatus === "Unassigned" ||
+                property.fieldAgentStatus === "Pending")
             );
           });
 
@@ -111,11 +123,12 @@ function My_propertyPVS() {
         }}
       >
         {/* <h2 style={{color:"#52796F"}}>My Properties</h2> */}
-        <CommonHeader title="My Properties" color="#1E0058" />
+        <CommonHeaderS title="My Properties" color="#1E0058" />
 
         {/* -------------------------------button---------------------------------------------- */}
         <div className="px-[0.5rem] py-[1rem] pt-[2rem]">
           <div className="grid grid-cols-2 gap-x-[0.5rem]">
+                  {/* active btn */}
             <CommonTopButton
               bgColor="#1E0058"
               borderColor="#DAF0EE"
@@ -166,9 +179,7 @@ function My_propertyPVS() {
             necessary to get them ready to share
           </text> */}
           <p className="pb-[0.5rem] font-bold">Hey {name} ,</p>
-          <p>
-            Properties shown here are YET TO BE VERIFIED
-          </p>
+          <p>Properties shown here are YET TO BE VERIFIED</p>
         </div>
         {/* --------------------------------------first tab-------------------------------------------- */}
         <ListingComp
@@ -177,7 +188,7 @@ function My_propertyPVS() {
         />
 
         {/* --------------------------------------Second tab-------------------------------------------- */}
-        <Back/>
+        <Back />
         <Footer />
       </div>
     </>

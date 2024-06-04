@@ -41,7 +41,7 @@ import CommonHeaderS from "../CommonHeaderS";
 
 function DashboardS() {
   const token = localStorage.getItem("token");
-  const [countBuyer,setCountBuyer] = useState([]);
+  const [countBuyer, setCountBuyer] = useState([]);
   const [responseCountProperties, setresponseCountProperties] = useState();
   const [responseProperties, setresponseProperties] = useState([]);
   const [CountProperties, setCountProperties] = useState([]);
@@ -70,8 +70,7 @@ function DashboardS() {
       Authorization: `Basic ${token}`,
     },
   };
-  useEffect(() =>{
-    
+  useEffect(() => {
     const fetchBuyerCounts = async () => {
       setLoading(true);
       try {
@@ -111,20 +110,22 @@ function DashboardS() {
     };
     fetchPropertiesCounts();
     fetchBuyerCounts();
-  },[])
+  }, []);
   // console.log(CountProperties);
 
   var pendingCounting = 0;
   var activeCounting = 0;
   const difference = countBuyer.Total - countBuyer.Deactivate;
 
-  const number = difference && difference !== 0
-    ? difference
-    : difference === 0
-    ? 0
-    : "-";
-  const difference2= CountProperties.Total - CountProperties.Closed;
-  const AvailablePropertyNumber =  difference2 && difference2!==0 ? difference2 : difference2===0 ? 0 : "-";
+  const number =
+    difference && difference !== 0 ? difference : difference === 0 ? 0 : "-";
+  const difference2 = CountProperties.Total - CountProperties.Closed;
+  const AvailablePropertyNumber =
+    difference2 && difference2 !== 0
+      ? difference2
+      : difference2 === 0
+      ? 0
+      : "-";
   responseProperties.map((element) => {
     // console.log(element.status);
     if (
@@ -138,7 +139,6 @@ function DashboardS() {
     }
     return null; // You should return something when using map to avoid React warnings.
   });
-  
 
   let route = {
     WaitingForProperty: "WaitingForProperty",
@@ -165,7 +165,7 @@ function DashboardS() {
         {/* top-btn */}
         <div className="p-[1rem]">
           <div className="grid grid-cols-2 gap-x-[1rem]">
-            <Link to="/DashboardS">
+            <Link to="/Dashboard">
               <CommonTopButton
                 text="For Rent"
                 bgColor="#F5F5F5"
@@ -214,7 +214,7 @@ function DashboardS() {
                     <div className="flex justify-center items-center pb-[0.5rem]">
                       <TbBrandGoogleHome className="text-[#1E0058] text-[2.5rem]" />
                       <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {AvailablePropertyNumber}
+                        {AvailablePropertyNumber}
                       </p>
                     </div>
                     {/* text */}
@@ -231,7 +231,12 @@ function DashboardS() {
                     <div className="flex justify-center items-center pb-[0.5rem]">
                       <RiQuestionnaireFill className="text-[#1E0058] text-[2.5rem]" />
                       <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountProperties.Pending && CountProperties.Pending!==0  ? CountProperties.Pending : CountProperties.Pending===0 ? 0 : "-"}
+                        {CountProperties.Pending &&
+                        CountProperties.Pending !== 0
+                          ? CountProperties.Pending
+                          : CountProperties.Pending === 0
+                          ? 0
+                          : "-"}
                       </p>
                     </div>
                     <div className="font-bold flex justify-center items-center flex-col">
@@ -247,7 +252,12 @@ function DashboardS() {
                     <div className="flex justify-center items-center pb-[0.5rem]">
                       <BsFillBookmarkCheckFill className="text-[#1E0058] text-[2.5rem]" />
                       <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountProperties.Verified && CountProperties.Verified!==0 ? CountProperties.Verified : CountProperties.Verified===0 ? 0 : "-"}
+                        {CountProperties.Verified &&
+                        CountProperties.Verified !== 0
+                          ? CountProperties.Verified
+                          : CountProperties.Verified === 0
+                          ? 0
+                          : "-"}
                       </p>
                     </div>
                     {/* text */}
@@ -264,7 +274,12 @@ function DashboardS() {
                     <div className="flex justify-center items-center pb-[0.5rem]">
                       <TbShareOff className="text-[#1E0058] text-[2.5rem]" />
                       <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountProperties.YetToShare && CountProperties.YetToShare!==0 ? (Math.max(CountProperties.YetToShare,0)):CountProperties.YetToShare===0 ? 0 :"-"}
+                        {CountProperties.YetToShare &&
+                        CountProperties.YetToShare !== 0
+                          ? Math.max(CountProperties.YetToShare, 0)
+                          : CountProperties.YetToShare === 0
+                          ? 0
+                          : "-"}
                       </p>
                     </div>
                     {/* text */}
@@ -281,7 +296,11 @@ function DashboardS() {
                     <div className="flex justify-center items-center pb-[0.5rem]">
                       <MdOutlineMobileScreenShare className="text-[#1E0058] text-[2.5rem]" />
                       <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountProperties.Shared && CountProperties.Shared!==0 ?  CountProperties.Shared : CountProperties.Shared===0 ? 0 : "-"}
+                        {CountProperties.Shared && CountProperties.Shared !== 0
+                          ? CountProperties.Shared
+                          : CountProperties.Shared === 0
+                          ? 0
+                          : "-"}
                       </p>
                     </div>
                     {/* text */}
@@ -298,7 +317,12 @@ function DashboardS() {
                     <div className="flex justify-center items-center pb-[0.5rem]">
                       <RiHomeHeartLine className="text-[#1E0058] text-[2.5rem]" />
                       <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                      {CountProperties.Shortlisted && CountProperties.Shortlisted!==0 ? CountProperties.Shortlisted: CountProperties.Shortlisted===0 ? 0 : "-"}
+                        {CountProperties.Shortlisted &&
+                        CountProperties.Shortlisted !== 0
+                          ? CountProperties.Shortlisted
+                          : CountProperties.Shortlisted === 0
+                          ? 0
+                          : "-"}
                       </p>
                     </div>
                     {/* text */}
@@ -308,7 +332,12 @@ function DashboardS() {
                   </Link>
                 </div>
                 <p className="font-bold text-[1.2rem] text-center py-[1rem]">
-                {CountProperties.Closed && CountProperties.Closed!==0 ? CountProperties.Closed : CountProperties.Closed===0? 0 : "-"} Sold
+                  {CountProperties.Closed && CountProperties.Closed !== 0
+                    ? CountProperties.Closed
+                    : CountProperties.Closed === 0
+                    ? 0
+                    : "-"}{" "}
+                  Sold
                 </p>
               </div>
               {/* right-container */}
@@ -340,7 +369,12 @@ function DashboardS() {
                     <div className="flex justify-center items-center pb-[0.5rem]">
                       <RiQuestionnaireFill className="text-[#1E0058] text-[2.5rem]" />
                       <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                        {countBuyer.WaitingForProperty && countBuyer.WaitingForProperty!=0 ? countBuyer.WaitingForProperty : countBuyer.WaitingForProperty===0 ? 0 : "-"}
+                        {countBuyer.WaitingForProperty &&
+                        countBuyer.WaitingForProperty != 0
+                          ? countBuyer.WaitingForProperty
+                          : countBuyer.WaitingForProperty === 0
+                          ? 0
+                          : "-"}
                       </p>
                     </div>
                     {/* text */}
@@ -374,7 +408,15 @@ function DashboardS() {
                     <div className="flex justify-center items-center pb-[0.5rem]">
                       <FaEye className="text-[#1E0058] text-[2.5rem]" />
                       <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                        {countBuyer.CurrentlyViewing + countBuyer.Shortlisted && countBuyer.CurrentlyViewing + countBuyer.Shortlisted!=0 ? countBuyer.CurrentlyViewing + countBuyer.Shortlisted : countBuyer.CurrentlyViewing + countBuyer.Shortlisted ===0 ? 0 : "-"}
+                        {countBuyer.CurrentlyViewing + countBuyer.Shortlisted &&
+                        countBuyer.CurrentlyViewing + countBuyer.Shortlisted !=
+                          0
+                          ? countBuyer.CurrentlyViewing + countBuyer.Shortlisted
+                          : countBuyer.CurrentlyViewing +
+                              countBuyer.Shortlisted ===
+                            0
+                          ? 0
+                          : "-"}
                       </p>
                     </div>
                     {/* text */}
@@ -391,7 +433,11 @@ function DashboardS() {
                     <div className="flex justify-center items-center pb-[0.5rem]">
                       <RiHomeHeartLine className="text-[#1E0058] text-[2.5rem]" />
                       <p className="text-[2rem] text-center px-[0.5rem] font-bold">
-                        { countBuyer.Shortlisted && countBuyer.Shortlisted !=0 ? countBuyer.Shortlisted : countBuyer.Shortlisted ===0 ? 0 :"-"}
+                        {countBuyer.Shortlisted && countBuyer.Shortlisted != 0
+                          ? countBuyer.Shortlisted
+                          : countBuyer.Shortlisted === 0
+                          ? 0
+                          : "-"}
                       </p>
                     </div>
                     {/* text */}

@@ -76,8 +76,8 @@ function AvailablePropertyrentalS() {
       <div
         className="form"
         style={{
-          borderRadius: "16px",
-          marginTop: "10%",
+          // borderRadius: "16px",
+          // marginTop: "10%",
           backgroundRepeat: "no-repeat",
           backgroundImage: `url(${oneBg})`,
           backgroundRepeat: "no-repeat",
@@ -85,14 +85,14 @@ function AvailablePropertyrentalS() {
         }}
       >
         <CommonHeaderS title="Available Properties Sale" color="#1E0058" />
-        <SearchBar
+        {/* <SearchBar
           onSearch={handleSearch}
           placeholder="Search by property Name"
         />
         <p style={{ textAlign: "left" }}>
           Hey <b>{name}</b>, Here are all the sale properties that are available
           for sale
-        </p>
+        </p> */}
         <AvailablePropertyComp props={responsePendingProperties} name={name} />
 
         <Footer />

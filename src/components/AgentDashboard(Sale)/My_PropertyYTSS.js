@@ -20,9 +20,9 @@ import CommonHeader from "../CommonHeader";
 import CommonBtn from "../CommonButton";
 import CommonTopButton from "../CommonTopButton";
 import Listing3 from "./ListingComp3";
-import ListingComp from './ListingComp';
-import YetToShareComp from './YetToShareComp';
-import Back from '../Back';
+import ListingComp from "./ListingComp";
+import YetToShareComp from "./YetToShareComp";
+import Back from "../Back";
 import CommonHeaderS from "../CommonHeaderS";
 
 function My_PropertyYTSS() {
@@ -46,43 +46,44 @@ function My_PropertyYTSS() {
     },
   };
 
-      useEffect(() => {
-        const fetchPosts = async () => {
-          setLoading(true);
-          axios
-            .get(`https://b8rliving.com/property/yetToShare/1?purposeType=purposeSale`, axiosConfig)
-            .then((response) => {
-              console.log(response.data.data);
-              var propertiesData = response.data.data;
-              // Filter out properties where propertyDetails.purposeSale is true
-    
-              // Filter out properties where propertyDetails.purposeSale is true
-              
-    
-              // var myArrayPropertyCount = response.data.data.properties;
-              //   setresponseNoImageProperty(noImageProperties);
-    
-              setresponseProperty(propertiesData);
-            })
-            .catch((error) => {
-              console.log(error);
-              // handle the error
-            });
-          setLoading(false);
-        };
-    
-        fetchPosts();
-      }, []);
-    
-      console.log(responseProperty);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      axios
+        .get(
+          `https://b8rliving.com/property/yetToShare/1?purposeType=purposeSale`,
+          axiosConfig
+        )
+        .then((response) => {
+          console.log(response.data.data);
+          var propertiesData = response.data.data;
+          // Filter out properties where propertyDetails.purposeSale is true
+
+          // Filter out properties where propertyDetails.purposeSale is true
+
+          // var myArrayPropertyCount = response.data.data.properties;
+          //   setresponseNoImageProperty(noImageProperties);
+
+          setresponseProperty(propertiesData);
+        })
+        .catch((error) => {
+          console.log(error);
+          // handle the error
+        });
+      setLoading(false);
+    };
+
+    fetchPosts();
+  }, []);
+
+  console.log(responseProperty);
 
   const username = localStorage.getItem("username");
   const name = username.substring(0, username.indexOf(" "));
 
-    return(
-        <>
-
-        <div
+  return (
+    <>
+      <div
         className=""
         style={{
           // borderRadius: "16px",
@@ -94,7 +95,7 @@ function My_PropertyYTSS() {
         }}
       >
         {/* <h2 style={{color:"#52796F"}}>My Properties</h2> */}
-        <CommonHeader title="My Properties" color="#52796F" />
+        <CommonHeaderS title="My Properties" color="#1E0058" />
 
         {/* -------------------------------button---------------------------------------------- */}
         <div className="px-[0.5rem] py-[1rem] pt-[2rem]">
@@ -102,15 +103,16 @@ function My_PropertyYTSS() {
             <Link to="/My_PropertyPVS">
               <CommonTopButton
                 bgColor="#D2D7D6"
-                borderColor="#A9C0BA"
-                color="#77A8A4"
+                borderColor="#DAF0EE"
+                color="#1E0058"
                 text="Pending Verification"
                 //        onclicked={handlePageAvailable}
               />
             </Link>
+            {/* active btn */}
             <Link to="/My_PropertyYTSS">
               <CommonTopButton
-                bgColor="#52796F"
+                bgColor="#1E0058"
                 borderColor="#DAF0EE"
                 color="#DAF0EE"
                 text="Yet to Share "
@@ -124,8 +126,8 @@ function My_PropertyYTSS() {
             <Link to="/My_PropertySS">
               <CommonTopButton
                 bgColor="#D2D7D6"
-                borderColor="#A9C0BA"
-                color="#77A8A4"
+                borderColor="#DAF0EE"
+                color="#1E0058"
                 text="Shortlisted"
                 //        onclicked={handlePageAvailable}
               />
@@ -133,8 +135,8 @@ function My_PropertyYTSS() {
             <Link to="/MyPropSNAS">
               <CommonTopButton
                 bgColor="#D2D7D6"
-                borderColor="#A9C0BA"
-                color="#77A8A4"
+                borderColor="#DAF0EE"
+                color="#1E0058"
                 text="Shared "
                 //        onclicked={handlePageAvailable}
               />
@@ -161,18 +163,18 @@ function My_PropertyYTSS() {
         </div>
 
         {responseProperty && responseProperty.length > 0 && (
-        <YetToShareComp responseProperty={responseProperty} />
-      )}
+          <YetToShareComp responseProperty={responseProperty} />
+        )}
         <div className="py-[2rem] flex justify-center items-center">
           <Link to="/AllTenantOneS">
             <CommonBtn title="Share with Tenant" />
           </Link>
         </div>
-        <Back/>
+        <Back />
 
         <Footer />
       </div>
-        </>
-    );
+    </>
+  );
 }
 export default My_PropertyYTSS;

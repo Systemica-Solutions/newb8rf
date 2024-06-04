@@ -11,7 +11,6 @@ import { FaHeart } from "react-icons/fa";
 import { FaEye } from "react-icons/fa6";
 import { MdOutlineAirplanemodeActive } from "react-icons/md";
 import { MdOutlineMobileScreenShare } from "react-icons/md";
-import { MdOutlineMobileScreenShare } from "react-icons/md";
 
 const TenantComp = ({ props, name }) => {
   // console.log(props);

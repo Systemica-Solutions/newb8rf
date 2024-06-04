@@ -1,5 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import CommonHeader from "../CommonHeader";
+import CommonHeaderS from "../CommonHeaderS";
 import CommonBtn from "../CommonButton";
 import CommonTopButton from "../CommonTopButton";
 import Footer from "../Footer";
@@ -49,9 +50,9 @@ function AllActivePropertiesS() {
         const properties = response.data.data.properties;
         console.log(properties);
 
-        const sort = properties.sort((a,b) =>{
-          return new Date(b.createdAt) - new Date(a.createdAt)
-        })
+        const sort = properties.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
 
         if (properties) {
           // Filter properties where 'imagesApproved' is true
@@ -59,14 +60,13 @@ function AllActivePropertiesS() {
             (property) => property.status === "Verified"
           );
 
-
           console.log(filteredProperties);
           // Sort the filtered properties by 'imagesApproved' in descending order
           const sortedProperties = filteredProperties.sort((a, b) => {
             return b.imagesApproved - a.imagesApproved;
           });
 
-          setresponsePendingProperties(sortedProperties || sort );
+          setresponsePendingProperties(sortedProperties || sort);
         } else {
           // Handle the case where 'imagesApproved' is empty or doesn't exist
           console.log("No properties with images approved found.");
@@ -95,7 +95,7 @@ function AllActivePropertiesS() {
           backgroundSize: "100% 100%",
         }}
       >
-        <CommonHeader title="All Active Properties" color="#1E0058" />
+        <CommonHeaderS title="All Active Properties" color="#1E0058" />
 
         <AvailablePropertyComp
           props={responsePendingProperties}

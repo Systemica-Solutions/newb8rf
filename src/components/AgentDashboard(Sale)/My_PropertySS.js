@@ -22,7 +22,7 @@ import CommonHeaderS from "../CommonHeaderS";
 import CommonBtn from "../CommonButton";
 import CommonTopButton from "../CommonTopButton";
 import ListingComp2 from "./ListingComp2";
-import Back from '../Back';
+import Back from "../Back";
 import MyPropertyCompS from "./MyPropertyCompS";
 
 function My_PropertySS() {
@@ -40,29 +40,30 @@ function My_PropertySS() {
     },
   };
 
-      useEffect(() => {
-        const fetchPosts = async () => {
-          setLoading(true);
-          axios
-            .get(`https://b8rliving.com/property/shortlisted/1?purposeType=purposeSale`, axiosConfig)
-            .then((response) => {
-              console.log(response.data.data);
-              var propertiesData = response.data.data;
-              // Filter out properties where propertyDetails.purposeSale is true
-    
-              
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      axios
+        .get(
+          `https://b8rliving.com/property/shortlisted/1?purposeType=purposeSale`,
+          axiosConfig
+        )
+        .then((response) => {
+          console.log(response.data.data);
+          var propertiesData = response.data.data;
+          // Filter out properties where propertyDetails.purposeSale is true
 
-              setresponseProperty(propertiesData);
-            })
-            .catch((error) => {
-              console.log(error);
-              // handle the error
-            });
-          setLoading(false);
-        };
-    
-        fetchPosts();
-      }, []);
+          setresponseProperty(propertiesData);
+        })
+        .catch((error) => {
+          console.log(error);
+          // handle the error
+        });
+      setLoading(false);
+    };
+
+    fetchPosts();
+  }, []);
 
   console.log(responseProperty);
 
@@ -75,11 +76,9 @@ function My_PropertySS() {
   const username = localStorage.getItem("username");
   const name = username.substring(0, username.indexOf(" "));
 
-
-    return(
-        <>
-
-<div
+  return (
+    <>
+      <div
         className=""
         style={{
           // borderRadius: "16px",
@@ -92,7 +91,7 @@ function My_PropertySS() {
         }}
       >
         {/* <h2 style={{color:"#52796F"}}>My Properties</h2> */}
-        <CommonHeader title="My Properties" color="#52796F" />
+        <CommonHeaderS title="My Properties" color="#1E0058" />
 
         {/* -------------------------------button---------------------------------------------- */}
         <div className="px-[0.5rem] py-[1rem] pt-[2rem]">
@@ -101,7 +100,7 @@ function My_PropertySS() {
               <CommonTopButton
                 bgColor="#D2D7D6"
                 borderColor="#DAF0EE"
-                color="#77A8A4"
+                color="#1E0058"
                 text="Pending Verification"
                 //        onclicked={handlePageAvailable}
               />
@@ -110,7 +109,7 @@ function My_PropertySS() {
               <CommonTopButton
                 bgColor="#D2D7D6"
                 borderColor="#DAF0EE"
-                color="#77A8A4"
+                color="#1E0058"
                 text="Yet to Share "
                 //        onclicked={handlePageAvailable}
               />
@@ -120,8 +119,9 @@ function My_PropertySS() {
         <div className="px-[0.5rem]">
           <div className="grid grid-cols-2 gap-x-[0.5rem]">
             <Link to="/My_PropertySS">
+              {/* active btn */}
               <CommonTopButton
-                bgColor="#52796F"
+                bgColor="#1E0058"
                 borderColor="#DAF0EE"
                 color="#DAF0EE"
                 text="Shortlisted"
@@ -133,7 +133,7 @@ function My_PropertySS() {
               <CommonTopButton
                 bgColor="#D2D7D6"
                 borderColor="#DAF0EE"
-                color="#77A8A4"
+                color="#1E0058"
                 text="Shared "
                 //        onclicked={handlePageAvailable}
               />
@@ -151,20 +151,27 @@ function My_PropertySS() {
           </text> */}
           <p className="pb-[0.5rem] font-bold">Hey {name} ,</p>
           <p>
-            Awesome news, <b>{responseProperty.length} Properties are shortlisted by Tenant</b>.
+            Awesome news,{" "}
+            <b>
+              {responseProperty.length} Properties are shortlisted by Tenant
+            </b>
+            .
           </p>
         </div>
 
         {/* --------------------------------------first tab-------------------------------------------- */}
-        <MyPropertyCompS responseProperty={responseProperty} showCloseButton={true}/>
+        <MyPropertyCompS
+          responseProperty={responseProperty}
+          showCloseButton={true}
+        />
         {/* --------------------------------------first tab-------------------------------------------- */}
 
         {/* <div style={{ marginTop: "310px" }}></div> */}
-        <Back/>
+        <Back />
 
         <Footer />
       </div>
-        </>
-    );
+    </>
+  );
 }
 export default My_PropertySS;
