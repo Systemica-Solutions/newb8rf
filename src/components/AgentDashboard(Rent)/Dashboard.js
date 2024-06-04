@@ -66,7 +66,7 @@ function Dashboard() {
     const fetchPosts = async () => {
       setLoading(true);
       axios
-        .get("https://b8rliving.com/property", axiosConfig)
+        .get("https://b8rliving.com/property?purposeType=purposeRent", axiosConfig)
         .then((response) => {
           // console.log(response.data.data.properties);
           var myArrayPropertyCount = response.data.data.properties;
@@ -173,7 +173,7 @@ function Dashboard() {
       setLoading(true);
       try {
         const response = await axios.get(
-          "https://b8rliving.com/property/count",
+          "https://b8rliving.com/property/count?purposeType=purposeRent",
           axiosConfig
         );
         // Update the countProperties state with the response data

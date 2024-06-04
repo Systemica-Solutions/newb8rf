@@ -40,7 +40,7 @@ function My_PropertyYTS() {
     const fetchPosts = async () => {
       setLoading(true);
       axios
-        .get(`https://b8rliving.com/property/yetToShare/1`, axiosConfig)
+        .get(`https://b8rliving.com/property/yetToShare/1?purposeType=purposeRent`, axiosConfig)
         .then((response) => {
           console.log(response.data.data);
           var propertiesData = response.data.data;

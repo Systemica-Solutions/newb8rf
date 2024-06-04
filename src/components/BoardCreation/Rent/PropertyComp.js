@@ -45,10 +45,6 @@ const PropertyComp = ({
     },
   };
 
-  const filteredProps = props.filter(property=>{
-    return property.propertyDetails.propertyInfo.purposeRent===true;
-  })
-
   // console.log("boardData=>"+boardData)
 
   // useEffect(() => {
@@ -226,7 +222,7 @@ const PropertyComp = ({
         ""
       ) : (
         <div>
-          {filteredProps.slice(0, visibleItems).map((values, key) => (
+          {props.slice(0, visibleItems).map((values, key) => (
             <div key={key} className="py-[1rem]">
               <div className="flex w-[100%] gap-x-[0.5rem]">
                 {/* left side */}
