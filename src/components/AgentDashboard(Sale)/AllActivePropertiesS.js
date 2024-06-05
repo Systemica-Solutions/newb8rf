@@ -1,5 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import CommonHeader from "../CommonHeader";
+import CommonHeaderS from "../CommonHeaderS";
 import CommonBtn from "../CommonButton";
 import CommonTopButton from "../CommonTopButton";
 import Footer from "../Footer";
@@ -95,7 +96,7 @@ function AllActivePropertiesS() {
           backgroundSize: "100% 100%",
         }}
       >
-        <CommonHeader title="All Active Properties" color="#1E0058" />
+        <CommonHeaderS title="All Active Properties" color="#1E0058" />
 
         <AvailablePropertyComp
           props={responsePendingProperties}

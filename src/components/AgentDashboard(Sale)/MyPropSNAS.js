@@ -19,6 +19,7 @@ import noImg from "../Assets/Images/AgentDashboard/noImg.png";
 import like from "../Assets/Images/AgentDashboard/Like.png";
 import sharedImg from "../Assets/Images/AgentDashboard/sharedImg.png";
 import CommonHeader from "../CommonHeader";
+import CommonHeaderS from "../CommonHeaderS";
 import CommonBtn from "../CommonButton";
 import CommonTopButton from "../CommonTopButton";
 import SharedNoactcompS from "./ShareNoactcompS";
@@ -43,7 +44,10 @@ function My_PropertySNAS() {
     const fetchPosts = async () => {
       setLoading(true);
       axios
-        .get(`https://b8rliving.com/property/shared/1?purposeType=purposeSale`, axiosConfig)
+        .get(
+          `https://b8rliving.com/property/shared/1?purposeType=purposeSale`,
+          axiosConfig
+        )
         .then((response) => {
           var propertiesData = response.data.data;
 
@@ -69,7 +73,7 @@ function My_PropertySNAS() {
           //   return property.propertyDetails.some(
           //     (detail) => detail.agentId != property.agentId && detail.propertyInfo.purposeRent === true
           //   );
-          // });          
+          // });
           setresponseProperty(sortedProperties);
         })
         .catch((error) => {
@@ -106,7 +110,7 @@ function My_PropertySNAS() {
           height: "750px",
         }}
       >
-        <CommonHeader title="My Properties" color="#52796F" />
+        <CommonHeaderS title="My Properties" color="#1E0058" />
 
         {/* -------------------------------button---------------------------------------------- */}
         <div className="px-[0.5rem] py-[1rem] pt-[2rem]">
@@ -115,7 +119,7 @@ function My_PropertySNAS() {
               <CommonTopButton
                 bgColor="#D2D7D6"
                 borderColor="#DAF0EE"
-                color="#77A8A4"
+                color="#1E0058"
                 text="Pending Verification"
                 //        onclicked={handlePageAvailable}
               />
@@ -124,7 +128,7 @@ function My_PropertySNAS() {
               <CommonTopButton
                 bgColor="#D2D7D6"
                 borderColor="#DAF0EE"
-                color="#77A8A4"
+                color="#1E0058"
                 text="Yet to Share "
                 //        onclicked={handlePageAvailable}
               />
@@ -137,14 +141,14 @@ function My_PropertySNAS() {
               <CommonTopButton
                 bgColor="#D2D7D6"
                 borderColor="#DAF0EE"
-                color="#77A8A4"
+                color="#1E0058"
                 text="Shortlisted"
                 //        onclicked={handlePageAvailable}
               />
             </Link>
             <Link to="/MyPropSNAS">
               <CommonTopButton
-                bgColor="#52796F"
+                bgColor="#1E0058"
                 borderColor="#DAF0EE"
                 color="#DAF0EE"
                 text="Shared"
@@ -169,12 +173,14 @@ function My_PropertySNAS() {
           </p>
         </div>
         {/* --------------------------------------first tab-------------------------------------------- */}
-        <MyPropertyCompS responseProperty={responseProperty} showCloseButton={true}/>
+        <MyPropertyCompS
+          responseProperty={responseProperty}
+          showCloseButton={true}
+        />
         {/* --------------------------------------first tab-------------------------------------------- */}
-        
-        <Back/>
-        <div className="pt-[2rem] pb-[1rem]">
 
+        <Back />
+        <div className="pt-[2rem] pb-[1rem]">
           <Footer />
         </div>
       </div>

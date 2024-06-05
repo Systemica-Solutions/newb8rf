@@ -1,12 +1,12 @@
-import React, { Component, useState, useEffect }  from 'react';
-import './DashboardS.css';
+import React, { Component, useState, useEffect } from "react";
+import "./DashboardS.css";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import UserLoginDetails from "../UserLoginDetails";
 import homeDown from "../Assets/Images/AgentDashboard/homeDown.png";
 import peopleDown from "../Assets/Images/AgentDashboard/peopleDown.png";
 import Footer from "../Footer";
-import vector from "../Assets/Images/AgentDashboard/vector.png"
+import vector from "../Assets/Images/AgentDashboard/vector.png";
 import backgroundSecond from "../Assets/Images/AgentDashboard/other_bg.png";
 import rentedOut from "../Assets/Images/AgentDashboard/rentedOut.png";
 import sharedOut from "../Assets/Images/AgentDashboard/sharedOut.png";
@@ -18,70 +18,67 @@ import checkP from "../Assets/Images/AgentDashboard/CheckP.png";
 import noImg from "../Assets/Images/AgentDashboard/noImg.png";
 import like from "../Assets/Images/AgentDashboard/Like.png";
 import CommonHeader from "../CommonHeader";
+import CommonHeaderS from "../CommonHeaderS";
 import CommonBtn from "../CommonButton";
 import CommonTopButton from "../CommonTopButton";
 import ListingComp2 from "./ListingComp2";
-import Back from '../Back';
+import Back from "../Back";
 import MyPropertyCompS from "./MyPropertyCompS";
 
+function My_PropertySS() {
+  const token = localStorage.getItem("token");
+  console.log(token);
 
-function My_PropertySS(){
+  const [loading, setLoading] = useState(false);
+  const [responseProperty, setresponseProperty] = useState([]);
 
+  let axiosConfig = {
+    headers: {
+      "Content-Type": "application/json;charset=UTF-8",
+      "Access-Control-Allow-Origin": "*",
+      Authorization: `Basic ${token}`,
+    },
+  };
 
-    const token = localStorage.getItem("token");
-    console.log(token);
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      axios
+        .get(
+          `https://b8rliving.com/property/shortlisted/1?purposeType=purposeSale`,
+          axiosConfig
+        )
+        .then((response) => {
+          console.log(response.data.data);
+          var propertiesData = response.data.data;
+          // Filter out properties where propertyDetails.purposeSale is true
 
-    const [loading, setLoading] = useState(false);
-    const [responseProperty, setresponseProperty] = useState([]);
+          setresponseProperty(propertiesData);
+        })
+        .catch((error) => {
+          console.log(error);
+          // handle the error
+        });
+      setLoading(false);
+    };
 
-    let axiosConfig = {
-        headers: {
-          "Content-Type": "application/json;charset=UTF-8",
-          "Access-Control-Allow-Origin": "*",
-          Authorization: `Basic ${token}`,
-        },
-      };
+    fetchPosts();
+  }, []);
 
-      useEffect(() => {
-        const fetchPosts = async () => {
-          setLoading(true);
-          axios
-            .get(`https://b8rliving.com/property/shortlisted/1?purposeType=purposeSale`, axiosConfig)
-            .then((response) => {
-              console.log(response.data.data);
-              var propertiesData = response.data.data;
-              // Filter out properties where propertyDetails.purposeSale is true
-    
-              
+  console.log(responseProperty);
 
-              setresponseProperty(propertiesData);
-            })
-            .catch((error) => {
-              console.log(error);
-              // handle the error
-            });
-          setLoading(false);
-        };
-    
-        fetchPosts();
-      }, []);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    localStorage.removeItem("token");
+    alert("You have been logged out.");
+  };
 
-      console.log(responseProperty);
-    
-    const handleSubmit = event => {
-	event.preventDefault();
-       localStorage.removeItem("token");
-			alert("You have been logged out.");
-	  };
+  const username = localStorage.getItem("username");
+  const name = username.substring(0, username.indexOf(" "));
 
-      const username = localStorage.getItem("username");
-      const name = username.substring(0, username.indexOf(" "));
-
-
-    return(
-        <>
-
-<div
+  return (
+    <>
+      <div
         className=""
         style={{
           // borderRadius: "16px",
@@ -94,7 +91,7 @@ function My_PropertySS(){
         }}
       >
         {/* <h2 style={{color:"#52796F"}}>My Properties</h2> */}
-        <CommonHeader title="My Properties" color="#52796F" />
+        <CommonHeaderS title="My Properties" color="#1E0058" />
 
         {/* -------------------------------button---------------------------------------------- */}
         <div className="px-[0.5rem] py-[1rem] pt-[2rem]">
@@ -103,7 +100,7 @@ function My_PropertySS(){
               <CommonTopButton
                 bgColor="#D2D7D6"
                 borderColor="#DAF0EE"
-                color="#77A8A4"
+                color="#1E0058"
                 text="Pending Verification"
                 //        onclicked={handlePageAvailable}
               />
@@ -112,7 +109,7 @@ function My_PropertySS(){
               <CommonTopButton
                 bgColor="#D2D7D6"
                 borderColor="#DAF0EE"
-                color="#77A8A4"
+                color="#1E0058"
                 text="Yet to Share "
                 //        onclicked={handlePageAvailable}
               />
@@ -123,7 +120,7 @@ function My_PropertySS(){
           <div className="grid grid-cols-2 gap-x-[0.5rem]">
             <Link to="/My_PropertySS">
               <CommonTopButton
-                bgColor="#52796F"
+                bgColor="#1E0058"
                 borderColor="#DAF0EE"
                 color="#DAF0EE"
                 text="Shortlisted"
@@ -135,7 +132,7 @@ function My_PropertySS(){
               <CommonTopButton
                 bgColor="#D2D7D6"
                 borderColor="#DAF0EE"
-                color="#77A8A4"
+                color="#1E0058"
                 text="Shared "
                 //        onclicked={handlePageAvailable}
               />
@@ -153,20 +150,27 @@ function My_PropertySS(){
           </text> */}
           <p className="pb-[0.5rem] font-bold">Hey {name} ,</p>
           <p>
-            Awesome news, <b>{responseProperty.length} Properties are shortlisted by Tenant</b>.
+            Awesome news,{" "}
+            <b>
+              {responseProperty.length} Properties are shortlisted by Tenant
+            </b>
+            .
           </p>
         </div>
 
         {/* --------------------------------------first tab-------------------------------------------- */}
-        <MyPropertyCompS responseProperty={responseProperty} showCloseButton={true}/>
+        <MyPropertyCompS
+          responseProperty={responseProperty}
+          showCloseButton={true}
+        />
         {/* --------------------------------------first tab-------------------------------------------- */}
 
         {/* <div style={{ marginTop: "310px" }}></div> */}
-        <Back/>
+        <Back />
 
         <Footer />
       </div>
-        </>
-    );
+    </>
+  );
 }
 export default My_PropertySS;

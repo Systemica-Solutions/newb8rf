@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import backgroundImg from "../../Assets/Images/Sale/RestBg.png";
 import CommonHeader from "../../CommonHeader";
+import CommonHeaderS from "../../CommonHeaderS";
 import CommonBtn from "../../CommonButton";
 import CommonTopButton from '../../CommonTopButton';
 import Footer from "../../Footer";
@@ -114,7 +115,7 @@ const queryParameters = new URLSearchParams(window.location.search);
           }
         }
       >
-        <CommonHeader title="Board Created" color="#3F007F" />
+        <CommonHeaderS title="Board Created" color="#3F007F" />
         <div className="flex justify-between items-center flex-col">
           <div className="flex py-[2rem]">
             <div>

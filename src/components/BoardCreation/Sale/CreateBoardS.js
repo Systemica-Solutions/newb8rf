@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import backgroundImg from "../../Assets/Images/Sale/RestBg.png";
 import CommonHeader from "../../CommonHeader";
+import CommonHeaderS from "../../CommonHeaderS";
 import CommonBtn from "../../CommonButton";
 import CommonTopButton from "../../CommonTopButton";
 import Footer from "../../Footer";
@@ -229,7 +230,7 @@ function CreateBoardS() {
           backgroundSize: "100% 100%",
         }}
       >
-        <CommonHeader title="Create/Add to Board" color="#1E0058" />
+        <CommonHeaderS title="Create/Add to Board" color="#1E0058" />
 
         {/* <img src={CreateBoardUpper} style={{height:"190px"}}/> */}
         {/* upper component */}
