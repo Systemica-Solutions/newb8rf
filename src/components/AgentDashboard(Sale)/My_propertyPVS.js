@@ -17,6 +17,7 @@ import imgOne from "../Assets/Images/AgentDashboard/imgOne.png";
 import checkP from "../Assets/Images/AgentDashboard/CheckP.png";
 import noImg from "../Assets/Images/AgentDashboard/noImg.png";
 import CommonHeader from "../CommonHeader";
+import CommonHeaderS from "../CommonHeaderS";
 import CommonBtn from "../CommonButton";
 import CommonTopButton from "../CommonTopButton";
 import ListingComp from "../AgentDashboard(Sale)/ListingComp";
@@ -44,12 +45,14 @@ function My_propertyPVS() {
     const fetchPosts = async () => {
       setLoading(true);
       axios
-        .get(`https://b8rliving.com/property?purposeType=purposeSale`, axiosConfig)
+        .get(
+          `https://b8rliving.com/property?purposeType=purposeSale`,
+          axiosConfig
+        )
         .then((response) => {
           console.log(response.data.data);
           var propertiesData = response.data.data.properties;
-                
-          
+
           // Filter out properties where propertyDetails.purposeSale is true
 
           // Filter out properties where propertyDetails.purposeSale is true
@@ -60,15 +63,18 @@ function My_propertyPVS() {
             );
           });
 
-          const sortedProperties = response.data.data.properties.sort((a, b) => {
-            return new Date(b.createdAt) - new Date(a.createdAt)
-          });
+          const sortedProperties = response.data.data.properties.sort(
+            (a, b) => {
+              return new Date(b.createdAt) - new Date(a.createdAt);
+            }
+          );
 
           const noImageProperties = propertiesData.filter((property) => {
             return (
               property.status !== "Closed" &&
               (property.fieldAgentStatus === "DetailsCompleted" ||
-                property.fieldAgentStatus === "Unassigned" || property.fieldAgentStatus==="Pending")
+                property.fieldAgentStatus === "Unassigned" ||
+                property.fieldAgentStatus === "Pending")
             );
           });
 
@@ -110,7 +116,7 @@ function My_propertyPVS() {
         }}
       >
         {/* <h2 style={{color:"#52796F"}}>My Properties</h2> */}
-        <CommonHeader title="My Properties" color="#1E0058" />
+        <CommonHeaderS title="My Properties" color="#1E0058" />
 
         {/* -------------------------------button---------------------------------------------- */}
         <div className="px-[0.5rem] py-[1rem] pt-[2rem]">
@@ -165,9 +171,7 @@ function My_propertyPVS() {
             necessary to get them ready to share
           </text> */}
           <p className="pb-[0.5rem] font-bold">Hey {name} ,</p>
-          <p>
-            Properties shown here are YET TO BE VERIFIED
-          </p>
+          <p>Properties shown here are YET TO BE VERIFIED</p>
         </div>
         {/* --------------------------------------first tab-------------------------------------------- */}
         <ListingComp
@@ -176,7 +180,7 @@ function My_propertyPVS() {
         />
 
         {/* --------------------------------------Second tab-------------------------------------------- */}
-        <Back/>
+        <Back />
         <Footer />
       </div>
     </>

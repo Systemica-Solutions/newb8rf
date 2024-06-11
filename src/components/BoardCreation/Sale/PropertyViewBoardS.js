@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import backgroundImg from "../../Assets/Images/BoardCreation/BackgroundBoard.png";
 import CommonHeader from "../../CommonHeader";
+import CommonHeaderS from "../../CommonHeaderS";
 import CommonBtn from "../../CommonButton";
 import CommonTopButton from "../../CommonTopButton";
 import Footer from "../../Footer";
@@ -119,15 +120,15 @@ function PropertyViewBoardS() {
       <div
         className="form"
         style={{
-          borderRadius: "16px",
-          marginTop: "10%",
+          // borderRadius: "16px",
+          // marginTop: "10%",
           backgroundRepeat: "no-repeat",
           backgroundImage: `url(${backgroundImg})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "100% 100%",
         }}
       >
-        <CommonHeader title="View Board" color="#3F007F" style={{fontWeight:"600"}}/>
+        <CommonHeaderS title="View Board" color="#3F007F" style={{fontWeight:"600"}}/>
 
         <div style={{ Display: "flex" }}>
           <div>
@@ -168,7 +169,7 @@ function PropertyViewBoardS() {
               }}
             >
               <ImCross className="text-[#CC3333]  lg:text-[2rem]  mr-[0.5rem]" />
-              <p className="text-[1.5rem] font-bold px-[1rem]">Deactivate Tenet</p>
+              <p className="text-[1.5rem] font-bold px-[1rem]">Deactivate Buyer</p>
             </Link>
             <Back/>
           </div>

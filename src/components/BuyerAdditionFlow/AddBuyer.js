@@ -10,12 +10,12 @@ import Footer from "../Footer";
 import CommonBtn from "../CommonButton";
 import BackButton from "../CommonButtonBack";
 import CommonHeader from "../CommonHeader";
+import CommonHeaderS from "../CommonHeaderS";
 import { useNavigate } from "react-router-dom";
 import { MdVpnKey } from "react-icons/md";
 import CommonTopButton from "../CommonTopButton";
-
 import ReactSwitch from "react-switch";
-import { ToastContainer , toast} from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   MdOutlineSecurity,
@@ -40,14 +40,12 @@ import { GrHostMaintenance } from "react-icons/gr";
 import { BsFillHouseLockFill } from "react-icons/bs";
 
 function AddBuyer() {
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [checkedStateOne, setCheckedStateOne] = useState(true);
   const [checkedStateTwo, setCheckedStateTwo] = useState(false);
   const [checkedStateThree, setCheckedStateThree] = useState(false);
 
-
-  
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -67,7 +65,7 @@ function AddBuyer() {
     buyerData: {
       name: "",
       email: "",
-      panNumber: "",
+      panNumber: "PAP10007G",
       houseConfiguration: "",
       houseType: "",
       furnishingType: "",
@@ -100,10 +98,10 @@ function AddBuyer() {
 
   const handleChangeTwo = (event) => {
     event.preventDefault();
-    
-      setCheckedStateTwo((current) => !current);
-      setCheckedStateThree((current) => !current);
-      console.log("Received from TenantPref In state:", formData);
+
+    setCheckedStateTwo((current) => !current);
+    setCheckedStateThree((current) => !current);
+    console.log("Received from TenantPref In state:", formData);
   };
 
   const navigate = useNavigate();
@@ -114,17 +112,17 @@ function AddBuyer() {
 
   const validateSubmit = () => {
     if (
-      (formData.tenantData.gatedSecurity ||
-        formData.tenantData.powerBackup ||
-        formData.tenantData.groceryStore ||
-        formData.tenantData.swimmingPool ||
-        formData.tenantData.gym ||
-        formData.tenantData.clubHouse ||
-        formData.tenantData.carParking ||
-        formData.tenantData.bikeParking ||
-        formData.tenantData.bathroom ||
-        formData.tenantData.ac ||
-        formData.tenantData.nonVeg) == false
+      (formData.buyerData.gatedSecurity ||
+        formData.buyerData.powerBackup ||
+        formData.buyerData.groceryStore ||
+        formData.buyerData.swimmingPool ||
+        formData.buyerData.gym ||
+        formData.buyerData.clubHouse ||
+        formData.buyerData.carParking ||
+        formData.buyerData.bikeParking ||
+        formData.buyerData.bathroom ||
+        formData.buyerData.ac ||
+        formData.buyerData.nonVeg) == false
     ) {
       toast.error("Please select atleast one");
       return false;
@@ -132,22 +130,21 @@ function AddBuyer() {
     return true;
   };
 
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     console.log(name, value);
-    if (name === 'budget') {
+    if (name === "budget") {
       if (value <= 15) {
         setFormData({
           ...formData,
           buyerData: {
             ...formData.buyerData,
-            [name]: value
-          }
+            [name]: value,
+          },
         });
-        setErrorMessage('');
+        setErrorMessage("");
       } else {
-        setErrorMessage('Budget should not exceed 15');
+        setErrorMessage("Budget should not exceed 15");
         return;
       }
     }
@@ -190,23 +187,23 @@ function AddBuyer() {
       email: "",
       phoneNumber: "",
     };
-if(validateSubmit){
-  axios
-      .post("https://b8rliving.com/buyer/1", formData, axiosConfig)
-      .then((response) => {
-        alert("Your Buyer details has been submitted");
-        //redirect user to Dashboard
-        window.location.href = `/BuyerCreated?name=${formData.buyerData.name}&budget=${formData.buyerData.budget}`;
-        // do something with the response
-      })
-      .catch((error) => {
-        console.log(error);
-        // handle the error
-      });
-    console.log("Finale In state:", formData);
-    alert("Buyer Added!");
-}
-    
+    if (validateSubmit()) {
+      axios
+        .post("https://b8rliving.com/buyer/1", formData, axiosConfig)
+        .then((response) => {
+          toast.success("Your Buyer details has been submitted");
+          //redirect user to Dashboard
+          window.location.href = `/BuyerCreated?name=${formData.buyerData.name}&budget=${formData.buyerData.budget}`;
+          // do something with the response
+        })
+        .catch((error) => {
+          console.log(error);
+          // handle the error
+          toast.error(error.response.data.message);
+        });
+      console.log("Finale In state:", formData);
+      // alert("Buyer Added!");
+    }
   };
   const styles = {
     width: "100%",
@@ -219,7 +216,7 @@ if(validateSubmit){
 
   return (
     <>
-    <ToastContainer
+      <ToastContainer
         className="my-[3rem] text-[1.1rem] font-bold"
         autoClose={1000}
         // hideProgressBar={true}
@@ -238,7 +235,7 @@ if(validateSubmit){
                 backgroundSize: "100% 100%",
               }}
             >
-              <CommonHeader title="Add Buyer" color="#1E0058" />
+              <CommonHeaderS title="Add Buyer" color="#1E0058" />
 
               <form
                 onSubmit={handleChangeOne}
@@ -286,7 +283,7 @@ if(validateSubmit){
                   onChange={handleChange}
                   required
                 />
-                <label htmlFor="panNumber" className="fieldTitle">
+                {/* <label htmlFor="panNumber" className="fieldTitle">
                   Pan Card Number{" "}
                   <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
                 </label>
@@ -298,19 +295,19 @@ if(validateSubmit){
                   value={formData.buyerData.panNumber}
                   onChange={handleChange}
                   required
-                />
+                /> */}
 
-                <div className="flex justify-center items-center py-[1rem]">
+                <div className="flex justify-around items-center py-[1rem]">
                   {/* <div onClick={handleClick}>
                     <BackButton title="Back" margin="" fontweight="bolder" />
                   </div> */}
                   <button
-                  onClick={() => {
-                    navigate(-1);
-                  }}
-                >
-                  <BackButton title="Back" />
-                </button>
+                    onClick={() => {
+                      navigate(-1);
+                    }}
+                  >
+                    <BackButton title="Back" />
+                  </button>
                   <CommonBtn
                     title="Next"
                     margin="50%"
@@ -330,8 +327,8 @@ if(validateSubmit){
       ) : (
         ""
       )}
-       {checkedStateTwo ? (
-       <div className="login-page">
+      {checkedStateTwo ? (
+        <div className="login-page">
           <div
             className="form"
             style={{
@@ -344,7 +341,7 @@ if(validateSubmit){
             }}
           >
             {/* <h2 style={{color:"#52796F"}}>Tenant Details (1/2)</h2> */}
-            <CommonHeader title="Buyer Details" color="#1E0058" />
+            <CommonHeaderS title="Buyer Details" color="#1E0058" />
 
             <form className="login-form pt-[2rem]" onSubmit={handleChangeTwo}>
               <label
@@ -373,7 +370,9 @@ if(validateSubmit){
                 }}
               >
                 [Studio, 1 BHK, 2 BHK, 3 BHK, 4 BHK, 0, 1, 2, 3, 4]
-                <option value=" ">Select from Drop Down</option>
+                <option value="" disabled selected>
+                  Select from Drop Down
+                </option>
                 <option value="Studio">Studio</option>
                 <option value="1 BHK">1 BHK</option>
                 <option value="2 BHK">2 BHK</option>
@@ -406,7 +405,9 @@ if(validateSubmit){
                   border: "1px solid #52796F",
                 }}
               >
-                <option value=" ">Type of Furnishing</option>
+                <option value="" disabled selected>
+                  Type of Furnishing
+                </option>
                 <option value="Full-furnished">Full-Furnished</option>
                 <option value="Semi-furnished">Semi-Furnished</option>
                 <option value="Un-furnished">UnFurnished</option>
@@ -437,7 +438,7 @@ if(validateSubmit){
                   border: "1px solid #52796F",
                 }}
               >
-                <option value="Selectfromdropdown">
+                <option value="" disabled selected>
                   Select from Drop Down
                 </option>
                 {/* houseType" must be one of [Flat (in Gated Society…r Floor,
@@ -540,7 +541,7 @@ if(validateSubmit){
                 </div>
               </div>
 
-              <div className="flex justify-center items-center py-[1rem]">
+              <div className="flex justify-around items-center py-[1rem]">
                 {/* <div>
                   <BackButton
                     title="Back"
@@ -570,338 +571,338 @@ if(validateSubmit){
             </form>
           </div>
         </div>
-      ):(
+      ) : (
         ""
       )}
       {checkedStateThree ? (
         <div>
-        <div className="login-page">
-          <div
-            className="form"
-            style={{
-              // borderRadius: "16px",
-              // marginTop: "10%",
-              backgroundRepeat: "no-repeat",
-              backgroundImage: `url(${bgm})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "100% 100%",
-            }}
-          >
-            {/* <div class="form" style={{  borderRadius: "16px", marginTop: "10%", backgroundRepeat: 'no-repeat' , backgroundRepeat: 'no-repeat' , backgroundSize : '100% 100%' }} > */}
-            {/* <h2 style={{color:"#52796F"}}>Tenant Details (2/2)</h2> */}
-            <CommonHeader title="Buyer Details (2/2)" color="#1E0058" />
-            <div className="text-left p-[1rem] text-[1.2rem]">
-              <p> What all facilitites?</p>
-              <p>
-                {" "}
-                (select atleast one)
-                <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
-              </p>
-            </div>
-            <form className="login-form" onSubmit={handleSubmit}>
-              <div className="flex justify-center items-center px-[1rem] py-[1rem]">
-                <div className="grid grid-cols-3 gap-y-[1rem]">
-                  <div className="flex justify-center items-center flex-col text-center">
-                    <MdOutlineSecurity className="text-[2rem]" />
-                    <p className="font-semibold">Gated Security</p>
-                    <p
-                      className="text-[#52796F] text-[0.8rem] pb-[0.4rem]
+          <div className="login-page">
+            <div
+              className="form"
+              style={{
+                // borderRadius: "16px",
+                // marginTop: "10%",
+                backgroundRepeat: "no-repeat",
+                backgroundImage: `url(${bgm})`,
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "100% 100%",
+              }}
+            >
+              {/* <div class="form" style={{  borderRadius: "16px", marginTop: "10%", backgroundRepeat: 'no-repeat' , backgroundRepeat: 'no-repeat' , backgroundSize : '100% 100%' }} > */}
+              {/* <h2 style={{color:"#52796F"}}>Tenant Details (2/2)</h2> */}
+              <CommonHeader title="Buyer Details (2/2)" color="#1E0058" />
+              <div className="text-left p-[1rem] text-[1.2rem]">
+                <p> What all facilitites?</p>
+                <p>
+                  {" "}
+                  (select atleast one)
+                  <span style={{ color: "red", fontSize: "1.5rem" }}>*</span>
+                </p>
+              </div>
+              <form className="login-form" onSubmit={handleSubmit}>
+                <div className="flex justify-center items-center px-[1rem] py-[1rem]">
+                  <div className="grid grid-cols-3 gap-y-[1rem]">
+                    <div className="flex justify-center items-center flex-col text-center">
+                      <MdOutlineSecurity className="text-[2rem]" />
+                      <p className="font-semibold">Gated Security</p>
+                      <p
+                        className="text-[#52796F] text-[0.8rem] pb-[0.4rem]
                 "
-                    >
-                      always secure
-                    </p>
-                    <ReactSwitch
-                      checked={formData.buyerData.gatedSecurity}
-                      onChange={() =>
-                        setFormData((prevState) => ({
-                          ...prevState,
-                          buyerData: {
-                            ...prevState.buyerData,
-                            ["gatedSecurity"]:
-                              !formData.buyerData.gatedSecurity,
-                          },
-                        }))
-                      }
-                      // onChange={handleChange}
-                      onColor="#DAF0EE"
-                      onHandleColor="#fff"
-                      handleDiameter={20}
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                      activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                    />
-                  </div>
-                  <div className="flex justify-center items-center flex-col text-center">
-                    <MdPower className="text-[2rem]" />
-                    <p className="font-semibold">24 x 7</p>
-                    <p className="text-[#52796F] text-[0.8rem] pb-[0.4rem]">
-                      Power Back-Up
-                    </p>
-                    <ReactSwitch
-                      checked={formData.buyerData.powerBackup}
-                      onChange={() =>
-                        setFormData((prevState) => ({
-                          ...prevState,
-                          buyerData: {
-                            ...prevState.buyerData,
-                            ["powerBackup"]: !formData.buyerData.powerBackup,
-                          },
-                        }))
-                      }
-                      onColor="#DAF0EE"
-                      onHandleColor="#fff"
-                      handleDiameter={20}
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                      activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                    />
-                  </div>
-                  <div className="flex justify-center items-center flex-col text-center">
-                    <FaCartShopping className="text-[2rem]" />
-                    <p className="font-semibold">Grocery Store</p>
-                    <p className="text-[#52796F] text-[0.8rem] pb-[0.4rem]">
-                      In Campus
-                    </p>
-                    <ReactSwitch
-                      checked={formData.buyerData.groceryStore}
-                      onChange={() =>
-                        setFormData((prevState) => ({
-                          ...prevState,
-                          buyerData: {
-                            ...prevState.buyerData,
-                            ["groceryStore"]:
-                              !formData.buyerData.groceryStore,
-                          },
-                        }))
-                      }
-                      onColor="#DAF0EE"
-                      onHandleColor="#fff"
-                      handleDiameter={20}
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                      activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                    />
-                  </div>
-                  <div className="flex justify-center items-center flex-col text-center">
-                    <BiSwim className="text-[2rem]" />
-                    <p className="font-semibold pb-[0.4rem]">Swimming Pool</p>
-                    <ReactSwitch
-                      checked={formData.buyerData.swimmingPool}
-                      onChange={() =>
-                        setFormData((prevState) => ({
-                          ...prevState,
-                          buyerData: {
-                            ...prevState.buyerData,
-                            ["swimmingPool"]:
-                              !formData.buyerData.swimmingPool,
-                          },
-                        }))
-                      }
-                      onColor="#DAF0EE"
-                      onHandleColor="#fff"
-                      handleDiameter={20}
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                      activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                    />
-                  </div>
-                  <div className="flex justify-center items-center flex-col text-center">
-                    <CgGym className="text-[2rem]" />
-                    <p className="font-semibold pb-[0.4rem]">Gym</p>
-                    <ReactSwitch
-                      checked={formData.buyerData.gym}
-                      onChange={() =>
-                        setFormData((prevState) => ({
-                          ...prevState,
-                          buyerData: {
-                            ...prevState.buyerData,
-                            ["gym"]: !formData.buyerData.gym,
-                          },
-                        }))
-                      }
-                      onColor="#DAF0EE"
-                      onHandleColor="#fff"
-                      handleDiameter={20}
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                      activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                    />
-                  </div>
-                  <div className="flex justify-center items-center flex-col text-center">
-                    <MdOutlineSportsHandball className="text-[2rem]" />
-                    <p className="font-semibold pb-[0.4rem]">Club house</p>
-                    <ReactSwitch
-                      checked={formData.buyerData.clubHouse}
-                      onChange={() =>
-                        setFormData((prevState) => ({
-                          ...prevState,
-                          buyerData: {
-                            ...prevState.buyerData,
-                            ["clubHouse"]: !formData.buyerData.clubHouse,
-                          },
-                        }))
-                      }
-                      onColor="#DAF0EE"
-                      onHandleColor="#fff"
-                      handleDiameter={20}
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                      activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                    />
-                  </div>
-                  <div className="flex justify-center items-center flex-col text-center">
-                    <RiParkingBoxFill className="text-[2rem]" />
-                    <p className="font-semibold pb-[0.4rem]">Car Parking</p>
-                    <ReactSwitch
-                      checked={formData.buyerData.carParking}
-                      onChange={() =>
-                        setFormData((prevState) => ({
-                          ...prevState,
-                          buyerData: {
-                            ...prevState.buyerData,
-                            ["carParking"]: !formData.buyerData.carParking,
-                          },
-                        }))
-                      }
-                      onColor="#DAF0EE"
-                      onHandleColor="#fff"
-                      handleDiameter={20}
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                      activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                    />
-                  </div>
-                  <div className="flex justify-center items-center flex-col text-center">
-                    <RiParkingBoxFill className="text-[2rem]" />
-                    <p className="font-semibold pb-[0.4rem]">Bike Parking</p>
-                    <ReactSwitch
-                      checked={formData.buyerData.bikeParking}
-                      onChange={() =>
-                        setFormData((prevState) => ({
-                          ...prevState,
-                          buyerData: {
-                            ...prevState.buyerData,
-                            ["bikeParking"]: !formData.buyerData.bikeParking,
-                          },
-                        }))
-                      }
-                      onColor="#DAF0EE"
-                      onHandleColor="#fff"
-                      handleDiameter={20}
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                      activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                    />
-                  </div>
-                  <div className="flex justify-center items-center flex-col text-center">
-                    <GiRoastChicken className="text-[2rem]" />
-                    <p className="font-semibold pb-[0.4rem]">
-                      Non-Veg Allowed
-                    </p>
-                    <ReactSwitch
-                      checked={formData.buyerData.nonVeg}
-                      onChange={() =>
-                        setFormData((prevState) => ({
-                          ...prevState,
-                          buyerData: {
-                            ...prevState.buyerData,
-                            ["nonVeg"]: !formData.buyerData.nonVeg,
-                          },
-                        }))
-                      }
-                      onColor="#DAF0EE"
-                      onHandleColor="#fff"
-                      handleDiameter={20}
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                      activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                    />
-                  </div>
-                  <div className="flex justify-center items-center flex-col text-center">
-                    <TbAirConditioning className="text-[2rem]" />
-                    <p className="font-semibold pb-[0.4rem]">
-                      Air Conditioner
-                    </p>
-                    <ReactSwitch
-                      checked={formData.buyerData.ac}
-                      onChange={() =>
-                        setFormData((prevState) => ({
-                          ...prevState,
-                          buyerData: {
-                            ...prevState.buyerData,
-                            ["ac"]: !formData.buyerData.ac,
-                          },
-                        }))
-                      }
-                      onColor="#DAF0EE"
-                      onHandleColor="#fff"
-                      handleDiameter={20}
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                      activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                    />
-                  </div>
-                  <div className="flex justify-center items-center flex-col text-center">
-                    <FaBath className="text-[2rem]" />
-                    <p className="font-semibold pb-[0.4rem]">
-                      Attached Bathroom
-                    </p>
-                    <ReactSwitch
-                      checked={formData.buyerData.bathroom}
-                      onChange={() =>
-                        setFormData((prevState) => ({
-                          ...prevState,
-                          buyerData: {
-                            ...prevState.buyerData,
-                            ["bathroom"]: !formData.buyerData.bathroom,
-                          },
-                        }))
-                      }
-                      onColor="#DAF0EE"
-                      onHandleColor="#fff"
-                      handleDiameter={20}
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                      activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
-                    />
+                      >
+                        always secure
+                      </p>
+                      <ReactSwitch
+                        checked={formData.buyerData.gatedSecurity}
+                        onChange={() =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            buyerData: {
+                              ...prevState.buyerData,
+                              ["gatedSecurity"]:
+                                !formData.buyerData.gatedSecurity,
+                            },
+                          }))
+                        }
+                        // onChange={handleChange}
+                        onColor="#DAF0EE"
+                        onHandleColor="#fff"
+                        handleDiameter={20}
+                        uncheckedIcon={false}
+                        checkedIcon={false}
+                        boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                        activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                      />
+                    </div>
+                    <div className="flex justify-center items-center flex-col text-center">
+                      <MdPower className="text-[2rem]" />
+                      <p className="font-semibold">24 x 7</p>
+                      <p className="text-[#52796F] text-[0.8rem] pb-[0.4rem]">
+                        Power Back-Up
+                      </p>
+                      <ReactSwitch
+                        checked={formData.buyerData.powerBackup}
+                        onChange={() =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            buyerData: {
+                              ...prevState.buyerData,
+                              ["powerBackup"]: !formData.buyerData.powerBackup,
+                            },
+                          }))
+                        }
+                        onColor="#DAF0EE"
+                        onHandleColor="#fff"
+                        handleDiameter={20}
+                        uncheckedIcon={false}
+                        checkedIcon={false}
+                        boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                        activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                      />
+                    </div>
+                    <div className="flex justify-center items-center flex-col text-center">
+                      <FaCartShopping className="text-[2rem]" />
+                      <p className="font-semibold">Grocery Store</p>
+                      <p className="text-[#52796F] text-[0.8rem] pb-[0.4rem]">
+                        In Campus
+                      </p>
+                      <ReactSwitch
+                        checked={formData.buyerData.groceryStore}
+                        onChange={() =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            buyerData: {
+                              ...prevState.buyerData,
+                              ["groceryStore"]:
+                                !formData.buyerData.groceryStore,
+                            },
+                          }))
+                        }
+                        onColor="#DAF0EE"
+                        onHandleColor="#fff"
+                        handleDiameter={20}
+                        uncheckedIcon={false}
+                        checkedIcon={false}
+                        boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                        activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                      />
+                    </div>
+                    <div className="flex justify-center items-center flex-col text-center">
+                      <BiSwim className="text-[2rem]" />
+                      <p className="font-semibold pb-[0.4rem]">Swimming Pool</p>
+                      <ReactSwitch
+                        checked={formData.buyerData.swimmingPool}
+                        onChange={() =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            buyerData: {
+                              ...prevState.buyerData,
+                              ["swimmingPool"]:
+                                !formData.buyerData.swimmingPool,
+                            },
+                          }))
+                        }
+                        onColor="#DAF0EE"
+                        onHandleColor="#fff"
+                        handleDiameter={20}
+                        uncheckedIcon={false}
+                        checkedIcon={false}
+                        boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                        activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                      />
+                    </div>
+                    <div className="flex justify-center items-center flex-col text-center">
+                      <CgGym className="text-[2rem]" />
+                      <p className="font-semibold pb-[0.4rem]">Gym</p>
+                      <ReactSwitch
+                        checked={formData.buyerData.gym}
+                        onChange={() =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            buyerData: {
+                              ...prevState.buyerData,
+                              ["gym"]: !formData.buyerData.gym,
+                            },
+                          }))
+                        }
+                        onColor="#DAF0EE"
+                        onHandleColor="#fff"
+                        handleDiameter={20}
+                        uncheckedIcon={false}
+                        checkedIcon={false}
+                        boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                        activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                      />
+                    </div>
+                    <div className="flex justify-center items-center flex-col text-center">
+                      <MdOutlineSportsHandball className="text-[2rem]" />
+                      <p className="font-semibold pb-[0.4rem]">Club house</p>
+                      <ReactSwitch
+                        checked={formData.buyerData.clubHouse}
+                        onChange={() =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            buyerData: {
+                              ...prevState.buyerData,
+                              ["clubHouse"]: !formData.buyerData.clubHouse,
+                            },
+                          }))
+                        }
+                        onColor="#DAF0EE"
+                        onHandleColor="#fff"
+                        handleDiameter={20}
+                        uncheckedIcon={false}
+                        checkedIcon={false}
+                        boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                        activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                      />
+                    </div>
+                    <div className="flex justify-center items-center flex-col text-center">
+                      <RiParkingBoxFill className="text-[2rem]" />
+                      <p className="font-semibold pb-[0.4rem]">Car Parking</p>
+                      <ReactSwitch
+                        checked={formData.buyerData.carParking}
+                        onChange={() =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            buyerData: {
+                              ...prevState.buyerData,
+                              ["carParking"]: !formData.buyerData.carParking,
+                            },
+                          }))
+                        }
+                        onColor="#DAF0EE"
+                        onHandleColor="#fff"
+                        handleDiameter={20}
+                        uncheckedIcon={false}
+                        checkedIcon={false}
+                        boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                        activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                      />
+                    </div>
+                    <div className="flex justify-center items-center flex-col text-center">
+                      <RiParkingBoxFill className="text-[2rem]" />
+                      <p className="font-semibold pb-[0.4rem]">Bike Parking</p>
+                      <ReactSwitch
+                        checked={formData.buyerData.bikeParking}
+                        onChange={() =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            buyerData: {
+                              ...prevState.buyerData,
+                              ["bikeParking"]: !formData.buyerData.bikeParking,
+                            },
+                          }))
+                        }
+                        onColor="#DAF0EE"
+                        onHandleColor="#fff"
+                        handleDiameter={20}
+                        uncheckedIcon={false}
+                        checkedIcon={false}
+                        boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                        activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                      />
+                    </div>
+                    <div className="flex justify-center items-center flex-col text-center">
+                      <GiRoastChicken className="text-[2rem]" />
+                      <p className="font-semibold pb-[0.4rem]">
+                        Non-Veg Allowed
+                      </p>
+                      <ReactSwitch
+                        checked={formData.buyerData.nonVeg}
+                        onChange={() =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            buyerData: {
+                              ...prevState.buyerData,
+                              ["nonVeg"]: !formData.buyerData.nonVeg,
+                            },
+                          }))
+                        }
+                        onColor="#DAF0EE"
+                        onHandleColor="#fff"
+                        handleDiameter={20}
+                        uncheckedIcon={false}
+                        checkedIcon={false}
+                        boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                        activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                      />
+                    </div>
+                    <div className="flex justify-center items-center flex-col text-center">
+                      <TbAirConditioning className="text-[2rem]" />
+                      <p className="font-semibold pb-[0.4rem]">
+                        Air Conditioner
+                      </p>
+                      <ReactSwitch
+                        checked={formData.buyerData.ac}
+                        onChange={() =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            buyerData: {
+                              ...prevState.buyerData,
+                              ["ac"]: !formData.buyerData.ac,
+                            },
+                          }))
+                        }
+                        onColor="#DAF0EE"
+                        onHandleColor="#fff"
+                        handleDiameter={20}
+                        uncheckedIcon={false}
+                        checkedIcon={false}
+                        boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                        activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                      />
+                    </div>
+                    <div className="flex justify-center items-center flex-col text-center">
+                      <FaBath className="text-[2rem]" />
+                      <p className="font-semibold pb-[0.4rem]">
+                        Attached Bathroom
+                      </p>
+                      <ReactSwitch
+                        checked={formData.buyerData.bathroom}
+                        onChange={() =>
+                          setFormData((prevState) => ({
+                            ...prevState,
+                            buyerData: {
+                              ...prevState.buyerData,
+                              ["bathroom"]: !formData.buyerData.bathroom,
+                            },
+                          }))
+                        }
+                        onColor="#DAF0EE"
+                        onHandleColor="#fff"
+                        handleDiameter={20}
+                        uncheckedIcon={false}
+                        checkedIcon={false}
+                        boxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                        activeBoxShadow="0 1px 2px rgba(0, 0, 0, 0.2)"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="flex justify-around items-center py-[1rem]">
-                <button
-                  onClick={() => {
-                    setCheckedStateThree(!checkedStateThree);
-                    setCheckedStateTwo(!checkedStateTwo);
-                  }}
-                >
-                  <BackButton title="Back" />
-                </button>
-                <CommonBtn
-                 title="Submit"
-                 margin="40%"
-                 fontweight="bolder"
-                 color="#DAF0EE"
-                 bgColor="#3F007F"
-                />
-              </div>
-            </form>
-            <Footer />
-            <div className="mb-[1rem]" />
+                <div className="flex justify-around items-center py-[1rem]">
+                  <button
+                    onClick={() => {
+                      setCheckedStateThree(!checkedStateThree);
+                      setCheckedStateTwo(!checkedStateTwo);
+                    }}
+                  >
+                    <BackButton title="Back" />
+                  </button>
+                  <CommonBtn
+                    title="Submit"
+                    margin="40%"
+                    fontweight="bolder"
+                    color="#DAF0EE"
+                    bgColor="#3F007F"
+                  />
+                </div>
+              </form>
+              <Footer />
+              <div className="mb-[1rem]" />
+            </div>
           </div>
         </div>
-      </div>
-      ):(
+      ) : (
         ""
       )}
     </>

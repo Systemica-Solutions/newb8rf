@@ -1,5 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import CommonHeader from "../CommonHeader";
+import CommonHeaderS from "../CommonHeaderS";
 import CommonBtn from "../CommonButton";
 import CommonTopButton from "../CommonTopButton";
 import Footer from "../Footer";
@@ -153,7 +154,7 @@ function AllTenantOneS() {
           backgroundSize: "100% 100%",
         }}
       >
-        <CommonHeader title="All Buyer" color="#1E0058" />
+        <CommonHeaderS title="All Buyer" color="#1E0058" />
 
         {/* <div className="p-[1rem]">
           grid-container

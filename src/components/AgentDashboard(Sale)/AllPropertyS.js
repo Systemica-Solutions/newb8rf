@@ -13,6 +13,7 @@ import { IoSearch } from "react-icons/io5";
 import searchImg from "../Assets/Search.png";
 import propertyComp from "./propertyComp";
 import AvailablePropertyComp from "./AvailablePropertyComp";
+import CommonHeaderS from "../CommonHeaderS";
 
 function AllPropertyS() {
   const token = localStorage.getItem("token");
@@ -148,7 +149,7 @@ function AllPropertyS() {
           backgroundSize: "100% 100%",
         }}
       >
-        <CommonHeader title="All Properties" color="#1E0058" />
+        <CommonHeaderS title="All Properties" color="#1E0058" />
 
         {/* <div style={{ display: "flex", justifyContent: "space-between" , marginBottom:"20px"}}>
           <div style={{ marginRight: "8px" }}>

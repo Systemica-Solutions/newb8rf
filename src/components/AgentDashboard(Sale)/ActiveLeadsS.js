@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CommonHeader from "../CommonHeader";
+import CommonHeaderS from "../CommonHeaderS";
 import CommonBtn from "../CommonButton";
 import CommonTopButton from "../CommonTopButton";
 import Footer from "../Footer";
@@ -98,14 +99,14 @@ function ActiveLeadsS() {
           backgroundSize: "100% 100%",
         }}
       >
-        <CommonHeader title="Active Leads" color="#1E0058" />
+        <CommonHeaderS title="Active Leads" color="#1E0058" />
 
         {/* <SearchBar onSearch={handleSearch} placeholder="Search by Buyer Name"/> */}
         {/* 
         <p style={{textAlign:"left"}}>Hey Yash, <br/>
 
         Here are all the tenants that you have onboarded </p> */}
-        <div className="mt-[1rem]"/>
+        <div className="mt-[1rem]" />
         <TenantComp props={responsePendingBuyers} name={name} />
         <Footer />
       </div>
