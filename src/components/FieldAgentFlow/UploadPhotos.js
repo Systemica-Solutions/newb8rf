@@ -29,7 +29,6 @@ import Footer from "../Footer";
 import { FcImageFile } from "react-icons/fc";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Hourglass } from "react-loader-spinner";
 
 function UploadPhotos() {
   const queryParameters = new URLSearchParams(window.location.search);
@@ -288,17 +287,7 @@ function UploadPhotos() {
 
       {loading ? (
         <>
-          <div className="flex justify-center items-center">
-            <Hourglass
-              visible={true}
-              height="100"
-              width="100"
-              ariaLabel="hourglass-loading"
-              wrapperStyle={{}}
-              wrapperClass=""
-              colors={["#52796f", "#377C64"]}
-            />
-          </div>
+          <div className="flex justify-center items-center">Uploading...</div>
         </>
       ) : (
         <>
