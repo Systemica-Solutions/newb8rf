@@ -33,8 +33,7 @@ function OTPscreenS() {
   const token = localStorage.getItem("token");
   console.log("TOKEN", token);
   // const [responseDataTotalProperties, setResponseDataTotalProperties] = useState("");
-  const [responseDataPropertyId, setResponseDataBuyerPropertyId] =
-    useState("");
+  const [responseDataPropertyId, setResponseDataBuyerPropertyId] = useState("");
 
   console.log("TOKEN ", token);
 
@@ -54,7 +53,7 @@ function OTPscreenS() {
           `https://b8rliving.com/board/details/${boardId}`,
           axiosConfig
         );
-        console.log(response)
+        console.log(response);
 
         // const responseData = response.data.data.tenant.tenantDetails;
         const responseDataBoardData = response.data.data.board;
@@ -170,9 +169,9 @@ function OTPscreenS() {
           toast.success(OTP_CHECK);
 
           axios
-            .post("https://b8rliving.com/buyer/login",{
+            .post("https://b8rliving.com/buyer/login", {
               phoneNumber: formData.phone,
-              boardId : boardId,
+              boardId: boardId,
             })
             .then((response) => {
               // console.log(response.data);
@@ -190,7 +189,7 @@ function OTPscreenS() {
               localStorage.setItem("token", token);
               localStorage.removeItem("name");
               localStorage.setItem("phone", phone);
-              localStorage.removeItem("isClickArray")
+              localStorage.removeItem("isClickArray");
               axios.get(
                 `https://b8rliving.com/buyer/board/${response.data.data.buyer._id}`,
                 axiosConfig
@@ -261,8 +260,8 @@ function OTPscreenS() {
                   </p>
                   <p className="">
                     Log in using{" "}
-                    <strong>{maskPhoneNumber(responseDataBuyerNumber)}</strong>
-                    , mobile number to view details
+                    <strong>{maskPhoneNumber(responseDataBuyerNumber)}</strong>,
+                    mobile number to view details
                   </p>
                 </div>
               </div>

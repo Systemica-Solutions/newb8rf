@@ -34,7 +34,7 @@ const PropertyCompS = ({
   const [responseDataBoard, setResponseDataBoard] = useState([]);
   const [responseDataProperty, setResponseDataProperty] = useState([]);
   const [addedItems, setAddedItems] = useState([]);
-  console.log(props)
+  console.log(props);
 
   let axiosConfig = {
     headers: {
@@ -45,7 +45,7 @@ const PropertyCompS = ({
   };
 
   const addToBoard = async (pId) => {
-    console.log("addToBoard",pId);
+    console.log("addToBoard", pId);
 
     // setLoading(true);
 
@@ -72,11 +72,11 @@ const PropertyCompS = ({
       console.log("Buyer board already exist");
       try {
         if (boardId) {
-          console.log(addedItems)
+          console.log(addedItems);
           var res;
           const response = await axios.put(
             `https://b8rliving.com/board/property/${boardId}`,
-            { propertyId: addedItems },  // Ensure propertyId is an array
+            { propertyId: addedItems }, // Ensure propertyId is an array
             axiosConfig
           );
           if (response.status === 200) {
@@ -112,14 +112,13 @@ const PropertyCompS = ({
         if (bId !== undefined && bId !== null) {
           const response = await axios.put(
             `https://b8rliving.com/board/property/${bId}`,
-            { propertyId: addedItems },  // Ensure propertyId is an array
+            { propertyId: addedItems }, // Ensure propertyId is an array
             axiosConfig
           );
           if (response.status === 200) {
             window.location.href = `/PropertyViewBoardS?boardId=${bId}&buyerId=${Id}&name=${name}`;
           }
         }
-        
       } catch (error) {
         // Handle any errors that occur during the API request
         console.error("Error fetching data:", error);
@@ -150,7 +149,10 @@ const PropertyCompS = ({
                 <div
                   className="w-[85%] px-[1rem] py-[0.5rem] flex justify-between items-center"
                   style={{
-                    background: values.status === "Closed" ? "rgb(250, 203, 203)" : "#F5F5F5",
+                    background:
+                      values.status === "Closed"
+                        ? "rgb(250, 203, 203)"
+                        : "#F5F5F5",
                     border: "1px solid #000000",
                     borderRadius: "0.5rem",
                     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
@@ -197,12 +199,15 @@ const PropertyCompS = ({
                       </text>
                     </div> */}
                       <p className="">
-                        {values.houseName}
-                        {values.societyName}
+                        {values.houseName} {values.societyName}
                       </p>
                       <p className="font-bold">
-                        Sale Amount:
-                        {values.propertyDetails.featureInfo.saleAmount} INR
+                        Sale Amount:{" "}
+                        {(
+                          values.propertyDetails.featureInfo.saleAmount /
+                          10000000
+                        ).toFixed(2)}{" "}
+                        Cr
                       </p>
                       <div className="pt-[0.8rem] flex items-center text-[#3B413D] font-semibold justify-center py-[0.5rem]">
                         <MdChair className="text-[1.2rem]" />
@@ -252,8 +257,10 @@ const PropertyCompS = ({
                           {values.propertyDetails.propertyInfo.houseConfig}
                         </p>
                       </div>
-                      {values.propertyDetails.featureInfo.parking.car!=="No Car Parking" &&
-                      values.propertyDetails.featureInfo.parking.bike!=="No Bike Parking"? (
+                      {values.propertyDetails.featureInfo.parking.car !==
+                        "No Car Parking" &&
+                      values.propertyDetails.featureInfo.parking.bike !==
+                        "No Bike Parking" ? (
                         <div className="flex flex-col justify-center items-center">
                           <LuParkingCircle className="text-[1.5rem] mx-[0.3rem]" />
                           <p className="text-[0.9rem] text-center">Available</p>
@@ -276,7 +283,9 @@ const PropertyCompS = ({
                 ) : (
                   <> */}
                 <div
-                   className={`w-[15%] flex justify-center items-center rounded-[0.5rem] flex-col font-bold ${values.status === "Closed" ? "bg-[#FACBCB]" : "bg-[#E8E7E7]"}`}
+                  className={`w-[15%] flex justify-center items-center rounded-[0.5rem] flex-col font-bold ${
+                    values.status === "Closed" ? "bg-[#FACBCB]" : "bg-[#E8E7E7]"
+                  }`}
                   key={values._id}
                   onClick={() => addToBoard(values._id)}
                 >
@@ -317,8 +326,7 @@ const PropertyCompS = ({
           to={`/PropertyViewBoardS?boardId=${responseDataTenantData.boardId}`}
         >
           </Link> */}
-          <CommonBtn title="View Board" bgColor="#3F007F" />
-      
+        <CommonBtn title="View Board" bgColor="#3F007F" />
       </div>
     </>
   );

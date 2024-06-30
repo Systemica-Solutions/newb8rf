@@ -60,7 +60,7 @@ function TenantSideViewCompS({ boards, boardId, boardData }) {
   const [loading, setLoading] = useState(false);
   // Initialize isClick state as an array with the same length as boards
   // const { isClickArray, setIsClickArray } = useBoardState(boards.length, boardData);
-  const [isClickArray, setIsClickArray] = useState([])
+  const [isClickArray, setIsClickArray] = useState([]);
   //const ClickArray
   // console.log("isClickArray", isClickArray);
   //console.log("boardLength", boards.length)
@@ -75,14 +75,18 @@ function TenantSideViewCompS({ boards, boardId, boardData }) {
 
   useEffect(() => {
     console.log(boardData);
-    if(boardData.propertyId){
+    if (boardData.propertyId) {
       let isClick = [];
       boardData.propertyId.map((property) => {
-        isClick.push(boardData.isShortlisted[property._id] ? boardData.isShortlisted[property._id]: false)
-      })
+        isClick.push(
+          boardData.isShortlisted[property._id]
+            ? boardData.isShortlisted[property._id]
+            : false
+        );
+      });
       setIsClickArray(isClick);
     }
-  }, [boardData])
+  }, [boardData]);
 
   // useEffect(() => {
   //   const fetchPosts = async () => {
@@ -124,24 +128,23 @@ function TenantSideViewCompS({ boards, boardId, boardData }) {
   const shortlist = async (propertyid, index) => {
     // event.preventDefault();
     // setClick(true);
-    
+
     // if (isClickArray[index]) {
     //   setClick(!isClick);
-     
+
     // } else {
     //   setClick(false);
-     
+
     // }
     setIsClickArray((prevState) => {
       const updatedIsClickArray = [...prevState];
       updatedIsClickArray[index] = !isClickArray[index]; // Use prevState here
       return updatedIsClickArray;
-    });   
+    });
     const updatedIsClick = !isClickArray[index];
     setClick(updatedIsClick);
     setshortListStatus(updatedIsClick); // Update shortListStatus based on updatedIsClick
-    
-    
+
     //setIsClickArray
     /*  
    if(isClick){
@@ -156,11 +159,10 @@ function TenantSideViewCompS({ boards, boardId, boardData }) {
     //   const updatedIsClickArray = [...prevState];
     //   updatedIsClickArray[index] = !isClickArray[index]; // Use prevState here
     //   return updatedIsClickArray;
-    // });   
+    // });
     try {
       // console.log("Final pid",propertyid)
       // console.log("Recieved BId", boardId);
-  
 
       console.log(
         "PropertyId",
@@ -173,7 +175,11 @@ function TenantSideViewCompS({ boards, boardId, boardData }) {
 
       const response = await axios.put(
         `https://b8rliving.com/board/shortlist/${boardId}`,
-        { propertyid, shortListStatus:updatedIsClick, globalTenantId:globalBuyerId },
+        {
+          propertyid,
+          shortListStatus: updatedIsClick,
+          globalTenantId: globalBuyerId,
+        },
         axiosConfig
       );
       console.log("Response fo apishortlist ", response);
@@ -185,11 +191,10 @@ function TenantSideViewCompS({ boards, boardId, boardData }) {
       setLoading(false); // Set loading to false when the request is complete
     }
   };
-  useEffect(()=>{
-    console.log("inUseEffect"+" "+ isClickArray);
-
-  },[])
-  console.log(isClickArray)
+  useEffect(() => {
+    console.log("inUseEffect" + " " + isClickArray);
+  }, []);
+  console.log(isClickArray);
 
   //console.log(boards);
 
@@ -242,15 +247,22 @@ function TenantSideViewCompS({ boards, boardId, boardData }) {
             <div className="pt-[0.5rem]">
               {/* rent & shortlist */}
               <div className="flex justify-between items-center">
-                <div className="flex justify-center items-center flex-col">
+                <div className="flex justify-start items-center py-[0.5rem]">
                   <div className="flex justify-center items-center">
-                    <HiOutlineCurrencyRupee className="text-[1.4rem] font-bold" />
+                    <HiOutlineCurrencyRupee className="text-[1.4rem] font-bold mr-[0.2rem]" />
                     <p className="font-bold text-[1.1rem]">
-                      {property.propertyDetails.featureInfo.saleAmount} /month
+                      {(
+                        property.propertyDetails.featureInfo.saleAmount /
+                        10000000
+                      ).toFixed(2)}{" "}
+                      Cr
                     </p>
                   </div>
-                  <p className="text-[0.7rem]"> ( + Maintenance {property.propertyDetails.featureInfo.saleMaintenance}
-)</p>
+                  <p className="text-[0.7rem] px-[0.5rem]">
+                    {" "}
+                    ( + Maintenance{" "}
+                    {property.propertyDetails.featureInfo.saleMaintenance})
+                  </p>
                 </div>
                 {globalBuyerId && (
                   <div className="flex justify-center items-center">

@@ -101,7 +101,6 @@ function DetailViewS() {
   };
 
   useEffect(() => {
-
     // const updateViewTime = async () => {
     //   try{
     //     const response = await axios.put(`https://b8rliving.com/board/view-property/${boardId}`, axiosConfig, propertyId);
@@ -122,14 +121,18 @@ function DetailViewS() {
           `https://b8rliving.com/board/${boardId}`,
           axiosConfig
         );
-          const boardData = response.data.data.board;
-          if(boardData.propertyId){
-            let isClick = [];
-            boardData.propertyId.map((property) => {
-              isClick.push(boardData.isShortlisted[property._id] ? boardData.isShortlisted[property._id]: false)
-            })
-            setIsClickArray(isClick);
-          }
+        const boardData = response.data.data.board;
+        if (boardData.propertyId) {
+          let isClick = [];
+          boardData.propertyId.map((property) => {
+            isClick.push(
+              boardData.isShortlisted[property._id]
+                ? boardData.isShortlisted[property._id]
+                : false
+            );
+          });
+          setIsClickArray(isClick);
+        }
         // const responseData = response.data.data.board.propertyId;
         const responseDataProperty = response.data.data.board.propertyId;
         console.log("REsponse", response);
@@ -198,7 +201,7 @@ function DetailViewS() {
       console.log("Recieved BId", boardId);
       const response = await axios.put(
         `https://b8rliving.com/board/shortlist/${boardId}`,
-        { propertyid, shortListStatus:status, globalBuyerId },
+        { propertyid, shortListStatus: status, globalBuyerId },
         axiosConfig
       );
       console.log("Response fo apishortlist ", response);
@@ -287,9 +290,34 @@ function DetailViewS() {
               </Carousel>
             </div>
 
-
             <Link to={`/VirtualTourS/?propertyId=${propertyId}`}>
-            <div style={{display:"flex",textAlign:"center",justifyContent:"center",background:"#52796F",width:"90%",padding:"10px",margin:"20px",borderRadius:"5px"}}><button><span style={{fontWeight:"600",color:"white",marginRight:"10px"}}>3D Virtual Tour </span><span style={{textDecoration:"underline",color:"white"}}>Click here</span></button></div>
+              <div
+                style={{
+                  display: "flex",
+                  textAlign: "center",
+                  justifyContent: "center",
+                  background: "#52796F",
+                  width: "90%",
+                  padding: "10px",
+                  margin: "20px",
+                  borderRadius: "5px",
+                }}
+              >
+                <button>
+                  <span
+                    style={{
+                      fontWeight: "600",
+                      color: "white",
+                      marginRight: "10px",
+                    }}
+                  >
+                    3D Virtual Tour{" "}
+                  </span>
+                  <span style={{ textDecoration: "underline", color: "white" }}>
+                    Click here
+                  </span>
+                </button>
+              </div>
             </Link>
             {/* property-name */}
             <div className="flex justify-center items-center py-[1rem]">
@@ -311,96 +339,105 @@ function DetailViewS() {
                   About the Society
                 </p>
                 <div className="grid grid-cols-4 gap-x-[0.5rem]" style={{}}>
-                  {property.propertyDetails.featureInfo.gatedSecurity === true ? 
-                  <div className="flex items-center flex-col text-center">
-                    <MdOutlineSecurity className="text-[2rem]" />
-                    <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                      Gated Security
-                    </p>
-                    <p className="text-[#52796F] text-[0.8rem]">
-                      always secure
-                    </p>
-                  </div>:
+                  {property.propertyDetails.featureInfo.gatedSecurity ===
+                  true ? (
+                    <div className="flex items-center flex-col text-center">
+                      <MdOutlineSecurity className="text-[2rem]" />
+                      <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                        Gated Security
+                      </p>
+                      <p className="text-[#52796F] text-[0.8rem]">
+                        always secure
+                      </p>
+                    </div>
+                  ) : (
                     <div className="flex items-center flex-col text-center text-red-500">
-                    <MdOutlineSecurity className="text-[2rem] text-red-500" />
-                    <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                      No Gated Security
-                    </p>
-                  </div>
-                  }
-                  {property.propertyDetails.featureInfo.powerBackup === true ?
-                  <div className="flex items-center flex-col text-center">
-                    <MdPower className="text-[2rem]" />
-                    <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                      24 x 7
-                    </p>
-                    <p className="text-[#52796F] text-[0.8rem]">
-                      Power Back-Up
-                    </p>
-                  </div>:
-                  <div className="flex items-center flex-col text-center text-red-500">
-                  <MdPower className="text-[2rem] text-red-500" />
-                  <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                    No Power Backup
-                  </p>
-                </div>
-                  }
-                  {property.propertyDetails.featureInfo.swimmingPool === true ?
-                  <div className="flex items-center flex-col text-center">
-                    <BiSwim className="text-[2rem]" />
-                    <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                    Swimming Pool
-                    </p>
-                  </div>:
-                  <div className="flex items-center flex-col text-center text-red-500">
-                  <BiSwim className="text-[2rem] text-red-500" />
-                  <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                    No Swimming Pool
-                  </p>
-                </div>
-                  }
-                  {property.propertyDetails.featureInfo.clubHouse === true ?
-                  <div className="flex items-center flex-col text-center">
-                    <MdOutlineSportsHandball className="text-[2rem]" />
-                    <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                    Club House
-                    </p>
-                  </div>:
-                  <div className="flex items-center flex-col text-center text-red-500">
-                  <MdOutlineSportsHandball className="text-[2rem] text-red-500" />
-                  <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                    No Club House
-                  </p>
-                </div>
-                  }
-                  {property.propertyDetails.featureInfo.groceryStore === true ?
-                  <div className="flex items-center flex-col text-center">
-                    <FaCartShopping className="text-[2rem]" />
-                    <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                      Grocery Store in campus
-                    </p>
-                  </div>:
-                  <div className="flex items-center flex-col text-center text-red-500">
-                  <FaCartShopping className="text-[2rem] text-red-500" />
-                  <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                    No Grocery Store
-                  </p>
-                </div>
-                  }
-                {property.propertyDetails.featureInfo.gym === true ?
-                  <div className="flex items-center flex-col text-center">
-                    <CgGym className="text-[2rem]" />
-                    <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                      Gym with basic equipments
-                    </p>
-                  </div>:
-                  <div className="flex items-center flex-col text-center text-red-500">
-                  <CgGym className="text-[2rem] text-red-500" />
-                  <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                      No Gym
-                    </p>
-                </div>
-                  }
+                      <MdOutlineSecurity className="text-[2rem] text-red-500" />
+                      <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                        No Gated Security
+                      </p>
+                    </div>
+                  )}
+                  {property.propertyDetails.featureInfo.powerBackup === true ? (
+                    <div className="flex items-center flex-col text-center">
+                      <MdPower className="text-[2rem]" />
+                      <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                        24 x 7
+                      </p>
+                      <p className="text-[#52796F] text-[0.8rem]">
+                        Power Back-Up
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex items-center flex-col text-center text-red-500">
+                      <MdPower className="text-[2rem] text-red-500" />
+                      <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                        No Power Backup
+                      </p>
+                    </div>
+                  )}
+                  {property.propertyDetails.featureInfo.swimmingPool ===
+                  true ? (
+                    <div className="flex items-center flex-col text-center">
+                      <BiSwim className="text-[2rem]" />
+                      <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                        Swimming Pool
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex items-center flex-col text-center text-red-500">
+                      <BiSwim className="text-[2rem] text-red-500" />
+                      <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                        No Swimming Pool
+                      </p>
+                    </div>
+                  )}
+                  {property.propertyDetails.featureInfo.clubHouse === true ? (
+                    <div className="flex items-center flex-col text-center">
+                      <MdOutlineSportsHandball className="text-[2rem]" />
+                      <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                        Club House
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex items-center flex-col text-center text-red-500">
+                      <MdOutlineSportsHandball className="text-[2rem] text-red-500" />
+                      <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                        No Club House
+                      </p>
+                    </div>
+                  )}
+                  {property.propertyDetails.featureInfo.groceryStore ===
+                  true ? (
+                    <div className="flex items-center flex-col text-center">
+                      <FaCartShopping className="text-[2rem]" />
+                      <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                        Grocery Store in campus
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex items-center flex-col text-center text-red-500">
+                      <FaCartShopping className="text-[2rem] text-red-500" />
+                      <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                        No Grocery Store
+                      </p>
+                    </div>
+                  )}
+                  {property.propertyDetails.featureInfo.gym === true ? (
+                    <div className="flex items-center flex-col text-center">
+                      <CgGym className="text-[2rem]" />
+                      <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                        Gym with basic equipments
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex items-center flex-col text-center text-red-500">
+                      <CgGym className="text-[2rem] text-red-500" />
+                      <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
+                        No Gym
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -520,8 +557,13 @@ function DetailViewS() {
                       <div className="flex items-center flex-col text-center">
                         <HiCurrencyRupee className="text-[2rem]" />
                         <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                          {property.propertyDetails.featureInfo.saleAmount+property.propertyDetails.featureInfo.saleMaintenance } INR{" "}
-                          
+                          {(
+                            (property.propertyDetails.featureInfo.saleAmount +
+                              property.propertyDetails.featureInfo
+                                .saleMaintenance) /
+                            10000000
+                          ).toFixed(2)}{" "}
+                          Cr
                         </p>
                         <p className="text-[#52796F] text-[0.8rem]">
                           Total Sale amount
@@ -530,16 +572,21 @@ function DetailViewS() {
                       <div className="flex items-center flex-col text-center">
                         <HiCurrencyRupee className="text-[2rem]" />
                         <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                          {property.propertyDetails.featureInfo.saleDeposit} INR
+                          {(
+                            property.propertyDetails.featureInfo.saleDeposit /
+                            100000
+                          ).toFixed(2)}{" "}
+                          Lakh
                         </p>
                         <p className="text-[#52796F] text-[0.8rem]">
                           Security Deposit
                         </p>
                       </div>
                       <div className="flex items-center flex-col text-center">
-                      <BsFillHouseLockFill className="text-[2rem]" />
+                        <BsFillHouseLockFill className="text-[2rem]" />
                         <p className="pt-[0.3rem] font-semibold text-[0.9rem]">
-                          {property.propertyDetails.featureInfo.lockInPeriod} months
+                          {property.propertyDetails.featureInfo.lockInPeriod}{" "}
+                          months
                         </p>
                         <p className="text-[#52796F] text-[0.8rem]">
                           Lock-in Period
