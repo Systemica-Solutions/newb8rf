@@ -1,7 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
 import axios from "axios";
 
-
 import imgOne from "../../Assets/Images/AgentDashboard/imgOne.png";
 import checkP from "../../Assets/Images/CheckP.png";
 import loadingGif from "../../Assets/Images/loading.gif";
@@ -21,16 +20,16 @@ import { FaSquareCheck } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 
-const ViewBoardComp = ({ props, loading , Id, responseDataBoard }) => {
+const ViewBoardComp = ({ props, loading, Id, responseDataBoard }) => {
   const [visibleItems, setVisibleItems] = useState(3);
   const token = localStorage.getItem("token");
   const [formData, setFormData] = useState({
-    propertyId : "",
+    propertyId: "",
   });
   const [addedProperty, setAddedProperty] = useState(false);
   console.log(props);
 
-    const boardId = responseDataBoard.boardId
+  const boardId = responseDataBoard.boardId;
 
   let axiosConfig = {
     headers: {
@@ -40,31 +39,29 @@ const ViewBoardComp = ({ props, loading , Id, responseDataBoard }) => {
     },
   };
 
-
-  
   const addToBoard = async (pId) => {
     // const { name, value } = event.target;
-   
-   console.log(pId);
-  //   setFormData(pId);
-  //   // setFormData((prevState) => {
-  //   //   return {
-  //   //     ...prevState,
-  //   //     [name]: value,
-  //   //   };
-  //   // })
 
-  //   console.log(formData);
+    console.log(pId);
+    //   setFormData(pId);
+    //   // setFormData((prevState) => {
+    //   //   return {
+    //   //     ...prevState,
+    //   //     [name]: value,
+    //   //   };
+    //   // })
+
+    //   console.log(formData);
 
     try {
       const response = await axios.put(
         `https://b8rliving.com/board/property/${boardId}`,
-        { propertyId : pId},
+        { propertyId: pId },
         axiosConfig
       );
       console.log(response);
-      setAddedProperty(true)
-      console.log(addedProperty)
+      setAddedProperty(true);
+      console.log(addedProperty);
       // alert(response);
       // console.log(JSON.stringify(formData));
     } catch (error) {
@@ -73,7 +70,7 @@ const ViewBoardComp = ({ props, loading , Id, responseDataBoard }) => {
     } finally {
       // setLoading(false); // Set loading to false when the request is complete
     }
-  }
+  };
 
   const handleLoadMore = () => {
     setVisibleItems(visibleItems + 3);
@@ -81,7 +78,7 @@ const ViewBoardComp = ({ props, loading , Id, responseDataBoard }) => {
 
   return (
     <>
-       {loading ? (
+      {loading ? (
         ""
       ) : (
         <div>
@@ -140,12 +137,15 @@ const ViewBoardComp = ({ props, loading , Id, responseDataBoard }) => {
                       </text>
                     </div> */}
                       <p className="">
-                        {values.houseName}
-                        {values.societyName}
+                        {values.houseName} {values.societyName}
                       </p>
                       <p className="font-bold">
-                        Sale:{values.propertyDetails.featureInfo.rentAmount}{" "}
-                        INR/month
+                        Sale Amount:{" "}
+                        {(
+                          values.propertyDetails.featureInfo.saleAmount /
+                          10000000
+                        ).toFixed(2)}{" "}
+                        Cr
                       </p>
                       <div className="pt-[0.8rem] flex items-center text-[#3B413D] font-semibold justify-center py-[0.5rem]">
                         <MdChair className="text-[1.2rem]" />
@@ -195,8 +195,10 @@ const ViewBoardComp = ({ props, loading , Id, responseDataBoard }) => {
                           {values.propertyDetails.propertyInfo.houseConfig}
                         </p>
                       </div>
-                      {values.propertyDetails.featureInfo.parking.car!=="No Car Parking" &&
-                      values.propertyDetails.featureInfo.parking.bike!=="No Bike Parking"   ? (
+                      {values.propertyDetails.featureInfo.parking.car !==
+                        "No Car Parking" &&
+                      values.propertyDetails.featureInfo.parking.bike !==
+                        "No Bike Parking" ? (
                         <div className="flex flex-col items-center">
                           <LuParkingCircle className="text-[1.1rem] mx-[0.3rem]" />
                           <p className="text-[0.6rem]">Available</p>
@@ -246,7 +248,7 @@ const ViewBoardComp = ({ props, loading , Id, responseDataBoard }) => {
                   )} */}
                   <Link
                     // onClick={() => addToBoard(values._id)}
-                    className="flex justify-center items-center flex-col" 
+                    className="flex justify-center items-center flex-col"
                     to={`/ChangeStatus?propertyId=${values._id}`}
                   >
                     <IoIosArrowDroprightCircle className="text-[1.4rem] text-[#5D6560]" />

@@ -152,7 +152,7 @@ const queryParameters = new URLSearchParams(window.location.search);
           </div>
         </div>
         <div className="flex justify-center items-center flex-col py-[1rem]">
-          <Link to={`/TenantSideView?boardId=${boardId}`}>
+          <Link to={`/TenantSideViewS?boardId=${boardId}`}>
             <CommonBtn title="Preview Board" margin="90px" bgColor="#3F007F"/>
           </Link>
           <p onClick={handleClick} className="py-[1rem]">
