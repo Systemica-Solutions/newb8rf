@@ -189,7 +189,7 @@ function AddBuyer() {
     };
     if (validateSubmit()) {
       axios
-        .post("https://b8rliving.com/buyer/1", formData, axiosConfig)
+        .post("https://b8rliving.com/buyer", formData, axiosConfig)
         .then((response) => {
           toast.success("Your Buyer details has been submitted");
           //redirect user to Dashboard
